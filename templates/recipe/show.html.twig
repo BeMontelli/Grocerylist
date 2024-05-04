@@ -9,28 +9,15 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }} {{ slug }} ({{ id }}) {# test #}! ✅</h1>
+    <a href="{{ url('recipe.index') }}">All recipes</a>
+    <h1>{{ recipe.title }}</h1>
 
-    {{ content | raw | nl2br }}
+    {{ recipe.content | raw | nl2br }}
 
-    This friendly message is coming from:
+    <br>
+    <hr>
 
-    {% if arr is not empty %}
-        Cool
-    {% endif %}
+    <div class="price"><span>{{ recipe.price }} €</span></div>
 
-    <ul>
-    {% for el in arr %}
-        <li>{{ el }}</li>
-    {% endfor %}
-    {% for el in arrmult %}
-        <li>{{ el.name }}</li>
-    {% endfor %}
-    </ul>
-
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/grocerylist/src/Controller/RecipeController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/grocerylist/templates/recipe/index.html.twig</code></li>
-    </ul>
 </div>
 {% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RecipeController!{% endblock %}
+{% block title %}Recipes{% endblock %}
 
 {% block body %}
 <style>
@@ -9,14 +9,12 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Recipes</h1>
 
-    This friendly message is coming from:
     <ul>
-        <li><a href="{{ url('recipe.show', {slug: 'test', id:'1'}) }}">Recipe test 1</a></li>
-        <li><a href="{{ url('recipe.show', {slug: 'tester', id:'2'}) }}">Recipe test 1</a></li>
-        <li>Your controller at <code>C:/wamp64/www/grocerylist/src/Controller/RecipeController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/grocerylist/templates/recipe/index.html.twig</code></li>
+        {% for recipe in recipes %}
+            <li><a href="{{ url('recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></li>
+        {% endfor %}
     </ul>
 </div>
 {% endblock %}
