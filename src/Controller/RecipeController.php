@@ -37,14 +37,13 @@ class RecipeController extends AbstractController
     #[Route('/recipes/create/', name: 'recipe.create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(RecipeType::class);
-
+        $recipe = new Recipe();
+        $form = $this->createForm(RecipeType::class,$recipe);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            $formData = $form->getData();
-            $formData->setCreatedAt(new \DateTimeImmutable());
-            $formData->setUpdatedAt(new \DateTimeImmutable());
-            $entityManager->persist($formData);
+            $recipe->setCreatedAt(new \DateTimeImmutable());
+            $recipe->setUpdatedAt(new \DateTimeImmutable());
+            $entityManager->persist($recipe);
             $entityManager->flush();
             $this->addFlash('success', 'Recipe saved !');
             return $this->redirectToRoute('recipe.index');
