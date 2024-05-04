@@ -3,6 +3,8 @@
 # CMD > git remote add origin git@github.com:BeMontelli/Grocerylist.git
 #
 # CMD > git checkout -b master
+#
+# git add . >> git commit -m "msg" >> git push -u origin master OR VCS process
 
 ###> symfony/framework-bundle ###
 /.env
