@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,12 +18,14 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/recipes/{slug}-{id}', name: 'recipe.show')]
-    public function show(Request $request): Response
+    #[Route('/recipes/{slug}-{id}', name: 'recipe.show', requirements: ['id' => '\d+', 'slug' => '[a-z0-9-]+'])]
+    public function show(Request $request, string $slug, int $id): Response
     {
         return $this->render('recipe/show.html.twig', [
-            'id' => $request->attributes->get('id'),
-            'slug' => $request->attributes->get('slug'),
+            'id' => $id,
+            'slug' => $slug,
+            'content' => "<strong>test</strong> and
+<u>test</u>",
             'controller_name' => 'RecipeController',
         ]);
     }
