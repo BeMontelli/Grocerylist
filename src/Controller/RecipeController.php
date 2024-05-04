@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Recipe;
+use App\Form\RecipeType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -33,11 +34,30 @@ class RecipeController extends AbstractController
         ]);
     }
 
+    #[Route('/recipes/create/', name: 'recipe.create')]
+    public function create(Request $request, RecipeRepository $recipeRepository,EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(RecipeType::class);
+        return $this->render('recipe/create.html.twig',[
+            'form' => $form
+        ]);
+    }
+
     #[Route('/recipes/{slug}-{id}', name: 'recipe.show', requirements: ['id' => '\d+', 'slug' => '[a-z0-9-]+'])]
     public function show(Request $request, string $slug, int $id, RecipeRepository $recipeRepository): Response
     {
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipeRepository->find($id),
+        ]);
+    }
+
+    #[Route('/recipes/edit/{id}', name: 'recipe.edit', requirements: ['id' => '\d+'])]
+    public function edit(Request $request, Recipe $recipe, RecipeRepository $recipeRepository): Response
+    {
+        $form = $this->createForm(RecipeType::class, $recipe);
+        return $this->render('recipe/edit.html.twig', [
+            'recipe' => $recipe,
+            'form' => $form
         ]);
     }
 }

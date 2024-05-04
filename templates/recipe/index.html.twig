@@ -10,10 +10,14 @@
 
 <div class="example-wrapper">
     <h1>Recipes</h1>
+    <a href="{{ url('recipe.create') }}">Create recipe</a>
 
     <ul>
         {% for recipe in recipes %}
-            <li><a href="{{ url('recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></li>
+            <li>
+                <a href="{{ url('recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a>
+                <a href="{{ url('recipe.edit', { id: recipe.id}) }}">Editer</a>
+            </li>
         {% endfor %}
     </ul>
 </div>

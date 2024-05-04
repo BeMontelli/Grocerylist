@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ recipe.title }}{% endblock %}
+{% block title %}Create Recipe{% endblock %}
 
 {% block body %}
 <style>
@@ -10,14 +10,11 @@
 
 <div class="example-wrapper">
     <a href="{{ url('recipe.index') }}">All recipes</a>
-    <h1>{{ recipe.title }}</h1>
+    <h1>Create Recipe</h1>
 
-    {{ recipe.content | raw | nl2br }}
-
-    <br>
     <hr>
-
-    <div class="price"><span>{{ recipe.price }} €</span></div>
+    {{ form(form) }}
+    <hr>
 
 </div>
 {% endblock %}
