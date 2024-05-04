@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class RecipeController extends AbstractController
 {
     #[Route('/recipes/', name: 'recipe.index')]
-    public function index(Request $request, RecipeRepository $recipeRepository,EntityManagerInterface $entityManager): Response
+    public function index(RecipeRepository $recipeRepository): Response
     {
         /*$recipe = new Recipe();
         $recipe->setTitle("Burger")
@@ -35,16 +35,28 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/recipes/create/', name: 'recipe.create')]
-    public function create(Request $request, RecipeRepository $recipeRepository,EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RecipeType::class);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $formData->setCreatedAt(new \DateTimeImmutable());
+            $formData->setUpdatedAt(new \DateTimeImmutable());
+            $entityManager->persist($formData);
+            $entityManager->flush();
+            $this->addFlash('success', 'Recipe saved !');
+            return $this->redirectToRoute('recipe.index');
+        }
+
         return $this->render('recipe/create.html.twig',[
             'form' => $form
         ]);
     }
 
     #[Route('/recipes/{slug}-{id}', name: 'recipe.show', requirements: ['id' => '\d+', 'slug' => '[a-z0-9-]+'])]
-    public function show(Request $request, string $slug, int $id, RecipeRepository $recipeRepository): Response
+    public function show(string $slug, int $id, RecipeRepository $recipeRepository): Response
     {
         return $this->render('recipe/show.html.twig', [
             'recipe' => $recipeRepository->find($id),
@@ -52,9 +64,19 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/recipes/edit/{id}', name: 'recipe.edit', requirements: ['id' => '\d+'])]
-    public function edit(Request $request, Recipe $recipe, RecipeRepository $recipeRepository): Response
+    public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $formData = $form->getData();
+            $formData->setUpdatedAt(new \DateTimeImmutable());
+            $entityManager->persist($formData);
+            $entityManager->flush();
+            $this->addFlash('success', 'Recipe updated !');
+            return $this->redirectToRoute('recipe.edit', ["id" => $recipe->getId()]);
+        }
+
         return $this->render('recipe/edit.html.twig', [
             'recipe' => $recipe,
             'form' => $form

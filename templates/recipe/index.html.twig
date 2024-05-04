@@ -12,6 +12,9 @@
     <h1>Recipes</h1>
     <a href="{{ url('recipe.create') }}">Create recipe</a>
 
+    <hr>
+    {% include 'layouts/flashes.html.twig' %}
+
     <ul>
         {% for recipe in recipes %}
             <li>
