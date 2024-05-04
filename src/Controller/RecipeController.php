@@ -24,8 +24,14 @@ class RecipeController extends AbstractController
         return $this->render('recipe/show.html.twig', [
             'id' => $id,
             'slug' => $slug,
-            'content' => "<strong>test</strong> and
-<u>test</u>",
+            'content' => "<strong>test</strong> and <u>test</u>",
+            'arr' => [
+                "test","testest"
+            ],
+            'arrmult' => [
+                ["name" => "test"],
+                ["name" => "test2"],
+            ],
             'controller_name' => 'RecipeController',
         ]);
     }

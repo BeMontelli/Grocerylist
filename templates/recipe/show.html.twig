@@ -14,6 +14,20 @@
     {{ content | raw | nl2br }}
 
     This friendly message is coming from:
+
+    {% if arr is not empty %}
+        Cool
+    {% endif %}
+
+    <ul>
+    {% for el in arr %}
+        <li>{{ el }}</li>
+    {% endfor %}
+    {% for el in arrmult %}
+        <li>{{ el.name }}</li>
+    {% endfor %}
+    </ul>
+
     <ul>
         <li>Your controller at <code>C:/wamp64/www/grocerylist/src/Controller/RecipeController.php</code></li>
         <li>Your template at <code>C:/wamp64/www/grocerylist/templates/recipe/index.html.twig</code></li>
