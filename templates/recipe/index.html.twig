@@ -20,6 +20,10 @@
             <li>
                 <a href="{{ url('recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a>
                 <a href="{{ url('recipe.edit', { id: recipe.id}) }}">Editer</a>
+                <form action="{{ url('recipe.delete', { id: recipe.id}) }}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Supprimer</button>
+                </form>
             </li>
         {% endfor %}
     </ul>
