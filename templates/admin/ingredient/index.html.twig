@@ -1,0 +1,31 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Ingredients{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Ingredients</h1>
+    <a href="{{ url('admin.ingredient.create') }}">Create ingredient</a>
+
+    <hr>
+    {% include 'admin/partials/flashes.html.twig' %}
+
+    <ul>
+        {% for ingredient in ingredients %}
+            <li>
+                <a href="{{ url('admin.ingredient.show', {slug: ingredient.slug, id: ingredient.id}) }}">{{ ingredient.title }}</a>
+                <a href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Editer</a>
+                <form action="{{ url('admin.ingredient.delete', { id: ingredient.id}) }}" method="post">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}
