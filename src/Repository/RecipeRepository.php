@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Recipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -11,9 +12,34 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class RecipeRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
     {
+        $this->entityManager = $entityManager;
         parent::__construct($registry, Recipe::class);
+    }
+
+    public function findAllRecipesWithCategories()
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+
+        $queryBuilder->select('r', 'c')
+            ->from(Recipe::class, 'r')
+            ->leftJoin('r.category', 'c');
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function findRecipeWithCategory($recipeId)
+    {
+        $queryBuilder = $this->entityManager->createQueryBuilder();
+
+        $queryBuilder->select('r', 'c')
+            ->from(Recipe::class, 'r')
+            ->leftJoin('r.category', 'c')
+            ->where('r.id = :recipeId')
+            ->setParameter('recipeId', $recipeId);
+
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
     //    /**

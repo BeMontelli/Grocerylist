@@ -14,6 +14,12 @@
 
     {{ recipe.content | raw | nl2br }}
 
+    {% if recipe.category is defined and recipe.category.title is defined and recipe.category.title is not empty %}
+        <span>| <a href="{{ url('admin.category.show', {id: recipe.category.id,slug: recipe.category.slug}) }}">{{ recipe.category.title }}</a> |</span>
+    {% else %}
+        <span>| --- |</span>
+    {% endif %}
+
     <br>
     <hr>
 

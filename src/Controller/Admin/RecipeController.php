@@ -31,7 +31,7 @@ class RecipeController extends AbstractController
         /*$entityManager->remove($recipe);*/
 
         return $this->render('admin/recipe/index.html.twig', [
-            'recipes' => $recipeRepository->findAll()
+            'recipes' => $recipeRepository->findAllRecipesWithCategories()
         ]);
     }
 
@@ -57,7 +57,7 @@ class RecipeController extends AbstractController
     public function show(string $slug, int $id, RecipeRepository $recipeRepository): Response
     {
         return $this->render('admin/recipe/show.html.twig', [
-            'recipe' => $recipeRepository->find($id),
+            'recipe' => $recipeRepository->findRecipeWithCategory($id),
         ]);
     }
 

@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Recipe;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
@@ -28,6 +30,12 @@ class RecipeType extends AbstractType
                 'empty_data' => '',
                 'required' => false,
                 'label' => 'Slug'
+            ])
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'label' => 'Recipe category',
+                'choice_label' => 'title',
+                'placeholder' => 'Select a category',
             ])
             ->add('price',NumberType::class, [
                 'empty_data' => 0,

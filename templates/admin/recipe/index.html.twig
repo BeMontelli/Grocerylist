@@ -19,6 +19,7 @@
         {% for recipe in recipes %}
             <li>
                 <a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a>
+                <span>| {{ recipe.category.title | default('---') }} |</span>
                 <a href="{{ url('admin.recipe.edit', { id: recipe.id}) }}">Editer</a>
                 <form action="{{ url('admin.recipe.delete', { id: recipe.id}) }}" method="post">
                     <input type="hidden" name="_method" value="DELETE">
