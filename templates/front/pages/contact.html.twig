@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'front/base.html.twig' %}
 
-{% block title %}Create Recipe{% endblock %}
+{% block title %}Contact{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,12 @@
 </style>
 
 <div class="example-wrapper">
-    <a href="{{ url('recipe.index') }}">All recipes</a>
-    <h1>Create Recipe</h1>
+    <h1>Contact</h1>
 
     <hr>
+    {% include 'admin/partials/flashes.html.twig' %}
+
     {{ form(form) }}
     <hr>
-
 </div>
 {% endblock %}

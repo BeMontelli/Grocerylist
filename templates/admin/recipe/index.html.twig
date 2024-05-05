@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Recipes{% endblock %}
 
@@ -10,17 +10,17 @@
 
 <div class="example-wrapper">
     <h1>Recipes</h1>
-    <a href="{{ url('recipe.create') }}">Create recipe</a>
+    <a href="{{ url('admin.recipe.create') }}">Create recipe</a>
 
     <hr>
-    {% include 'partials/flashes.html.twig' %}
+    {% include 'admin/partials/flashes.html.twig' %}
 
     <ul>
         {% for recipe in recipes %}
             <li>
-                <a href="{{ url('recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a>
-                <a href="{{ url('recipe.edit', { id: recipe.id}) }}">Editer</a>
-                <form action="{{ url('recipe.delete', { id: recipe.id}) }}" method="post">
+                <a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a>
+                <a href="{{ url('admin.recipe.edit', { id: recipe.id}) }}">Editer</a>
+                <form action="{{ url('admin.recipe.delete', { id: recipe.id}) }}" method="post">
                     <input type="hidden" name="_method" value="DELETE">
                     <button type="submit">Supprimer</button>
                 </form>

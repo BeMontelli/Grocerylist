@@ -1,20 +1,21 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Recipe;
 use App\Form\RecipeType;
+use App\Repository\RecipeRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-use App\Repository\RecipeRepository;
-use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Requirement\Requirement;
 
+#[Route("/admin/recipes", name: "admin.recipe.")]
 class RecipeController extends AbstractController
 {
-    #[Route('/recipes/', name: 'recipe.index')]
+    #[Route('/', name: 'index')]
     public function index(RecipeRepository $recipeRepository): Response
     {
         /*$recipe = new Recipe();
@@ -29,12 +30,12 @@ class RecipeController extends AbstractController
 
         /*$entityManager->remove($recipe);*/
 
-        return $this->render('recipe/index.html.twig', [
+        return $this->render('admin/recipe/index.html.twig', [
             'recipes' => $recipeRepository->findAll()
         ]);
     }
 
-    #[Route('/recipes/create/', name: 'recipe.create')]
+    #[Route('/create/', name: 'create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $recipe = new Recipe();
@@ -44,23 +45,23 @@ class RecipeController extends AbstractController
             $entityManager->persist($recipe);
             $entityManager->flush();
             $this->addFlash('success', 'Recipe saved !');
-            return $this->redirectToRoute('recipe.index');
+            return $this->redirectToRoute('admin.recipe.index');
         }
 
-        return $this->render('recipe/create.html.twig',[
+        return $this->render('admin/recipe/create.html.twig',[
             'form' => $form
         ]);
     }
 
-    #[Route('/recipes/{slug}-{id}', name: 'recipe.show', requirements: ['id' => '\d+', 'slug' => '[a-z0-9-]+'])]
+    #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
     public function show(string $slug, int $id, RecipeRepository $recipeRepository): Response
     {
-        return $this->render('recipe/show.html.twig', [
+        return $this->render('admin/recipe/show.html.twig', [
             'recipe' => $recipeRepository->find($id),
         ]);
     }
 
-    #[Route('/recipes/edit/{id}', name: 'recipe.edit', requirements: ['id' => '\d+'], methods: ['GET','POST'])]
+    #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
@@ -70,20 +71,20 @@ class RecipeController extends AbstractController
             $entityManager->persist($formData);
             $entityManager->flush();
             $this->addFlash('success', 'Recipe updated !');
-            return $this->redirectToRoute('recipe.edit', ["id" => $recipe->getId()]);
+            return $this->redirectToRoute('admin.recipe.edit', ["id" => $recipe->getId()]);
         }
 
-        return $this->render('recipe/edit.html.twig', [
+        return $this->render('admin/recipe/edit.html.twig', [
             'recipe' => $recipe,
             'form' => $form
         ]);
     }
 
-    #[Route('/recipes/edit/{id}', name: 'recipe.delete', requirements: ['id' => '\d+'], methods: ['DELETE'])]
+    #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
     public function delete(Recipe $recipe, EntityManagerInterface $entityManager) {
         $entityManager->remove($recipe);
         $entityManager->flush();
         $this->addFlash('success', 'Recipe '.$recipe->getTitle().' deleted !');
-        return $this->redirectToRoute('recipe.index');
+        return $this->redirectToRoute('admin.recipe.index');
     }
 }

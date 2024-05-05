@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 
 {% block title %}Edit - {{ recipe.title }}{% endblock %}
 
@@ -9,11 +9,11 @@
 </style>
 
 <div class="example-wrapper">
-    <a href="{{ url('recipe.index') }}">All recipes</a>
+    <a href="{{ url('admin.recipe.index') }}">All recipes</a>
     <h1>Edit - {{ recipe.title }}</h1>
 
     <hr>
-    {% include 'partials/flashes.html.twig' %}
+    {% include 'admin/partials/flashes.html.twig' %}
 
     {{ form_start(form) }}
 
