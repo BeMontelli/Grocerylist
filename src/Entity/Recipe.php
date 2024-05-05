@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RecipeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -57,6 +59,17 @@ class Recipe
 
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
     private ?Category $category = null;
+
+    /**
+     * @var Collection<int, Ingredient>
+     */
+    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'recipes')]
+    private Collection $ingredients;
+
+    public function __construct()
+    {
+        $this->ingredients = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -143,6 +156,30 @@ class Recipe
     public function setCategory(?Category $category): static
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Ingredient>
+     */
+    public function getIngredients(): Collection
+    {
+        return $this->ingredients;
+    }
+
+    public function addIngredient(Ingredient $ingredient): static
+    {
+        if (!$this->ingredients->contains($ingredient)) {
+            $this->ingredients->add($ingredient);
+        }
+
+        return $this;
+    }
+
+    public function removeIngredient(Ingredient $ingredient): static
+    {
+        $this->ingredients->removeElement($ingredient);
 
         return $this;
     }

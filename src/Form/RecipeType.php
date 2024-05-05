@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -36,6 +37,14 @@ class RecipeType extends AbstractType
                 'label' => 'Recipe category',
                 'choice_label' => 'title',
                 'placeholder' => 'Select a category',
+            ])
+            ->add('ingredients', EntityType::class, [
+                'label' => 'Ingredients in',
+                'class' => Ingredient::class,
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false
             ])
             ->add('price',NumberType::class, [
                 'empty_data' => 0,

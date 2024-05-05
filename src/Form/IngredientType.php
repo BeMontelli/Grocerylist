@@ -29,6 +29,14 @@ class IngredientType extends AbstractType
                 'required' => false,
                 'label' => 'Slug'
             ])
+            ->add('recipes', EntityType::class, [
+                'label' => 'Recipes related',
+                'class' => Recipe::class,
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false
+            ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save Ingredient'
             ])
