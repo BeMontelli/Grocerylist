@@ -32,7 +32,7 @@ class CategoryController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($category);
             $entityManager->flush();
-            $this->addFlash('success', 'Recipe saved !');
+            $this->addFlash('success', 'Category saved !');
             return $this->redirectToRoute('admin.category.index');
         }
 
@@ -58,7 +58,7 @@ class CategoryController extends AbstractController
             $formData = $form->getData();
             $entityManager->persist($formData);
             $entityManager->flush();
-            $this->addFlash('success', 'Recipe updated !');
+            $this->addFlash('success', 'Category updated !');
             return $this->redirectToRoute('admin.category.edit', ["id" => $category->getId()]);
         }
 
@@ -72,7 +72,7 @@ class CategoryController extends AbstractController
     public function delete(Category $category, EntityManagerInterface $entityManager) {
         $entityManager->remove($category);
         $entityManager->flush();
-        $this->addFlash('success', 'Recipe '.$category->getTitle().' deleted !');
+        $this->addFlash('success', 'Category '.$category->getTitle().' deleted !');
         return $this->redirectToRoute('admin.category.index');
     }
 }
