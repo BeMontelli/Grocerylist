@@ -12,6 +12,14 @@
     <a href="{{ url('admin.recipe.index') }}">All recipes</a>
     <h1>{{ recipe.title }}</h1>
 
+    <div class="image">
+        {% if recipe.thumbnail is not empty %}
+            <img src="{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
+        {% else %}
+            <span>NO IMAGE</span>
+        {% endif %}
+    </div>
+
     {{ recipe.content | raw | nl2br }}
 
     {% if recipe.category is defined and recipe.category.title is defined and recipe.category.title is not empty %}

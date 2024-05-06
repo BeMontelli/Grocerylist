@@ -66,6 +66,9 @@ class Recipe
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'recipes')]
     private Collection $ingredients;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $thumbnail = null;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -180,6 +183,18 @@ class Recipe
     public function removeIngredient(Ingredient $ingredient): static
     {
         $this->ingredients->removeElement($ingredient);
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?string
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?string $thumbnail): static
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }
