@@ -1,6 +1,7 @@
 <header>
     <nav>
         <ul>
+            <li><a class="{{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}">Front site</a></li>
             <li><a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}">Dashboard</a></li>
             <li><a class="{{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}">Recipes</a></li>
             <li><a class="{{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}">Ingredients</a></li>
