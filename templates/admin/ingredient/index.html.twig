@@ -10,7 +10,7 @@
 
 <div class="example-wrapper">
     <h1>Ingredients</h1>
-    <a href="{{ url('admin.ingredient.create') }}">Create ingredient</a>
+    <a class="btn-primary btn" href="{{ url('admin.ingredient.create') }}">Create ingredient</a>
 
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}
@@ -29,7 +29,7 @@
             <th{% if ingredients.isSorted('a.slug') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(ingredients, 'Slug', 'r.slug') }}
             </th>
-            <th>Actions</th>
+            <th class="actions">Actions</th>
         </tr>
 
         {# table body #}
@@ -38,11 +38,11 @@
                 <td>{{ ingredient.id }}</td>
                 <td><a href="{{ url('admin.ingredient.show', {slug: ingredient.slug, id: ingredient.id}) }}">{{ ingredient.title }}</a></td>
                 <td>{{ ingredient.slug }}</td>
-                <td>
-                    <a href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Editer</a>
+                <td class="actions">
+                    <a class="btn-primary btn" href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Editer</a>
                     <form action="{{ url('admin.ingredient.delete', { id: ingredient.id}) }}" method="post">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button type="submit">Supprimer</button>
+                        <button class="btn-primary btn" type="submit">Supprimer</button>
                     </form>
                 </td>
             </tr>
