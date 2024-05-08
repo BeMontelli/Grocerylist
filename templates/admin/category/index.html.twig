@@ -15,17 +15,42 @@
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}
 
-    <ul>
+    {# total items count #}
+    <div class="count">
+        Results count : {{ categories.getTotalItemCount }}
+    </div>
+    <table>
+        <tr>
+            {# sorting of properties based on query components #}
+            <th>{{ knp_pagination_sortable(categories, 'Id', 'r.id') }}</th>
+            <th{% if categories.isSorted('a.title') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(categories, 'Title', 'r.title') }}
+            </th>
+            <th{% if categories.isSorted('a.slug') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(categories, 'Slug', 'r.slug') }}
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        {# table body #}
         {% for category in categories %}
-            <li>
-                <a href="{{ url('admin.category.show', {slug: category.slug, id: category.id}) }}">{{ category.title }}</a>
-                <a href="{{ url('admin.category.edit', { id: category.id}) }}">Editer</a>
-                <form action="{{ url('admin.category.delete', { id: category.id}) }}" method="post">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit">Supprimer</button>
-                </form>
-            </li>
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ category.id }}</td>
+                <td><a href="{{ url('admin.category.show', {slug: category.slug, id: category.id}) }}">{{ category.title }}</a></td>
+                <td>{{ category.slug }}</td>
+                <td>
+                    <a href="{{ url('admin.category.edit', { id: category.id}) }}">Editer</a>
+                    <form action="{{ url('admin.category.delete', { id: category.id}) }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(categories) }}
+    </div>
 </div>
 {% endblock %}

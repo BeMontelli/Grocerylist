@@ -18,10 +18,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class IngredientController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(IngredientRepository $ingredientRepository): Response
+    public function index(Request $request, IngredientRepository $ingredientRepository): Response
     {
+        $currentPage = $request->query->getInt('page', 1);
+        $ingredients = $ingredientRepository->paginateIngredients($currentPage);
+
         return $this->render('admin/ingredient/index.html.twig', [
-            'ingredients' => $ingredientRepository->findAll()
+            'ingredients' => $ingredients
         ]);
     }
 

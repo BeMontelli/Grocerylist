@@ -15,17 +15,42 @@
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}
 
-    <ul>
+    {# total items count #}
+    <div class="count">
+        Results count : {{ ingredients.getTotalItemCount }}
+    </div>
+    <table>
+        <tr>
+            {# sorting of properties based on query components #}
+            <th>{{ knp_pagination_sortable(ingredients, 'Id', 'r.id') }}</th>
+            <th{% if ingredients.isSorted('a.title') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(ingredients, 'Title', 'r.title') }}
+            </th>
+            <th{% if ingredients.isSorted('a.slug') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(ingredients, 'Slug', 'r.slug') }}
+            </th>
+            <th>Actions</th>
+        </tr>
+
+        {# table body #}
         {% for ingredient in ingredients %}
-            <li>
-                <a href="{{ url('admin.ingredient.show', {slug: ingredient.slug, id: ingredient.id}) }}">{{ ingredient.title }}</a>
-                <a href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Editer</a>
-                <form action="{{ url('admin.ingredient.delete', { id: ingredient.id}) }}" method="post">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit">Supprimer</button>
-                </form>
-            </li>
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ ingredient.id }}</td>
+                <td><a href="{{ url('admin.ingredient.show', {slug: ingredient.slug, id: ingredient.id}) }}">{{ ingredient.title }}</a></td>
+                <td>{{ ingredient.slug }}</td>
+                <td>
+                    <a href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Editer</a>
+                    <form action="{{ url('admin.ingredient.delete', { id: ingredient.id}) }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(ingredients) }}
+    </div>
 </div>
 {% endblock %}

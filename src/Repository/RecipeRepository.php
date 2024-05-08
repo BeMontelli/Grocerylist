@@ -29,7 +29,7 @@ class RecipeRepository extends ServiceEntityRepository
         return $this->paginator->paginate($queryBuilder,$page,$perPage,[
             'distinct' => true,
             'sortFieldAllowList' => [
-                'r.id','r.title'
+                'r.id','r.title','r.slug'
             ],
         ]);
     }

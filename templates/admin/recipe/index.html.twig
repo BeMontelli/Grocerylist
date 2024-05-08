@@ -27,6 +27,9 @@
                 {{ knp_pagination_sortable(recipes, 'Title', 'r.title') }}
             </th>
             <th>Categories</th>
+            <th{% if recipes.isSorted('a.slug') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(recipes, 'Slug', 'r.slug') }}
+            </th>
             <th>Actions</th>
         </tr>
 
@@ -36,6 +39,7 @@
                 <td>{{ recipe.id }}</td>
                 <td><a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></td>
                 <td><span>| {{ recipe.category.title | default('---') }} |</span></td>
+                <td>{{ recipe.slug }}</td>
                 <td>
                     <a href="{{ url('admin.recipe.edit', { id: recipe.id}) }}">Editer</a>
                     <form action="{{ url('admin.recipe.delete', { id: recipe.id}) }}" method="post">
