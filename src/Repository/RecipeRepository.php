@@ -6,17 +6,43 @@ use App\Entity\Recipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @extends ServiceEntityRepository<Recipe>
  */
 class RecipeRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, private PaginatorInterface $paginator)
     {
         $this->entityManager = $entityManager;
         parent::__construct($registry, Recipe::class);
     }
+
+    public function paginateRecipesWithCategories(int $page) : PaginationInterface {
+
+        $queryBuilder = $this->createQueryBuilder('r');
+        $perPage = 2;
+
+        return $this->paginator->paginate($queryBuilder,$page,$perPage,[
+            'distinct' => true,
+            'sortFieldAllowList' => [
+                'r.id','r.title'
+            ],
+        ]);
+    }
+
+    /*public function paginateRecipesWithCategories(int $page, int $limit): Paginator {
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->setFirstResult(($page - 1) * $limit)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->setHint(Paginator::HINT_ENABLE_DISTINCT, false);
+
+        return new Paginator($queryBuilder,false);
+    }*/
 
     public function findAllRecipesWithCategories()
     {

@@ -20,8 +20,9 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 class RecipeController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(RecipeRepository $recipeRepository): Response
+    public function index(Request $request, RecipeRepository $recipeRepository): Response
     {
+        $currentPage = $request->query->getInt('page', 1);
         /*$recipe = new Recipe();
         $recipe->setTitle("Burger")
             ->setSlug("burger")
@@ -34,8 +35,10 @@ class RecipeController extends AbstractController
 
         /*$entityManager->remove($recipe);*/
 
+        $recipes = $recipeRepository->paginateRecipesWithCategories($currentPage);
+
         return $this->render('admin/recipe/index.html.twig', [
-            'recipes' => $recipeRepository->findAllRecipesWithCategories()
+            'recipes' => $recipes
         ]);
     }
 

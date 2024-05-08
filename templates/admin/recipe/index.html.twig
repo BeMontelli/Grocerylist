@@ -15,18 +15,40 @@
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}
 
-    <ul>
+    {# total items count #}
+    <div class="count">
+        Results count : {{ recipes.getTotalItemCount }}
+    </div>
+    <table>
+        <tr>
+            {# sorting of properties based on query components #}
+            <th>{{ knp_pagination_sortable(recipes, 'Id', 'r.id') }}</th>
+            <th{% if recipes.isSorted('a.title') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(recipes, 'Title', 'r.title') }}
+            </th>
+            <th>Categories</th>
+            <th>Actions</th>
+        </tr>
+
+        {# table body #}
         {% for recipe in recipes %}
-            <li>
-                <a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a>
-                <span>| {{ recipe.category.title | default('---') }} |</span>
-                <a href="{{ url('admin.recipe.edit', { id: recipe.id}) }}">Editer</a>
-                <form action="{{ url('admin.recipe.delete', { id: recipe.id}) }}" method="post">
-                    <input type="hidden" name="_method" value="DELETE">
-                    <button type="submit">Supprimer</button>
-                </form>
-            </li>
+            <tr {% if loop.index is odd %}class="color"{% endif %}>
+                <td>{{ recipe.id }}</td>
+                <td><a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></td>
+                <td><span>| {{ recipe.category.title | default('---') }} |</span></td>
+                <td>
+                    <a href="{{ url('admin.recipe.edit', { id: recipe.id}) }}">Editer</a>
+                    <form action="{{ url('admin.recipe.delete', { id: recipe.id}) }}" method="post">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <button type="submit">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
         {% endfor %}
-    </ul>
+    </table>
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(recipes) }}
+    </div>
 </div>
 {% endblock %}
