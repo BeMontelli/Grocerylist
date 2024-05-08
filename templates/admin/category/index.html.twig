@@ -22,12 +22,12 @@
     <table>
         <tr>
             {# sorting of properties based on query components #}
-            <th>{{ knp_pagination_sortable(categories, 'Id', 'r.id') }}</th>
+            <th>{{ knp_pagination_sortable(categories, 'Id', 'c.id') }}</th>
             <th{% if categories.isSorted('a.title') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(categories, 'Title', 'r.title') }}
+                {{ knp_pagination_sortable(categories, 'Title', 'c.title') }}
             </th>
             <th{% if categories.isSorted('a.slug') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(categories, 'Slug', 'r.slug') }}
+                {{ knp_pagination_sortable(categories, 'Slug', 'c.slug') }}
             </th>
             <th>Count Recipes</th>
             <th class="actions">Actions</th>
