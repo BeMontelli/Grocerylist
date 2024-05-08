@@ -18,8 +18,18 @@ body {
     padding-top: 60px;
 }
 
-ul,li,a,p{
+ul,li,a{
     color: var(--main-text-color);
+}
+
+a{
+    color: var(--main-green);
+    text-decoration: none;
+    transition: all 0.5s ease;
+}
+a:hover,a:focus{
+    color: var(--main-green-alt);
+    text-decoration: none;
     transition: all 0.5s ease;
 }
 
@@ -61,7 +71,15 @@ header nav ul li{
 }
 
 header li a{
+    padding: 10px;
+    font-weight: 600;
     text-transform: uppercase;
+    color: var(--main-text-color);
+    text-decoration: none;
+    transition: all 0.5s ease;
+}
+header li a:hover,header li a:focus{
+    color: var(--main-green-alt);
     text-decoration: none;
     transition: all 0.5s ease;
 }
@@ -69,11 +87,6 @@ header li a{
 header li a:hover{
     color: var(--main-green);
     transition: all 0.5s ease;
-}
-
-header a{
-    padding: 10px;
-    font-weight: bold;
 }
 
 header li:first-child a{
