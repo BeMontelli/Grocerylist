@@ -29,18 +29,20 @@
             <th{% if categories.isSorted('a.slug') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(categories, 'Slug', 'r.slug') }}
             </th>
+            <th>Count Recipes</th>
             <th class="actions">Actions</th>
         </tr>
 
         {# table body #}
         {% for category in categories %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ category.id }}</td>
-                <td><a href="{{ url('admin.category.show', {slug: category.slug, id: category.id}) }}">{{ category.title }}</a></td>
-                <td>{{ category.slug }}</td>
+                <td>{{ category.category.id }}</td>
+                <td><a href="{{ url('admin.category.show', {slug: category.category.slug, id: category.category.id}) }}">{{ category.category.title }}</a></td>
+                <td>{{ category.category.slug }}</td>
+                <td>{{ category.total }}</td>
                 <td class="actions">
-                    <a class="btn-primary btn" href="{{ url('admin.category.edit', { id: category.id}) }}">Editer</a>
-                    <form action="{{ url('admin.category.delete', { id: category.id}) }}" method="post">
+                    <a class="btn-primary btn" href="{{ url('admin.category.edit', { id: category.category.id}) }}">Editer</a>
+                    <form action="{{ url('admin.category.delete', { id: category.category.id}) }}" method="post">
                         <input type="hidden" name="_method" value="DELETE">
                         <button class="btn-primary btn" type="submit">Supprimer</button>
                     </form>
