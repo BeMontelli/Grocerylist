@@ -14,14 +14,16 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Serializer\SerializerInterface;
 
 #[Route("/api/v1/recipes", name: "api.recipe.")]
 class RecipeController extends AbstractController
 {
     #[Route('/', name: 'index')]
-    public function index(Request $request, RecipeRepository $recipeRepository): Response
+    public function index(Request $request, RecipeRepository $recipeRepository, SerializerInterface $serializer): Response
     {
-        $recipes = $recipeRepository->findAll();
+        $currentPage = $request->query->getInt('page', 1);
+        $recipes = $recipeRepository->paginateRecipesWithCategories($currentPage);
         return $this->json($recipes,200, [], [
             'groups' => ['recipes.index']
         ]);
