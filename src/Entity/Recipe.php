@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
@@ -18,6 +19,7 @@ class Recipe
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['recipes.index','recipes.show'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -25,6 +27,7 @@ class Recipe
         new Assert\NotBlank(),
         new Assert\Length(min: 10),
     ])]
+    #[Groups(['recipes.index','recipes.show'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -35,12 +38,14 @@ class Recipe
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
+    #[Groups(['recipes.index','recipes.show'])]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Sequentially([
         new Assert\NotBlank(),
     ])]
+    #[Groups(['recipes.show'])]
     private ?string $content = null;
 
     #[ORM\Column]
@@ -55,18 +60,22 @@ class Recipe
         new Assert\Positive(),
         new Assert\GreaterThan(value: '0'),
     ])]
+    #[Groups(['recipes.index','recipes.show'])]
     private ?string $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
+    #[Groups(['recipes.index','recipes.show'])]
     private ?Category $category = null;
 
     /**
      * @var Collection<int, Ingredient>
      */
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'recipes')]
+    #[Groups(['recipes.index','recipes.show'])]
     private Collection $ingredients;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['recipes.index','recipes.show'])]
     private ?string $thumbnail = null;
 
     public function __construct()

@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
@@ -18,6 +19,7 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['recipes.index','recipes.show'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -25,6 +27,7 @@ class Category
         new Assert\NotBlank(),
         new Assert\Length(min: 4),
     ])]
+    #[Groups(['recipes.index','recipes.show'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -35,6 +38,7 @@ class Category
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
+    #[Groups(['recipes.index','recipes.show'])]
     private ?string $slug = null;
 
     #[ORM\Column]
