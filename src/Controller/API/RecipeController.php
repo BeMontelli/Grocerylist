@@ -19,7 +19,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 #[Route("/api/v1/recipes", name: "api.recipe.")]
 class RecipeController extends AbstractController
 {
-    #[Route('/', name: 'index')]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(Request $request, RecipeRepository $recipeRepository, SerializerInterface $serializer): Response
     {
         $currentPage = $request->query->getInt('page', 1);
@@ -29,7 +29,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/create/', name: 'create')]
+    #[Route('/', name: 'create', methods: ['POST'])]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
         $recipe = new Recipe();
@@ -61,7 +61,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'show', requirements: ['id' => Requirement::DIGITS])]
+    #[Route('/{id}', name: 'show', requirements: ['id' => Requirement::DIGITS], methods: ['GET'])]
     public function show(int $id, RecipeRepository $recipeRepository): Response
     {
         return $this->json($recipeRepository->find($id),200, [], [
@@ -69,7 +69,7 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]
+    #[Route('/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['PUT'])]
     public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(RecipeType::class, $recipe);
