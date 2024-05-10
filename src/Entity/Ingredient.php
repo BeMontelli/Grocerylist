@@ -15,7 +15,7 @@ class Ingredient
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['recipes.*'])]
+    #[Groups(['ingredients.*','recipes.*'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -23,7 +23,7 @@ class Ingredient
         new Assert\NotBlank(),
         new Assert\Length(min: 4),
     ])]
-    #[Groups(['recipes.*'])]
+    #[Groups(['ingredients.*','recipes.*'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -34,21 +34,22 @@ class Ingredient
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
-    #[Groups(['recipes.*'])]
+    #[Groups(['ingredients.*','recipes.*'])]
     private ?string $slug = null;
 
     #[ORM\Column]
-    #[Groups(['recipes.*'])]
+    #[Groups(['ingredients.*','recipes.*'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Groups(['recipes.*'])]
+    #[Groups(['ingredients.*','recipes.*'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * @var Collection<int, Recipe>
      */
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'ingredients')]
+    #[Groups(['ingredients.index','ingredients.show'])]
     private Collection $recipes;
 
     public function __construct()
