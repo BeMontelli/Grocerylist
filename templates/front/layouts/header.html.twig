@@ -1,21 +1,23 @@
 <header>
-    <nav class="left">
-        <ul>
-            <li><a class="{{ app.current_route == 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i></a></li>
-            <li><a class="{{ app.current_route starts with 'page.contact' ? 'active' : '' }}" href="{{ url('page.contact') }}">Contact</a></li>
-        </ul>
-    </nav>
-    <nav class="right">
-        <ul>
-            {% if app.user %}
-                {% if is_granted('ROLE_ADMIN') %}
-                <li><a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i></a></li>
+    <div class="container">
+        <nav class="left">
+            <ul>
+                <li><a class="{{ app.current_route == 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i></a></li>
+                {% if app.user and is_granted('ROLE_ADMIN') %}
+                    <li><a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i></a></li>
                 {% endif %}
-                <li><a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bx-log-out-circle'></i></a></li>
-            {% else %}
-                <li><a class="{{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">Login</a></li>
-                <li><a class="{{ app.current_route starts with 'app_register' ? 'active' : '' }}" href="{{ url('app_register') }}">Register</a></li>
-            {% endif %}
-        </ul>
-    </nav>
+                <li><a class="{{ app.current_route starts with 'page.contact' ? 'active' : '' }}" href="{{ url('page.contact') }}">Contact</a></li>
+            </ul>
+        </nav>
+        <nav class="right">
+            <ul>
+                {% if app.user %}
+                    <li><a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bx-log-out-circle'></i></a></li>
+                {% else %}
+                    <li><a class="{{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">Login</a></li>
+                    <li><a class="{{ app.current_route starts with 'app_register' ? 'active' : '' }}" href="{{ url('app_register') }}">Register</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
 </header>
