@@ -19,7 +19,7 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipes.*'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -27,7 +27,7 @@ class Category
         new Assert\NotBlank(),
         new Assert\Length(min: 4),
     ])]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipes.*'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -38,13 +38,15 @@ class Category
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipes.*'])]
     private ?string $slug = null;
 
     #[ORM\Column]
+    #[Groups(['recipes.*'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Groups(['recipes.*'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'category', cascade: ['remove'], orphanRemoval: true)]

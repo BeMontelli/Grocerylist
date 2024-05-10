@@ -25,7 +25,7 @@ class RecipeController extends AbstractController
         $currentPage = $request->query->getInt('page', 1);
         $recipes = $recipeRepository->paginateRecipesWithCategories($currentPage);
         return $this->json($recipes,Response::HTTP_OK, [], [
-            'groups' => ['recipes.index']
+            'groups' => ['recipes.*','recipes.index']
         ]);
     }
 
@@ -41,7 +41,7 @@ class RecipeController extends AbstractController
     public function show(int $id, RecipeRepository $recipeRepository): Response
     {
         return $this->json($recipeRepository->find($id),Response::HTTP_OK, [], [
-            'groups' => ['recipes.show']
+            'groups' => ['recipes.*','recipes.show']
         ]);
     }
 
