@@ -52,6 +52,12 @@ header{
     backdrop-filter: blur(5.9px);
     -webkit-backdrop-filter: blur(5.9px);
     border: 1px solid rgba(203, 220, 215, 0.07);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+header nav{
+    width: auto;
 }
 
 header nav i{
