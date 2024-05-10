@@ -19,7 +19,7 @@ class Recipe
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipes.index','recipes.show','recipes.create'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -27,7 +27,7 @@ class Recipe
         new Assert\NotBlank(),
         new Assert\Length(min: 10),
     ])]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipes.index','recipes.show','recipes.create'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -38,14 +38,14 @@ class Recipe
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipes.index','recipes.show','recipes.create'])]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
     #[Assert\Sequentially([
         new Assert\NotBlank(),
     ])]
-    #[Groups(['recipes.show'])]
+    #[Groups(['recipes.show','recipes.create'])]
     private ?string $content = null;
 
     #[ORM\Column]
@@ -60,7 +60,7 @@ class Recipe
         new Assert\Positive(),
         new Assert\GreaterThan(value: '0'),
     ])]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipes.index','recipes.show','recipes.create'])]
     private ?string $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
@@ -75,7 +75,7 @@ class Recipe
     private Collection $ingredients;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipes.index','recipes.show','recipes.create'])]
     private ?string $thumbnail = null;
 
     public function __construct()
