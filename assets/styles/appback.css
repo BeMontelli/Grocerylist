@@ -54,8 +54,9 @@ header{
     border: 1px solid rgba(203, 220, 215, 0.07);
 }
 
-header nav{
-
+header nav i{
+    font-size: 1.4rem;
+    line-height: 1rem;
 }
 
 header ul,header li,header a,header p{

@@ -1,13 +1,13 @@
 <header>
     <nav>
         <ul>
-            <li><a class="{{ app.current_route == 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}">Home</a></li>
+            <li><a class="{{ app.current_route == 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i></a></li>
             <li><a class="{{ app.current_route starts with 'page.contact' ? 'active' : '' }}" href="{{ url('page.contact') }}">Contact</a></li>
             {% if app.user %}
                 {% if is_granted('ROLE_ADMIN') %}
-                <li><a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}">Dashboard</a></li>
+                <li><a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i></a></li>
                 {% endif %}
-                <li><a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}">Logout</a></li>
+                <li><a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bx-log-out-circle'></i></a></li>
             {% else %}
                 <li><a class="{{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">Login</a></li>
                 <li><a class="{{ app.current_route starts with 'app_register' ? 'active' : '' }}" href="{{ url('app_register') }}">Register</a></li>

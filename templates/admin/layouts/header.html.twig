@@ -1,13 +1,13 @@
 <header>
     <nav>
         <ul>
-            <li><a class="{{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}">Front site</a></li>
-            <li><a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}">Dashboard</a></li>
+            <li><a class="{{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i></a></li>
+            <li><a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i></a></li>
             <li><a class="{{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}">Recipes</a></li>
             <li><a class="{{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}">Ingredients</a></li>
             <li><a class="{{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ url('admin.category.index') }}">Categories</a></li>
             {% if app.user %}
-                <li><a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}">Logout</a></li>
+                <li><a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bx-log-out-circle'></i></a></li>
             {% endif %}
         </ul>
     </nav>
