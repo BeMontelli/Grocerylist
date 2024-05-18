@@ -7,6 +7,7 @@
                 <li><a class="{{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}">Recipes</a></li>
                 <li><a class="{{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}">Ingredients</a></li>
                 <li><a class="{{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ url('admin.category.index') }}">Categories</a></li>
+                <li><a class="{{ app.current_route starts with 'admin.list.' ? 'active' : '' }}" href="{{ url('admin.list.index') }}">My lists</a></li>
             </ul>
         </nav>
         <nav class="right">
