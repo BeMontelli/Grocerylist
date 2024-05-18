@@ -1,11 +1,13 @@
-<!DOCTYPE html>
+{% extends 'admin/base.html.twig' %}
 
-<title>New GroceryList</title>
+{% block title %}New GroceryList{% endblock %}
 
 {% block body %}
-    <h1>Create new GroceryList</h1>
+    <div class="container">
+        <h1>Create new GroceryList</h1>
 
-    {{ include('admin/grocery_list/_form.html.twig') }}
+        {{ include('admin/grocery_list/_form.html.twig') }}
 
-    <a href="{{ path('admin.list.index') }}">back to list</a>
+        <a class="btn-primary btn" href="{{ path('admin.list.index') }}">back to list</a>
+    </div>
 {% endblock %}

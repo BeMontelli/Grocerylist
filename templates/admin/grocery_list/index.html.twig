@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+{% extends 'admin/base.html.twig' %}
 
-<title>GroceryList index</title>
+{% block title %}My Lists{% endblock %}
 
 {% block body %}
-    <h1>GroceryList index</h1>
+    <div class="container">
+        <h1>GroceryList index</h1>
 
-    <table class="table">
-        <thead>
+        <table class="table">
+            <thead>
             <tr>
                 <th>Id</th>
                 <th>Title</th>
@@ -14,26 +15,27 @@
                 <th>UpdatedAt</th>
                 <th>actions</th>
             </tr>
-        </thead>
-        <tbody>
-        {% for grocery_list in grocery_lists %}
-            <tr>
-                <td>{{ grocery_list.id }}</td>
-                <td>{{ grocery_list.title }}</td>
-                <td>{{ grocery_list.createdAt ? grocery_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ grocery_list.updatedAt ? grocery_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-                <td>
-                    <a href="{{ path('admin.list.show', {'slug': grocery_list.slug,'id': grocery_list.id}) }}">show</a>
-                    <a href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            {% for grocery_list in grocery_lists %}
+                <tr>
+                    <td>{{ grocery_list.id }}</td>
+                    <td>{{ grocery_list.title }}</td>
+                    <td>{{ grocery_list.createdAt ? grocery_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ grocery_list.updatedAt ? grocery_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>
+                        <a class="btn-primary btn" href="{{ path('admin.list.show', {'slug': grocery_list.slug,'id': grocery_list.id}) }}">show</a>
+                        <a class="btn-primary btn" href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
-    <a href="{{ path('admin.list.new') }}">Create new</a>
+        <a class="btn-primary btn" href="{{ path('admin.list.new') }}">Create new</a>
+    </div>
 {% endblock %}

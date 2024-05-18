@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+{% extends 'admin/base.html.twig' %}
 
-<title>GroceryList</title>
+{% block title %}{{ grocery_list.title }}{% endblock %}
 
 {% block body %}
-    <h1>GroceryList</h1>
+    <div class="container">
+        <h1>GroceryList</h1>
 
-    <table class="table">
-        <tbody>
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ grocery_list.id }}</td>
@@ -23,12 +24,13 @@
                 <th>UpdatedAt</th>
                 <td>{{ grocery_list.updatedAt ? grocery_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <a href="{{ path('admin.list.index') }}">back to list</a>
+        <a class="btn-primary btn" href="{{ path('admin.list.index') }}">back to list</a>
 
-    <a href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">edit</a>
+        <a class="btn-primary btn" href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">edit</a>
 
-    {{ include('admin/grocery_list/_delete_form.html.twig') }}
+        {{ include('admin/grocery_list/_delete_form.html.twig') }}
+    </div>
 {% endblock %}
