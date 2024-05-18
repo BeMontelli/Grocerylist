@@ -27,9 +27,9 @@
             </tbody>
         </table>
 
-        <a class="btn-primary btn" href="{{ path('admin.list.index') }}">back to list</a>
+        <a class="btn-primary btn mb-2" href="{{ path('admin.list.index') }}">back to list</a>
 
-        <a class="btn-primary btn" href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">edit</a>
+        <a class="btn-primary btn mb-2" href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">edit</a>
 
         {{ include('admin/grocery_list/_delete_form.html.twig') }}
     </div>

@@ -115,6 +115,7 @@ header li:first-child a{
 
 .btn-primary.btn{
     height: 30px;
+    width: fit-content;
     line-height: 30px;
     font-size: 1rem;
     padding: 0 15px;
