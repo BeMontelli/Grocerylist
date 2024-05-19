@@ -184,3 +184,15 @@ hr {
     width: 100%;
     border: none;
 }
+
+.page-link{
+    color: var(--main-green);
+}
+.page-link:hover {
+    color: var(--main-dark);
+}
+.active > .page-link, .page-link.active {
+    color: var(--bs-pagination-active-color);
+    background-color: var(--main-green);
+    border-color: var(--main-green);
+}
