@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
+use App\Entity\Section;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
@@ -34,6 +35,14 @@ class IngredientType extends AbstractType
                 'class' => Recipe::class,
                 'choice_label' => 'title',
                 'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false
+            ])
+            ->add('section', EntityType::class, [
+                'label' => 'Section',
+                'class' => Section::class,
+                'choice_label' => 'title',
+                'multiple' => false,
                 'expanded' => true,
                 'by_reference' => false
             ])
