@@ -18,10 +18,12 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class GroceryListController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(GroceryListRepository $groceryListRepository): Response
+    public function index(Request $request, GroceryListRepository $groceryListRepository): Response
     {
+        $currentPage = $request->query->getInt('page', 1);
+        $lists = $groceryListRepository->paginateLists($currentPage);
         return $this->render('admin/grocery_list/index.html.twig', [
-            'grocery_lists' => $groceryListRepository->findAll(),
+            'grocery_lists' => $lists,
         ]);
     }
 
