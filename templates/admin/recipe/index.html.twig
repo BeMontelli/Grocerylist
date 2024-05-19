@@ -15,7 +15,8 @@
     <div class="count">
         Results count : {{ recipes.getTotalItemCount }}
     </div>
-    <table>
+    <table class="table">
+        <thead>
         <tr>
             {# sorting of properties based on query components #}
             <th>{{ knp_pagination_sortable(recipes, 'Id', 'r.id') }}</th>
@@ -28,6 +29,8 @@
             </th>
             <th class="actions">Actions</th>
         </tr>
+        </thead>
+        <tbody>
 
         {# table body #}
         {% for recipe in recipes %}
@@ -45,6 +48,8 @@
                 </td>
             </tr>
         {% endfor %}
+
+        </tbody>
     </table>
     {# display navigation #}
     <div class="navigation">

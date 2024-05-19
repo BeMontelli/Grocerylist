@@ -7,6 +7,10 @@
         <h1>My Lists</h1>
         <a class="btn-primary btn mb-4" href="{{ path('admin.list.new') }}">Create new</a>
 
+        {# total items count #}
+        <div class="count">
+            Results count : {{ grocery_lists.getTotalItemCount }}
+        </div>
         <table class="table">
             <thead>
             <tr>
