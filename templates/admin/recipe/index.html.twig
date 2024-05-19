@@ -37,7 +37,7 @@
             <tr {% if loop.index is odd %}class="color"{% endif %}>
                 <td>{{ recipe.id }}</td>
                 <td><a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></td>
-                <td><span>| {{ recipe.category.title | default('---') }} |</span></td>
+                <td>{{ recipe.category.title | default('---') }}</td>
                 <td>{{ recipe.slug }}</td>
                 <td class="actions">
                     <a class="btn-primary btn" href="{{ url('admin.recipe.edit', { id: recipe.id}) }}">Editer</a>

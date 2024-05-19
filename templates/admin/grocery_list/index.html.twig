@@ -21,8 +21,8 @@
                 <th{% if grocery_lists.isSorted('a.slug') %} class="sorted"{% endif %}>
                     {{ knp_pagination_sortable(grocery_lists, 'Slug', 'r.slug') }}
                 </th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
+                {#<th>CreatedAt</th>
+                <th>UpdatedAt</th>#}
                 <th class="actions">actions</th>
             </tr>
             </thead>
@@ -32,8 +32,8 @@
                     <td>{{ grocery_list.id }}</td>
                     <td>{{ grocery_list.title }}</td>
                     <td>{{ grocery_list.slug }}</td>
-                    <td>{{ grocery_list.createdAt ? grocery_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-                    <td>{{ grocery_list.updatedAt ? grocery_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                    {#<td>{{ grocery_list.createdAt ? grocery_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                    <td>{{ grocery_list.updatedAt ? grocery_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
                     <td class="actions">
                         <a class="btn-primary btn" href="{{ path('admin.list.show', {'slug': grocery_list.slug,'id': grocery_list.id}) }}">show</a>
                         <a class="btn-primary btn" href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">edit</a>
