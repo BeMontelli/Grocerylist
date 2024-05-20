@@ -7,12 +7,24 @@
         <h1>Sections</h1>
         <a class="btn-primary btn mb-4" href="{{ path('admin.section.new') }}">Create new</a>
 
+        <hr>
+        {% include 'admin/partials/flashes.html.twig' %}
+
+
+        {# total items count #}
+        <div class="count">
+            Results count : {{ sections.getTotalItemCount }}
+        </div>
         <table class="table">
             <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>Slug</th>
+                <th>{{ knp_pagination_sortable(sections, 'Id', 'r.id') }}</th>
+                <th{% if sections.isSorted('a.title') %} class="sorted"{% endif %}>
+                    {{ knp_pagination_sortable(sections, 'Title', 'r.title') }}
+                </th>
+                <th{% if sections.isSorted('a.slug') %} class="sorted"{% endif %}>
+                    {{ knp_pagination_sortable(sections, 'Slug', 'r.slug') }}
+                </th>
                 <th class="actions">actions</th>
             </tr>
             </thead>
@@ -34,5 +46,9 @@
             {% endfor %}
             </tbody>
         </table>
+        {# display navigation #}
+        <div class="navigation">
+            {{ knp_pagination_render(sections) }}
+        </div>
     </div>
 {% endblock %}

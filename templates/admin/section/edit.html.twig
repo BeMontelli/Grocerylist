@@ -10,6 +10,9 @@
 
         <a class="btn-primary btn mb-2" href="{{ path('admin.section.index') }}">back to list</a>
 
+        <hr>
+        {% include 'admin/partials/flashes.html.twig' %}
+
         {{ include('admin/section/_delete_form.html.twig') }}
     </div>
 {% endblock %}

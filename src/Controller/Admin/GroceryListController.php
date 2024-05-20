@@ -37,6 +37,7 @@ class GroceryListController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($groceryList);
             $entityManager->flush();
+            $this->addFlash('success', 'List saved !');
 
             return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
         }
@@ -63,6 +64,7 @@ class GroceryListController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'List updated !');
 
             return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
         }
@@ -79,6 +81,7 @@ class GroceryListController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$groceryList->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($groceryList);
             $entityManager->flush();
+            $this->addFlash('success', 'Recipe '.$groceryList->getTitle().' deleted !');
         }
 
         return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);

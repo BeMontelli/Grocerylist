@@ -18,10 +18,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class SectionController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(SectionRepository $sectionRepository): Response
+    public function index(Request $request, SectionRepository $sectionRepository): Response
     {
+        $currentPage = $request->query->getInt('page', 1);
+        $sections = $sectionRepository->paginateSections($currentPage);
+
         return $this->render('admin/section/index.html.twig', [
-            'sections' => $sectionRepository->findAll(),
+            'sections' => $sections
         ]);
     }
 
@@ -35,6 +38,7 @@ class SectionController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($section);
             $entityManager->flush();
+            $this->addFlash('success', 'Section saved !');
 
             return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
         }
@@ -61,6 +65,7 @@ class SectionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success', 'Section updated !');
 
             return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
         }
@@ -77,6 +82,7 @@ class SectionController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($section);
             $entityManager->flush();
+            $this->addFlash('success', 'Recipe '.$section->getTitle().' deleted !');
         }
 
         return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
