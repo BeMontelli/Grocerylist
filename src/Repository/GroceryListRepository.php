@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\GroceryList;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -23,6 +24,25 @@ class GroceryListRepository extends ServiceEntityRepository
     public function paginateLists(int $page) : PaginationInterface {
 
         $queryBuilder = $this->createQueryBuilder('r');
+        $perPage = 2;
+
+        return $this->paginator->paginate($queryBuilder,$page,$perPage,[
+            'distinct' => true,
+            'sortFieldAllowList' => [
+                'r.id','r.title','r.slug'
+            ],
+        ]);
+    }
+
+    public function paginateUserLists(int $page, User $user) : PaginationInterface {
+
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->andWhere('l.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('l.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
         $perPage = 2;
 
         return $this->paginator->paginate($queryBuilder,$page,$perPage,[

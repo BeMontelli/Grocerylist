@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -39,6 +41,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private bool $isVerified = false;
+
+    /**
+     * @var Collection<int, GroceryList>
+     */
+    #[ORM\OneToMany(targetEntity: GroceryList::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $groceryLists;
+
+    public function __construct()
+    {
+        $this->groceryLists = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -141,6 +154,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GroceryList>
+     */
+    public function getGroceryLists(): Collection
+    {
+        return $this->groceryLists;
+    }
+
+    public function addGroceryList(GroceryList $groceryList): static
+    {
+        if (!$this->groceryLists->contains($groceryList)) {
+            $this->groceryLists->add($groceryList);
+            $groceryList->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroceryList(GroceryList $groceryList): static
+    {
+        if ($this->groceryLists->removeElement($groceryList)) {
+            // set the owning side to null (unless already changed)
+            if ($groceryList->getUser() === $this) {
+                $groceryList->setUser(null);
+            }
+        }
 
         return $this;
     }
