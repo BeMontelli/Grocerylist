@@ -1,0 +1,38 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}Sections{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Sections</h1>
+        <a class="btn-primary btn mb-4" href="{{ path('admin.section.new') }}">Create new</a>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Slug</th>
+                <th class="actions">actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for section in sections %}
+                <tr>
+                    <td>{{ section.id }}</td>
+                    <td>{{ section.title }}</td>
+                    <td>{{ section.slug }}</td>
+                    <td class="actions">
+                        <a class="btn-primary btn" href="{{ path('admin.section.show', {'slug': section.slug,'id': section.id}) }}">show</a>
+                        <a class="btn-primary btn" href="{{ path('admin.section.edit', {'id': section.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

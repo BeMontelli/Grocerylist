@@ -73,7 +73,6 @@ header nav ul li{
 }
 
 header li a{
-    text-transform: uppercase;
     text-decoration: none;
     transition: all 0.5s ease;
 }
