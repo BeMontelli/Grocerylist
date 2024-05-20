@@ -23,6 +23,7 @@
             <th{% if ingredients.isSorted('a.title') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(ingredients, 'Title', 'r.title') }}
             </th>
+            <th>Sections</th>
             <th{% if ingredients.isSorted('a.slug') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(ingredients, 'Slug', 'r.slug') }}
             </th>
@@ -36,6 +37,7 @@
             <tr {% if loop.index is odd %}class="color"{% endif %}>
                 <td>{{ ingredient.id }}</td>
                 <td><a href="{{ url('admin.ingredient.show', {slug: ingredient.slug, id: ingredient.id}) }}">{{ ingredient.title }}</a></td>
+                <td>{{ ingredient.section.title | default('---') }}</td>
                 <td>{{ ingredient.slug }}</td>
                 <td class="actions">
                     <a class="btn-primary btn" href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Editer</a>

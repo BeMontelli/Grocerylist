@@ -30,6 +30,12 @@ class IngredientType extends AbstractType
                 'required' => false,
                 'label' => 'Slug'
             ])
+            ->add('section', EntityType::class, [
+                'class' => Section::class,
+                'label' => 'Ingredient section',
+                'choice_label' => 'title',
+                'placeholder' => 'Select a section',
+            ])
             ->add('recipes', EntityType::class, [
                 'label' => 'Recipes related',
                 'class' => Recipe::class,

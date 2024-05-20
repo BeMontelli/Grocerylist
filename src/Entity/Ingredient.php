@@ -52,6 +52,9 @@ class Ingredient
     #[Groups(['ingredients.index','ingredients.show'])]
     private Collection $recipes;
 
+    #[ORM\ManyToOne(inversedBy: 'ingredients', cascade: ['persist'])]
+    private ?Section $section = null;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
@@ -133,6 +136,18 @@ class Ingredient
         if ($this->recipes->removeElement($recipe)) {
             $recipe->removeIngredient($this);
         }
+
+        return $this;
+    }
+
+    public function getSection(): ?Section
+    {
+        return $this->section;
+    }
+
+    public function setSection(?Section $section): static
+    {
+        $this->section = $section;
 
         return $this;
     }
