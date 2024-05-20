@@ -38,14 +38,6 @@ class IngredientType extends AbstractType
                 'expanded' => true,
                 'by_reference' => false
             ])
-            ->add('section', EntityType::class, [
-                'label' => 'Section',
-                'class' => Section::class,
-                'choice_label' => 'title',
-                'multiple' => false,
-                'expanded' => false,
-                'by_reference' => false
-            ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save Ingredient'
             ])

@@ -26,9 +26,6 @@
             <th{% if ingredients.isSorted('a.slug') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(ingredients, 'Slug', 'r.slug') }}
             </th>
-            <th{% if ingredients.isSorted('a.section') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(ingredients, 'Section', 'r.section') }}
-            </th>
             <th class="actions">Actions</th>
         </tr>
         </thead>
@@ -40,7 +37,6 @@
                 <td>{{ ingredient.id }}</td>
                 <td><a href="{{ url('admin.ingredient.show', {slug: ingredient.slug, id: ingredient.id}) }}">{{ ingredient.title }}</a></td>
                 <td>{{ ingredient.slug }}</td>
-                <td>{{ ingredient.section.title | default('---') }}</td>
                 <td class="actions">
                     <a class="btn-primary btn" href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Editer</a>
                     <form action="{{ url('admin.ingredient.delete', { id: ingredient.id}) }}" method="post">
