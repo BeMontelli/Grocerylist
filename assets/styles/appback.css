@@ -19,7 +19,7 @@ body {
     font-family: Arial, sans-serif;
     color: var(--main-text-color);
     background-color: var(--main-bg-color);
-    padding-top: 60px;
+    padding-top: 90px;
 }
 
 ul,li,a{
@@ -35,6 +35,10 @@ a:hover,a:focus{
     color: var(--main-green-alt);
     text-decoration: none;
     transition: all 0.5s ease;
+}
+a.hspec{
+    height: 38px;
+    display: block;
 }
 
 input,input::placeholder,textarea,textarea::placeholder,button{
@@ -104,8 +108,17 @@ header li a:hover{
     transition: all 0.5s ease;
 }
 
-header li:first-child a{
+header ul.main_list>li:first-child>a{
     padding-left: 0;
+}
+header ul.main_list .btn-group{
+    margin-right: 10px;
+}
+.dropdown-item{
+    font-weight: 600;
+}
+.dropdown-item.active, .dropdown-item:active{
+    background-color: var(--main-green);
 }
 
 .btn-primary{
