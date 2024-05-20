@@ -28,7 +28,7 @@ class IngredientRepository extends ServiceEntityRepository
         return $this->paginator->paginate($queryBuilder,$page,$perPage,[
             'distinct' => true,
             'sortFieldAllowList' => [
-                'r.id','r.title','r.slug'
+                'r.id','r.title','r.slug','r.section'
             ],
         ]);
     }
