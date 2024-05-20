@@ -4,26 +4,26 @@
             <ul class="main_list">
                 <li><a class="hspec {{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i></a></li>
                 <li><a class="hspec {{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i></a></li>
-                <li><a class="{{ app.current_route starts with 'admin.list.' ? 'active' : '' }}" href="{{ url('admin.list.index') }}">My lists</a></li>
+                <li><a class="{{ app.current_route starts with 'admin.list.' ? 'active' : '' }}" href="{{ url('admin.list.index') }}">{{ 'app.admin.lists.title'|trans }}</a></li>
                 <li>
                     <div class="btn-group">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Recipes
+                            {{ 'app.admin.recipes.title'|trans }}
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}">Recipes</a></li>
-                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ url('admin.category.index') }}">Recipe Categories</a></li>
+                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}">{{ 'app.admin.recipes.title'|trans }}</a></li>
+                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ url('admin.category.index') }}">{{ 'app.admin.categories.title'|trans }}</a></li>
                         </ul>
                     </div>
                 </li>
                 <li>
                     <div class="btn-group">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Ingredients
+                            {{ 'app.admin.ingredients.title'|trans }}
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}">Ingredients</a></li>
-                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.section.' ? 'active' : '' }}" href="{{ url('admin.section.index') }}">Ingredient Categories</a></li>
+                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}">{{ 'app.admin.ingredients.title'|trans }}</a></li>
+                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.section.' ? 'active' : '' }}" href="{{ url('admin.section.index') }}">{{ 'app.admin.sections.title'|trans }}</a></li>
                         </ul>
                     </div>
                 </li>

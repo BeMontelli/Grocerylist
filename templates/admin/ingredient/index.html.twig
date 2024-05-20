@@ -44,10 +44,10 @@
                 <td>{{ ingredient.section.title | default('---') }}</td>
                 <td>{{ ingredient.slug }}</td>
                 <td class="actions">
-                    <a class="btn-primary btn" href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Editer</a>
+                    <a class="btn-primary btn" href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Edit</a>
                     <form action="{{ url('admin.ingredient.delete', { id: ingredient.id}) }}" method="post">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn-primary btn" type="submit">Supprimer</button>
+                        <button class="btn-primary btn" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>

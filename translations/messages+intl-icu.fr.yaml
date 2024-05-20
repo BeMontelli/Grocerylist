@@ -1,0 +1,7 @@
+app.admin.default_title: "Bienvenue dans l'administration"
+app.admin.welcome_title: Bienvenue
+app.admin.lists.title: 'Mes listes'
+app.admin.recipes.title: Recettes
+app.admin.categories.title: 'Categories de recette'
+app.admin.ingredients.title: Ingredients
+app.admin.sections.title: "Categories d'ingredient"

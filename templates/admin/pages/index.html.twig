@@ -1,10 +1,10 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}{{ 'app.admin.welcome_title'|trans }} {{ controller_name }}!{% endblock %}
 
 {% block body %}
 
 <div class="container">
-    <h1>Hello {{ controller_name }} ! ✅</h1>
+    <h1>{{ 'app.admin.welcome_title'|trans }} {{ controller_name }} ! ✅</h1>
 </div>
 {% endblock %}
