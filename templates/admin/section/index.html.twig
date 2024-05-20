@@ -5,11 +5,11 @@
 {% block body %}
     <div class="container">
         <div class="d-flex flex-row mb-3 align-items-center">
-            <div class="p-2"><h1>Sections</h1></div>
+            <div class="p-2"><h1>{{ 'app.admin.sections.title'|trans }}</h1></div>
             <div class="p-2"><a class="btn-primary btn" href="{{ url('admin.ingredient.index') }}">Ingredients</a></div>
         </div>
 
-        <a class="btn-primary btn mb-4" href="{{ path('admin.section.new') }}">Create new</a>
+        <a class="btn-primary btn mb-4" href="{{ path('admin.section.new') }}">{{ 'app.admin.action.new'|trans }}</a>
 
         <hr>
         {% include 'admin/partials/flashes.html.twig' %}
@@ -39,8 +39,8 @@
                     <td>{{ section.title }}</td>
                     <td>{{ section.slug }}</td>
                     <td class="actions">
-                        <a class="btn-primary btn" href="{{ path('admin.section.show', {'slug': section.slug,'id': section.id}) }}">show</a>
-                        <a class="btn-primary btn" href="{{ path('admin.section.edit', {'id': section.id}) }}">edit</a>
+                        <a class="btn-primary btn" href="{{ path('admin.section.show', {'slug': section.slug,'id': section.id}) }}">{{ 'app.admin.action.show'|trans }}</a>
+                        <a class="btn-primary btn" href="{{ path('admin.section.edit', {'id': section.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
                     </td>
                 </tr>
             {% else %}

@@ -5,3 +5,7 @@ app.admin.recipes.title: Recettes
 app.admin.categories.title: 'Categories de recette'
 app.admin.ingredients.title: Ingredients
 app.admin.sections.title: "Categories d'ingredient"
+app.admin.action.new: Créer un nouveau
+app.admin.action.show: Montrer
+app.admin.action.edit: Editer
+app.admin.action.delete: Supprimer

@@ -6,11 +6,11 @@
 
 <div class="container">
     <div class="d-flex flex-row mb-3 align-items-center">
-        <div class="p-2"><h1>Ingredients</h1></div>
+        <div class="p-2"><h1>{{ 'app.admin.ingredients.title'|trans }}</h1></div>
         <div class="p-2"><a class="btn-primary btn" href="{{ url('admin.section.index') }}">Ingredient sections</a></div>
     </div>
 
-    <a class="btn-primary btn" href="{{ url('admin.ingredient.create') }}">Create ingredient</a>
+    <a class="btn-primary btn" href="{{ url('admin.ingredient.create') }}">{{ 'app.admin.action.new'|trans }}</a>
 
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}
@@ -44,10 +44,10 @@
                 <td>{{ ingredient.section.title | default('---') }}</td>
                 <td>{{ ingredient.slug }}</td>
                 <td class="actions">
-                    <a class="btn-primary btn" href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">Edit</a>
+                    <a class="btn-primary btn" href="{{ url('admin.ingredient.edit', { id: ingredient.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
                     <form action="{{ url('admin.ingredient.delete', { id: ingredient.id}) }}" method="post">
                         <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn-primary btn" type="submit">Delete</button>
+                        <button class="btn-primary btn" type="submit">{{ 'app.admin.action.delete'|trans }}</button>
                     </form>
                 </td>
             </tr>
