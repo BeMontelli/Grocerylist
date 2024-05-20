@@ -5,7 +5,11 @@
 {% block body %}
 
 <div class="container">
-    <h1>Ingredients</h1>
+    <div class="d-flex flex-row mb-3 align-items-center">
+        <div class="p-2"><h1>Ingredients</h1></div>
+        <div class="p-2"><a class="btn-primary btn" href="{{ url('admin.section.index') }}">Ingredient sections</a></div>
+    </div>
+
     <a class="btn-primary btn" href="{{ url('admin.ingredient.create') }}">Create ingredient</a>
 
     <hr>

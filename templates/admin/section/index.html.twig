@@ -4,7 +4,11 @@
 
 {% block body %}
     <div class="container">
-        <h1>Sections</h1>
+        <div class="d-flex flex-row mb-3 align-items-center">
+            <div class="p-2"><h1>Sections</h1></div>
+            <div class="p-2"><a class="btn-primary btn" href="{{ url('admin.ingredient.index') }}">Ingredients</a></div>
+        </div>
+
         <a class="btn-primary btn mb-4" href="{{ path('admin.section.new') }}">Create new</a>
 
         <hr>
