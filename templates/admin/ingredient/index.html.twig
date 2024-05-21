@@ -10,7 +10,7 @@
         <div class="p-2"><a class="btn-primary btn" href="{{ url('admin.section.index') }}">{{ 'app.admin.sections.title'|trans }}</a></div>
     </div>
 
-    <a class="btn-primary btn" href="{{ url('admin.ingredient.create') }}">{{ 'app.admin.action.new'|trans }}</a>
+    <a class="btn-primary btn" href="{{ url('admin.ingredient.create') }}">{{ 'app.admin.action.new'|trans({'%gender%': 'male'}) }}</a>
 
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}

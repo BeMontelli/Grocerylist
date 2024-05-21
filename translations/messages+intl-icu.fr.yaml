@@ -8,7 +8,12 @@ app:
     ingredients.title: Ingredients
     sections.title: "Categories d'ingredient"
     action:
-      new: Créer un nouveau
+      new:  >-
+        {gender, select,
+          female   {Créer une nouvelle}
+          male     {Créer un nouveau}
+          other    {Créer un nouveau}
+        }
       show: Montrer
       edit: Editer
       delete: Supprimer

@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use function Symfony\Component\Translation\t;
 
 class ContactType extends AbstractType
 {
@@ -18,22 +19,22 @@ class ContactType extends AbstractType
         $builder
             ->add('name',TextType::class, [
                 'empty_data' => '',
-                'attr' => ['placeholder' => 'app.front.form.name.placeholder'],
-                'label' => 'app.front.form.name'
+                'attr' => ['placeholder' => t('app.front.form.name.placeholder')],
+                'label' => t('app.front.form.name')
             ])
             ->add('email',EmailType::class, [
                 'empty_data' => '',
-                'attr' => ['placeholder' => 'app.front.form.email.placeholder'],
-                'label' => 'app.front.form.email'
+                'attr' => ['placeholder' => t('app.front.form.email.placeholder')],
+                'label' => t('app.front.form.email')
             ])
             ->add('message',TextareaType::class, [
                 'required' => false,
                 'empty_data' => '',
-                'attr' => ['placeholder' => 'app.front.form.message.placeholder'],
-                'label' => 'app.front.form.message'
+                'attr' => ['placeholder' => t('app.front.form.message.placeholder')],
+                'label' => t('app.front.form.message')
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'app.front.form.send'
+                'label' => t('app.front.form.send')
             ])
         ;
     }
