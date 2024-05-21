@@ -156,6 +156,10 @@ header ul.main_list .btn-group{
     transform: scale(0.95);
 }
 
+.card{
+    background-color: var(--main-bg-color);
+}
+
 fieldset{
     border: solid 1px var(--main-green-alt);
     border-radius: 5px;

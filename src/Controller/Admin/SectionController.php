@@ -17,20 +17,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class SectionController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(Request $request, SectionRepository $sectionRepository): Response
+    #[Route('/', name: 'index', methods: ['GET', 'POST'])]
+    public function index(Request $request, SectionRepository $sectionRepository, EntityManagerInterface $entityManager): Response
     {
         $currentPage = $request->query->getInt('page', 1);
         $sections = $sectionRepository->paginateSections($currentPage);
 
-        return $this->render('admin/section/index.html.twig', [
-            'sections' => $sections
-        ]);
-    }
-
-    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+        // form new
         $section = new Section();
         $form = $this->createForm(SectionType::class, $section);
         $form->handleRequest($request);
@@ -43,8 +36,8 @@ class SectionController extends AbstractController
             return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->render('admin/section/new.html.twig', [
-            'section' => $section,
+        return $this->render('admin/section/index.html.twig', [
+            'sections' => $sections,
             'form' => $form,
         ]);
     }

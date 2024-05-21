@@ -27,14 +27,6 @@ class CategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/', name: 'create', methods: ['POST'])]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        return $this->render('admin/category/create.html.twig',[
-            '' => ''
-        ]);
-    }
-
     #[Route('/{id}', name: 'show', requirements: ['id' => Requirement::DIGITS], methods: ['GET'])]
     public function show(int $id, CategoryRepository $categoryRepository): Response
     {

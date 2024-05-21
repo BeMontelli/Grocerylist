@@ -17,20 +17,13 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class CategoryController extends AbstractController
 {
-    #[Route('/', name: 'index')]
-    public function index(Request $request, CategoryRepository $categoryRepository): Response
+    #[Route('/', name: 'index', methods: ['GET', 'POST'])]
+    public function index(Request $request, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager): Response
     {
         $currentPage = $request->query->getInt('page', 1);
         $categories = $categoryRepository->paginateCategories($currentPage);
 
-        return $this->render('admin/category/index.html.twig', [
-            'categories' => $categories
-        ]);
-    }
-
-    #[Route('/create/', name: 'create')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
-    {
+        // form new
         $category = new Category();
         $form = $this->createForm(CategoryType::class,$category);
         $form->handleRequest($request);
@@ -41,7 +34,8 @@ class CategoryController extends AbstractController
             return $this->redirectToRoute('admin.category.index');
         }
 
-        return $this->render('admin/category/create.html.twig',[
+        return $this->render('admin/category/index.html.twig', [
+            'categories' => $categories,
             'form' => $form
         ]);
     }
