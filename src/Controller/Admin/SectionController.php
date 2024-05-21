@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route("/admin/sections", name: "admin.section.")]
+#[Route("/{_locale}/admin/sections", name: "admin.section.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
 class SectionController extends AbstractController
 {

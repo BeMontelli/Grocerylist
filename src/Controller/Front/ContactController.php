@@ -12,9 +12,10 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
+#[Route("/{_locale}", name: "page.", requirements: ['_locale' => 'fr|en'])]
 class ContactController extends AbstractController
 {
-    #[Route('/contact', name: 'page.contact')]
+    #[Route('/contact', name: 'contact')]
     public function contact(Request $request, MailerInterface $mailer): Response
     {
         $contact = new ContactDTO();

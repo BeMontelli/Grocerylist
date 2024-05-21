@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[Route("/admin/ingredients", name: "admin.ingredient.")]
+#[Route("/{_locale}/admin/ingredients", name: "admin.ingredient.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
 class IngredientController extends AbstractController
 {
