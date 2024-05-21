@@ -1,11 +1,13 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}My Lists{% endblock %}
+{% block title %}{{ 'app.admin.lists.title'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container">
         <h1>{{ 'app.admin.lists.title'|trans }}</h1>
-        <a class="btn-primary btn mb-4" href="{{ path('admin.list.new') }}">{{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }}</a>
+        <a class="btn-primary btn mb-4" href="{{ path('admin.list.new') }}">
+            {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.lists.entity'|trans({'%entity%': 1}) }}
+        </a>
 
         <hr>
         {% include 'admin/partials/flashes.html.twig' %}

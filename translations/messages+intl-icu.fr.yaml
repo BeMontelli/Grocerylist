@@ -3,10 +3,35 @@ app:
     default_title: "Bienvenue dans l'administration"
     welcome_title: Bienvenue
     lists.title: 'Mes listes'
+    lists.entity: >-
+      {entity, plural,
+        =1 {Liste}
+        other {Listes}
+      }
     recipes.title: Recettes
+    recipes.entity: >-
+      {entity, plural,
+        =1 {Recette}
+        other {Recettes}
+      }
     categories.title: 'Categories de recette'
+    categories.entity: >-
+      {entity, plural,
+        =1 {Categorie de recette}
+        other {Categories de recette}
+      }
     ingredients.title: Ingredients
+    ingredients.entity: >-
+      {entity, plural,
+        =1 {Ingredient}
+        other {Ingredients}
+      }
     sections.title: "Categories d'ingredient"
+    sections.entity: >-
+      {entity, plural,
+        =1 {Categorie d'ingredient}
+        other {Categories d'ingredient}
+      }
     action:
       new:  >-
         {gender, select,

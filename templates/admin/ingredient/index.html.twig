@@ -1,6 +1,6 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Ingredients{% endblock %}
+{% block title %}{{ 'app.admin.ingredients.title'|trans }}{% endblock %}
 
 {% block body %}
 
@@ -10,7 +10,9 @@
         <div class="p-2"><a class="btn-primary btn" href="{{ url('admin.section.index') }}">{{ 'app.admin.sections.title'|trans }}</a></div>
     </div>
 
-    <a class="btn-primary btn" href="{{ url('admin.ingredient.create') }}">{{ 'app.admin.action.new'|trans({'%gender%': 'male'}) }}</a>
+    <a class="btn-primary btn" href="{{ url('admin.ingredient.create') }}">
+        {{ 'app.admin.action.new'|trans({'%gender%': 'male'}) }} {{ 'app.admin.ingredients.entity'|trans({'%entity%': 1}) }}
+    </a>
 
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}

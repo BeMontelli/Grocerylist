@@ -1,10 +1,10 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}New GroceryList{% endblock %}
+{% block title %}{{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.lists.entity'|trans({'%entity%': 1}) }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>Create new GroceryList</h1>
+        <h1>{{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.lists.entity'|trans({'%entity%': 1}) }}</h1>
 
         {{ include('admin/grocery_list/_form.html.twig') }}
 
