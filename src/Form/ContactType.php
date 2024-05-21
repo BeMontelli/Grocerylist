@@ -18,22 +18,22 @@ class ContactType extends AbstractType
         $builder
             ->add('name',TextType::class, [
                 'empty_data' => '',
-                'attr' => ['placeholder' => 'John Doe'],
-                'label' => 'Your name'
+                'attr' => ['placeholder' => 'app.front.form.name.placeholder'],
+                'label' => 'app.front.form.name'
             ])
             ->add('email',EmailType::class, [
                 'empty_data' => '',
-                'attr' => ['placeholder' => 'johndoe@gmail.com'],
-                'label' => 'Your email'
+                'attr' => ['placeholder' => 'app.front.form.email.placeholder'],
+                'label' => 'app.front.form.email'
             ])
             ->add('message',TextareaType::class, [
                 'required' => false,
                 'empty_data' => '',
-                'attr' => ['placeholder' => 'The message ...'],
-                'label' => 'Your message'
+                'attr' => ['placeholder' => 'app.front.form.message.placeholder'],
+                'label' => 'app.front.form.message'
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Send'
+                'label' => 'app.front.form.send'
             ])
         ;
     }

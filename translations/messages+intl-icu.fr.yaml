@@ -1,11 +1,23 @@
-app.admin.default_title: "Bienvenue dans l'administration"
-app.admin.welcome_title: Bienvenue
-app.admin.lists.title: 'Mes listes'
-app.admin.recipes.title: Recettes
-app.admin.categories.title: 'Categories de recette'
-app.admin.ingredients.title: Ingredients
-app.admin.sections.title: "Categories d'ingredient"
-app.admin.action.new: Créer un nouveau
-app.admin.action.show: Montrer
-app.admin.action.edit: Editer
-app.admin.action.delete: Supprimer
+app:
+  admin:
+    default_title: "Bienvenue dans l'administration"
+    welcome_title: Bienvenue
+    lists.title: 'Mes listes'
+    recipes.title: Recettes
+    categories.title: 'Categories de recette'
+    ingredients.title: Ingredients
+    sections.title: "Categories d'ingredient"
+    action:
+      new: Créer un nouveau
+      show: Montrer
+      edit: Editer
+      delete: Supprimer
+  front:
+    form:
+      name: 'Votre nom'
+      name.placeholder: 'John Doe'
+      email: 'Votre email'
+      email.placeholder: johndoe@gmail.com
+      message: 'Votre message'
+      message.placeholder: 'Le message ...'
+      send: Envoyer
