@@ -3,10 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Recipe;
+use App\Entity\User;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,6 +21,13 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 #[IsGranted('ROLE_ADMIN')]
 class RecipeController extends AbstractController
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     #[Route('/', name: 'index')]
     public function index(Request $request, RecipeRepository $recipeRepository): Response
     {
@@ -45,6 +54,9 @@ class RecipeController extends AbstractController
     #[Route('/create/', name: 'create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
+        /** @var $user User */
+        $user = $this->security->getUser();
+
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class,$recipe);
         $form->handleRequest($request);
@@ -63,6 +75,7 @@ class RecipeController extends AbstractController
             $recipe = $form->getData();
             $recipe->setThumbnail($filePath.$fileName.'.'.$fileExtension);
 
+            $recipe->setUser($user);
             $entityManager->persist($recipe);
             $entityManager->flush();
             $this->addFlash('success', 'Recipe saved !');

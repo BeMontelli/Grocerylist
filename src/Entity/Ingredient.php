@@ -55,6 +55,10 @@ class Ingredient
     #[ORM\ManyToOne(inversedBy: 'ingredients', cascade: ['persist'])]
     private ?Section $section = null;
 
+    #[ORM\ManyToOne(inversedBy: 'ingredients')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
@@ -148,6 +152,18 @@ class Ingredient
     public function setSection(?Section $section): static
     {
         $this->section = $section;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

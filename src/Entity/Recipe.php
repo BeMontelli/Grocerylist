@@ -80,6 +80,10 @@ class Recipe
     #[Groups(['recipes.*','categories.*','ingredients.*'])]
     private ?string $thumbnail = null;
 
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -206,6 +210,18 @@ class Recipe
     public function setThumbnail(?string $thumbnail): static
     {
         $this->thumbnail = $thumbnail;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

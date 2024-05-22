@@ -3,10 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Category;
+use App\Entity\User;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,9 +20,19 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[IsGranted('ROLE_ADMIN')]
 class CategoryController extends AbstractController
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
     public function index(Request $request, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager): Response
     {
+        /** @var $user User */
+        $user = $this->security->getUser();
+
         $currentPage = $request->query->getInt('page', 1);
         $categories = $categoryRepository->paginateCategories($currentPage);
 
@@ -29,6 +41,7 @@ class CategoryController extends AbstractController
         $form = $this->createForm(CategoryType::class,$category);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            $category->setUser($user);
             $entityManager->persist($category);
             $entityManager->flush();
             $this->addFlash('success', 'Category saved !');
