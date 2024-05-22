@@ -18,6 +18,7 @@ class HomeController extends AbstractController
 
         return $this->redirectToRoute('page.home', ["_locale" => 'en']);
     }
+
     #[Route("/{_locale}/", name: "page.home", requirements: ['_locale' => 'fr|en'])]
     public function index(Request $request): Response
     {
