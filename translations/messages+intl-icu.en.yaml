@@ -46,3 +46,14 @@ app:
       message: 'Your message'
       message.placeholder: 'The message ...'
       send: Send
+    login:
+      action: Login
+      page_title: 'Log in!'
+      title: 'Please sign in'
+      status: 'You are logged in as'
+      username: 'Username'
+      password: 'Password'
+      remember: 'Remember me'
+      signin: 'Sign in'
+    logout:
+      action: 'Logout'

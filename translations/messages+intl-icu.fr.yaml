@@ -51,3 +51,14 @@ app:
       message: 'Votre message'
       message.placeholder: 'Le message ...'
       send: Envoyer
+    login:
+      action: Connexion
+      page_title: 'Se connecter!'
+      title: 'Merci de vous connecter'
+      status: 'Vous êtes connecté en tant que'
+      username: 'Login'
+      password: 'Mot de passe'
+      remember: 'Se souvenir de moi'
+      signin: 'Se connecter'
+    logout:
+      action: 'Se déconnecter'

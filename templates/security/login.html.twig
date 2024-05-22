@@ -1,13 +1,13 @@
 {% extends 'front/base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{ 'app.front.login.page_title'|trans }}{% endblock %}
 
 {% block body %}
 
     <div class="container">
     {% if app.user %}
         <div class="mb-3">
-            You are logged in as {{ app.user.userIdentifier }}, <a class="btn-primary btn" href="{{ path('app_logout') }}">Logout</a>
+            {{ 'app.front.login.status'|trans }} {{ app.user.userIdentifier }}, <a class="btn-primary btn" href="{{ path('app_logout') }}">{{ 'app.front.logout.action'|trans }}</a>
         </div>
     {% else %}
         <form method="post">
@@ -15,14 +15,14 @@
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
             {% endif %}
 
-            <h1>Please sign in</h1>
+            <h1>{{ 'app.front.login.title'|trans }}</h1>
 
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">{{ 'app.front.login.username'|trans }}</label>
                 <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
             </div>
             <div class="form-group toggle-password-container">
-                <label for="password">Password</label>
+                <label for="password">{{ 'app.front.login.password'|trans }}</label>
                 <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" {{ stimulus_controller('symfony/ux-toggle-password/toggle-password', {buttonClasses: ['toggle-password-button'],}) }} required>
             </div>
 
@@ -31,12 +31,12 @@
             >
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
+                    <input type="checkbox" name="_remember_me"> {{ 'app.front.login.remember'|trans }}
                 </label>
             </div>
 
             <button class="btn btn-lg btn-primary" type="submit">
-                Sign in
+                {{ 'app.front.login.signin'|trans }}
             </button>
         </form>
     {% endif %}

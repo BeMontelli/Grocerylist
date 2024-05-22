@@ -14,7 +14,7 @@
                 {% if app.user %}
                     <li><a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bx-log-out-circle'></i></a></li>
                 {% else %}
-                    <li><a class="{{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">Login</a></li>
+                    <li><a class="{{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">{{ 'app.front.login.action'|trans }}</a></li>
                     <li><a class="{{ app.current_route starts with 'app_register' ? 'active' : '' }}" href="{{ url('app_register') }}">Register</a></li>
                 {% endif %}
             </ul>
