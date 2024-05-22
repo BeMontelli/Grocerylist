@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use function Symfony\Component\Translation\t;
 
 class RegistrationFormType extends AbstractType
 {
@@ -21,16 +22,17 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('username',TextType::class, [
                 'empty_data' => '',
-                'attr' => ['placeholder' => 'johndoe'],
-                'label' => 'Your name'
+                'attr' => ['placeholder' => t('app.front.register.username.placeholder')],
+                'label' => t('app.front.register.username')
             ])
             ->add('email',EmailType::class, [
                 'empty_data' => '',
-                'attr' => ['placeholder' => 'johndoe@gmail.com'],
-                'label' => 'Your email'
+                'attr' => ['placeholder' => t('app.front.register.email.placeholder')],
+                'label' => t('app.front.register.email')
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
+                'label' => t('app.front.register.terms'),
                 'constraints' => [
                     new IsTrue([
                         'message' => 'You should agree to our terms.',

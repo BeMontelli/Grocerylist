@@ -20,11 +20,8 @@ class HomeController extends AbstractController
     }
 
     #[Route("/{_locale}/", name: "page.home", requirements: ['_locale' => 'fr|en'])]
-    public function index(Request $request): Response
+    public function index(): Response
     {
-        return $this->render('front/pages/index.html.twig', [
-            'test' => $request->query->get('test'),
-            'controller_name' => 'HomeController',
-        ]);
+        return $this->render('front/pages/index.html.twig');
     }
 }

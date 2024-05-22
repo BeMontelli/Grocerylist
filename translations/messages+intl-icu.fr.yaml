@@ -46,7 +46,7 @@ app:
     form:
       name: 'Votre nom'
       name.placeholder: 'John Doe'
-      email: 'Votre email'
+      email: 'Votre e-mail'
       email.placeholder: johndoe@gmail.com
       message: 'Votre message'
       message.placeholder: 'Le message ...'
@@ -60,5 +60,16 @@ app:
       password: 'Mot de passe'
       remember: 'Se souvenir de moi'
       signin: 'Se connecter'
+    register:
+      action: "S'inscrire"
+      page_title: "S'inscrire"
+      title: 'Vous pouvez vous inscrire ici !'
+      username: 'Login'
+      username.placeholder: 'John Doe'
+      email: 'Votre e-mail'
+      email.placeholder: johndoe@gmail.com
+      password: 'Mot de passe'
+      terms: 'Accpter les termes & conditions'
+      btn: "S'inscrire"
     logout:
       action: 'Se déconnecter'

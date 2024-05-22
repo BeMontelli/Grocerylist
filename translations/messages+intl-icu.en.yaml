@@ -55,5 +55,16 @@ app:
       password: 'Password'
       remember: 'Remember me'
       signin: 'Sign in'
+    register:
+      action: Register
+      page_title: Register
+      title: 'You can register here !'
+      username: 'Username'
+      username.placeholder: 'John Doe'
+      email: 'Your email'
+      email.placeholder: johndoe@gmail.com
+      password: 'Password'
+      terms: 'Agree terms'
+      btn: 'Register'
     logout:
       action: 'Logout'
