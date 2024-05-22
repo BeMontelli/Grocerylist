@@ -15,6 +15,8 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class GroceryListRepository extends ServiceEntityRepository
 {
+    use ConfigRepositoryTrait;
+
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, private PaginatorInterface $paginator)
     {
         $this->entityManager = $entityManager;
@@ -30,9 +32,7 @@ class GroceryListRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        $perPage = 2;
-
-        return $this->paginator->paginate($queryBuilder,$page,$perPage,[
+        return $this->paginator->paginate($queryBuilder,$page,self::getPerPage(),[
             'distinct' => true,
             'sortFieldAllowList' => [
                 'l.id','l.title','l.slug'

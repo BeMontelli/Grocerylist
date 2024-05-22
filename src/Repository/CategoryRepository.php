@@ -15,6 +15,8 @@ use Knp\Component\Pager\PaginatorInterface;
  */
 class CategoryRepository extends ServiceEntityRepository
 {
+    use ConfigRepositoryTrait;
+
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, private PaginatorInterface $paginator)
     {
         $this->entityManager = $entityManager;
@@ -32,9 +34,8 @@ class CategoryRepository extends ServiceEntityRepository
             ->groupBy('c.id')
             ->getQuery()
             ->getResult();
-        $perPage = 2;
 
-        return $this->paginator->paginate($queryBuilder,$page,$perPage,[
+        return $this->paginator->paginate($queryBuilder,$page,self::getPerPage(),[
             'distinct' => true,
             'sortFieldAllowList' => [
                 'c.id','c.title','c.slug'

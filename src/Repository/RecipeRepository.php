@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class RecipeRepository extends ServiceEntityRepository
 {
+    use ConfigRepositoryTrait;
+
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, private PaginatorInterface $paginator)
     {
         $this->entityManager = $entityManager;
@@ -30,9 +32,8 @@ class RecipeRepository extends ServiceEntityRepository
             ->orderBy('r.id', 'ASC')
             ->getQuery()
             ->getResult();
-        $perPage = 2;
 
-        return $this->paginator->paginate($queryBuilder,$page,$perPage,[
+        return $this->paginator->paginate($queryBuilder,$page,self::getPerPage(),[
             'distinct' => true,
             'sortFieldAllowList' => [
                 'r.id','r.title','r.slug'
