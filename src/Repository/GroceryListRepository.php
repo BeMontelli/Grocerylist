@@ -21,19 +21,6 @@ class GroceryListRepository extends ServiceEntityRepository
         parent::__construct($registry, GroceryList::class);
     }
 
-    public function paginateLists(int $page) : PaginationInterface {
-
-        $queryBuilder = $this->createQueryBuilder('r');
-        $perPage = 2;
-
-        return $this->paginator->paginate($queryBuilder,$page,$perPage,[
-            'distinct' => true,
-            'sortFieldAllowList' => [
-                'r.id','r.title','r.slug'
-            ],
-        ]);
-    }
-
     public function paginateUserLists(int $page, User $user) : PaginationInterface {
 
         $queryBuilder = $this->createQueryBuilder('l')
@@ -48,7 +35,7 @@ class GroceryListRepository extends ServiceEntityRepository
         return $this->paginator->paginate($queryBuilder,$page,$perPage,[
             'distinct' => true,
             'sortFieldAllowList' => [
-                'r.id','r.title','r.slug'
+                'l.id','l.title','l.slug'
             ],
         ]);
     }

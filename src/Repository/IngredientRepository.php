@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Ingredient;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,15 +21,20 @@ class IngredientRepository extends ServiceEntityRepository
         parent::__construct($registry, Ingredient::class);
     }
 
-    public function paginateIngredients(int $page) : PaginationInterface {
+    public function paginateUserIngredients(int $page, User $user) : PaginationInterface {
 
-        $queryBuilder = $this->createQueryBuilder('r');
+        $queryBuilder = $this->createQueryBuilder('i')
+            ->andWhere('i.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('i.id', 'ASC')
+            ->getQuery()
+            ->getResult();
         $perPage = 2;
 
         return $this->paginator->paginate($queryBuilder,$page,$perPage,[
             'distinct' => true,
             'sortFieldAllowList' => [
-                'r.id','r.title','r.slug'
+                'i.id','i.title','i.slug'
             ],
         ]);
     }

@@ -19,12 +19,12 @@
         <table class="table">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(grocery_lists, 'Id', 'r.id') }}</th>
+                <th>{{ knp_pagination_sortable(grocery_lists, 'Id', 'l.id') }}</th>
                 <th{% if grocery_lists.isSorted('a.title') %} class="sorted"{% endif %}>
-                    {{ knp_pagination_sortable(grocery_lists, 'Title', 'r.title') }}
+                    {{ knp_pagination_sortable(grocery_lists, 'Title', 'l.title') }}
                 </th>
                 <th{% if grocery_lists.isSorted('a.slug') %} class="sorted"{% endif %}>
-                    {{ knp_pagination_sortable(grocery_lists, 'Slug', 'r.slug') }}
+                    {{ knp_pagination_sortable(grocery_lists, 'Slug', 'l.slug') }}
                 </th>
                 {#<th>CreatedAt</th>
                 <th>UpdatedAt</th>#}

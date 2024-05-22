@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,12 +21,17 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
-    public function paginateCategories(int $page) : PaginationInterface {
+    public function paginateUserCategoriesWithRecipesTotal(int $page, User $user) : PaginationInterface {
 
         $queryBuilder = $this->createQueryBuilder('c')
             ->select('c as category','COUNT(c.id) as total')
             ->leftJoin('c.recipes', 'r')
-            ->groupBy('c.id');
+            ->andWhere('c.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('c.id', 'ASC')
+            ->groupBy('c.id')
+            ->getQuery()
+            ->getResult();
         $perPage = 2;
 
         return $this->paginator->paginate($queryBuilder,$page,$perPage,[

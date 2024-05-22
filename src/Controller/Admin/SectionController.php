@@ -33,7 +33,7 @@ class SectionController extends AbstractController
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
-        $sections = $sectionRepository->paginateSections($currentPage);
+        $sections = $sectionRepository->paginateUserSections($currentPage,$user);
 
         // form new
         $section = new Section();

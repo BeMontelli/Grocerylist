@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Recipe;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -21,9 +22,14 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-    public function paginateRecipesWithCategories(int $page) : PaginationInterface {
+    public function paginateUserRecipes(int $page, User $user) : PaginationInterface {
 
-        $queryBuilder = $this->createQueryBuilder('r');
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->andWhere('r.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('r.id', 'ASC')
+            ->getQuery()
+            ->getResult();
         $perPage = 2;
 
         return $this->paginator->paginate($queryBuilder,$page,$perPage,[

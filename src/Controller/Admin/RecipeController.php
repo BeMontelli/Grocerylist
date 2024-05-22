@@ -31,20 +31,11 @@ class RecipeController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, RecipeRepository $recipeRepository): Response
     {
+        /** @var $user User */
+        $user = $this->security->getUser();
+
         $currentPage = $request->query->getInt('page', 1);
-        /*$recipe = new Recipe();
-        $recipe->setTitle("Burger")
-            ->setSlug("burger")
-            ->setPrice(5.80)
-            ->setContent("<b>test</b> fsegrd")
-            ->setCreatedAt(new \DateTimeImmutable())
-            ->setUpdatedAt(new \DateTimeImmutable());
-        $entityManager->persist($recipe);
-        $entityManager->flush();*/
-
-        /*$entityManager->remove($recipe);*/
-
-        $recipes = $recipeRepository->paginateRecipesWithCategories($currentPage);
+        $recipes = $recipeRepository->paginateUserRecipes($currentPage,$user);
 
         return $this->render('admin/recipe/index.html.twig', [
             'recipes' => $recipes

@@ -25,13 +25,13 @@
         <thead>
         <tr>
             {# sorting of properties based on query components #}
-            <th>{{ knp_pagination_sortable(ingredients, 'Id', 'r.id') }}</th>
+            <th>{{ knp_pagination_sortable(ingredients, 'Id', 'i.id') }}</th>
             <th{% if ingredients.isSorted('a.title') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(ingredients, 'Title', 'r.title') }}
+                {{ knp_pagination_sortable(ingredients, 'Title', 'i.title') }}
             </th>
             <th>Sections</th>
             <th{% if ingredients.isSorted('a.slug') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(ingredients, 'Slug', 'r.slug') }}
+                {{ knp_pagination_sortable(ingredients, 'Slug', 'i.slug') }}
             </th>
             <th class="actions">Actions</th>
         </tr>

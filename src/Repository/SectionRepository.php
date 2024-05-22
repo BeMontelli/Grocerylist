@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Section;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,15 +21,20 @@ class SectionRepository extends ServiceEntityRepository
         parent::__construct($registry, Section::class);
     }
 
-    public function paginateSections(int $page) : PaginationInterface {
+    public function paginateUserSections(int $page, User $user) : PaginationInterface {
 
-        $queryBuilder = $this->createQueryBuilder('r');
+        $queryBuilder = $this->createQueryBuilder('s')
+            ->andWhere('s.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('s.id', 'ASC')
+            ->getQuery()
+            ->getResult();
         $perPage = 2;
 
         return $this->paginator->paginate($queryBuilder,$page,$perPage,[
             'distinct' => true,
             'sortFieldAllowList' => [
-                'r.id','r.title','r.slug'
+                's.id','s.title','s.slug'
             ],
         ]);
     }

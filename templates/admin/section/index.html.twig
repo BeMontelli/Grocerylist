@@ -29,12 +29,12 @@
         <table class="table">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(sections, 'Id', 'r.id') }}</th>
+                <th>{{ knp_pagination_sortable(sections, 'Id', 's.id') }}</th>
                 <th{% if sections.isSorted('a.title') %} class="sorted"{% endif %}>
-                    {{ knp_pagination_sortable(sections, 'Title', 'r.title') }}
+                    {{ knp_pagination_sortable(sections, 'Title', 's.title') }}
                 </th>
                 <th{% if sections.isSorted('a.slug') %} class="sorted"{% endif %}>
-                    {{ knp_pagination_sortable(sections, 'Slug', 'r.slug') }}
+                    {{ knp_pagination_sortable(sections, 'Slug', 's.slug') }}
                 </th>
                 <th class="actions">actions</th>
             </tr>

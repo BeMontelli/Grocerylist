@@ -29,8 +29,11 @@ class IngredientController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, IngredientRepository $ingredientRepository): Response
     {
+        /** @var $user User */
+        $user = $this->security->getUser();
+
         $currentPage = $request->query->getInt('page', 1);
-        $ingredients = $ingredientRepository->paginateIngredients($currentPage);
+        $ingredients = $ingredientRepository->paginateUserIngredients($currentPage,$user);
 
         return $this->render('admin/ingredient/index.html.twig', [
             'ingredients' => $ingredients
