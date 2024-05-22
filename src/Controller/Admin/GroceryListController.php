@@ -97,7 +97,7 @@ class GroceryListController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$groceryList->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($groceryList);
             $entityManager->flush();
-            $this->addFlash('success', 'Recipe '.$groceryList->getTitle().' deleted !');
+            $this->addFlash('success', 'List '.$groceryList->getTitle().' deleted !');
         }
 
         return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
