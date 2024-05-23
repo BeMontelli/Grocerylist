@@ -159,6 +159,14 @@ header ul.main_list .btn-group{
 .card{
     background-color: var(--main-bg-color);
 }
+.accordion-button,.accordion-body{
+    color: var(--main-text-color);
+    background-color: var(--main-bg-color);
+}
+.accordion-button:not(.collapsed){
+    color: var(--main-bg-input);
+    background-color: var(--main-green);
+}
 
 fieldset{
     border: solid 1px var(--main-green-alt);

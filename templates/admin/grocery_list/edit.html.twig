@@ -9,7 +9,36 @@
         <hr>
         {% include 'admin/partials/flashes.html.twig' %}
 
-        {{ include('admin/grocery_list/_form.html.twig', {'button_label': 'Update'}) }}
+        <div class="list__form mb-4">
+            {{ include('admin/grocery_list/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
+        </div>
+
+        <div class="accordion mb-4" id="accordionEntities">
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                        {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.recipes.entity'|trans({'%entity%': 1}) }}
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        {{ form(form_recipe) }}
+                    </div>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        {{ 'app.admin.action.new'|trans({'%gender%': 'male'}) }} {{ 'app.admin.ingredients.entity'|trans({'%entity%': 1}) }}
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        {{ form(form_ingredient) }}
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <a class="btn-primary btn mb-2" href="{{ path('admin.list.index') }}">back to list</a>
 

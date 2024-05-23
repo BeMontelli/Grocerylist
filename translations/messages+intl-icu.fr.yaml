@@ -40,6 +40,9 @@ app:
           other    {Créer un nouveau}
         }
       show: Montrer
+      save: Sauvegarder
+      submit: Soumettre
+      update: 'Mettre à jour'
       edit: Editer
       delete: Supprimer
   front:

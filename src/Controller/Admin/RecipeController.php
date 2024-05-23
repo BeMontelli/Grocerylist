@@ -6,6 +6,7 @@ use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\RecipeType;
 use App\Repository\RecipeRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -22,10 +23,12 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 class RecipeController extends AbstractController
 {
     private $security;
+    private $fileUploader;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, FileUploader $fileUploader)
     {
         $this->security = $security;
+        $this->fileUploader = $fileUploader;
     }
 
     #[Route('/', name: 'index')]
@@ -52,20 +55,14 @@ class RecipeController extends AbstractController
         $form = $this->createForm(RecipeType::class,$recipe);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            $slugger = new AsciiSlugger();
-
-            /** @var UploadedFile $file */
             $file = $form->get('thumbnailfile')->getData();
-            $fileName = date("His-").$slugger->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
-            $fileExtension = $file->getClientOriginalExtension();
-            $fileDir = $this->getParameter('kernel.project_dir').'/public';
-            $filePath = '/images/recipes/';
-            $file->move($fileDir.$filePath,$fileName.'.'.$fileExtension);
+            if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
 
             /** @var Recipe $recipe */
             $recipe = $form->getData();
-            $recipe->setThumbnail($filePath.$fileName.'.'.$fileExtension);
+            if($thumbnailPath) $recipe->setThumbnail($thumbnailPath);
 
+            $recipe = $form->getData();
             $recipe->setUser($user);
             $entityManager->persist($recipe);
             $entityManager->flush();
@@ -92,23 +89,19 @@ class RecipeController extends AbstractController
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            $slugger = new AsciiSlugger();
-
-            /** @var UploadedFile $file */
-            $file = $form->get('thumbnailfile')->getData();
-            $fileName = date("His-").$slugger->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
-            $fileExtension = $file->getClientOriginalExtension();
-            $fileDir = $this->getParameter('kernel.project_dir').'/public';
-            $filePath = '/images/recipes/';
-
-            $currentThumbnail = $recipe->getThumbnail();
-            if(!empty($currentThumbnail)) unlink($fileDir.$currentThumbnail);
-
-            $file->move($fileDir.$filePath,$fileName.'.'.$fileExtension);
 
             /** @var Recipe $recipe */
             $recipe = $form->getData();
-            $recipe->setThumbnail($filePath.$fileName.'.'.$fileExtension);
+            $oldThumbnail = $recipe->getThumbnail();
+
+            $file = $form->get('thumbnailfile')->getData();
+            if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
+
+            $fileDir = $this->getParameter('kernel.project_dir').'/public';
+            $this->fileUploader->deleteThumbnail($fileDir,$oldThumbnail);
+
+            /** @var Recipe $recipe */
+            if($thumbnailPath) $recipe->setThumbnail($thumbnailPath);
 
             $entityManager->persist($recipe);
             $entityManager->flush();
@@ -126,7 +119,7 @@ class RecipeController extends AbstractController
     public function delete(Recipe $recipe, EntityManagerInterface $entityManager) {
         $currentThumbnail = $recipe->getThumbnail();
         $fileDir = $this->getParameter('kernel.project_dir').'/public';
-        if(!empty($currentThumbnail)) unlink($fileDir.$currentThumbnail);
+        $this->fileUploader->deleteThumbnail($fileDir,$currentThumbnail);
 
         $entityManager->remove($recipe);
         $entityManager->flush();

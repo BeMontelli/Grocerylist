@@ -9,7 +9,7 @@
         <hr>
         {% include 'admin/partials/flashes.html.twig' %}
 
-        {{ include('admin/section/_form.html.twig', {'button_label': 'Update'}) }}
+        {{ include('admin/section/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
 
         <a class="btn-primary btn mb-2" href="{{ path('admin.section.index') }}">back to list</a>
 

@@ -3,9 +3,13 @@
 namespace App\Controller\Admin;
 
 use App\Entity\GroceryList;
+use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\GroceryListType;
+use App\Form\IngredientType;
+use App\Form\RecipeType;
 use App\Repository\GroceryListRepository;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -20,10 +24,12 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class GroceryListController extends AbstractController
 {
     private $security;
+    private $fileUploader;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security, FileUploader $fileUploader)
     {
         $this->security = $security;
+        $this->fileUploader = $fileUploader;
     }
 
     #[Route('/', name: 'index', methods: ['GET'])]
@@ -75,9 +81,11 @@ class GroceryListController extends AbstractController
     #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]
     public function edit(Request $request, GroceryList $groceryList, EntityManagerInterface $entityManager): Response
     {
+        /** @var $user User */
+        $user = $this->security->getUser();
+
         $form = $this->createForm(GroceryListType::class, $groceryList);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
             $this->addFlash('success', 'List updated !');
@@ -85,9 +93,42 @@ class GroceryListController extends AbstractController
             return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $formRecipe = $this->createForm(RecipeType::class);
+        $formRecipe->handleRequest($request);
+        if ($formRecipe->isSubmitted() && $formRecipe->isValid()) {
+            $file = $formRecipe->get('thumbnailfile')->getData();
+            if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
+
+            /** @var Recipe $recipe */
+            $recipe = $formRecipe->getData();
+            if($thumbnailPath) $recipe->setThumbnail($thumbnailPath);
+
+            $recipe = $formRecipe->getData();
+            $recipe->setUser($user);
+            $entityManager->persist($recipe);
+            $entityManager->flush();
+            $this->addFlash('success', 'Recipe added successfully.');
+
+            return $this->redirectToRoute('admin.list.edit', ['id' => $groceryList->getId()]);
+        }
+
+        $formIngredient = $this->createForm(IngredientType::class);
+        $formIngredient->handleRequest($request);
+        if ($formIngredient->isSubmitted() && $formIngredient->isValid()) {
+            $ingredient = $formIngredient->getData();
+            $ingredient->setUser($user);
+            $entityManager->persist($ingredient);
+            $entityManager->flush();
+            $this->addFlash('success', 'Ingredient added successfully.');
+
+            return $this->redirectToRoute('admin.list.edit', ['id' => $groceryList->getId()]);
+        }
+
         return $this->render('admin/grocery_list/edit.html.twig', [
             'grocery_list' => $groceryList,
             'form' => $form,
+            'form_recipe' => $formRecipe,
+            'form_ingredient' => $formIngredient,
         ]);
     }
 

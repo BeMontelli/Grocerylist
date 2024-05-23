@@ -35,6 +35,9 @@ app:
     action:
       new: Create new
       show: Show
+      save: Save
+      submit: Submit
+      update: Update
       edit: Edit
       delete: Delete
   front:
