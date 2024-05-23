@@ -16,11 +16,16 @@ class FileUploader
 
     public function uploadRecipeThumbnail(UploadedFile $file): string
     {
+        $filePath = '/images/recipes/';
+        return $this->uploadPublicFile($file, $filePath);
+    }
+
+    public function uploadPublicFile(UploadedFile $file, $filePath): string
+    {
         $slugger = new AsciiSlugger();
         $fileName = date("His-") . $slugger->slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
         $fileExtension = $file->getClientOriginalExtension();
         $fileDir = $this->projectDir . '/public';
-        $filePath = '/images/recipes/';
         $file->move($fileDir . $filePath, $fileName . '.' . $fileExtension);
 
         return $filePath . $fileName . '.' . $fileExtension;
