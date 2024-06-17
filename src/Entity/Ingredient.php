@@ -59,9 +59,16 @@ class Ingredient
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    /**
+     * @var Collection<int, GroceryList>
+     */
+    #[ORM\ManyToMany(targetEntity: GroceryList::class, mappedBy: 'ingredients')]
+    private Collection $groceryLists;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
+        $this->groceryLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,6 +171,33 @@ class Ingredient
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GroceryList>
+     */
+    public function getGroceryLists(): Collection
+    {
+        return $this->groceryLists;
+    }
+
+    public function addGroceryList(GroceryList $groceryList): static
+    {
+        if (!$this->groceryLists->contains($groceryList)) {
+            $this->groceryLists->add($groceryList);
+            $groceryList->addIngredient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroceryList(GroceryList $groceryList): static
+    {
+        if ($this->groceryLists->removeElement($groceryList)) {
+            $groceryList->removeIngredient($this);
+        }
 
         return $this;
     }
