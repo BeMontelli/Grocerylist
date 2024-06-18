@@ -43,11 +43,11 @@
             {% for section in sections %}
                 <tr>
                     <td>{{ section.id }}</td>
-                    <td>{{ section.title }}</td>
+                    <td><a href="{{ path('admin.section.show', {'slug': section.slug,'id': section.id}) }}">{{ section.title }}</a></td>
                     <td>{{ section.slug }}</td>
                     <td class="actions">
-                        <a class="btn-primary btn" href="{{ path('admin.section.show', {'slug': section.slug,'id': section.id}) }}">{{ 'app.admin.action.show'|trans }}</a>
                         <a class="btn-primary btn" href="{{ path('admin.section.edit', {'id': section.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
+                        {{ include('admin/section/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}

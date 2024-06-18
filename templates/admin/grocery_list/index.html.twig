@@ -35,13 +35,13 @@
             {% for grocery_list in grocery_lists %}
                 <tr>
                     <td>{{ grocery_list.id }}</td>
-                    <td>{{ grocery_list.title }}</td>
+                    <td><a href="{{ path('admin.list.show', {'slug': grocery_list.slug,'id': grocery_list.id}) }}">{{ grocery_list.title }}</a></td>
                     <td>{{ grocery_list.slug }}</td>
                     {#<td>{{ grocery_list.createdAt ? grocery_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ grocery_list.updatedAt ? grocery_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
                     <td class="actions">
-                        <a class="btn-primary btn" href="{{ path('admin.list.show', {'slug': grocery_list.slug,'id': grocery_list.id}) }}">{{ 'app.admin.action.show'|trans }}</a>
                         <a class="btn-primary btn" href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
+                        {{ include('admin/grocery_list/_delete_form.html.twig') }}
                     </td>
                 </tr>
             {% else %}
