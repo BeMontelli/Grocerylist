@@ -38,6 +38,9 @@ class GroceryList
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'groceryLists')]
     private Collection $ingredients;
 
+    #[ORM\Column(nullable: true)]
+    private ?array $recipes = null;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
@@ -128,6 +131,18 @@ class GroceryList
     public function removeIngredient(Ingredient $ingredient): static
     {
         $this->ingredients->removeElement($ingredient);
+
+        return $this;
+    }
+
+    public function getRecipes(): ?array
+    {
+        return $this->recipes;
+    }
+
+    public function setRecipes(?array $recipes): static
+    {
+        $this->recipes = $recipes;
 
         return $this;
     }
