@@ -54,10 +54,7 @@
                 <td>{{ category.total }}</td>
                 <td class="actions">
                     <a class="btn-primary btn" href="{{ url('admin.category.edit', { id: category.category.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
-                    <form action="{{ url('admin.category.delete', { id: category.category.id}) }}" method="post">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn-primary btn" type="submit">{{ 'app.admin.action.delete'|trans }}</button>
-                    </form>
+                    {{ include('admin/category/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% endfor %}

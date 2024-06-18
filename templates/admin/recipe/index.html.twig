@@ -46,10 +46,7 @@
                 <td>{{ recipe.slug }}</td>
                 <td class="actions">
                     <a class="btn-primary btn" href="{{ url('admin.recipe.edit', { id: recipe.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
-                    <form action="{{ url('admin.recipe.delete', { id: recipe.id}) }}" method="post">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn-primary btn" type="submit">{{ 'app.admin.action.delete'|trans }}</button>
-                    </form>
+                    {{ include('admin/recipe/_delete_form.html.twig') }}
                 </td>
             </tr>
         {% endfor %}
