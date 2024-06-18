@@ -40,6 +40,19 @@ class GroceryListRepository extends ServiceEntityRepository
         ]);
     }
 
+    public function findWithIngredients($id)
+    {
+        return $this->createQueryBuilder('gl')
+            ->leftJoin('gl.ingredients', 'i')
+            ->addSelect('i')
+            ->leftJoin('i.section', 's')
+            ->addSelect('s')
+            ->where('gl.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return GroceryList[] Returns an array of GroceryList objects
     //     */

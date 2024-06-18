@@ -71,10 +71,10 @@ class GroceryListController extends AbstractController
     }
 
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
-    public function show(GroceryList $groceryList): Response
+    public function show(string $slug, int $id,GroceryListRepository $groceryListRepository): Response
     {
         return $this->render('admin/grocery_list/show.html.twig', [
-            'grocery_list' => $groceryList,
+            'grocery_list' => $groceryListRepository->findWithIngredients($id),
         ]);
     }
 
