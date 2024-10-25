@@ -3,6 +3,7 @@ app:
     default_title: "Bienvenue dans l'administration"
     welcome_title: Bienvenue
     lists.title: 'Mes listes'
+    lists.count: 'Nombre de résultats'
     lists.entity: >-
       {entity, plural,
         =1 {Liste}
