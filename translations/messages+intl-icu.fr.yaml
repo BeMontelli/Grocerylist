@@ -45,6 +45,7 @@ app:
       update: 'Mettre à jour'
       edit: Editer
       delete: Supprimer
+      backlist: Retourner à la liste
   front:
     form:
       name: 'Votre nom'

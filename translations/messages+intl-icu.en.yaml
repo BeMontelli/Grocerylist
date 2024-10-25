@@ -40,6 +40,7 @@ app:
       update: Update
       edit: Edit
       delete: Delete
+      backlist: Back to List
   front:
     form:
       name: 'Your name'
