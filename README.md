@@ -1,10 +1,17 @@
-Symfony Demo Application
+Symfony Application
 ========================
 
-The "Symfony Demo Application" is a reference application created to show how
-to develop applications following the [Symfony Best Practices][1].
+Reference application created to show how to develop applications following the [Symfony Best Practices][1].
 
 You can also learn about these practices in [the official Symfony Book][5].
+
+TO DO LIST
+------------
+
+  * entity Product
+  * remove wrapped forms
+  * Add ingrdients etc from singles to list selection
+  * favicon
 
 Requirements
 ------------
