@@ -9,9 +9,13 @@ TO DO LIST
 ------------
 
   * entity Product
-  * remove wrapped forms
-  * Add ingrdients etc from singles to list selection
+  * remove wrapped forms in lists single
+  * Add ingredients (checkboxes) in recipes singles to list selection
   * favicon
+  * translations
+  * responsive
+  * remove categories/sections single
+  * root admin => my lists
 
 Requirements
 ------------
