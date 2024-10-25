@@ -14,7 +14,7 @@
 
         {# total items count #}
         <div class="count">
-            Results count : {{ grocery_lists.getTotalItemCount }}
+            {{ 'app.admin.lists.count'|trans({'%entity%': 1}) }} : {{ grocery_lists.getTotalItemCount }}
         </div>
         <table class="table">
             <thead>
