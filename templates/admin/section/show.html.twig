@@ -31,9 +31,9 @@
             </tbody>
         </table>
 
-        <a class="btn-primary btn mb-2" href="{{ path('admin.section.index') }}">back to list</a>
+        <a class="btn-primary btn mb-2" href="{{ path('admin.section.index') }}">{{ 'app.admin.action.backlist'|trans }}</a>
 
-        <a class="btn-primary btn mb-2" href="{{ path('admin.section.edit', {'id': section.id}) }}">edit</a>
+        <a class="btn-primary btn mb-2" href="{{ path('admin.section.edit', {'id': section.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
 
         {{ include('admin/section/_delete_form.html.twig') }}
     </div>

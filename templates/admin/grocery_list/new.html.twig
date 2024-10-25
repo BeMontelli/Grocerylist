@@ -10,6 +10,6 @@
 
         {{ include('admin/grocery_list/_form.html.twig') }}
 
-        <a class="btn-primary btn" href="{{ path('admin.list.index') }}">back to list</a>
+        <a class="btn-primary btn" href="{{ path('admin.list.index') }}">{{ 'app.admin.action.backlist'|trans }}</a>
     </div>
 {% endblock %}
