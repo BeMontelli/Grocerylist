@@ -9,8 +9,16 @@ TO DO LIST
 ------------
 
   * entity Product
-  * Add ingredients (checkboxes) in recipes singles to list selection
-  * favicon
+  * entity products Group
+  * remove index group and redirect to edit
+
+  * Add ingredients list (checkboxes) in recipes singles
+  * Add list select in recipes singles
+  * Add process add recipe and ingredients removed to list selected
+
+  * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
+
+  * favicon front/admin
   * translations
   * responsive
 
