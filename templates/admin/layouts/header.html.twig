@@ -4,7 +4,6 @@
             <ul class="main_list">
                 <li><a class="hspec {{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i></a></li>
                 <li><a class="hspec {{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i></a></li>
-                <li><a class="{{ app.current_route starts with 'admin.list.' ? 'active' : '' }}" href="{{ url('admin.list.index') }}">{{ 'app.admin.lists.title'|trans }}</a></li>
                 <li>
                     <div class="btn-group">
                         <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
