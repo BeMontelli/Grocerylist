@@ -93,42 +93,9 @@ class GroceryListController extends AbstractController
             return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
         }
 
-        $formRecipe = $this->createForm(RecipeType::class);
-        $formRecipe->handleRequest($request);
-        if ($formRecipe->isSubmitted() && $formRecipe->isValid()) {
-            $file = $formRecipe->get('thumbnailfile')->getData();
-            if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
-
-            /** @var Recipe $recipe */
-            $recipe = $formRecipe->getData();
-            if($thumbnailPath) $recipe->setThumbnail($thumbnailPath);
-
-            $recipe = $formRecipe->getData();
-            $recipe->setUser($user);
-            $entityManager->persist($recipe);
-            $entityManager->flush();
-            $this->addFlash('success', 'Recipe added successfully.');
-
-            return $this->redirectToRoute('admin.list.edit', ['id' => $groceryList->getId()]);
-        }
-
-        $formIngredient = $this->createForm(IngredientType::class);
-        $formIngredient->handleRequest($request);
-        if ($formIngredient->isSubmitted() && $formIngredient->isValid()) {
-            $ingredient = $formIngredient->getData();
-            $ingredient->setUser($user);
-            $entityManager->persist($ingredient);
-            $entityManager->flush();
-            $this->addFlash('success', 'Ingredient added successfully.');
-
-            return $this->redirectToRoute('admin.list.edit', ['id' => $groceryList->getId()]);
-        }
-
         return $this->render('admin/grocery_list/edit.html.twig', [
             'grocery_list' => $groceryList,
-            'form' => $form,
-            'form_recipe' => $formRecipe,
-            'form_ingredient' => $formIngredient,
+            'form' => $form
         ]);
     }
 
