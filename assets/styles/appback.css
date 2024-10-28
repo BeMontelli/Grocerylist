@@ -40,6 +40,9 @@ a.hspec{
     height: 38px;
     display: block;
 }
+a.dashboard{
+    padding: 10px 20px 10px 10px;
+}
 
 input,input::placeholder,textarea,textarea::placeholder,button{
     font-family: Arial, sans-serif;
