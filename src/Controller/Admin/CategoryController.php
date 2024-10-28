@@ -55,11 +55,9 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
-    public function show(string $slug, int $id, CategoryRepository $categoryRepository): Response
+    public function show(Category $category)
     {
-        return $this->render('admin/category/show.html.twig', [
-            'category' => $categoryRepository->find($id),
-        ]);
+        return $this->redirectToRoute('admin.category.edit', ["id" => $category->getId()]);
     }
 
     #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]

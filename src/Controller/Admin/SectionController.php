@@ -56,11 +56,9 @@ class SectionController extends AbstractController
     }
 
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
-    public function show(Section $section): Response
+    public function show(Section $section)
     {
-        return $this->render('admin/section/show.html.twig', [
-            'section' => $section,
-        ]);
+        return $this->redirectToRoute('admin.section.edit', ["id" => $section->getId()]);
     }
 
     #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]
