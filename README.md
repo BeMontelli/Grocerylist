@@ -9,7 +9,6 @@ TO DO LIST
 ------------
 
   * entity Product
-  * remove wrapped forms in lists single
   * Add ingredients (checkboxes) in recipes singles to list selection
   * favicon
   * translations
