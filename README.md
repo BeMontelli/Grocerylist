@@ -13,7 +13,6 @@ TO DO LIST
   * favicon
   * translations
   * responsive
-  * root admin => my lists
 
 Requirements
 ------------
