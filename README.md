@@ -13,7 +13,6 @@ TO DO LIST
   * favicon
   * translations
   * responsive
-  * remove categories/sections single
   * root admin => my lists
 
 Requirements
