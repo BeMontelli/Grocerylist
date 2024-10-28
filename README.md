@@ -18,6 +18,8 @@ TO DO LIST
 
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
 
+  * list entity add field relationship ingredient_recipe_deactivated (temp name) fields recipe,ingredient,user
+
   * favicon front/admin
   * translations
   * responsive
