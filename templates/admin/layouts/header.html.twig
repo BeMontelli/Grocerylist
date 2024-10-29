@@ -32,7 +32,7 @@
                             {{ 'app.admin.products.title'|trans }}
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.group.' ? 'active' : '' }}" href="{{ url('admin.group.index') }}">{{ 'app.admin.products.title'|trans }}</a></li>
+                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.product.' ? 'active' : '' }}" href="{{ url('admin.product.index') }}">{{ 'app.admin.products.title'|trans }}</a></li>
                             <li><a class="dropdown-item {{ app.current_route starts with 'admin.group.' ? 'active' : '' }}" href="{{ url('admin.group.index') }}">{{ 'app.admin.groups.title'|trans }}</a></li>
                         </ul>
                     </div>
