@@ -33,7 +33,13 @@ app:
         =1 {Categorie d'ingredient}
         other {Categories d'ingredient}
       }
-    groups.title: 'Groupe de produit'
+    products.title: 'Produits'
+    products.entity: >-
+      {entity, plural,
+        =1 {Produit}
+        other {Produits}
+      }
+    groups.title: 'Groupes de produit'
     groups.entity: >-
       {entity, plural,
         =1 {Groupe de produit}

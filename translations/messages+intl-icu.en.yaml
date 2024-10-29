@@ -33,7 +33,13 @@ app:
         =1 {Ingredient Category}
         other {Ingredient Categories}
       }
-    groups.title: 'Product Group'
+    products.title: 'Products'
+    products.entity: >-
+      {entity, plural,
+        =1 {Product}
+        other {Products}
+      }
+    groups.title: 'Product Groups'
     groups.entity: >-
       {entity, plural,
         =1 {Product Group}
