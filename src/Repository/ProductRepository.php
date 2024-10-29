@@ -3,17 +3,41 @@
 namespace App\Repository;
 
 use App\Entity\Product;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Product>
  */
 class ProductRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    use ConfigRepositoryTrait;
+
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, private PaginatorInterface $paginator)
     {
+        $this->entityManager = $entityManager;
         parent::__construct($registry, Product::class);
+    }
+
+    public function paginateUserProducts(int $page, User $user) : PaginationInterface {
+
+        $queryBuilder = $this->createQueryBuilder('i')
+            ->andWhere('i.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('i.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return $this->paginator->paginate($queryBuilder,$page,self::getPerPage(),[
+            'distinct' => true,
+            'sortFieldAllowList' => [
+                'i.id','i.title','i.slug'
+            ],
+        ]);
     }
 
     //    /**
