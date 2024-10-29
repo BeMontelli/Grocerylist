@@ -3,17 +3,41 @@
 namespace App\Repository;
 
 use App\Entity\Group;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<Group>
  */
 class GroupRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    use ConfigRepositoryTrait;
+    
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, private PaginatorInterface $paginator)
     {
-        parent::__construct($registry, Group::class);
+        $this->entityManager = $entityManager;
+        parent::__construct($registry, entityClass: Group::class);
+    }
+
+    public function paginateUserGroups(int $page, User $user) : PaginationInterface {
+
+        $queryBuilder = $this->createQueryBuilder('s')
+            ->andWhere('s.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('s.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return $this->paginator->paginate($queryBuilder,$page,self::getPerPage(),[
+            'distinct' => true,
+            'sortFieldAllowList' => [
+                's.id','s.title','s.slug'
+            ],
+        ]);
     }
 
 //    /**
