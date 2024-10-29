@@ -33,6 +33,12 @@ app:
         =1 {Categorie d'ingredient}
         other {Categories d'ingredient}
       }
+    groups.title: 'Groupe de produit'
+    groups.entity: >-
+      {entity, plural,
+        =1 {Groupe de produit}
+        other {Groupes de produit}
+      }
     action:
       new:  >-
         {gender, select,
