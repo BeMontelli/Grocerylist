@@ -26,6 +26,17 @@
                         </ul>
                     </div>
                 </li>
+                <li>
+                    <div class="btn-group">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ 'app.admin.products.title'|trans }}
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.group.' ? 'active' : '' }}" href="{{ url('admin.group.index') }}">{{ 'app.admin.products.title'|trans }}</a></li>
+                            <li><a class="dropdown-item {{ app.current_route starts with 'admin.group.' ? 'active' : '' }}" href="{{ url('admin.group.index') }}">{{ 'app.admin.groups.title'|trans }}</a></li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </nav>
         <nav class="right">
