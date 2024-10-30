@@ -14,11 +14,32 @@ TO DO LIST
 
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
 
-  * list recipes field from json storage type to relationship 
   * list entity add field relationship ingredient_recipe_deactivated (temp name) fields recipe,ingredient,user
+
+  * grocerylist entity array (json) field 'recipes_ingredients_off'
+  [
+    {
+      "name" : "recipe",
+      "id" : 40,
+      "ingredient" : [
+        18
+      ]
+    },
+    ...
+  ]
 
   * translations
   * responsive
+
+Data Schema
+------------
+
+GroceryList
+- own recipes
+- own ingredients
+- own products
+- one tab for recipes listing
+- one tab for list ingredients/products by categories (list mixed types)
 
 Requirements
 ------------
