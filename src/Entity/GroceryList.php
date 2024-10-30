@@ -38,19 +38,23 @@ class GroceryList
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'groceryLists')]
     private Collection $ingredients;
 
-    #[ORM\Column(nullable: true)]
-    private ?array $recipes = null;
-
     /**
      * @var Collection<int, Product>
      */
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'groceryLists')]
     private Collection $products;
 
+    /**
+     * @var Collection<int, Recipe>
+     */
+    #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'groceryLists')]
+    private Collection $recipes;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->recipes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -142,18 +146,6 @@ class GroceryList
         return $this;
     }
 
-    public function getRecipes(): ?array
-    {
-        return $this->recipes;
-    }
-
-    public function setRecipes(?array $recipes): static
-    {
-        $this->recipes = $recipes;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Product>
      */
@@ -177,6 +169,30 @@ class GroceryList
         if ($this->products->removeElement($product)) {
             $product->removeGroceryList($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Recipe>
+     */
+    public function getRecipes(): Collection
+    {
+        return $this->recipes;
+    }
+
+    public function addRecipe(Recipe $recipe): static
+    {
+        if (!$this->recipes->contains($recipe)) {
+            $this->recipes->add($recipe);
+        }
+
+        return $this;
+    }
+
+    public function removeRecipe(Recipe $recipe): static
+    {
+        $this->recipes->removeElement($recipe);
 
         return $this;
     }
