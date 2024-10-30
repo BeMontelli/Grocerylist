@@ -8,10 +8,6 @@ You can also learn about these practices in [the official Symfony Book][5].
 TO DO LIST
 ------------
 
-  * entity Product
-  * entity products Group
-  * remove index group and redirect to edit
-
   * Add ingredients list (checkboxes) in recipes singles
   * Add list select in recipes singles
   * Add process add recipe and ingredients removed to list selected
