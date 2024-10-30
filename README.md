@@ -17,7 +17,6 @@ TO DO LIST
   * list recipes field from json storage type to relationship 
   * list entity add field relationship ingredient_recipe_deactivated (temp name) fields recipe,ingredient,user
 
-  * favicon front/admin
   * translations
   * responsive
 
