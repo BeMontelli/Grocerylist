@@ -16,6 +16,9 @@ use Knp\Component\Pager\PaginatorInterface;
 class GroupRepository extends ServiceEntityRepository
 {
     use ConfigRepositoryTrait;
+
+    /** @var EntityManagerInterface $entityManager */
+    private $entityManager;
     
     public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, private PaginatorInterface $paginator)
     {
