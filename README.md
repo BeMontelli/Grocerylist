@@ -8,13 +8,15 @@ You can also learn about these practices in [the official Symfony Book][5].
 TO DO LIST
 ------------
 
-  * Add ingredients list (checkboxes) in recipes singles
-  * Add list select in recipes singles
   * Add process add recipe and ingredients removed to list selected
 
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
 
   * list entity add field relationship ingredient_recipe_deactivated (temp name) fields recipe,ingredient,user
+
+  * User add current_list field onetoone
+  * when delete list check user current_list and set to null if same
+  * auto select list when needed
 
   * grocerylist entity array (json) field 'recipes_ingredients_off'
   [
