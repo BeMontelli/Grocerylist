@@ -223,3 +223,26 @@ hr {
     background-color: var(--main-green);
     border-color: var(--main-green);
 }
+
+/**** Recipe single ****/
+#single__recipe{
+    position: relative;
+}
+#single__recipe .single__title{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+#single__recipe .single__title h1{
+    margin:0 10px 10px 0;
+}
+#single__recipe .single__categories{
+    margin: 20px 0;
+}
+#single__recipe .single__image{
+    margin: 20px 0;
+}
+#single__recipe .single__image img{
+    max-width: 150px;
+}
