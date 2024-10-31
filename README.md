@@ -12,11 +12,10 @@ TO DO LIST
 
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
 
-  * list entity add field relationship ingredient_recipe_deactivated (temp name) fields recipe,ingredient,user
+  * grocerylist entity add field relationship ingredient_recipe_deactivated (temp name) fields recipe,ingredient,user
 
-  * User add current_list field onetoone
-  * when delete list check user current_list and set to null if same
-  * auto select list when needed
+  * when delete grocerylist check user current_list and set to null if same
+  * auto select grocerylist when needed
 
   * grocerylist entity array (json) field 'recipes_ingredients_off'
   [
