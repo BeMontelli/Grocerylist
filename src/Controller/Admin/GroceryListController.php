@@ -35,7 +35,7 @@ class GroceryListController extends AbstractController
     #[Route('/', name: 'index', methods: ['GET'])]
     public function index(Request $request, GroceryListRepository $groceryListRepository): Response
     {
-        /** @var $user User */
+        /** @var User $user */
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
@@ -48,7 +48,7 @@ class GroceryListController extends AbstractController
     #[Route('/new/', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
-        /** @var $user User */
+        /** @var User $user */
         $user = $this->security->getUser();
 
         $groceryList = new GroceryList();
@@ -71,17 +71,24 @@ class GroceryListController extends AbstractController
     }
 
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
-    public function show(string $slug, int $id,GroceryListRepository $groceryListRepository): Response
+    public function show(string $slug, int $id,GroceryListRepository $groceryListRepository, EntityManagerInterface $entityManager): Response
     {
+        $groceryList = $groceryListRepository->findWithIngredients($id);
+        
+        /** @var User $user  */
+        $user = $this->security->getUser();
+        $user->setCurrentGroceryList($groceryList);
+        $entityManager->flush();
+
         return $this->render('admin/grocery_list/show.html.twig', [
-            'grocery_list' => $groceryListRepository->findWithIngredients($id),
+            'grocery_list' => $groceryList,
         ]);
     }
 
     #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]
     public function edit(Request $request, GroceryList $groceryList, EntityManagerInterface $entityManager): Response
     {
-        /** @var $user User */
+        /** @var User $user */
         $user = $this->security->getUser();
 
         $form = $this->createForm(GroceryListType::class, $groceryList);

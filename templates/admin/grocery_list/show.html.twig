@@ -4,17 +4,13 @@
 
 {% block body %}
     <div class="container">
-        <h1>GroceryList</h1>
+        <h1>{{ grocery_list.title }} - <i style="font-size:0.65em">Current list</i></h1>
 
         <table class="table">
             <tbody>
             <tr>
                 <th>Id</th>
                 <td>{{ grocery_list.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ grocery_list.title }}</td>
             </tr>
             <tr>
                 <th>CreatedAt</th>
