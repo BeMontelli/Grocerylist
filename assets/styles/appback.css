@@ -228,6 +228,19 @@ hr {
 #single__recipe{
     position: relative;
 }
+#single__recipe .cols{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+#single__recipe .col__left{
+    max-width: 250px;
+}
+#single__recipe .col__right{
+    width: calc(100% - 250px);
+    padding-left: 30px;
+}
 #single__recipe .single__title{
     position: relative;
     display: flex;
@@ -241,8 +254,17 @@ hr {
     margin: 20px 0;
 }
 #single__recipe .single__image{
-    margin: 20px 0;
+    position: relative;
 }
 #single__recipe .single__image img{
-    max-width: 150px;
+    max-width: 250px;
+}
+#single__recipe .actions,td.actions{
+    width: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+#single__recipe .actions a:first-child{
+    margin-right: 5px;
 }
