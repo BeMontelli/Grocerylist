@@ -64,6 +64,15 @@ class CategoryController extends AbstractController
     #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]
     public function edit(Request $request, Category $category, EntityManagerInterface $entityManager): Response
     {
+        /** @var User $user  */
+        $user = $this->security->getUser();
+
+        // Fix Proxy/Proxies instances of Class w/ $em->detach()
+        //$entityManager->detach($user);
+        //$user = $entityManager->find(User::class, $user->getId());
+        //dump($user); // App\Entity\User
+        //dd($category->getUser()); // Proxies\__CG__\App\Entity\User
+
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
