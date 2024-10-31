@@ -31,7 +31,7 @@ class CategoryController extends AbstractController
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
     public function index(Request $request, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager): Response
     {
-        /** @var $user User */
+        /** @var User $user  */
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
