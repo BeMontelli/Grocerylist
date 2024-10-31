@@ -17,6 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use App\Form\RecipeIngredients;
 
 #[Route("/{_locale}/admin/recipes", name: "admin.recipe.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -34,7 +35,7 @@ class RecipeController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, RecipeRepository $recipeRepository): Response
     {
-        /** @var $user User */
+        /** @var User $user  */
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
@@ -48,7 +49,7 @@ class RecipeController extends AbstractController
     #[Route('/create/', name: 'create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        /** @var $user User */
+        /** @var User $user  */
         $user = $this->security->getUser();
 
         $recipe = new Recipe();
@@ -76,10 +77,40 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
-    public function show(string $slug, int $id, RecipeRepository $recipeRepository): Response
+    public function show(string $slug, int $id, Request $request, EntityManagerInterface $em, RecipeRepository $recipeRepository): Response
     {
+        /** @var User $user  */
+        $user = $this->security->getUser();
+
+        $recipe = $recipeRepository->findRecipeWithCategory($id);
+            
+        $form = $this->createForm(RecipeIngredients::class,[
+            'recipe' => $recipe,
+            'user' => $user,
+        ]);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $groceryList = $form->get('groceryList')->getData();
+            $ingredients = $form->get('ingredients')->getData();
+
+            //foreach ($ingredients as $ingredient) {
+            //    $groceryList->addIngredient($ingredient);
+            //}
+
+            dump($groceryList);
+            dump($ingredients);
+            dd($form);
+
+            //$em->persist($groceryList);
+            //$em->flush();
+
+            return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
+        }
+
         return $this->render('admin/recipe/show.html.twig', [
-            'recipe' => $recipeRepository->findRecipeWithCategory($id),
+            'form' => $form->createView(),
+            'recipe' => $recipe,
         ]);
     }
 
