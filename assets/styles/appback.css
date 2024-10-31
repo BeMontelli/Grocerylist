@@ -241,6 +241,9 @@ hr {
     width: calc(100% - 250px);
     padding-left: 30px;
 }
+#single__recipe .single__pres{
+    margin-bottom: 20px;
+}
 #single__recipe .single__title{
     position: relative;
     display: flex;
@@ -250,8 +253,8 @@ hr {
 #single__recipe .single__title h1{
     margin:0 10px 10px 0;
 }
-#single__recipe .single__categories{
-    margin: 20px 0;
+#single__recipe .single__price{
+    margin: 20px 0 10px;
 }
 #single__recipe .single__image{
     position: relative;
