@@ -23,7 +23,7 @@ class RecipeIngredients extends AbstractType
                 'label' => 'Your Lists',
                 'class' => GroceryList::class,
                 'choice_label' => 'title',
-                'placeholder' => 'Sélectionnez une liste de courses',
+                'placeholder' => 'Select grocery list',
                 'required' => true,
                 'query_builder' => function (EntityRepository $er) use ($options) {
                     return $er->createQueryBuilder('g')
@@ -33,12 +33,13 @@ class RecipeIngredients extends AbstractType
                 'by_reference' => false
             ])
             ->add('ingredients', EntityType::class, [
-                'label' => 'Ingredients in',
+                'label' => 'Ingredients',
                 'class' => Ingredient::class,
                 'choices' => $options['data']['recipe']->getIngredients(),
                 'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
+                'data' => $options['data']['ingredients'],
                 'by_reference' => false
             ])
             ->add('save', SubmitType::class, [

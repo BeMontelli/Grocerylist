@@ -86,6 +86,7 @@ class RecipeController extends AbstractController
             
         $form = $this->createForm(RecipeIngredients::class,[
             'recipe' => $recipe,
+            'ingredients' => $recipe->getIngredients()->toArray(),
             'user' => $user,
         ]);
 
