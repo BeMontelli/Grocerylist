@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\RecipeType;
+use App\Entity\GroceryList;
 use App\Repository\RecipeRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,6 +19,7 @@ use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use App\Form\RecipeIngredients;
+use App\Repository\GroceryListRepository;
 
 #[Route("/{_locale}/admin/recipes", name: "admin.recipe.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -79,11 +81,11 @@ class RecipeController extends AbstractController
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
     public function show(string $slug, int $id, Request $request, EntityManagerInterface $em, RecipeRepository $recipeRepository): Response
     {
-        /** @var User $user  */
+        /** @var User $user */
         $user = $this->security->getUser();
 
         $recipe = $recipeRepository->findRecipeWithCategory($id);
-            
+
         $form = $this->createForm(RecipeIngredients::class,[
             'recipe' => $recipe,
             'ingredients' => $recipe->getIngredients()->toArray(),

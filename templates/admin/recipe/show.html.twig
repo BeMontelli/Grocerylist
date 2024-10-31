@@ -38,13 +38,7 @@
                     </div>
                 </div>
 
-                <div class="single__ingredients">
-                    <h2>Ingredients</h2>
-                    <ul class="single__ingredients__list">
-                        {% for ingredient in recipe.ingredients %}
-                            <li>{{ ingredient.title }}</li>
-                        {% endfor %}
-                    </ul>
+                <div class="single__form">
                     {{ form_start(form) }}
                         {{ form_widget(form) }}
                     {{ form_end(form) }}

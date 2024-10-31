@@ -85,9 +85,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Group::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $product_groups;
 
-    #[ORM\ManyToOne(inversedBy: 'users')]
-    private ?groceryList $currentGroceryList = null;
-
     public function __construct()
     {
         $this->groceryLists = new ArrayCollection();
@@ -410,18 +407,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $productGroup->setUser(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getCurrentGroceryList(): ?groceryList
-    {
-        return $this->currentGroceryList;
-    }
-
-    public function setCurrentGroceryList(?groceryList $currentGroceryList): static
-    {
-        $this->currentGroceryList = $currentGroceryList;
 
         return $this;
     }
