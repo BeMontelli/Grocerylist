@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\AsciiSlugger;
-use App\Form\RecipeIngredients;
+use App\Form\GroceryListRecipeIngredientsType;
 use App\Repository\GroceryListRepository;
 
 #[Route("/{_locale}/admin/recipes", name: "admin.recipe.", requirements: ['_locale' => 'fr|en'])]
@@ -94,7 +94,7 @@ class RecipeController extends AbstractController
             $choices[$groceryList->getTitle()] = $groceryList->getId();
         }
 
-        $form = $this->createForm(RecipeIngredients::class,[
+        $form = $this->createForm(GroceryListRecipeIngredientsType::class,[
             'recipe' => $recipe,
             'ingredients' => $recipe->getIngredients()->toArray(),
             'choices' => $choices,

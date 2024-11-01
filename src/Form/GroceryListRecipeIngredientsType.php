@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Doctrine\ORM\EntityRepository;
 
-class RecipeIngredients extends AbstractType
+class GroceryListRecipeIngredientsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
