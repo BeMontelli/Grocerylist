@@ -54,6 +54,7 @@ header{
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 100;
     box-sizing: border-box;
     background: rgba(203, 220, 215, 0.25);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
