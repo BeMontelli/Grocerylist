@@ -25,7 +25,7 @@ class RecipeIngredients extends AbstractType
                 'choices' => $options['data']['choices'],
                 'placeholder' => 'Select grocery list',
                 'required' => true,
-                'data' => $options['data']['currentGrocerylist']->getId(),
+                'data' => $options['data']['currentGrocerylistId'],
                 'by_reference' => false,
             ])
             ->add('ingredients', EntityType::class, [

@@ -84,7 +84,7 @@ class RecipeController extends AbstractController
         /** @var User $user */
         $user = $this->security->getUser();
 
-        $currentGrocerylist = $user->getCurrentGroceryList();
+        $currentGrocerylistId = ($user->getCurrentGroceryList() && $user->getCurrentGroceryList()->getId()) ? $user->getCurrentGroceryList()->getId(): null;
 
         $recipe = $recipeRepository->findRecipeWithCategory($id);
 
@@ -98,7 +98,7 @@ class RecipeController extends AbstractController
             'recipe' => $recipe,
             'ingredients' => $recipe->getIngredients()->toArray(),
             'choices' => $choices,
-            'currentGrocerylist' => $currentGrocerylist,
+            'currentGrocerylistId' => $currentGrocerylistId,
         ]);
 
         $form->handleRequest($request);
