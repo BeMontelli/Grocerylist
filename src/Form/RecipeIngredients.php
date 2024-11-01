@@ -6,6 +6,7 @@ use App\Entity\Ingredient;
 use App\Entity\GroceryList;
 use App\Entity\Recipe;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,18 +20,13 @@ class RecipeIngredients extends AbstractType
     {
 
         $builder
-            ->add('groceryList', EntityType::class, [
+            ->add('groceryList', ChoiceType::class, [
                 'label' => 'Your Lists',
-                'class' => GroceryList::class,
-                'choice_label' => 'title',
+                'choices' => $options['data']['choices'],
                 'placeholder' => 'Select grocery list',
                 'required' => true,
-                'query_builder' => function (EntityRepository $er) use ($options) {
-                    return $er->createQueryBuilder('g')
-                        ->where('g.user = :user')
-                        ->setParameter('user', $options['data']['user']);
-                },
-                'by_reference' => false
+                'data' => $options['data']['currentGrocerylist']->getId(),
+                'by_reference' => false,
             ])
             ->add('ingredients', EntityType::class, [
                 'label' => 'Ingredients',

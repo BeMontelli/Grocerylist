@@ -84,12 +84,21 @@ class RecipeController extends AbstractController
         /** @var User $user */
         $user = $this->security->getUser();
 
+        $currentGrocerylist = $user->getCurrentGroceryList();
+
         $recipe = $recipeRepository->findRecipeWithCategory($id);
+
+        $groceryLists = $user->getGroceryLists();
+        $choices = [];
+        foreach ($groceryLists as $groceryList) {
+            $choices[$groceryList->getTitle()] = $groceryList->getId();
+        }
 
         $form = $this->createForm(RecipeIngredients::class,[
             'recipe' => $recipe,
             'ingredients' => $recipe->getIngredients()->toArray(),
-            'user' => $user,
+            'choices' => $choices,
+            'currentGrocerylist' => $currentGrocerylist,
         ]);
 
         $form->handleRequest($request);
@@ -113,7 +122,7 @@ class RecipeController extends AbstractController
 
         return $this->render('admin/recipe/show.html.twig', [
             'form' => $form->createView(),
-            'recipe' => $recipe,
+            'recipe' => $recipe
         ]);
     }
 
