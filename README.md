@@ -14,9 +14,6 @@ TO DO LIST
 
   * grocerylist entity add field relationship ingredient_recipe_deactivated (temp name) fields recipe,ingredient,user
 
-  * when delete grocerylist check user current_list and set to null if same
-  * auto select grocerylist when needed
-
   * grocerylist entity array (json) field 'recipes_ingredients_off'
   [
     {
