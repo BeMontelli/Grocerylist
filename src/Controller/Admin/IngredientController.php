@@ -47,8 +47,7 @@ class IngredientController extends AbstractController
         $user = $this->security->getUser();
 
         $ingredient = new Ingredient();
-        $form = $this->createForm(IngredientType::class,[
-            'ingredient'=> $ingredient,
+        $form = $this->createForm(IngredientType::class,$ingredient,[
             'user'=> $user,
         ]);
         $form->handleRequest($request);
@@ -79,8 +78,7 @@ class IngredientController extends AbstractController
         /** @var User $user */
         $user = $this->security->getUser();
 
-        $form = $this->createForm(IngredientType::class,[
-            'ingredient'=> $ingredient,
+        $form = $this->createForm(IngredientType::class,$ingredient,[
             'user'=> $user,
         ]);
         

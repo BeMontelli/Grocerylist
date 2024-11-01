@@ -47,10 +47,11 @@ class ProductController extends AbstractController
         $user = $this->security->getUser();
 
         $product = new Product();
-        $form = $this->createForm(ProductType::class,[
-            'product'=> $product,
+        
+        $form = $this->createForm(ProductType::class,$product,[
             'user'=> $user,
         ]);
+        
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $product->setUser($user);
@@ -79,8 +80,7 @@ class ProductController extends AbstractController
         /** @var User $user */
         $user = $this->security->getUser();
 
-        $form = $this->createForm(ProductType::class,[
-            'product'=> $product,
+        $form = $this->createForm(ProductType::class,$product,[
             'user'=> $user,
         ]);
 

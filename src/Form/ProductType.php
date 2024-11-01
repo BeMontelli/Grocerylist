@@ -45,7 +45,7 @@ class ProductType extends AbstractType
                 'query_builder' => function (EntityRepository $er) use ($options) {
                     return $er->createQueryBuilder('g')
                         ->where('g.user = :user')
-                        ->setParameter('user', $options['data']['user']);
+                        ->setParameter('user', $options['user']);
                 },
                 'multiple' => true,
                 'expanded' => true,
@@ -79,7 +79,8 @@ class ProductType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => null,
+            'data_class' => Product::class,
         ]);
+        $resolver->setDefined(['user']);
     }
 }
