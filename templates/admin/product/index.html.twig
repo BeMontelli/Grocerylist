@@ -43,7 +43,7 @@
             <tr {% if loop.index is odd %}class="color"{% endif %}>
                 <td>{{ product.id }}</td>
                 <td><a href="{{ url('admin.product.show', {slug: product.slug, id: product.id}) }}">{{ product.title }}</a></td>
-                <td>{{ product.group.title | default('---') }}</td>
+                <td>{{ product.productGroup.title | default('---') }}</td>
                 <td>{{ product.slug }}</td>
                 <td class="actions">
                     {{ include('admin/product/_delete_form.html.twig') }}
