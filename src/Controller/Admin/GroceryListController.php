@@ -110,6 +110,12 @@ class GroceryListController extends AbstractController
     public function delete(Request $request, GroceryList $groceryList, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$groceryList->getId(), $request->getPayload()->get('_token'))) {
+
+            $usersWithGroceryList = $entityManager->getRepository(User::class)->findBy(['current_grocery_list' => $groceryList]);
+            foreach ($usersWithGroceryList as $user) {
+                $user->setCurrentGroceryList(null);
+            }
+
             $entityManager->remove($groceryList);
             $entityManager->flush();
             $this->addFlash('success', 'List '.$groceryList->getTitle().' deleted !');
