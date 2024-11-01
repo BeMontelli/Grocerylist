@@ -14,7 +14,6 @@ TO DO LIST
 
   * grocerylist entity add field relationship ingredient_recipe_deactivated (temp name) fields recipe,ingredient,user
 
-  * User add current_list field onetomany (last try fail because of Proxy && form data selection)
   * when delete grocerylist check user current_list and set to null if same
   * auto select grocerylist when needed
 
