@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Doctrine\ORM\EntityRepository;
 
 class ProductType extends AbstractType
 {
@@ -41,12 +42,17 @@ class ProductType extends AbstractType
                 'label' => 'Grocery list related',
                 'class' => GroceryList::class,
                 'choice_label' => 'title',
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    return $er->createQueryBuilder('g')
+                        ->where('g.user = :user')
+                        ->setParameter('user', $options['data']['user']);
+                },
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Save Ingredient'
+                'label' => 'Save Product'
             ])
             ->addEventListener(FormEvents::PRE_SUBMIT,$this->autoSlug(...))
             ->addEventListener(FormEvents::POST_SUBMIT,$this->autoTimestamps(...))
@@ -73,7 +79,7 @@ class ProductType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Product::class,
+            'data_class' => null,
         ]);
     }
 }

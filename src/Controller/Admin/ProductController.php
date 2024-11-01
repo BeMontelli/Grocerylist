@@ -47,7 +47,10 @@ class ProductController extends AbstractController
         $user = $this->security->getUser();
 
         $product = new Product();
-        $form = $this->createForm(ProductType::class,$product);
+        $form = $this->createForm(ProductType::class,[
+            'product'=> $product,
+            'user'=> $user,
+        ]);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $product->setUser($user);
@@ -73,7 +76,14 @@ class ProductController extends AbstractController
     #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]
     public function edit(Request $request, Product $product, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(ProductType::class, $product);
+        /** @var User $user */
+        $user = $this->security->getUser();
+
+        $form = $this->createForm(ProductType::class,[
+            'product'=> $product,
+            'user'=> $user,
+        ]);
+
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $formData = $form->getData();

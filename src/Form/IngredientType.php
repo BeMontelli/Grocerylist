@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\GroceryList;
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use App\Entity\Section;
@@ -15,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Doctrine\ORM\EntityRepository;
 
 class IngredientType extends AbstractType
 {
@@ -35,6 +37,19 @@ class IngredientType extends AbstractType
                 'label' => 'Ingredient section',
                 'choice_label' => 'title',
                 'placeholder' => 'Select a section',
+            ])
+            ->add('groceryLists', EntityType::class, [
+                'label' => 'Grocery list related',
+                'class' => GroceryList::class,
+                'choice_label' => 'title',
+                'query_builder' => function (EntityRepository $er) use ($options) {
+                    return $er->createQueryBuilder('g')
+                        ->where('g.user = :user')
+                        ->setParameter('user', $options['data']['user']);
+                },
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false
             ])
             ->add('recipes', EntityType::class, [
                 'label' => 'Recipes related',
@@ -72,7 +87,7 @@ class IngredientType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Ingredient::class,
+            'data_class' => null,
         ]);
     }
 }
