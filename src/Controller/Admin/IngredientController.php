@@ -67,9 +67,8 @@ class IngredientController extends AbstractController
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
     public function show(string $slug, int $id, IngredientRepository $ingredientRepository): Response
     {
-        return $this->render('admin/ingredient/show.html.twig', [
-            'ingredient' => $ingredientRepository->find($id),
-        ]);
+        $ingredient = $ingredientRepository->find($id);
+        return $this->redirectToRoute('admin.ingredient.edit', ["id" => $ingredient->getId()]);
     }
 
     #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]

@@ -69,9 +69,8 @@ class ProductController extends AbstractController
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
     public function show(string $slug, int $id, ProductRepository $productRepository): Response
     {
-        return $this->render('admin/product/show.html.twig', [
-            'product' => $productRepository->find($id),
-        ]);
+        $product = $productRepository->find($id);
+        return $this->redirectToRoute('admin.product.edit', ["id" => $product->getId()]);
     }
 
     #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]
