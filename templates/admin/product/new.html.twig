@@ -5,8 +5,8 @@
 {% block body %}
 
 <div class="container">
-    <h1>{{ 'app.admin.action.new'|trans({'%gender%': 'male'}) }} {{ 'app.admin.ingredients.entity'|trans({'%entity%': 1}) }}</h1>
-    <a class="btn-primary btn" href="{{ url('admin.ingredient.index') }}">All ingredients</a>
+    <h1>{{ 'app.admin.action.new'|trans({'%gender%': 'male'}) }} {{ 'app.admin.products.entity'|trans({'%entity%': 1}) }}</h1>
+    <a class="btn-primary btn" href="{{ url('admin.product.index') }}">All productss</a>
 
     <hr>
     {{ form(form) }}
