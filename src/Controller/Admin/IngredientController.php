@@ -29,7 +29,7 @@ class IngredientController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(Request $request, IngredientRepository $ingredientRepository): Response
     {
-        /** @var $user User */
+        /** @var User $user */
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
@@ -43,7 +43,7 @@ class IngredientController extends AbstractController
     #[Route('/create/', name: 'create')]
     public function create(Request $request, EntityManagerInterface $entityManager): Response
     {
-        /** @var $user User */
+        /** @var User $user */
         $user = $this->security->getUser();
 
         $ingredient = new Ingredient();
