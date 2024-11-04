@@ -90,10 +90,17 @@ class Recipe
     #[ORM\ManyToMany(targetEntity: GroceryList::class, mappedBy: 'recipes')]
     private Collection $groceryLists;
 
+    /**
+     * @var Collection<int, GroceryListIngredient>
+     */
+    #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'Recipe')]
+    private Collection $groceryListIngredients;
+
     public function __construct()
     {
         $this->ingredients = new ArrayCollection();
         $this->groceryLists = new ArrayCollection();
+        $this->groceryListIngredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -255,6 +262,36 @@ class Recipe
     {
         if ($this->groceryLists->removeElement($groceryList)) {
             $groceryList->removeRecipe($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GroceryListIngredient>
+     */
+    public function getGroceryListIngredients(): Collection
+    {
+        return $this->groceryListIngredients;
+    }
+
+    public function addGroceryListIngredient(GroceryListIngredient $groceryListIngredient): static
+    {
+        if (!$this->groceryListIngredients->contains($groceryListIngredient)) {
+            $this->groceryListIngredients->add($groceryListIngredient);
+            $groceryListIngredient->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroceryListIngredient(GroceryListIngredient $groceryListIngredient): static
+    {
+        if ($this->groceryListIngredients->removeElement($groceryListIngredient)) {
+            // set the owning side to null (unless already changed)
+            if ($groceryListIngredient->getRecipe() === $this) {
+                $groceryListIngredient->setRecipe(null);
+            }
         }
 
         return $this;

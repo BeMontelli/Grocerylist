@@ -60,15 +60,15 @@ class Ingredient
     private ?User $user = null;
 
     /**
-     * @var Collection<int, GroceryList>
+     * @var Collection<int, GroceryListIngredient>
      */
-    #[ORM\ManyToMany(targetEntity: GroceryList::class, mappedBy: 'ingredients')]
-    private Collection $groceryLists;
+    #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'Ingredient', orphanRemoval: true)]
+    private Collection $groceryListIngredients;
 
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
-        $this->groceryLists = new ArrayCollection();
+        $this->groceryListIngredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,27 +176,30 @@ class Ingredient
     }
 
     /**
-     * @return Collection<int, GroceryList>
+     * @return Collection<int, GroceryListIngredient>
      */
-    public function getGroceryLists(): Collection
+    public function getGroceryListIngredients(): Collection
     {
-        return $this->groceryLists;
+        return $this->groceryListIngredients;
     }
 
-    public function addGroceryList(GroceryList $groceryList): static
+    public function addGroceryListIngredient(GroceryListIngredient $groceryListIngredient): static
     {
-        if (!$this->groceryLists->contains($groceryList)) {
-            $this->groceryLists->add($groceryList);
-            $groceryList->addIngredient($this);
+        if (!$this->groceryListIngredients->contains($groceryListIngredient)) {
+            $this->groceryListIngredients->add($groceryListIngredient);
+            $groceryListIngredient->setIngredient($this);
         }
 
         return $this;
     }
 
-    public function removeGroceryList(GroceryList $groceryList): static
+    public function removeGroceryListIngredient(GroceryListIngredient $groceryListIngredient): static
     {
-        if ($this->groceryLists->removeElement($groceryList)) {
-            $groceryList->removeIngredient($this);
+        if ($this->groceryListIngredients->removeElement($groceryListIngredient)) {
+            // set the owning side to null (unless already changed)
+            if ($groceryListIngredient->getIngredient() === $this) {
+                $groceryListIngredient->setIngredient(null);
+            }
         }
 
         return $this;

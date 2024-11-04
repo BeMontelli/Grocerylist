@@ -33,12 +33,6 @@ class GroceryList
     private ?User $user = null;
 
     /**
-     * @var Collection<int, Ingredient>
-     */
-    #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'groceryLists')]
-    private Collection $ingredients;
-
-    /**
      * @var Collection<int, Product>
      */
     #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'groceryLists')]
@@ -56,12 +50,18 @@ class GroceryList
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'current_grocery_list')]
     private Collection $users;
 
+    /**
+     * @var Collection<int, GroceryListIngredient>
+     */
+    #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'groceryList', orphanRemoval: true)]
+    private Collection $groceryListIngredients;
+
     public function __construct()
     {
-        $this->ingredients = new ArrayCollection();
         $this->products = new ArrayCollection();
         $this->recipes = new ArrayCollection();
         $this->users = new ArrayCollection();
+        $this->groceryListIngredients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -125,30 +125,6 @@ class GroceryList
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Ingredient>
-     */
-    public function getIngredients(): Collection
-    {
-        return $this->ingredients;
-    }
-
-    public function addIngredient(Ingredient $ingredient): static
-    {
-        if (!$this->ingredients->contains($ingredient)) {
-            $this->ingredients->add($ingredient);
-        }
-
-        return $this;
-    }
-
-    public function removeIngredient(Ingredient $ingredient): static
-    {
-        $this->ingredients->removeElement($ingredient);
 
         return $this;
     }
@@ -228,6 +204,36 @@ class GroceryList
             // set the owning side to null (unless already changed)
             if ($user->getCurrentGroceryList() === $this) {
                 $user->setCurrentGroceryList(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, GroceryListIngredient>
+     */
+    public function getGroceryListIngredients(): Collection
+    {
+        return $this->groceryListIngredients;
+    }
+
+    public function addGroceryListIngredient(GroceryListIngredient $groceryListIngredient): static
+    {
+        if (!$this->groceryListIngredients->contains($groceryListIngredient)) {
+            $this->groceryListIngredients->add($groceryListIngredient);
+            $groceryListIngredient->setGroceryList($this);
+        }
+
+        return $this;
+    }
+
+    public function removeGroceryListIngredient(GroceryListIngredient $groceryListIngredient): static
+    {
+        if ($this->groceryListIngredients->removeElement($groceryListIngredient)) {
+            // set the owning side to null (unless already changed)
+            if ($groceryListIngredient->getGroceryList() === $this) {
+                $groceryListIngredient->setGroceryList(null);
             }
         }
 
