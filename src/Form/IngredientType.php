@@ -38,7 +38,7 @@ class IngredientType extends AbstractType
                 'choice_label' => 'title',
                 'placeholder' => 'Select a section',
             ])
-            ->add('groceryLists', EntityType::class, [
+            /*->add('groceryLists', EntityType::class, [
                 'label' => 'Grocery list related',
                 'class' => GroceryList::class,
                 'choice_label' => 'title',
@@ -50,7 +50,7 @@ class IngredientType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false
-            ])
+            ])*/
             ->add('recipes', EntityType::class, [
                 'label' => 'Recipes related',
                 'class' => Recipe::class,
