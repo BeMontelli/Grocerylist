@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class GroceryListIngredientRepository extends ServiceEntityRepository
 {
+    
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, GroceryListIngredient::class);
