@@ -73,7 +73,7 @@ class GroceryListController extends AbstractController
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
     public function show(string $slug, int $id,GroceryListRepository $groceryListRepository, EntityManagerInterface $entityManager): Response
     {
-        $groceryList = $groceryListRepository->findWithIngredients($id);
+        $groceryList = $groceryListRepository->find($id);
         
         /** @var User $user  */
         $user = $this->security->getUser();
