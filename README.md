@@ -12,20 +12,6 @@ TO DO LIST
 
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
 
-  * grocerylist entity add field relationship ingredient_recipe_deactivated (temp name) fields recipe,ingredient,user
-
-  * grocerylist entity array (json) field 'recipes_ingredients_off'
-  [
-    {
-      "name" : "recipe",
-      "id" : 40,
-      "ingredient" : [
-        18
-      ]
-    },
-    ...
-  ]
-
   * translations
   * responsive
 
