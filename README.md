@@ -29,6 +29,9 @@ TO DO LIST
   * translations
   * responsive
 
+  * Recipe edit thumbnail mandatory ?
+  * Entities Edit titles translate + structure rework
+
 Data Schema
 ------------
 
