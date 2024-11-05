@@ -11,17 +11,10 @@
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}
 
-    {{ form_start(form) }}
+    <div class="list__form mb-4">
+        {{ include('admin/ingredient/_form.html.twig') }}
+    </div>
 
-    {{ form_row(form.title) }}
-    {{ form_row(form.slug) }}
-    {{ form_row(form.section) }}
-    {#{{ form_row(form.groceryLists) }}#}
-    {{ form_row(form.recipes) }}
-
-    {{ form_row(form.save, {'label': 'app.admin.action.update'|trans}) }}
-
-    {{ form_end(form) }}
     <hr>
 
 </div>

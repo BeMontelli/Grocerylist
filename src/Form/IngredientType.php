@@ -38,8 +38,16 @@ class IngredientType extends AbstractType
                 'choice_label' => 'title',
                 'placeholder' => 'Select a section',
             ])
-            /*->add('groceryLists', EntityType::class, [
-                'label' => 'Grocery list related',
+            ->add('recipes', EntityType::class, [
+                'label' => 'Recipes related',
+                'class' => Recipe::class,
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => true,
+                'by_reference' => false
+            ])
+            ->add('groceryListIngredients', EntityType::class, [
+                'label' => 'In grocery list(s) ?',
                 'class' => GroceryList::class,
                 'choice_label' => 'title',
                 'query_builder' => function (EntityRepository $er) use ($options) {
@@ -47,14 +55,6 @@ class IngredientType extends AbstractType
                         ->where('g.user = :user')
                         ->setParameter('user', $options['user']);
                 },
-                'multiple' => true,
-                'expanded' => true,
-                'by_reference' => false
-            ])*/
-            ->add('recipes', EntityType::class, [
-                'label' => 'Recipes related',
-                'class' => Recipe::class,
-                'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
                 'by_reference' => false
