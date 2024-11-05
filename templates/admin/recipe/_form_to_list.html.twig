@@ -1,0 +1,8 @@
+{{ form_start(form) }}
+
+    {{ form_row(form.groceryList) }}
+    {{ form_row(form.ingredients) }}
+    <span class="notice">{{ 'app.admin.recipes.sendtolistnotice'|trans({'%entity%': 1}) }}</span>
+    {{ form_row(form.save) }}
+
+{{ form_end(form) }}

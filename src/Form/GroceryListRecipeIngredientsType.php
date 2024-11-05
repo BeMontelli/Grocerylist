@@ -39,7 +39,7 @@ class GroceryListRecipeIngredientsType extends AbstractType
                 'by_reference' => false
             ])
             ->add('save', SubmitType::class, [
-                'label' => 'Add recipe with ingredients to list'
+                'label' => 'app.admin.recipes.sendtolistbtn'
             ])
         ;
     }

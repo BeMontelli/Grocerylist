@@ -10,6 +10,8 @@ app:
         other {Lists}
       }
     recipes.title: Recipes
+    recipes.sendtolistnotice: Your recipe will be sent to the grocery list with selected ingredients.
+    recipes.sendtolistbtn: Add recipe with ingredients to list
     recipes.entity: >-
       {entity, plural,
         =1 {Recipe}

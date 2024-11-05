@@ -10,6 +10,8 @@ app:
         other {Listes}
       }
     recipes.title: Recettes
+    recipes.sendtolistnotice: Votre recette sera envoyée à la liste sélectionnée avec les ingrédients cible.
+    recipes.sendtolistbtn: Ajouter recette et ingrédients à la liste
     recipes.entity: >-
       {entity, plural,
         =1 {Recette}

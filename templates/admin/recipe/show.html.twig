@@ -37,11 +37,10 @@
                         {{ recipe.content | raw | nl2br }}
                     </div>
                 </div>
+                <hr>
 
                 <div class="single__form">
-                    {{ form_start(form) }}
-                        {{ form_widget(form) }}
-                    {{ form_end(form) }}
+                    {{ include('admin/recipe/_form_to_list.html.twig') }}
                 </div>
 
                 <br>
