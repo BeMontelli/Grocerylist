@@ -8,7 +8,10 @@ You can also learn about these practices in [the official Symfony Book][5].
 TO DO LIST
 ------------
 
-  * Process add recipe and ingredients removed to grocerylist selected
+  * Process add product and ingredients removed to grocerylist selected
+  * Process add ingredient to grocerylist selected
+  * Process add recipe to grocerylist selected
+  * Process add ingrdients recipe to grocerylist selected
 
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
 
