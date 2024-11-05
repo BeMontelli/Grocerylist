@@ -39,7 +39,7 @@ class ProductType extends AbstractType
                 'placeholder' => 'Select a product group',
             ])
             ->add('groceryLists', EntityType::class, [
-                'label' => 'Grocery list related',
+                'label' => 'In grocery list(s) ?',
                 'class' => GroceryList::class,
                 'choice_label' => 'title',
                 'query_builder' => function (EntityRepository $er) use ($options) {
