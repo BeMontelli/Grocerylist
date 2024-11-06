@@ -12,7 +12,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
-//use Symfony\Component\Form\Event\SubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -29,6 +28,7 @@ class IngredientType extends AbstractType
     {
         $this->entityManager = $entityManager;
     }
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $ingredient = $options['data'];
@@ -88,25 +88,10 @@ class IngredientType extends AbstractType
                 'label' => 'Save Ingredient'
             ])
             ->addEventListener(FormEvents::PRE_SUBMIT,$this->processGroceryListsPreSubmit(...))
-            //->addEventListener(FormEvents::POST_SUBMIT,$this->processGroceryListsSubmit(...))
             ->addEventListener(FormEvents::PRE_SUBMIT,$this->autoSlug(...))
             ->addEventListener(FormEvents::POST_SUBMIT,$this->autoTimestamps(...))
         ;
     }
-    /*public function processGroceryListsSubmit(PostSubmitEvent $event) : void {
-        $ingredient = $event->getForm()->getData();
-        dd($ingredient);
-
-        if (!$ingredient instanceof Ingredient  || !$ingredient->getId()) {
-            // cancel process if $ingredient not ingrdeint or not already created on /create 
-            return;
-        }
-
-        dump($event->getForm()->getData());
-        dump($event->getForm()->get('groceryLists'));
-        dump($event->getForm()->get('groceryLists')->getData()->toArray());
-        dd($event);
-    }*/
 
     public function processGroceryListsPreSubmit(PreSubmitEvent $event) : void {
         
@@ -115,7 +100,10 @@ class IngredientType extends AbstractType
         $ingredient = $form->getData();
 
         if (!$ingredient instanceof Ingredient  || !$ingredient->getId()) {
-            // cancel process if $ingredient not ingrdeint or not already created on /create 
+            // cancel process if $ingredient not ingredient or not already created on /create 
+            if (isset($data['groceryLists']) && !empty($data['groceryLists'])) {
+                $ingredient->setTemporaryGroceryLists($data['groceryLists']);
+            }
             return;
         }
 

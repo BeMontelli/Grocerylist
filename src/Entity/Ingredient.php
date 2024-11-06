@@ -65,6 +65,11 @@ class Ingredient
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'ingredient', orphanRemoval: true)]
     private Collection $groceryListIngredients;
 
+    /**
+     * @var array
+     */
+    private array $temporaryGroceryLists = []; // Propriété temporaire
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
@@ -203,5 +208,15 @@ class Ingredient
         }
 
         return $this;
+    }
+
+    public function setTemporaryGroceryLists(array $groceryLists): void
+    {
+        $this->temporaryGroceryLists = $groceryLists;
+    }
+
+    public function getTemporaryGroceryLists(): array
+    {
+        return $this->temporaryGroceryLists;
     }
 }
