@@ -12,6 +12,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
+//use Symfony\Component\Form\Event\SubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,14 +33,17 @@ class IngredientType extends AbstractType
     {
         $ingredient = $options['data'];
         // Get GroceryLists linked to ingredient
-        $groceryListsAssociated = $this->entityManager
-            ->getRepository(GroceryList::class)
-            ->createQueryBuilder('g')
-            ->join(GroceryListIngredient::class, 'gli', 'WITH', 'gli.groceryList = g')
-            ->where('gli.ingredient = :ingredient')
-            ->setParameter('ingredient', $ingredient)
-            ->getQuery()
-            ->getResult();
+        $groceryListsAssociated = [];
+        if($ingredient->getId()) {
+            $groceryListsAssociated = $this->entityManager
+                ->getRepository(GroceryList::class)
+                ->createQueryBuilder('g')
+                ->join(GroceryListIngredient::class, 'gli', 'WITH', 'gli.groceryList = g')
+                ->where('gli.ingredient = :ingredient')
+                ->setParameter('ingredient', $ingredient)
+                ->getQuery()
+                ->getResult();
+        }
 
         $builder
             ->add('title',TextType::class, [
@@ -83,19 +87,35 @@ class IngredientType extends AbstractType
             ->add('save', SubmitType::class, [
                 'label' => 'Save Ingredient'
             ])
-            ->addEventListener(FormEvents::PRE_SUBMIT,$this->processGroceryLists(...))
+            ->addEventListener(FormEvents::PRE_SUBMIT,$this->processGroceryListsPreSubmit(...))
+            //->addEventListener(FormEvents::POST_SUBMIT,$this->processGroceryListsSubmit(...))
             ->addEventListener(FormEvents::PRE_SUBMIT,$this->autoSlug(...))
             ->addEventListener(FormEvents::POST_SUBMIT,$this->autoTimestamps(...))
         ;
     }
+    /*public function processGroceryListsSubmit(PostSubmitEvent $event) : void {
+        $ingredient = $event->getForm()->getData();
+        dd($ingredient);
 
-    public function processGroceryLists(PreSubmitEvent $event) : void {
+        if (!$ingredient instanceof Ingredient  || !$ingredient->getId()) {
+            // cancel process if $ingredient not ingrdeint or not already created on /create 
+            return;
+        }
+
+        dump($event->getForm()->getData());
+        dump($event->getForm()->get('groceryLists'));
+        dump($event->getForm()->get('groceryLists')->getData()->toArray());
+        dd($event);
+    }*/
+
+    public function processGroceryListsPreSubmit(PreSubmitEvent $event) : void {
         
         $data = $event->getData();
         $form = $event->getForm();
         $ingredient = $form->getData();
 
-        if (!$ingredient instanceof Ingredient) {
+        if (!$ingredient instanceof Ingredient  || !$ingredient->getId()) {
+            // cancel process if $ingredient not ingrdeint or not already created on /create 
             return;
         }
 
@@ -115,7 +135,6 @@ class IngredientType extends AbstractType
             $this->entityManager->flush();
 
             // rebuild relations Ingredient / GroceryListIngredient if some checked
-            $selectedGroceryListIngredientsIds = [];
             $groceryLists = $this->entityManager->getRepository(GroceryList::class)
                 ->findBy(['id' => $selectedGroceryListIds]);
 
@@ -129,8 +148,6 @@ class IngredientType extends AbstractType
 
                 $this->entityManager->persist($groceryListIngredient);
                 $this->entityManager->flush();
-
-                $selectedGroceryListIngredientsIds[] = $groceryListIngredient->getId();
             }
             
         } else {
