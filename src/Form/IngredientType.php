@@ -99,6 +99,7 @@ class IngredientType extends AbstractType
             return;
         }
 
+        // Logic to service ? WIP
         if (isset($data['groceryLists']) && !empty($data['groceryLists'])) {
             // default delete all relations Ingredient / GroceryListIngredient
             $selectedGroceryListIds = $data['groceryLists'];
