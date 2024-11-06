@@ -19,7 +19,7 @@ class GroceryListIngredient
 
     #[ORM\ManyToOne(inversedBy: 'groceryListIngredients')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Ingredient $Ingredient = null;
+    private ?ingredient $ingredient = null;
 
     #[ORM\Column]
     private ?bool $activation = null;
@@ -47,14 +47,14 @@ class GroceryListIngredient
         return $this;
     }
 
-    public function getIngredient(): ?Ingredient
+    public function getIngredient(): ?ingredient
     {
-        return $this->Ingredient;
+        return $this->ingredient;
     }
 
-    public function setIngredient(?Ingredient $Ingredient): static
+    public function setIngredient(?ingredient $ingredient): static
     {
-        $this->Ingredient = $Ingredient;
+        $this->ingredient = $ingredient;
 
         return $this;
     }
