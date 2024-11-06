@@ -28,13 +28,14 @@ class IngredientType extends AbstractType
     {
         $this->entityManager = $entityManager;
     }
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $ingredient = $options['data'];
         // Get GroceryLists linked to ingredient
         $groceryListsAssociated = [];
         if($ingredient->getId()) {
+            // Logic to repo ? WIP
             $groceryListsAssociated = $this->entityManager
                 ->getRepository(GroceryList::class)
                 ->createQueryBuilder('g')

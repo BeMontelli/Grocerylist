@@ -19,6 +19,10 @@ TO DO LIST
   * Recipe edit thumbnail mandatory ?
   * Entities Edit titles translate + structure rework
 
+  * Check **WIP** notes
+  * services manager forms
+  * logic refactor to respository for queries ?
+
 Data Schema
 ------------
 
