@@ -3,9 +3,11 @@
 namespace App\Form;
 
 use App\Entity\GroceryList;
+use App\Entity\GroceryListIngredient;
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use App\Entity\Section;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
@@ -20,8 +22,25 @@ use Doctrine\ORM\EntityRepository;
 
 class IngredientType extends AbstractType
 {
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        $ingredient = $options['data'];
+        // Get GroceryLists linked to ingredient
+        $groceryListsAssociated = $this->entityManager
+            ->getRepository(GroceryList::class)
+            ->createQueryBuilder('g')
+            ->join(GroceryListIngredient::class, 'gli', 'WITH', 'gli.groceryList = g')
+            ->where('gli.ingredient = :ingredient')
+            ->setParameter('ingredient', $ingredient)
+            ->getQuery()
+            ->getResult();
+
         $builder
             ->add('title',TextType::class, [
                 'empty_data' => '',
@@ -46,10 +65,11 @@ class IngredientType extends AbstractType
                 'expanded' => true,
                 'by_reference' => false
             ])
-            ->add('groceryListIngredients', EntityType::class, [
+            ->add('groceryLists', EntityType::class, [
                 'label' => 'In grocery list(s) ?',
                 'class' => GroceryList::class,
                 'choice_label' => 'title',
+                'mapped' => false, // Not mapping to entity
                 'query_builder' => function (EntityRepository $er) use ($options) {
                     return $er->createQueryBuilder('g')
                         ->where('g.user = :user')
@@ -57,14 +77,75 @@ class IngredientType extends AbstractType
                 },
                 'multiple' => true,
                 'expanded' => true,
-                'by_reference' => false
+                'by_reference' => false,
+                'data' => $groceryListsAssociated 
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save Ingredient'
             ])
+            ->addEventListener(FormEvents::PRE_SUBMIT,$this->processGroceryLists(...))
             ->addEventListener(FormEvents::PRE_SUBMIT,$this->autoSlug(...))
             ->addEventListener(FormEvents::POST_SUBMIT,$this->autoTimestamps(...))
         ;
+    }
+
+    public function processGroceryLists(PreSubmitEvent $event) : void {
+        
+        $data = $event->getData();
+        $form = $event->getForm();
+        $ingredient = $form->getData();
+
+        if (!$ingredient instanceof Ingredient) {
+            return;
+        }
+
+        if (isset($data['groceryLists']) && !empty($data['groceryLists'])) {
+            // default delete all relations Ingredient / GroceryListIngredient
+            $selectedGroceryListIds = $data['groceryLists'];
+            $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
+            ->findBy([
+                'ingredient' => $ingredient,
+                'groceryList' => $selectedGroceryListIds
+                // User ID maybe ? WIP
+            ]);
+            foreach ($existingRelations as $relation) {
+                $this->entityManager->remove($relation);
+            }
+            $this->entityManager->flush();
+
+            // rebuild relations Ingredient / GroceryListIngredient if some checked
+            $selectedGroceryListIngredientsIds = [];
+            $groceryLists = $this->entityManager->getRepository(GroceryList::class)
+                ->findBy(['id' => $selectedGroceryListIds]);
+
+            foreach ($groceryLists as $groceryList) {
+                
+                $groceryListIngredient = new GroceryListIngredient();
+                $groceryListIngredient->setIngredient($ingredient);
+                $groceryListIngredient->setGroceryList($groceryList);
+                $groceryListIngredient->setActivation(false);
+                $groceryListIngredient->setInList(true);
+
+                $this->entityManager->persist($groceryListIngredient);
+                $this->entityManager->flush();
+
+                $selectedGroceryListIngredientsIds[] = $groceryListIngredient->getId();
+            }
+            
+        } else {
+            // if no lists, delete all ingredients relashionship
+            $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
+            ->findBy([
+                'ingredient' => $ingredient
+                // User ID maybe ? WIP
+            ]);
+            foreach ($existingRelations as $relation) {
+                $this->entityManager->remove($relation);
+            }
+            $this->entityManager->flush();
+        }
+
+        $event->setData($data);
     }
 
     public function autoSlug(PreSubmitEvent $event) : void {
