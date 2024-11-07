@@ -27,7 +27,7 @@ class ProductController extends AbstractController
     }
 
     #[Route('/', name: 'index')]
-    public function index(Request $request, ProductRepository $productRepository): Response
+    public function index(Request $request, ProductRepository $productRepository, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
         $user = $this->security->getUser();
@@ -35,19 +35,7 @@ class ProductController extends AbstractController
         $currentPage = $request->query->getInt('page', 1);
         $products = $productRepository->paginateUserProducts($currentPage,$user);
 
-        return $this->render('admin/product/index.html.twig', [
-            'products' => $products
-        ]);
-    }
-
-    #[Route('/create/', name: 'create')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        /** @var User $user */
-        $user = $this->security->getUser();
-
         $product = new Product();
-        
         $form = $this->createForm(ProductType::class,$product,[
             'user'=> $user,
         ]);
@@ -61,8 +49,9 @@ class ProductController extends AbstractController
             return $this->redirectToRoute('admin.product.index');
         }
 
-        return $this->render('admin/product/new.html.twig',[
-            'form' => $form
+        return $this->render('admin/product/index.html.twig', [
+            'products' => $products,
+            'form' => $form,
         ]);
     }
 
