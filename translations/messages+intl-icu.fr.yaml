@@ -4,12 +4,14 @@ app:
     welcome_title: Bienvenue
     lists.title: 'Mes listes'
     lists.count: 'Nombre de résultats'
+    lists.none: 'Pas de résultat'
     lists.entity: >-
       {entity, plural,
         =1 {Liste}
         other {Listes}
       }
     recipes.title: Recettes
+    recipes.none: 'Pas de recette'
     recipes.sendtolistnotice: Votre recette sera envoyée à la liste sélectionnée avec les ingrédients cible.
     recipes.sendtolistbtn: Ajouter recette et ingrédients à la liste
     recipes.entity: >-
@@ -24,6 +26,7 @@ app:
         other {Categories de recette}
       }
     ingredients.title: Ingredients
+    ingredients.none: "Pas d'ingredient"
     ingredients.entity: >-
       {entity, plural,
         =1 {Ingredient}
@@ -36,6 +39,7 @@ app:
         other {Categories d'ingredient}
       }
     products.title: 'Produits'
+    products.none: "Pas de produit"
     products.entity: >-
       {entity, plural,
         =1 {Produit}

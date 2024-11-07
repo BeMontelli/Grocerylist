@@ -73,15 +73,25 @@ class GroceryListController extends AbstractController
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
     public function show(string $slug, int $id,GroceryListRepository $groceryListRepository, EntityManagerInterface $entityManager): Response
     {
+        /** @var GroceryList $groceryList  */
         $groceryList = $groceryListRepository->find($id);
+        // fully load object
+        $entityManager->refresh($groceryList);
         
         /** @var User $user  */
         $user = $this->security->getUser();
         $user->setCurrentGroceryList($groceryList);
         $entityManager->flush();
 
+        $products = $groceryList->getProducts();
+        $ingredients = $groceryList->getGroceryListIngredients();
+        $recipes = $groceryList->getRecipes();
+
         return $this->render('admin/grocery_list/show.html.twig', [
             'grocery_list' => $groceryList,
+            'products' => $products,
+            'ingredients' => $ingredients,
+            'recipes' => $recipes,
         ]);
     }
 

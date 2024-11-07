@@ -4,12 +4,14 @@ app:
     welcome_title: Welcome
     lists.title: 'My lists'
     lists.count: 'Results count'
+    lists.none: 'No result'
     lists.entity: >-
       {entity, plural,
         =1 {List}
         other {Lists}
       }
     recipes.title: Recipes
+    recipes.none: 'No recipes'
     recipes.sendtolistnotice: Your recipe will be sent to the grocery list with selected ingredients.
     recipes.sendtolistbtn: Add recipe with ingredients to list
     recipes.entity: >-
@@ -24,6 +26,7 @@ app:
         other {Recipe Categories}
       }
     ingredients.title: Ingredients
+    ingredients.none: 'No ingredients'
     ingredients.entity: >-
       {entity, plural,
         =1 {Ingredient}
@@ -36,6 +39,7 @@ app:
         other {Ingredient Categories}
       }
     products.title: 'Products'
+    products.none: 'No products'
     products.entity: >-
       {entity, plural,
         =1 {Product}

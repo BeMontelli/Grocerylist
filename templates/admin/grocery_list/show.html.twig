@@ -23,6 +23,45 @@
             </tbody>
         </table>
 
+        <div class="data">
+            <div class="ingredients__products">
+                <h2>{{ 'app.admin.ingredients.title'|trans }}</h3>
+                <ul>
+                    {% if ingredients is not empty %}
+                        {% for ingredient in ingredients %}
+                            <li>{{ dump(ingredient) }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>{{ 'app.admin.ingredients.none'|trans }}</li>
+                    {% endif %}
+                </ul>
+
+                <h2>{{ 'app.admin.products.title'|trans }}</h3>
+                <ul>
+                    {% if products is not empty %}
+                        {% for product in products %}
+                            <li>{{ product.title }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>{{ 'app.admin.products.none'|trans }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+
+            <div class="recipes">
+                <h2>{{ 'app.admin.recipes.title'|trans }}</h3>
+                <ul>
+                    {% if recipes is not empty %}
+                        {% for recipe in recipes %}
+                            <li>{{ recipe.title }}</li>
+                        {% endfor %}
+                    {% else %}
+                        <li>{{ 'app.admin.recipes.none'|trans }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+
         <a class="btn-primary btn mb-2" href="{{ path('admin.list.index') }}">{{ 'app.admin.action.backlist'|trans }}</a>
 
         <a class="btn-primary btn mb-2" href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
