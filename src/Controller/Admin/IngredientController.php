@@ -30,24 +30,13 @@ class IngredientController extends AbstractController
     }
 
     #[Route('/', name: 'index')]
-    public function index(Request $request, IngredientRepository $ingredientRepository): Response
+    public function index(Request $request, IngredientRepository $ingredientRepository, EntityManagerInterface $entityManager, GroceryListIngredientService $groceryListIngredientService): Response
     {
         /** @var User $user */
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
         $ingredients = $ingredientRepository->paginateUserIngredients($currentPage,$user);
-
-        return $this->render('admin/ingredient/index.html.twig', [
-            'ingredients' => $ingredients
-        ]);
-    }
-
-    #[Route('/create/', name: 'create')]
-    public function create(Request $request, EntityManagerInterface $entityManager, GroceryListIngredientService $groceryListIngredientService): Response
-    {
-        /** @var User $user */
-        $user = $this->security->getUser();
 
         $ingredient = new Ingredient();
         $form = $this->createForm(IngredientType::class,$ingredient,[
@@ -67,7 +56,8 @@ class IngredientController extends AbstractController
             return $this->redirectToRoute('admin.ingredient.index');
         }
 
-        return $this->render('admin/ingredient/create.html.twig',[
+        return $this->render('admin/ingredient/index.html.twig', [
+            'ingredients' => $ingredients,
             'form' => $form
         ]);
     }
