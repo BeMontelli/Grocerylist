@@ -20,16 +20,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Doctrine\ORM\EntityRepository;
 use App\Repository\GroceryListRepository;
+use App\Service\GroceryListIngredientService;
 
 class IngredientType extends AbstractType
 {
     private EntityManagerInterface $entityManager;
     private GroceryListRepository $groceryListRepository;
+    private GroceryListIngredientService $groceryListIngredientService;
 
-    public function __construct(EntityManagerInterface $entityManager, GroceryListRepository $groceryListRepository)
+    public function __construct(EntityManagerInterface $entityManager, GroceryListRepository $groceryListRepository, GroceryListIngredientService $groceryListIngredientService)
     {
         $this->entityManager = $entityManager;
         $this->groceryListRepository = $groceryListRepository;
+        $this->groceryListIngredientService = $groceryListIngredientService;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -102,45 +105,17 @@ class IngredientType extends AbstractType
         if (!$ingredient->getId()) {
             // not already created on /create 
             if (isset($data['groceryLists']) && !empty($data['groceryLists'])) {
+                // TemporaryGroceryLists to store data groceryLists && then expoit in controller where built form
                 $ingredient->setTemporaryGroceryLists($data['groceryLists']);
             }
             return;
         }
 
-        // Logic to service ? WIP
         // if $ingredient already have ID, it exist => edit
-
-        // default delete all relations Ingredient / GroceryListIngredient
-        $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
-        ->findBy([
-            'ingredient' => $ingredient
-            // User ID maybe ? WIP
-        ]);
-        foreach ($existingRelations as $relation) {
-            $this->entityManager->remove($relation);
-        }
-        $this->entityManager->flush();
-
-        if (isset($data['groceryLists']) && !empty($data['groceryLists'])) {
-            $selectedGroceryListIds = $data['groceryLists'];
-
-            // rebuild relations Ingredient / GroceryListIngredient if some checked
-            $groceryLists = $this->entityManager->getRepository(GroceryList::class)
-                ->findBy(['id' => $selectedGroceryListIds]);
-
-            foreach ($groceryLists as $groceryList) {
-                
-                $groceryListIngredient = new GroceryListIngredient();
-                $groceryListIngredient->setIngredient($ingredient);
-                $groceryListIngredient->setGroceryList($groceryList);
-                $groceryListIngredient->setActivation(false);
-                $groceryListIngredient->setInList(true);
-
-                $this->entityManager->persist($groceryListIngredient);
-                $this->entityManager->flush();
-            }
-            
-        }
+        $this->groceryListIngredientService->editIngredientsInGroceryLists(
+            $ingredient,
+            $data
+        );
 
         $event->setData($data);
     }

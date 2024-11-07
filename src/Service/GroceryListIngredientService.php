@@ -26,16 +26,48 @@ class GroceryListIngredientService
             ->findBy(['id' => $groceryListIds]);
 
         foreach ($groceryLists as $groceryList) {
-            $groceryListIngredient = new GroceryListIngredient();
-            $groceryListIngredient->setIngredient($ingredient);
-            $groceryListIngredient->setGroceryList($groceryList);
-            $groceryListIngredient->setActivation(false);
-            $groceryListIngredient->setInList(true);
-
-            $this->entityManager->persist($groceryListIngredient);
+            $this->setGroceryListIngredient($ingredient,$groceryList,false,true);
         }
 
         $this->entityManager->flush();
         $ingredient->setTemporaryGroceryLists([]);
     }
+
+     public function editIngredientsInGroceryLists($ingredient,$data) : void {
+
+        // default delete all relations Ingredient / GroceryListIngredient
+        $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
+        ->findBy([
+            'ingredient' => $ingredient
+            // User ID maybe ? WIP
+        ]);
+        foreach ($existingRelations as $relation) {
+            $this->entityManager->remove($relation);
+        }
+        $this->entityManager->flush();
+
+        if (isset($data['groceryLists']) && !empty($data['groceryLists'])) {
+            $selectedGroceryListIds = $data['groceryLists'];
+
+            // rebuild relations Ingredient / GroceryListIngredient if some checked
+            $groceryLists = $this->entityManager->getRepository(GroceryList::class)
+                ->findBy(['id' => $selectedGroceryListIds]);
+
+            foreach ($groceryLists as $groceryList) {
+                $this->setGroceryListIngredient($ingredient,$groceryList,false,true);
+            }
+
+            $this->entityManager->flush();
+            
+        }
+     }
+
+     public function setGroceryListIngredient($ingredient,$groceryList,$activation,$inList) : void {
+        $groceryListIngredient = new GroceryListIngredient();
+        $groceryListIngredient->setIngredient($ingredient);
+        $groceryListIngredient->setGroceryList($groceryList);
+        $groceryListIngredient->setActivation($activation);
+        $groceryListIngredient->setInList($inList);
+        $this->entityManager->persist($groceryListIngredient);
+     }
 }
