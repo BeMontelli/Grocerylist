@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use App\Service\GroceryListIngredientService;
 
 #[Route("/{_locale}/admin/ingredients", name: "admin.ingredient.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -43,7 +44,7 @@ class IngredientController extends AbstractController
     }
 
     #[Route('/create/', name: 'create')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
+    public function create(Request $request, EntityManagerInterface $entityManager, GroceryListIngredientService $groceryListIngredientService): Response
     {
         /** @var User $user */
         $user = $this->security->getUser();
@@ -57,32 +58,10 @@ class IngredientController extends AbstractController
             $ingredient->setUser($user);
             $entityManager->persist($ingredient);
 
-            /* Ingredient's GroceryLists */
-            // Récupérez les GroceryLists temporairement enregistrées et traitez-les
-            $selectedGroceryListIds = $ingredient->getTemporaryGroceryLists();
-    
-            // Logic to service ? WIP
-            if (isset($selectedGroceryListIds) && !empty($selectedGroceryListIds)) {
-                
-                // build relations Ingredient / GroceryListIngredient if some checked
-                $groceryLists = $entityManager->getRepository(GroceryList::class)
-                    ->findBy(['id' => $selectedGroceryListIds]);
-    
-                foreach ($groceryLists as $groceryList) {
-                    
-                    $groceryListIngredient = new GroceryListIngredient();
-                    $groceryListIngredient->setIngredient($ingredient);
-                    $groceryListIngredient->setGroceryList($groceryList);
-                    $groceryListIngredient->setActivation(false);
-                    $groceryListIngredient->setInList(true);
-    
-                    $entityManager->persist($groceryListIngredient);
-                }
-                
-            }
-            $entityManager->flush();
-            $ingredient->setTemporaryGroceryLists([]);
-            /* / Ingredient's GroceryLists */
+            $groceryListIngredientService->linkIngredientToGroceryLists(
+                $ingredient,
+                $ingredient->getTemporaryGroceryLists()
+            );
 
             $this->addFlash('success', 'Ingredient saved !');
             return $this->redirectToRoute('admin.ingredient.index');
