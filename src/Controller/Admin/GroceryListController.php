@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Doctrine\Persistence\Proxy;
 
 #[Route("/{_locale}/admin/lists", name: "admin.list.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -84,13 +85,21 @@ class GroceryListController extends AbstractController
         $entityManager->flush();
 
         $products = $groceryList->getProducts();
-        $ingredients = $groceryList->getGroceryListIngredients();
+        $groceryListIngredients = $groceryList->getGroceryListIngredients();
+        // collection objects fully initialize if not
+        foreach ($groceryListIngredients as $groceryListIngredient) {
+            $ingredient = $groceryListIngredient->getIngredient();
+            if ($ingredient instanceof Proxy) {
+                $entityManager->initializeObject($ingredient);
+            }
+        }
+
         $recipes = $groceryList->getRecipes();
 
         return $this->render('admin/grocery_list/show.html.twig', [
             'grocery_list' => $groceryList,
             'products' => $products,
-            'ingredients' => $ingredients,
+            'groceryListIngredients' => $groceryListIngredients,
             'recipes' => $recipes,
         ]);
     }
