@@ -21,7 +21,6 @@ TO DO LIST
 
   * Check **WIP** notes
   * logic refactor to respository for queries ?
-  * Ingredient edit form lists do not work w/ multiple lists (can't un-check target(s))
 
 Data Schema
 ------------

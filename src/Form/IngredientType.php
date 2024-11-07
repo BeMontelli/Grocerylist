@@ -95,8 +95,12 @@ class IngredientType extends AbstractType
         $form = $event->getForm();
         $ingredient = $form->getData();
 
-        if (!$ingredient instanceof Ingredient  || !$ingredient->getId()) {
-            // cancel process if $ingredient not ingredient or not already created on /create 
+        if (!$ingredient instanceof Ingredient) return;
+        // cancel process if $ingredient not ingredient
+
+        // if $ingredient do not have ID, it does not exist => create
+        if (!$ingredient->getId()) {
+            // not already created on /create 
             if (isset($data['groceryLists']) && !empty($data['groceryLists'])) {
                 $ingredient->setTemporaryGroceryLists($data['groceryLists']);
             }
@@ -104,19 +108,21 @@ class IngredientType extends AbstractType
         }
 
         // Logic to service ? WIP
+        // if $ingredient already have ID, it exist => edit
+
+        // default delete all relations Ingredient / GroceryListIngredient
+        $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
+        ->findBy([
+            'ingredient' => $ingredient
+            // User ID maybe ? WIP
+        ]);
+        foreach ($existingRelations as $relation) {
+            $this->entityManager->remove($relation);
+        }
+        $this->entityManager->flush();
+
         if (isset($data['groceryLists']) && !empty($data['groceryLists'])) {
-            // default delete all relations Ingredient / GroceryListIngredient
             $selectedGroceryListIds = $data['groceryLists'];
-            $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
-            ->findBy([
-                'ingredient' => $ingredient,
-                'groceryList' => $selectedGroceryListIds
-                // User ID maybe ? WIP
-            ]);
-            foreach ($existingRelations as $relation) {
-                $this->entityManager->remove($relation);
-            }
-            $this->entityManager->flush();
 
             // rebuild relations Ingredient / GroceryListIngredient if some checked
             $groceryLists = $this->entityManager->getRepository(GroceryList::class)
@@ -134,17 +140,6 @@ class IngredientType extends AbstractType
                 $this->entityManager->flush();
             }
             
-        } else {
-            // if no lists, delete all ingredients relashionship
-            $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
-            ->findBy([
-                'ingredient' => $ingredient
-                // User ID maybe ? WIP
-            ]);
-            foreach ($existingRelations as $relation) {
-                $this->entityManager->remove($relation);
-            }
-            $this->entityManager->flush();
         }
 
         $event->setData($data);
