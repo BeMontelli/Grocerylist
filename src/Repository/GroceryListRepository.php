@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\GroceryList;
+use App\Entity\GroceryListIngredient;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,6 +42,17 @@ class GroceryListRepository extends ServiceEntityRepository
                 'l.id','l.title','l.slug'
             ],
         ]);
+    }
+
+    public function getIngredientGroceryLists($ingredient) {
+        return $this->entityManager
+        ->getRepository(GroceryList::class)
+        ->createQueryBuilder('g')
+        ->join(GroceryListIngredient::class, 'gli', 'WITH', 'gli.groceryList = g')
+        ->where('gli.ingredient = :ingredient')
+        ->setParameter('ingredient', $ingredient)
+        ->getQuery()
+        ->getResult();
     }
 
     /*public function findWithIngredients($id)

@@ -19,14 +19,17 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Doctrine\ORM\EntityRepository;
+use App\Repository\GroceryListRepository;
 
 class IngredientType extends AbstractType
 {
     private EntityManagerInterface $entityManager;
+    private GroceryListRepository $groceryListRepository;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, GroceryListRepository $groceryListRepository)
     {
         $this->entityManager = $entityManager;
+        $this->groceryListRepository = $groceryListRepository;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -35,15 +38,7 @@ class IngredientType extends AbstractType
         // Get GroceryLists linked to ingredient
         $groceryListsAssociated = [];
         if($ingredient->getId()) {
-            // Logic to repo ? WIP
-            $groceryListsAssociated = $this->entityManager
-                ->getRepository(GroceryList::class)
-                ->createQueryBuilder('g')
-                ->join(GroceryListIngredient::class, 'gli', 'WITH', 'gli.groceryList = g')
-                ->where('gli.ingredient = :ingredient')
-                ->setParameter('ingredient', $ingredient)
-                ->getQuery()
-                ->getResult();
+            $groceryListsAssociated = $this->groceryListRepository->getIngredientGroceryLists($ingredient);
         }
 
         $builder

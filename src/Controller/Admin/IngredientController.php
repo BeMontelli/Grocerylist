@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Ingredient;
+use App\Entity\GroceryList;
+use App\Entity\GroceryListIngredient;
 use App\Entity\User;
 use App\Form\IngredientType;
 use App\Repository\IngredientRepository;
@@ -54,7 +56,34 @@ class IngredientController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             $ingredient->setUser($user);
             $entityManager->persist($ingredient);
+
+            /* Ingredient's GroceryLists */
+            // Récupérez les GroceryLists temporairement enregistrées et traitez-les
+            $selectedGroceryListIds = $ingredient->getTemporaryGroceryLists();
+    
+            // Logic to service ? WIP
+            if (isset($selectedGroceryListIds) && !empty($selectedGroceryListIds)) {
+                
+                // build relations Ingredient / GroceryListIngredient if some checked
+                $groceryLists = $entityManager->getRepository(GroceryList::class)
+                    ->findBy(['id' => $selectedGroceryListIds]);
+    
+                foreach ($groceryLists as $groceryList) {
+                    
+                    $groceryListIngredient = new GroceryListIngredient();
+                    $groceryListIngredient->setIngredient($ingredient);
+                    $groceryListIngredient->setGroceryList($groceryList);
+                    $groceryListIngredient->setActivation(false);
+                    $groceryListIngredient->setInList(true);
+    
+                    $entityManager->persist($groceryListIngredient);
+                }
+                
+            }
             $entityManager->flush();
+            $ingredient->setTemporaryGroceryLists([]);
+            /* / Ingredient's GroceryLists */
+
             $this->addFlash('success', 'Ingredient saved !');
             return $this->redirectToRoute('admin.ingredient.index');
         }
