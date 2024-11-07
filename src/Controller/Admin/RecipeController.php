@@ -35,24 +35,13 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/', name: 'index')]
-    public function index(Request $request, RecipeRepository $recipeRepository): Response
+    public function index(Request $request, RecipeRepository $recipeRepository, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user  */
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
         $recipes = $recipeRepository->paginateUserRecipes($currentPage,$user);
-
-        return $this->render('admin/recipe/index.html.twig', [
-            'recipes' => $recipes
-        ]);
-    }
-
-    #[Route('/create/', name: 'create')]
-    public function create(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        /** @var User $user  */
-        $user = $this->security->getUser();
 
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class,$recipe);
@@ -73,7 +62,8 @@ class RecipeController extends AbstractController
             return $this->redirectToRoute('admin.recipe.index');
         }
 
-        return $this->render('admin/recipe/create.html.twig',[
+        return $this->render('admin/recipe/index.html.twig', [
+            'recipes' => $recipes,
             'form' => $form
         ]);
     }
