@@ -20,7 +20,6 @@ TO DO LIST
   * Entities Edit titles translate + structure rework
 
   * Check **WIP** notes
-  * services manager forms
   * logic refactor to respository for queries ?
   * Ingredient edit form lists do not work w/ multiple lists (can't un-check target(s))
 
