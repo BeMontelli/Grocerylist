@@ -6,6 +6,7 @@ use App\Entity\GroceryList;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
@@ -25,6 +26,9 @@ class GroceryListType extends AbstractType
                 'empty_data' => '',
                 'required' => false,
                 'label' => 'Slug'
+            ])
+            ->add('save', SubmitType::class, [
+                'label' => 'Save List'
             ])
             ->addEventListener(FormEvents::PRE_SUBMIT,$this->autoSlug(...))
             ->addEventListener(FormEvents::POST_SUBMIT,$this->autoTimestamps(...))

@@ -5,12 +5,19 @@
 {% block body %}
     <div class="container">
         <h1>{{ 'app.admin.lists.title'|trans }}</h1>
-        <a class="btn-primary btn mb-4" href="{{ path('admin.list.new') }}">
-            {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.lists.entity'|trans({'%entity%': 1}) }}
-        </a>
 
         <hr>
         {% include 'admin/partials/flashes.html.twig' %}
+
+        <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.lists.entity'|trans({'%entity%': 1}) }}
+        </button>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+                {{ form(form) }}
+            </div>
+        </div>
+        <hr>
 
         {# total items count #}
         <div class="count">

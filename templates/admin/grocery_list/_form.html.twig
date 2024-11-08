@@ -1,4 +1,6 @@
 {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.slug) }}
+    {{ form_row(form.save, {'label':  'app.admin.action.update'|trans}) }}
     {{ form_widget(form) }}
-    <button class="btn-primary btn mb-2">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}

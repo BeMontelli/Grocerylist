@@ -33,24 +33,14 @@ class GroceryListController extends AbstractController
         $this->fileUploader = $fileUploader;
     }
 
-    #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(Request $request, GroceryListRepository $groceryListRepository): Response
+    #[Route('/', name: 'index', methods: ['GET','POST'])]
+    public function index(Request $request, GroceryListRepository $groceryListRepository, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
         $lists = $groceryListRepository->paginateUserLists($currentPage,$user);
-        return $this->render('admin/grocery_list/index.html.twig', [
-            'grocery_lists' => $lists,
-        ]);
-    }
-
-    #[Route('/new/', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        /** @var User $user */
-        $user = $this->security->getUser();
 
         $groceryList = new GroceryList();
         $form = $this->createForm(GroceryListType::class, $groceryList);
@@ -60,13 +50,13 @@ class GroceryListController extends AbstractController
             $groceryList->setUser($user);
             $entityManager->persist($groceryList);
             $entityManager->flush();
-            $this->addFlash('success', 'List saved !');
 
-            return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'List saved !');
+            return $this->redirectToRoute('admin.list.index');
         }
 
-        return $this->render('admin/grocery_list/new.html.twig', [
-            'grocery_list' => $groceryList,
+        return $this->render('admin/grocery_list/index.html.twig', [
+            'grocery_lists' => $lists,
             'form' => $form,
         ]);
     }
