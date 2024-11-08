@@ -41,17 +41,17 @@
                         </div>
                     </div>
                 </div>
-                <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     {{ 'app.admin.action.edit'|trans({'%gender%': 'female'}) }}
                 </button>
-                <div class="single__edit">
+                {% include 'admin/partials/flashes.html.twig' %}
+                <div class="single__edit mb-3">
                     <div class="collapse" id="collapseExample">
                         <div class="card card-body">
                             {{ include('admin/recipe/_form.html.twig') }}
                         </div>
                     </div>
                 </div>
-                <hr>
 
                 <div class="single__form">
                     <div class="collapse show" id="collapseExample">
