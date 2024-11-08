@@ -7,14 +7,14 @@
 <div class="container">
     <div class="d-flex flex-row mb-3 align-items-center">
         <div class="p-2"><h1>{{ 'app.admin.categories.title'|trans }}</h1></div>
-        <div class="p-2"><a class="btn-primary btn" href="{{ url('admin.recipe.index') }}">{{ 'app.admin.recipes.title'|trans }}</a></div>
+        <div class="p-2"><a class="btn-primary btn" href="{{ url('admin.recipe.index') }}">{{ 'app.admin.recipes.title'|trans }} <i class='bx bx-transfer-alt'></i></a></div>
     </div>
 
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}
 
     <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.categories.entity'|trans({'%entity%': 1}) }}
+        {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.categories.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
     </button>
     <div class="collapse" id="collapseExample">
         <div class="card card-body">

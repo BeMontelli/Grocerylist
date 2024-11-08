@@ -131,6 +131,11 @@ header ul.main_list .btn-group{
 .btn-primary,.btn-remove{
     text-decoration: none;
 }
+.btn-primary i,.btn-remove i{
+    position: relative;
+    top: 2px;
+    font-size: 1.2rem;
+}
 
 .btn-primary.btn{
     height: 30px;
@@ -167,8 +172,7 @@ header ul.main_list .btn-group{
     height: 30px;
     width: 33px;
     padding: 0;
-    line-height: 35px;
-    font-size: 1.5rem;
+    line-height: 30px;
     width: fit-content;
     padding: 0 15px;
     text-align: center;
@@ -185,6 +189,9 @@ header ul.main_list .btn-group{
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
+}
+.btn-remove.btn i{
+    font-size: 1.5rem;
 }
 .btn-remove.btn:hover {
     background-position: right center;
