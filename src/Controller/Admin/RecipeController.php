@@ -77,6 +77,7 @@ class RecipeController extends AbstractController
         $currentGrocerylistId = ($user->getCurrentGroceryList() && $user->getCurrentGroceryList()->getId()) ? $user->getCurrentGroceryList()->getId(): null;
 
         $recipe = $recipeRepository->findRecipeWithCategory($id);
+        $allIngredients = $recipe->getIngredients();
 
         $groceryLists = $user->getGroceryLists();
         $choices = [];
@@ -86,7 +87,7 @@ class RecipeController extends AbstractController
 
         $formlist = $this->createForm(GroceryListRecipeIngredientsType::class,[
             'recipe' => $recipe,
-            'ingredients' => $recipe->getIngredients()->toArray(),
+            'ingredients' => $allIngredients->toArray(),
             'choices' => $choices,
             'currentGrocerylistId' => $currentGrocerylistId,
         ]);
@@ -100,8 +101,24 @@ class RecipeController extends AbstractController
             //    $groceryList->addIngredient($ingredient);
             //}
 
+            // WIP
+            // add recipe to groceryList
+            // // check if already linked ?
+            // // // if yes do nothing
+            // // // if not default system process (add link)
+            // add ingredients to groceryList
+            // // get all recipe ingredients
+            // // compare ingredients list from form
+            // // check if $ingredients in $allIngredients && selected in form
+            // // // if yes create array groceryListIngredients with inList true
+            // // // if no create array groceryListIngredients with inList false
+            // // delete groceryListIngredients in list with recipe
+            // // rebuild groceryListIngredients with list and recipe
+
+            dump($recipe);
             dump($groceryList);
-            dump($ingredients);
+            dump($ingredients->toArray());
+            dump($allIngredients->toArray());
             dd($formlist);
 
             //$em->persist($groceryList);
