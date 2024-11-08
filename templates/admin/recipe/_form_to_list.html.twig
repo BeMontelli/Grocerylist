@@ -1,8 +1,8 @@
-{{ form_start(form) }}
+{{ form_start(formlist) }}
 
-    {{ form_row(form.groceryList) }}
-    {{ form_row(form.ingredients) }}
+    {{ form_row(formlist.groceryList) }}
+    {{ form_row(formlist.ingredients) }}
     <span class="notice">{{ 'app.admin.recipes.sendtolistnotice'|trans({'%entity%': 1}) }}</span>
-    {{ form_row(form.save) }}
+    {{ form_row(formlist.save) }}
 
-{{ form_end(form) }}
+{{ form_end(formlist) }}

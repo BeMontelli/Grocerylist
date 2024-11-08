@@ -68,8 +68,8 @@ class RecipeController extends AbstractController
         ]);
     }
 
-    #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
-    public function show(string $slug, int $id, Request $request, EntityManagerInterface $em, RecipeRepository $recipeRepository): Response
+    #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG], methods: ['GET','POST'])]
+    public function show(string $slug, int $id, Request $request, EntityManagerInterface $em, RecipeRepository $recipeRepository, EntityManagerInterface $entityManager): Response
     {
         /** @var User $user */
         $user = $this->security->getUser();
@@ -84,17 +84,17 @@ class RecipeController extends AbstractController
             $choices[$groceryList->getTitle()] = $groceryList->getId();
         }
 
-        $form = $this->createForm(GroceryListRecipeIngredientsType::class,[
+        $formlist = $this->createForm(GroceryListRecipeIngredientsType::class,[
             'recipe' => $recipe,
             'ingredients' => $recipe->getIngredients()->toArray(),
             'choices' => $choices,
             'currentGrocerylistId' => $currentGrocerylistId,
         ]);
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $groceryList = $form->get('groceryList')->getData();
-            $ingredients = $form->get('ingredients')->getData();
+        $formlist->handleRequest($request);
+        if ($formlist->isSubmitted() && $formlist->isValid()) {
+            $groceryList = $formlist->get('groceryList')->getData();
+            $ingredients = $formlist->get('ingredients')->getData();
 
             //foreach ($ingredients as $ingredient) {
             //    $groceryList->addIngredient($ingredient);
@@ -102,7 +102,7 @@ class RecipeController extends AbstractController
 
             dump($groceryList);
             dump($ingredients);
-            dd($form);
+            dd($formlist);
 
             //$em->persist($groceryList);
             //$em->flush();
@@ -110,15 +110,6 @@ class RecipeController extends AbstractController
             return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
         }
 
-        return $this->render('admin/recipe/show.html.twig', [
-            'form' => $form->createView(),
-            'recipe' => $recipe
-        ]);
-    }
-
-    #[Route('/edit/{id}', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET','POST'])]
-    public function edit(Request $request, Recipe $recipe, EntityManagerInterface $entityManager): Response
-    {
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
@@ -139,12 +130,13 @@ class RecipeController extends AbstractController
             $entityManager->persist($recipe);
             $entityManager->flush();
             $this->addFlash('success', 'Recipe updated !');
-            return $this->redirectToRoute('admin.recipe.edit', ["id" => $recipe->getId()]);
+            return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
         }
 
-        return $this->render('admin/recipe/edit.html.twig', [
-            'recipe' => $recipe,
-            'form' => $form
+        return $this->render('admin/recipe/show.html.twig', [
+            'formlist' => $formlist->createView(),
+            'form' => $form,
+            'recipe' => $recipe
         ]);
     }
 

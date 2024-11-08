@@ -31,24 +31,34 @@
                 <div class="single__pres">
                     <div class="single__title">
                         <h1>{{ recipe.title }}</h1>
-                        <a class="btn-primary btn" href="{{ url('admin.recipe.index') }}">All recipes</a>
+                        <a class="btn-primary btn mb-2" href="{{ url('admin.recipe.index') }}">All recipes</a>
                     </div>
                     <div class="single__content">
-                        {{ recipe.content | raw | nl2br }}
+                        <div class="collapse show" id="collapseExample">
+                            <div class="card card-body">
+                                {{ recipe.content | raw | nl2br }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    {{ 'app.admin.action.edit'|trans({'%gender%': 'female'}) }}
+                </button>
+                <div class="single__edit">
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            {{ include('admin/recipe/_form.html.twig') }}
+                        </div>
                     </div>
                 </div>
                 <hr>
 
                 <div class="single__form">
-                    {{ include('admin/recipe/_form_to_list.html.twig') }}
-                </div>
-
-                <br>
-                <hr>
-
-                <div class="actions">
-                    <a class="btn-primary btn" href="{{ url('admin.recipe.edit', { id: recipe.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
-                    {{ include('admin/recipe/_delete_form.html.twig') }}
+                    <div class="collapse show" id="collapseExample">
+                        <div class="card card-body">
+                            {{ include('admin/recipe/_form_to_list.html.twig') }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
