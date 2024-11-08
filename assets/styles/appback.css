@@ -121,6 +121,11 @@ header ul.main_list>li:first-child>a{
 header ul.main_list .btn-group{
     margin-right: 10px;
 }
+
+.table__count{
+    margin-bottom: 10px;
+}
+
 .dropdown-item{
     font-weight: 600;
 }
