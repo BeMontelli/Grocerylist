@@ -32,6 +32,57 @@ GroceryList
 - one tab for recipes listing
 - one tab for list ingredients/products by categories (list mixed types)
 
+Data Default
+------------
+* User
+- Admin : test@example.com
+- test : test@test.com
+
+* Product
+- 
+* Group
+- Conserves
+- Hygiene
+- Ménage
+- Vaisselle
+- Cuisine
+- Surgelés
+- Condiments/Sauces
+- Fruits
+- Légumes
+- Laitages
+- Fromages
+- Matin/Biscuits
+- Boissons
+- Desserts
+- Apéritifs
+- Autres
+
+* Ingredient
+- 
+* Section
+- Surgelés
+- Condiments/Sauces
+- Fruits
+- Légumes
+- Laitages
+- Fromages
+- Viandes
+- Poissons
+- Autres
+
+* Recipe
+-
+* Category
+- Entrée
+- Plat principal
+- Dessert
+- Apéritif
+- Autre
+
+* GroceryList
+- 
+
 Requirements
 ------------
 
