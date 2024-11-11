@@ -22,6 +22,7 @@ TO DO LIST
   * Check **WIP** notes
   * logic refactor to respository for queries ?
   * Product add grocerylist : inList, activation data ? to solve
+  * Delete product entity ? and add Ingredient entity option : recipe_available true/false
 
 
 Data Schema
