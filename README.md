@@ -21,6 +21,8 @@ TO DO LIST
 
   * Check **WIP** notes
   * logic refactor to respository for queries ?
+  * Product add grocerylist : inList, activation data ? to solve
+
 
 Data Schema
 ------------
@@ -48,6 +50,7 @@ Data Default
 - Cuisine
 - Surgelés
 - Condiments/Sauces
+- Épicerie
 - Fruits
 - Légumes
 - Laitages
@@ -63,6 +66,7 @@ Data Default
 * Section
 - Surgelés
 - Condiments/Sauces
+- Épicerie
 - Fruits
 - Légumes
 - Laitages
