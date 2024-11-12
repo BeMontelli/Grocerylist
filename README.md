@@ -20,9 +20,7 @@ TO DO LIST
   * Entities Edit titles translate + structure rework
 
   * Check **WIP** notes
-  * logic refactor to respository for queries ?
-  * Product add grocerylist : inList, activation data ? to solve
-  * Delete product entity ? and add Ingredient entity option : recipe_available true/false
+  * logic refactor to repository for queries ?
 
 
 Data Schema
