@@ -45,7 +45,9 @@ class IngredientController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
             $ingredient->setUser($user);
+
             $entityManager->persist($ingredient);
+            $entityManager->flush();
 
             $groceryListIngredientService->linkIngredientToGroceryLists(
                 $ingredient,
