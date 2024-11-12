@@ -43,6 +43,13 @@ class IngredientRepository extends ServiceEntityRepository
         ]);
     }
 
+    public function findAvailableForRecipe()
+    {
+        return $this->createQueryBuilder('i')
+                    ->where('i.availableRecipe = :available')
+                    ->setParameter('available', true);
+    }
+
     //    /**
     //     * @return Ingredient[] Returns an array of Ingredient objects
     //     */

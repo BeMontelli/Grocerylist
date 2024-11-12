@@ -55,6 +55,13 @@ class GroceryListRepository extends ServiceEntityRepository
         ->getResult();
     }
 
+    public function findGroceryListForUser($user)
+    {
+        return $this->createQueryBuilder('g')
+        ->where('g.user = :user')
+        ->setParameter('user', $user);
+    }
+
     /*public function findWithIngredients($id)
     {
         return $this->createQueryBuilder('gl')

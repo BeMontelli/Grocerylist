@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Component\Validator\Constraints\Image;
-use Doctrine\ORM\EntityRepository;
+use App\Repository\IngredientRepository;
 
 class RecipeType extends AbstractType
 {
@@ -54,10 +54,8 @@ class RecipeType extends AbstractType
                 'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
-                'query_builder' => function (EntityRepository $er) {
-                    return $er->createQueryBuilder('i')
-                            ->where('i.availableRecipe = :available')
-                            ->setParameter('available', true);
+                'query_builder' => function (IngredientRepository $er) {
+                    return $er->findAvailableForRecipe();
                 },
                 'by_reference' => false
             ])

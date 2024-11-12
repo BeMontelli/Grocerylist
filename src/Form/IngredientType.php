@@ -80,10 +80,8 @@ class IngredientType extends AbstractType
                 'class' => GroceryList::class,
                 'choice_label' => 'title',
                 'mapped' => false, // Not mapping to entity
-                'query_builder' => function (EntityRepository $er) use ($options) {
-                    return $er->createQueryBuilder('g')
-                        ->where('g.user = :user')
-                        ->setParameter('user', $options['user']);
+                'query_builder' => function (GroceryListRepository $er) use ($options) {
+                    return $er->findGroceryListForUser($options['user']);
                 },
                 'multiple' => true,
                 'expanded' => true,
