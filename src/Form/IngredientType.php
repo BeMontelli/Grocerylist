@@ -64,6 +64,7 @@ class IngredientType extends AbstractType
             ->add('availableRecipe', CheckboxType::class, [
                 'label' => 'Can be choosed in a Recipe ?',
                 'required' => false,
+                'attr' => ['class' => 'recipes__check'],
             ])
             ->add('recipes', EntityType::class, [
                 'label' => 'Recipes related',
@@ -71,7 +72,8 @@ class IngredientType extends AbstractType
                 'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => true,
-                'by_reference' => false
+                'by_reference' => false,
+                'attr' => ['class' => 'recipe__fields'],
             ])
             ->add('groceryLists', EntityType::class, [
                 'label' => 'In grocery list(s) ?',
