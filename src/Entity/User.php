@@ -73,18 +73,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private Collection $sections;
 
-    /**
-     * @var Collection<int, Product>
-     */
-    #[ORM\OneToMany(targetEntity: Product::class, mappedBy: 'user', orphanRemoval: true)]
-    private Collection $products;
-
-    /**
-     * @var Collection<int, Group>
-     */
-    #[ORM\OneToMany(targetEntity: Group::class, mappedBy: 'user', orphanRemoval: true)]
-    private Collection $product_groups;
-
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?GroceryList $current_grocery_list = null;
 
@@ -95,8 +83,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->ingredients = new ArrayCollection();
         $this->categories = new ArrayCollection();
         $this->sections = new ArrayCollection();
-        $this->products = new ArrayCollection();
-        $this->product_groups = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -348,66 +334,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($section->getUser() === $this) {
                 $section->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): static
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getUser() === $this) {
-                $product->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Group>
-     */
-    public function getProductGroups(): Collection
-    {
-        return $this->product_groups;
-    }
-
-    public function addProductGroup(Group $productGroup): static
-    {
-        if (!$this->product_groups->contains($productGroup)) {
-            $this->product_groups->add($productGroup);
-            $productGroup->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProductGroup(Group $productGroup): static
-    {
-        if ($this->product_groups->removeElement($productGroup)) {
-            // set the owning side to null (unless already changed)
-            if ($productGroup->getUser() === $this) {
-                $productGroup->setUser(null);
             }
         }
 

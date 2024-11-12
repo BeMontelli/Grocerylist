@@ -33,12 +33,6 @@ class GroceryList
     private ?User $user = null;
 
     /**
-     * @var Collection<int, Product>
-     */
-    #[ORM\ManyToMany(targetEntity: Product::class, mappedBy: 'groceryLists')]
-    private Collection $products;
-
-    /**
      * @var Collection<int, Recipe>
      */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'groceryLists')]
@@ -58,7 +52,6 @@ class GroceryList
 
     public function __construct()
     {
-        $this->products = new ArrayCollection();
         $this->recipes = new ArrayCollection();
         $this->users = new ArrayCollection();
         $this->groceryListIngredients = new ArrayCollection();
@@ -125,33 +118,6 @@ class GroceryList
     public function setUser(?User $user): static
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Product>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->products;
-    }
-
-    public function addProduct(Product $product): static
-    {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
-            $product->addGroceryList($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Product $product): static
-    {
-        if ($this->products->removeElement($product)) {
-            $product->removeGroceryList($this);
-        }
 
         return $this;
     }
