@@ -14,6 +14,7 @@ use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -59,6 +60,10 @@ class IngredientType extends AbstractType
                 'label' => 'Ingredient section',
                 'choice_label' => 'title',
                 'placeholder' => 'Select a section',
+            ])
+            ->add('availableRecipe', CheckboxType::class, [
+                'label' => 'Can be choosed in a Recipe ?',
+                'required' => false,
             ])
             ->add('recipes', EntityType::class, [
                 'label' => 'Recipes related',
