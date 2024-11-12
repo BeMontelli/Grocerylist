@@ -13,7 +13,7 @@ class GroceryListIngredient
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'yes')]
+    #[ORM\ManyToOne(inversedBy: 'groceryListIngredients')]
     #[ORM\JoinColumn(nullable: false)]
     private ?GroceryList $groceryList = null;
 
@@ -27,8 +27,8 @@ class GroceryListIngredient
     #[ORM\Column]
     private ?bool $inList = null;
 
-    #[ORM\ManyToOne(inversedBy: 'yes')]
-    private ?Recipe $Recipe = null;
+    #[ORM\ManyToOne(inversedBy: 'groceryListIngredients')]
+    private ?Recipe $recipe = null;
 
     public function getId(): ?int
     {
@@ -85,12 +85,12 @@ class GroceryListIngredient
 
     public function getRecipe(): ?Recipe
     {
-        return $this->Recipe;
+        return $this->recipe;
     }
 
-    public function setRecipe(?Recipe $Recipe): static
+    public function setRecipe(?Recipe $recipe): static
     {
-        $this->Recipe = $Recipe;
+        $this->recipe = $recipe;
 
         return $this;
     }
