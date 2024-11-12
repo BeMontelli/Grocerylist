@@ -41,30 +41,16 @@ Data Default
 - Admin : test@example.com
 - test : test@test.com
 
-* Product
-- 
-* Group
+* Ingredient/Product's Section
 - Conserves
 - Hygiene
 - Ménage
 - Vaisselle
 - Cuisine
-- Surgelés
-- Condiments/Sauces
-- Épicerie
-- Fruits
-- Légumes
-- Laitages
-- Fromages
 - Matin/Biscuits
 - Boissons
 - Desserts
 - Apéritifs
-- Autres
-
-* Ingredient
-- 
-* Section
 - Surgelés
 - Condiments/Sauces
 - Épicerie
@@ -76,17 +62,12 @@ Data Default
 - Poissons
 - Autres
 
-* Recipe
--
-* Category
+* Recipe's Category
 - Entrée
 - Plat principal
 - Dessert
 - Apéritif
 - Autre
-
-* GroceryList
-- 
 
 Requirements
 ------------
