@@ -68,7 +68,10 @@ class Ingredient
     /**
      * @var array
      */
-    private array $temporaryGroceryLists = []; // Propriété temporaire
+    private array $temporaryGroceryLists = [];
+
+    #[ORM\Column]
+    private ?bool $availableRecipe = null; // Propriété temporaire
 
     public function __construct()
     {
@@ -218,5 +221,17 @@ class Ingredient
     public function getTemporaryGroceryLists(): array
     {
         return $this->temporaryGroceryLists;
+    }
+
+    public function isAvailableRecipe(): ?bool
+    {
+        return $this->availableRecipe;
+    }
+
+    public function setAvailableRecipe(bool $availableRecipe): static
+    {
+        $this->availableRecipe = $availableRecipe;
+
+        return $this;
     }
 }
