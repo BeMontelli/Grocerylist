@@ -74,7 +74,6 @@ class GroceryListController extends AbstractController
         $user->setCurrentGroceryList($groceryList);
         $entityManager->flush();
 
-        $products = $groceryList->getProducts();
         $groceryListIngredients = $groceryList->getGroceryListIngredients();
         // collection objects fully initialize if not
         foreach ($groceryListIngredients as $groceryListIngredient) {
@@ -88,7 +87,6 @@ class GroceryListController extends AbstractController
 
         return $this->render('admin/grocery_list/show.html.twig', [
             'grocery_list' => $groceryList,
-            'products' => $products,
             'groceryListIngredients' => $groceryListIngredients,
             'recipes' => $recipes,
         ]);
