@@ -38,19 +38,6 @@ app:
         =1 {Ingredient Category}
         other {Ingredient Categories}
       }
-    products.title: 'Products'
-    products.none: 'No products'
-    products.entity: >-
-      {entity, plural,
-        =1 {Product}
-        other {Products}
-      }
-    groups.title: 'Product Groups'
-    groups.entity: >-
-      {entity, plural,
-        =1 {Product Group}
-        other {Product Groups}
-      }
     action:
       new: Create new
       show: Show

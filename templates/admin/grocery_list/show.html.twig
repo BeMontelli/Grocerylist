@@ -39,17 +39,6 @@
                         <li><strong>{{ 'app.admin.ingredients.none'|trans }}</strong></li>
                     {% endif %}
                 </ul>
-
-                <h2>{{ 'app.admin.products.title'|trans }}</h3>
-                <ul>
-                    {% if products is not empty %}
-                        {% for product in products %}
-                            <li><strong>{{ product.title }}</strong></li>
-                        {% endfor %}
-                    {% else %}
-                        <li><strong>{{ 'app.admin.products.none'|trans }}</strong></li>
-                    {% endif %}
-                </ul>
             </div>
 
             <div class="recipes">
