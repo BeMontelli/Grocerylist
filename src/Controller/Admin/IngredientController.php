@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Service\GroceryListIngredientService;
 
-#[Route("/{_locale}/admin/ingredients", name: "admin.ingredient.", requirements: ['_locale' => 'fr|en'])]
+#[Route("/{_locale}/admin/products-ingredients", name: "admin.ingredient.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
 class IngredientController extends AbstractController
 {

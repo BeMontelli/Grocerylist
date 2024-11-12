@@ -25,18 +25,18 @@ app:
         =1 {Categorie de recette}
         other {Categories de recette}
       }
-    ingredients.title: Ingredients
-    ingredients.none: "Pas d'ingredient"
+    ingredients.title: Produits/Ingredients
+    ingredients.none: "Pas de produit/ingredient"
     ingredients.entity: >-
       {entity, plural,
-        =1 {Ingredient}
-        other {Ingredients}
+        =1 {Produit/Ingredient}
+        other {Produits/Ingredients}
       }
-    sections.title: "Categories d'ingredient"
+    sections.title: "Categories de produit/ingredient"
     sections.entity: >-
       {entity, plural,
-        =1 {Categorie d'ingredient}
-        other {Categories d'ingredient}
+        =1 {Categorie de produit/ingredient}
+        other {Categories de produit/ingredient}
       }
     action:
       new:  >-

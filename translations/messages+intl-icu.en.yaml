@@ -25,18 +25,18 @@ app:
         =1 {Recipe Category}
         other {Recipe Categories}
       }
-    ingredients.title: Ingredients
-    ingredients.none: 'No ingredients'
+    ingredients.title: Products/Ingredients
+    ingredients.none: 'No products/ingredients'
     ingredients.entity: >-
       {entity, plural,
-        =1 {Ingredient}
-        other {Ingredients}
+        =1 {Product/Ingredient}
+        other {Products/Ingredients}
       }
-    sections.title: 'Ingredient Categories'
+    sections.title: 'Product/Ingredient Categories'
     sections.entity: >-
       {entity, plural,
-        =1 {Ingredient Category}
-        other {Ingredient Categories}
+        =1 {Product/Ingredient Category}
+        other {Product/Ingredient Categories}
       }
     action:
       new: Create new
