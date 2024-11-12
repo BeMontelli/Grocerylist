@@ -71,7 +71,7 @@ class Ingredient
     private array $temporaryGroceryLists = [];
 
     #[ORM\Column]
-    private ?bool $availableRecipe = null; // Propriété temporaire
+    private ?bool $availableRecipe = null;
 
     public function __construct()
     {
