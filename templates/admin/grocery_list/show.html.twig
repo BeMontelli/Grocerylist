@@ -23,14 +23,17 @@
             </tbody>
         </table>
 
-        <div class="data">
-            <div class="ingredients__products">
+        <div class="data row">
+            <div class="ingredients__products col-6">
                 <h2>{{ 'app.admin.ingredients.title'|trans }}</h3>
                 <ul>
                     {% if groceryListIngredients is not empty %}
                         {% for groceryListIngredient in groceryListIngredients %}
                             <li>
-                            <strong>{{ groceryListIngredient.ingredient.title }}</strong>
+                            <strong>({{ groceryListIngredient.ingredient.id }}) {{ groceryListIngredient.ingredient.title }}</strong>
+                            {% if groceryListIngredient.recipe is defined and groceryListIngredient.recipe.title is defined %}
+                                <span><br>Recipe : <strong>{{ groceryListIngredient.recipe.title }}</strong></span>
+                            {% endif %}
                             <span><br>est coché ? : {{ groceryListIngredient.activation ? 'Oui' : 'Non' }}</span>
                             <span><br>est dans la liste ? : {{ groceryListIngredient.inList ? 'Oui' : 'Non' }}</span>
                             </li>
@@ -41,12 +44,12 @@
                 </ul>
             </div>
 
-            <div class="recipes">
+            <div class="recipes col-6">
                 <h2>{{ 'app.admin.recipes.title'|trans }}</h3>
                 <ul>
                     {% if recipes is not empty %}
                         {% for recipe in recipes %}
-                            <li><strong>{{ recipe.title }}</strong></li>
+                            <li><strong>({{ recipe.id }}) {{ recipe.title }}</strong></li>
                         {% endfor %}
                     {% else %}
                         <li><strong>{{ 'app.admin.recipes.none'|trans }}</strong></li>
