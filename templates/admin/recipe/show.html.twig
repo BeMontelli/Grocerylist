@@ -34,6 +34,7 @@
                         <h1>{{ recipe.title }}</h1>
                         <a class="btn-primary btn mb-2" href="{{ url('admin.recipe.index') }}">All recipes</a>
                     </div>
+                    {% if recipe.content is not empty %}
                     <div class="single__content">
                         <div class="collapse show" id="collapseExample">
                             <div class="card card-body">
@@ -41,6 +42,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                 </div>
                 <button class="btn btn-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     {{ 'app.admin.action.edit'|trans({'%gender%': 'female'}) }}

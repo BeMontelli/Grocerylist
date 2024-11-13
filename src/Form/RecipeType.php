@@ -37,6 +37,7 @@ class RecipeType extends AbstractType
             ])
             ->add('thumbnailfile',FileType::class, [
                 'mapped' => false,
+                'required' => false,
                 'constraints' => [
                     new Image()
                 ],
@@ -70,6 +71,7 @@ class RecipeType extends AbstractType
             ])
             ->add('content', TextareaType::class, [
                 'empty_data' => '',
+                'required' => false,
                 'label' => 'Content'
             ])
             ->add('save', SubmitType::class, [

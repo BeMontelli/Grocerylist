@@ -42,9 +42,6 @@ class Recipe
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\Sequentially([
-        new Assert\NotBlank(),
-    ])]
     #[Groups(['recipes.show','categories.*','ingredients.*'])]
     private ?string $content = null;
 
