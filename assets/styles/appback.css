@@ -242,11 +242,10 @@ input[type=text], input[type=email], input[type=number], select, textarea {
 table{
     width: 100%;
 }
-th.actions,td.actions{
-    width: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+table img{
+    max-width: 120px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 td.actions a:first-child{
     margin-right: 5px;
@@ -311,15 +310,6 @@ hr {
     max-width: 250px;
     border-radius: 10px;
     overflow: hidden;
-}
-#single__recipe .actions,td.actions{
-    width: 220px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-#single__recipe .actions a:first-child{
-    margin-right: 5px;
 }
 #single__recipe .notice{  
     margin: 0 0 15px;

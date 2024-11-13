@@ -32,6 +32,7 @@
         <tr>
             {# sorting of properties based on query components #}
             <th>{{ knp_pagination_sortable(recipes, 'Id', 'r.id') }}</th>
+            <th>Image</th>
             <th{% if recipes.isSorted('a.title') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(recipes, 'Title', 'r.title') }}
             </th>
@@ -48,6 +49,13 @@
         {% for recipe in recipes %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
                 <td>{{ recipe.id }}</td>
+                <td>
+                    {% if recipe.thumbnail is not empty %}
+                        <img src="{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
+                    {% else %}
+                        <span>NO IMAGE</span>
+                    {% endif %}
+                </td>
                 <td><a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></td>
                 <td>{{ recipe.category.title | default('---') }}</td>
                 <td>{{ recipe.slug }}</td>
