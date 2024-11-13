@@ -8,15 +8,16 @@ You can also learn about these practices in [the official Symfony Book][5].
 TO DO LIST
 ------------
 
-  * Process add product and ingredients activated/deactivated to grocerylist selected
-  * Process add recipe to grocerylist selected
+  * Display/Filter ingredients in list
+  * Toggle ingredients activation process
+  * Delete ingredients list
+  * Delete recipes list with ingredients related
 
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
 
   * translations
   * responsive
 
-  * Recipe edit thumbnail mandatory ?
   * Entities Edit titles translate + structure rework
 
   * Check **WIP** notes
