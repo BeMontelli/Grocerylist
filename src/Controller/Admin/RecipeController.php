@@ -112,48 +112,30 @@ class RecipeController extends AbstractController
             if (!$groceryList) {
                 $this->addFlash('error', 'GroceryList do not exists.');
                 return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
-        
-            }
-
-            if ($groceryList->getRecipes()->contains($recipe)) {
-                $this->addFlash('error', 'Recipe already in selected grocerylist.');
-                return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
             }
 
             $groceryList->addRecipe($recipe);
             $em->persist($groceryList);
             
-            // $ingredients (inList:true/activation:false) && $allIngredients restants (inList:false/activation:false)
-            /*foreach ($ingredients as $ingredient) {
-                $this->groceryListIngredientService->editIngredientsInGroceryLists(
+            $this->groceryListIngredientService->removeRecipeIngredientsInGroceryList($recipe,$groceryList);
+            foreach ($ingredients as $ingredient) {
+                $this->groceryListIngredientService->setGroceryListIngredient(
                     $ingredient,
                     $recipe,
-                    ['groceryLists'=>[$groceryListId]],
+                    $groceryList,
+                    false,
                     true
                 );
             }
             foreach ($remainingIngredients as $ingredient) {
-                $this->groceryListIngredientService->editIngredientsInGroceryLists(
+                $this->groceryListIngredientService->setGroceryListIngredient(
                     $ingredient,
                     $recipe,
-                    ['groceryLists'=>[$groceryListId]],
+                    $groceryList,
+                    false,
                     false
                 );
-            }*/
-
-            // WIP
-            // add ingredients to groceryList
-            // // get all recipe ingredients
-            // // compare ingredients list from form
-            // // check if $ingredients in $allIngredients && selected in form
-            // // // if yes create array groceryListIngredients with inList true
-            // // // if no create array groceryListIngredients with inList false
-            // // delete groceryListIngredients in list with recipe
-            // // rebuild groceryListIngredients with list and recipe
-
-            /*dump($recipe);
-            dump($groceryList);
-            dd($formlist);*/
+            }
 
             $em->flush();
 

@@ -34,8 +34,17 @@ class GroceryListIngredientService
         $ingredient->setTemporaryGroceryLists([]);
     }
 
-    public function removeIngredientsInGroceryLists() : void {
-
+    public function removeRecipeIngredientsInGroceryList(Recipe $recipe, GroceryList $groceryList) : void {
+        $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
+        ->findBy([
+            'recipe' => $recipe,
+            'groceryList' => $groceryList,
+            // User ID maybe ? WIP
+        ]);
+        foreach ($existingRelations as $relation) {
+            $this->entityManager->remove($relation);
+        }
+        $this->entityManager->flush();
     }
 
      public function editIngredientsInGroceryLists(Ingredient $ingredient, ?Recipe $recipe, $arrGroceryLists,$inList = true) : void {
