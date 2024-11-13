@@ -20,6 +20,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use App\Form\GroceryListRecipeIngredientsType;
 use App\Repository\GroceryListRepository;
+use App\Service\GroceryListIngredientService;
 
 #[Route("/{_locale}/admin/recipes", name: "admin.recipe.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -27,11 +28,13 @@ class RecipeController extends AbstractController
 {
     private $security;
     private $fileUploader;
+    private $groceryListIngredientService;
 
-    public function __construct(Security $security, FileUploader $fileUploader)
+    public function __construct(Security $security, FileUploader $fileUploader,GroceryListIngredientService $groceryListIngredientService)
     {
         $this->security = $security;
         $this->fileUploader = $fileUploader;
+        $this->groceryListIngredientService = $groceryListIngredientService;
     }
 
     #[Route('/', name: 'index')]
@@ -96,6 +99,14 @@ class RecipeController extends AbstractController
         if ($formlist->isSubmitted() && $formlist->isValid()) {
             $groceryListId = $formlist->get('groceryList')->getData();
             $ingredients = $formlist->get('ingredients')->getData();
+            $remainingIngredients = array_filter($allIngredients->toArray(), function ($ingredient) use ($ingredients) {
+                foreach ($ingredients as $selectedIngredient) {
+                    if ($ingredient->getId() === $selectedIngredient->getId()) {
+                        return false;
+                    }
+                }
+                return true;
+            });
 
             $groceryList = $em->getRepository(GroceryList::class)->find($groceryListId);
             if (!$groceryList) {
@@ -112,9 +123,23 @@ class RecipeController extends AbstractController
             $groceryList->addRecipe($recipe);
             $em->persist($groceryList);
             
-            //foreach ($ingredients as $ingredient) {
-            //    $groceryList->addIngredient($ingredient);
-            //}
+            // $ingredients (inList:true/activation:false) && $allIngredients restants (inList:false/activation:false)
+            /*foreach ($ingredients as $ingredient) {
+                $this->groceryListIngredientService->editIngredientsInGroceryLists(
+                    $ingredient,
+                    $recipe,
+                    ['groceryLists'=>[$groceryListId]],
+                    true
+                );
+            }
+            foreach ($remainingIngredients as $ingredient) {
+                $this->groceryListIngredientService->editIngredientsInGroceryLists(
+                    $ingredient,
+                    $recipe,
+                    ['groceryLists'=>[$groceryListId]],
+                    false
+                );
+            }*/
 
             // WIP
             // add ingredients to groceryList
@@ -127,9 +152,7 @@ class RecipeController extends AbstractController
             // // rebuild groceryListIngredients with list and recipe
 
             /*dump($recipe);
-            dump($groceryListId);
-            dump($ingredients->toArray());
-            dump($allIngredients->toArray());
+            dump($groceryList);
             dd($formlist);*/
 
             $em->flush();

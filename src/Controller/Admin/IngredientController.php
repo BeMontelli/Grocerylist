@@ -51,6 +51,7 @@ class IngredientController extends AbstractController
 
             $groceryListIngredientService->linkIngredientToGroceryLists(
                 $ingredient,
+                null,
                 $ingredient->getTemporaryGroceryLists()
             );
 

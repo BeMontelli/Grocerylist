@@ -119,6 +119,7 @@ class IngredientType extends AbstractType
         // if $ingredient already have ID, it exist => edit
         $this->groceryListIngredientService->editIngredientsInGroceryLists(
             $ingredient,
+            null,
             $data
         );
 
