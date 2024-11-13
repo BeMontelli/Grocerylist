@@ -247,6 +247,12 @@ table img{
     border-radius: 10px;
     overflow: hidden;
 }
+td.actions__edit{
+    width: 100px;
+}
+td.actions__delete{
+    width: 80px;
+}
 td.actions a:first-child{
     margin-right: 5px;
 }
