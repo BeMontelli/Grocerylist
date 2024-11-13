@@ -29,6 +29,7 @@
             </div>
             <div class="col__right">
                 <div class="single__pres">
+                        {% include 'admin/partials/flashes.html.twig' %}
                     <div class="single__title">
                         <h1>{{ recipe.title }}</h1>
                         <a class="btn-primary btn mb-2" href="{{ url('admin.recipe.index') }}">All recipes</a>

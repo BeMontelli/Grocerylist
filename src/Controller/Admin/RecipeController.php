@@ -35,7 +35,7 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/', name: 'index')]
-    public function index(Request $request, RecipeRepository $recipeRepository, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, RecipeRepository $recipeRepository, EntityManagerInterface $em): Response
     {
         /** @var User $user  */
         $user = $this->security->getUser();
@@ -56,8 +56,8 @@ class RecipeController extends AbstractController
 
             $recipe = $form->getData();
             $recipe->setUser($user);
-            $entityManager->persist($recipe);
-            $entityManager->flush();
+            $em->persist($recipe);
+            $em->flush();
             $this->addFlash('success', 'Recipe saved !');
             return $this->redirectToRoute('admin.recipe.index');
         }
@@ -69,7 +69,7 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG], methods: ['GET','POST'])]
-    public function show(string $slug, int $id, Request $request, EntityManagerInterface $em, RecipeRepository $recipeRepository, EntityManagerInterface $entityManager): Response
+    public function show(string $slug, int $id, Request $request, EntityManagerInterface $em, RecipeRepository $recipeRepository): Response
     {
         /** @var User $user */
         $user = $this->security->getUser();
@@ -94,18 +94,29 @@ class RecipeController extends AbstractController
 
         $formlist->handleRequest($request);
         if ($formlist->isSubmitted() && $formlist->isValid()) {
-            $groceryList = $formlist->get('groceryList')->getData();
+            $groceryListId = $formlist->get('groceryList')->getData();
             $ingredients = $formlist->get('ingredients')->getData();
 
+            $groceryList = $em->getRepository(GroceryList::class)->find($groceryListId);
+            if (!$groceryList) {
+                $this->addFlash('error', 'GroceryList do not exists.');
+                return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
+        
+            }
+
+            if ($groceryList->getRecipes()->contains($recipe)) {
+                $this->addFlash('error', 'Recipe already in selected grocerylist.');
+                return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
+            }
+
+            $groceryList->addRecipe($recipe);
+            $em->persist($groceryList);
+            
             //foreach ($ingredients as $ingredient) {
             //    $groceryList->addIngredient($ingredient);
             //}
 
             // WIP
-            // add recipe to groceryList
-            // // check if already linked ?
-            // // // if yes do nothing
-            // // // if not default system process (add link)
             // add ingredients to groceryList
             // // get all recipe ingredients
             // // compare ingredients list from form
@@ -115,14 +126,13 @@ class RecipeController extends AbstractController
             // // delete groceryListIngredients in list with recipe
             // // rebuild groceryListIngredients with list and recipe
 
-            dump($recipe);
-            dump($groceryList);
+            /*dump($recipe);
+            dump($groceryListId);
             dump($ingredients->toArray());
             dump($allIngredients->toArray());
-            dd($formlist);
+            dd($formlist);*/
 
-            //$em->persist($groceryList);
-            //$em->flush();
+            $em->flush();
 
             return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
         }
@@ -144,8 +154,8 @@ class RecipeController extends AbstractController
             /** @var Recipe $recipe */
             if($thumbnailPath) $recipe->setThumbnail($thumbnailPath);
 
-            $entityManager->persist($recipe);
-            $entityManager->flush();
+            $em->persist($recipe);
+            $em->flush();
             $this->addFlash('success', 'Recipe updated !');
             return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
         }
@@ -158,13 +168,13 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
-    public function delete(Recipe $recipe, EntityManagerInterface $entityManager) {
+    public function delete(Recipe $recipe, EntityManagerInterface $em) {
         $currentThumbnail = $recipe->getThumbnail();
         $fileDir = $this->getParameter('kernel.project_dir').'/public';
         $this->fileUploader->deleteThumbnail($fileDir,$currentThumbnail);
 
-        $entityManager->remove($recipe);
-        $entityManager->flush();
+        $em->remove($recipe);
+        $em->flush();
         $this->addFlash('success', 'Recipe '.$recipe->getTitle().' deleted !');
         return $this->redirectToRoute('admin.recipe.index');
     }
