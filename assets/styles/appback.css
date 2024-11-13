@@ -321,3 +321,19 @@ hr {
     margin: 0 0 15px;
     display: block;
 }
+
+.title__slug_row .row:first-child{
+    margin-bottom: 0 !important;
+}
+.title__slug_row .row>label{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+.title__slug_row .row>div{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+.title__slug_row .row input{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}

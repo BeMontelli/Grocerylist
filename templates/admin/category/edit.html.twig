@@ -11,7 +11,7 @@
     <hr>
     {% include 'admin/partials/flashes.html.twig' %}
 
-    {{ include('admin/category/_form.html.twig') }}
+    {{ include('admin/category/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
     <hr>
 
 </div>

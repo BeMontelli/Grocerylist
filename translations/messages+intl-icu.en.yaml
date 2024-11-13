@@ -42,6 +42,7 @@ app:
       new: Create new
       show: Show
       save: Save
+      create: Create
       submit: Submit
       update: Update
       edit: Edit

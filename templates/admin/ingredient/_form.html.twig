@@ -1,11 +1,13 @@
 {{ form_start(form, { attr: { 'data-controller': 'recipesform' } }) }}
 
-    {{ form_row(form.title) }}
-    {{ form_row(form.slug) }}
+    <div class="title__slug_row">
+        {{ form_row(form.title) }}
+        {{ form_row(form.slug) }}
+    </div>
     {{ form_row(form.section) }}
     {{ form_row(form.availableRecipe) }}
     {{ form_row(form.recipes) }}
     {{ form_row(form.groceryLists) }}
-    {{ form_row(form.save, {'label': 'app.admin.action.update'|trans}) }}
+    {{ form_row(form.save, {'label': button_label|default('app.admin.action.create'|trans)}) }}
 
 {{ form_end(form) }}

@@ -12,7 +12,7 @@
     {% include 'admin/partials/flashes.html.twig' %}
 
     <div class="list__form mb-4">
-        {{ include('admin/ingredient/_form.html.twig') }}
+        {{ include('admin/ingredient/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
     </div>
 
     <hr>

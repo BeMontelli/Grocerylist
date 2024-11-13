@@ -47,6 +47,7 @@ app:
         }
       show: Montrer
       save: Sauvegarder
+      create: Créer
       submit: Soumettre
       update: 'Mettre à jour'
       edit: Editer
