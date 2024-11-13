@@ -20,7 +20,6 @@ TO DO LIST
   * Entities Edit titles translate + structure rework
 
   * Check **WIP** notes
-  * logic refactor to repository for queries ?
 
 
 Data Schema
