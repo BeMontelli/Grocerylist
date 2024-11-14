@@ -28,7 +28,7 @@
                 <h2>{{ 'app.admin.ingredients.title'|trans }}</h3>
                 <ul>
                     {% if elements is not empty %}
-                        <div class="sections">
+                        <div class="sections" data-controller="listelementchecker">
                         {% for element in elements %}
                             <div class="section">
                                 <h3 class="section__title">({{element['section'].id}}) {{element['section'].title}}</h3>
@@ -38,7 +38,7 @@
                                     {% for ingredient in element['ingredients'] %}
                                     <li class="section__element__item">
                                     <div class="section__element__content">
-                                        ({{ingredient[0].id}}) {{ ingredient[0].title }}
+                                        <input type="checkbox" checked="checked" data-id="{{ ingredient[0].id }}"> ({{ingredient[0].id}}) {{ ingredient[0].title }}
                                     </div>
                                     </li>
                                     {% endfor %}
