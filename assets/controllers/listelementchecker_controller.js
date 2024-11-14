@@ -22,19 +22,21 @@ export default class extends Controller {
 
     toggleElement(event) {
         const checkbox = event.target;
-        const elementId = checkbox.dataset.id;
+        const ingredientId = checkbox.dataset.ingredientid;
+        const listId = checkbox.dataset.listid;
+        if(!ingredientId || !listId) return;
 
-        fetch('/admin/ajax/element-toggle/', {
+        fetch('/admin/ajax/ingredient-toggle/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-Requested-With': 'XMLHttpRequest'
             },
-            body: JSON.stringify({ elementId: elementId })
+            body: JSON.stringify({ ingredientId: ingredientId, listId: listId })
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Element toggled:', data);
+            console.log('Ingredient toggled:', data);
         })
         .catch(error => console.error('Error:', error));
     }

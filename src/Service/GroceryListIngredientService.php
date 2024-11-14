@@ -30,24 +30,36 @@ class GroceryListIngredientService
             if(!empty($section)) {
                 $sectionTitle = $section->getTitle();
                 $this->entityManager->initializeObject($section);
-                if(array_key_exists($sectionTitle,$structure) && array_key_exists("ingredients",$structure[$sectionTitle])) {
-                    $structure[$sectionTitle]["ingredients"][] = $ingredient;
-                } else {
+                if(
+                    !array_key_exists($sectionTitle,$structure) || 
+                    !array_key_exists("ingredients",$structure[$sectionTitle])
+                ) {
                     $structure[$sectionTitle] = [
                         "section" => $section,
-                        "ingredients" => [$ingredient]
+                        "ingredients" => []
                     ];
+                    $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()] = [
+                        "id" => $ingredient->getId(),
+                        "title" => $ingredient->getTitle(),
+                        "activation" => $groceryListIngredient->isActive(),
+                        "collection" => [$ingredient]
+                    ];
+                } else {
+                    if(
+                        !array_key_exists($ingredient->getTitle(),$structure[$sectionTitle]["ingredients"]) || 
+                        !array_key_exists("collection",$structure[$sectionTitle]["ingredients"][$ingredient->getTitle()])
+                    ) {
+                        $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()] = [
+                            "id" => $ingredient->getId(),
+                            "title" => $ingredient->getTitle(),
+                            "activation" => $groceryListIngredient->isActive(),
+                            "collection" => [$ingredient]
+                        ];
+                    } else {
+                        $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["collection"][] = $ingredient;
+                    }
                 }
             }
-        }
-
-        foreach ($structure as $k => $elem) {
-            $groupedIngredients = [];
-            foreach ($elem['ingredients'] as $ingredient) {
-                $ingredientTitle = $ingredient->getTitle();
-                $groupedIngredients[$ingredientTitle][] = $ingredient;
-            }
-            $structure[$k]['ingredients'] = $groupedIngredients;
         }
 
         return $structure;

@@ -38,7 +38,11 @@
                                     {% for ingredient in element['ingredients'] %}
                                     <li class="section__element__item">
                                     <div class="section__element__content">
-                                        <input type="checkbox" checked="checked" data-id="{{ ingredient[0].id }}"> ({{ingredient[0].id}}) {{ ingredient[0].title }}
+                                        <input type="checkbox" 
+                                            {% if ingredient.activation %}checked="checked"{% endif %}
+                                            data-ingredientid="{{ ingredient.id }}" 
+                                            data-listid="{{ grocery_list.id }}">
+                                        ({{ ingredient.id }}) {{ ingredient.title }}
                                     </div>
                                     </li>
                                     {% endfor %}

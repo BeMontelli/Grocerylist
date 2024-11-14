@@ -59,7 +59,7 @@ class GroceryListIngredient
         return $this;
     }
 
-    public function isActivation(): ?bool
+    public function isActive(): ?bool
     {
         return $this->activation;
     }

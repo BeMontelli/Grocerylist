@@ -3,13 +3,12 @@
 namespace App\Controller\Admin;
 
 use App\Entity\GroceryList;
+use App\Entity\GroceryListIngredient;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\GroceryListType;
 use App\Form\IngredientType;
-use App\Form\RecipeType;
 use App\Repository\GroceryListRepository;
-use App\Service\FileUploader;
 use App\Service\GroceryListIngredientService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,19 +30,32 @@ class AjaxController extends AbstractController
 
     }
 
-    #[Route('/element-toggle/', name: 'elementToggle', methods: ['POST'])]
-    public function elementToggle(Request $request, Security $security): JsonResponse
+    #[Route('/ingredient-toggle/', name: 'ingredientToggle', methods: ['POST'])]
+    public function ingredientToggle(Request $request, Security $security, EntityManagerInterface $entityManager): JsonResponse
     {
         /** @var User $user */
         $user = $security->getUser();
 
         $data = json_decode($request->getContent(), true);
-        $elementId = $data['elementId'] ?? null;
+        $ingredientId = $data['ingredientId'] ?? null;
+        $listId = $data['listId'] ?? null;
 
-        if ($elementId === null) {
+        if ($ingredientId === null) {
             return new JsonResponse(['error' => 'Ingredient ID not provided'], Response::HTTP_BAD_REQUEST);
         }
+
+        if ($listId === null) {
+            return new JsonResponse(['error' => 'GroceryList ID not provided'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $groceryListIngredients = $entityManager->getRepository(GroceryListIngredient::class)->findBy(['ingredient' => $ingredientId,'groceryList' => $listId]);
+        foreach ($groceryListIngredients as $groceryListIngredient) {
+            $status = $groceryListIngredient->isActive();
+            $groceryListIngredient->setActivation(!$status);
+            $entityManager->persist($groceryListIngredient);
+        }
+        $entityManager->flush();
         
-        return new JsonResponse(['success' => true, 'ingredientId' => $elementId]);
+        return new JsonResponse(['success' => true, 'ingredientId' => $ingredientId, 'listId' => $listId]);
     }
 }
