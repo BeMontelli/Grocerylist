@@ -14,18 +14,20 @@
                         <div class="sections" data-controller="listelementchecker">
                         {% for element in elements %}
                             <div class="section">
-                                <h3 class="section__title">({{element['section'].id}}) {{element['section'].title}}</h3>
+                                <h3 class="section__title">
+                                    {#({{ element['section'].id }})#} {{element['section'].title}}
+                                </h3>
                                 {% if elements is not empty %}
                                 <div class="section__elements">
                                 <ul class="section__elements__list">
                                     {% for ingredient in element['ingredients'] %}
                                     <li class="section__element__item">
                                     <div class="section__element__content">
-                                        <input type="checkbox" 
+                                        <input type="checkbox" id="{{ ingredient.id }}-{{ grocery_list.id }}"
                                             {% if ingredient.activation %}checked="checked"{% endif %}
                                             data-ingredientid="{{ ingredient.id }}" 
                                             data-listid="{{ grocery_list.id }}">
-                                        ({{ ingredient.id }}) {{ ingredient.title }}
+                                        {#({{ ingredient.id }})#} <label for="{{ ingredient.id }}-{{ grocery_list.id }}">{{ ingredient.title }}</label>
                                     </div>
                                     </li>
                                     {% endfor %}
@@ -48,7 +50,9 @@
                 <ul>
                     {% if recipes is not empty %}
                         {% for recipe in recipes %}
-                            <li><strong>({{ recipe.id }}) {{ recipe.title }}</strong></li>
+                            <li>
+                                <strong>{#({{ recipe.id }})#} {{ recipe.title }}</strong>
+                            </li>
                         {% endfor %}
                     {% else %}
                         <li><strong>{{ 'app.admin.recipes.none'|trans }}</strong></li>
