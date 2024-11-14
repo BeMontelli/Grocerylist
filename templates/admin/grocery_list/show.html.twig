@@ -27,17 +27,37 @@
             <div class="ingredients__products col-6">
                 <h2>{{ 'app.admin.ingredients.title'|trans }}</h3>
                 <ul>
-                    {% if groceryListIngredients is not empty %}
-                        {% for groceryListIngredient in groceryListIngredients %}
-                            <li>
+                    {% if elements is not empty %}
+                        <div class="sections">
+                        {% for element in elements %}
+                            <div class="section">
+                                <h3 class="section__title">({{element['section'].id}}) {{element['section'].title}}</h3>
+                                {% if elements is not empty %}
+                                <div class="section__elements">
+                                <ul class="section__elements__list">
+                                    {% for ingredient in element['ingredients'] %}
+                                    <li class="section__element__item">
+                                    <div class="section__element__content">
+                                        ({{ingredient[0].id}}) {{ ingredient[0].title }}
+                                    </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                                </div>
+                                {% else %}
+                                    <span class="section__elements__none">NO ITEM</span>
+                                {% endif %}
+                            </div>
+                            {#<li>
                             <strong>({{ groceryListIngredient.ingredient.id }}) {{ groceryListIngredient.ingredient.title }}</strong>
                             {% if groceryListIngredient.recipe is defined and groceryListIngredient.recipe.title is defined %}
                                 <span><br>Recipe : <strong>{{ groceryListIngredient.recipe.title }}</strong></span>
                             {% endif %}
                             <span><br>est coché ? : {{ groceryListIngredient.activation ? 'Oui' : 'Non' }}</span>
                             <span><br>est dans la liste ? : {{ groceryListIngredient.inList ? 'Oui' : 'Non' }}</span>
-                            </li>
+                            </li>#}
                         {% endfor %}
+                        </div>
                     {% else %}
                         <li><strong>{{ 'app.admin.ingredients.none'|trans }}</strong></li>
                     {% endif %}

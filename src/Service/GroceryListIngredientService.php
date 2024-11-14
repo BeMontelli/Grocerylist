@@ -5,6 +5,7 @@ use App\Entity\Ingredient;
 use App\Entity\GroceryList;
 use App\Entity\Recipe;
 use App\Entity\GroceryListIngredient;
+use App\Entity\Section;
 use Doctrine\ORM\EntityManagerInterface;
 
 class GroceryListIngredientService
@@ -14,6 +15,42 @@ class GroceryListIngredientService
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
+    }
+
+    public function getIngredientsStructured(array $groceryListIngredients): array {
+        $structure = [];
+        
+        /** @var GroceryListIngredient $groceryListIngredient */
+        foreach ($groceryListIngredients as $groceryListIngredient) {
+            /** @var Ingredient $ingredient */
+            $ingredient = $groceryListIngredient->getIngredient();
+
+            /** @var Section $section */
+            $section = $ingredient->getSection();
+            if(!empty($section)) {
+                $sectionTitle = $section->getTitle();
+                $this->entityManager->initializeObject($section);
+                if(array_key_exists($sectionTitle,$structure) && array_key_exists("ingredients",$structure[$sectionTitle])) {
+                    $structure[$sectionTitle]["ingredients"][] = $ingredient;
+                } else {
+                    $structure[$sectionTitle] = [
+                        "section" => $section,
+                        "ingredients" => [$ingredient]
+                    ];
+                }
+            }
+        }
+
+        foreach ($structure as $k => $elem) {
+            $groupedIngredients = [];
+            foreach ($elem['ingredients'] as $ingredient) {
+                $ingredientTitle = $ingredient->getTitle();
+                $groupedIngredients[$ingredientTitle][] = $ingredient;
+            }
+            $structure[$k]['ingredients'] = $groupedIngredients;
+        }
+
+        return $structure;
     }
 
     public function linkIngredientToGroceryLists(Ingredient $ingredient, ?Recipe $recipe, array $groceryListIds): void

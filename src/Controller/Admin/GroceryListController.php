@@ -10,6 +10,7 @@ use App\Form\IngredientType;
 use App\Form\RecipeType;
 use App\Repository\GroceryListRepository;
 use App\Service\FileUploader;
+use App\Service\GroceryListIngredientService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
@@ -26,11 +27,13 @@ class GroceryListController extends AbstractController
 {
     private $security;
     private $fileUploader;
+    private $groceryListIngredientService;
 
-    public function __construct(Security $security, FileUploader $fileUploader)
+    public function __construct(Security $security, FileUploader $fileUploader, GroceryListIngredientService $groceryListIngredientService)
     {
         $this->security = $security;
         $this->fileUploader = $fileUploader;
+        $this->groceryListIngredientService = $groceryListIngredientService;
     }
 
     #[Route('/', name: 'index', methods: ['GET','POST'])]
@@ -87,7 +90,7 @@ class GroceryListController extends AbstractController
 
         return $this->render('admin/grocery_list/show.html.twig', [
             'grocery_list' => $groceryList,
-            'groceryListIngredients' => $groceryListIngredients,
+            'elements' => $this->groceryListIngredientService->getIngredientsStructured($groceryListIngredients->toArray()),
             'recipes' => $recipes,
         ]);
     }
