@@ -3,17 +3,17 @@
 {% block title %}{{ grocery_list.title }}{% endblock %}
 
 {% block body %}
+<div id="grocerylist__single">
     <div class="container">
         <h1>{{ grocery_list.title }} - <i style="font-size:0.65em">Current list</i></h1>
 
         <div class="data row">
             <div class="ingredients__products col-6">
                 <h2>{{ 'app.admin.ingredients.title'|trans }}</h3>
-                <ul>
+                <ul data-controller="listelementchecker">
                     {% if elements is not empty %}
-                        <div class="sections" data-controller="listelementchecker">
                         {% for element in elements %}
-                            <div class="section">
+                            <li class="section">
                                 <h3 class="section__title">
                                     {#({{ element['section'].id }})#} {{element['section'].title}}
                                 </h3>
@@ -27,7 +27,7 @@
                                             {% if ingredient.activation %}checked="checked"{% endif %}
                                             data-ingredientid="{{ ingredient.id }}" 
                                             data-listid="{{ grocery_list.id }}">
-                                        {#({{ ingredient.id }})#} <label for="{{ ingredient.id }}-{{ grocery_list.id }}">{{ ingredient.title }}</label>
+                                        {#({{ ingredient.id }})#} <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
                                     </div>
                                     </li>
                                     {% endfor %}
@@ -36,11 +36,10 @@
                                 {% else %}
                                     <span class="section__elements__none">NO ITEM</span>
                                 {% endif %}
-                            </div>
+                            </li>
                         {% endfor %}
-                        </div>
                     {% else %}
-                        <li><strong>{{ 'app.admin.ingredients.none'|trans }}</strong></li>
+                        <li><strong class="section__elements__none">{{ 'app.admin.ingredients.none'|trans }}</strong></li>
                     {% endif %}
                 </ul>
             </div>
@@ -55,7 +54,7 @@
                             </li>
                         {% endfor %}
                     {% else %}
-                        <li><strong>{{ 'app.admin.recipes.none'|trans }}</strong></li>
+                        <li><strong class="section__elements__none">{{ 'app.admin.recipes.none'|trans }}</strong></li>
                     {% endif %}
                 </ul>
             </div>
@@ -67,4 +66,5 @@
 
         {{ include('admin/grocery_list/_delete_form.html.twig') }}
     </div>
+</div>
 {% endblock %}

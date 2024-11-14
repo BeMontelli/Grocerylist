@@ -9,6 +9,8 @@
     --main-white: #cbdcd7;
     --main-pure-white: #f3f3f3;
 
+    --main-orange: #d48b37;
+
     --main-red: #d14949;
     --main-dark-red: #8b1c1c;
 
@@ -337,3 +339,47 @@ hr {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
 }
+
+/* grocerylist single */
+#grocerylist__single{
+    position: relative;
+}
+
+#grocerylist__single ul{
+    padding: 0 0 15px;
+}
+
+#grocerylist__single li{
+    list-style: none;
+}
+
+#grocerylist__single .section__elements__list{
+    padding-left: 10px;
+}
+
+.section__element__item .section__element__content{
+    position: relative;
+}
+
+.section__element__item .section__element__content input{
+    position: relative;
+}
+
+.section__element__item .section__element__content label{
+    position: relative;
+}
+.section__element__item input:checked {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+.section__element__item input:checked + .check__label {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+
+#grocerylist__single .section__elements__none{
+    font-weight: bold;
+    color: var(--main-orange);
+}
+/* / grocerylist single */
