@@ -14,6 +14,7 @@ app:
     recipes.none: 'Pas de recette'
     recipes.sendtolistnotice: Votre recette sera envoyée à la liste sélectionnée avec les ingrédients cible.
     recipes.sendtolistbtn: Ajouter recette et ingrédients à la liste
+    recipes.cta: Ajouter une/des recette(s)
     recipes.entity: >-
       {entity, plural,
         =1 {Recette}

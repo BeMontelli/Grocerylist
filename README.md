@@ -8,8 +8,6 @@ You can also learn about these practices in [the official Symfony Book][5].
 TO DO LIST
 ------------
 
-  * Display/Filter ingredients in list
-  * Toggle ingredients activation process
   * Delete ingredients list
   * Delete recipes list with ingredients related
 
@@ -19,6 +17,8 @@ TO DO LIST
   * responsive
 
   * Entities Edit titles translate + structure rework
+
+  * Entities recipes / ingredients => list filter by categories / sections
 
   * Check **WIP** notes
 

@@ -14,6 +14,7 @@ app:
     recipes.none: 'No recipes'
     recipes.sendtolistnotice: Your recipe will be sent to the grocery list with selected ingredients.
     recipes.sendtolistbtn: Add recipe with ingredients to list
+    recipes.cta: Add recipe(s)
     recipes.entity: >-
       {entity, plural,
         =1 {Recipe}
