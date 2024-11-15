@@ -5,7 +5,7 @@
 {% block body %}
 <div id="grocerylist__single">
     <div class="container">
-        <h1>{{ grocery_list.title }} - <i style="font-size:0.65em">Current list</i></h1>
+        <h1>{{ grocery_list.title }} <i class="current__list__notice" style="font-size:0.65em">{{ 'app.admin.lists.current'|trans }}</i></h1>
 
         <div class="data row">
             <div class="ingredients__products col-6">

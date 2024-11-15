@@ -3,6 +3,7 @@ app:
     default_title: 'Welcome in Administration'
     welcome_title: Welcome
     lists.title: 'My lists'
+    lists.current: 'Current list'
     lists.count: 'Results count'
     lists.none: 'No result'
     lists.entity: >-

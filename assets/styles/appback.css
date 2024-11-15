@@ -344,6 +344,16 @@ hr {
 #grocerylist__single{
     position: relative;
 }
+#grocerylist__single .current__list__notice{
+    border: solid 1px var(--main-orange);
+    background-color: var(--main-orange);
+    border-radius: 5px;
+    font-size: 14px !important;
+    padding: 3px 10px;
+    font-weight: bold;
+    position: relative;
+    top: -6px;
+}
 #grocerylist__single .list__title{
     display: flex;
     justify-content: flex-start;
