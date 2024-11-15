@@ -346,14 +346,22 @@ hr {
 }
 
 #grocerylist__single ul{
+    padding: 0 0 0;
+    margin-bottom: 2rem;
+}
+#grocerylist__single ul.listelementchecker{
     padding: 0 0 15px;
+    margin-bottom: 0rem;
 }
 
 #grocerylist__single li{
     list-style: none;
 }
 
-#grocerylist__single .section__elements__list{
+#grocerylist__single ul.section__elements__list{
+
+    padding: 0 0 15px;
+    margin-bottom: 0rem;
     padding-left: 10px;
 }
 
@@ -383,3 +391,34 @@ hr {
     color: var(--main-orange);
 }
 /* / grocerylist single */
+
+
+/* grocery__list_recipe_card */
+.grocery__list_recipe_card{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.grocery__list_recipe_card .cols{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.grocery__list_recipe_card .col__left{
+    max-width: 150px;
+}
+.grocery__list_recipe_card .col__right{
+    width: calc(100% - 150px);
+    padding-left: 15px;
+}
+
+.grocery__list_recipe_card .single__image{
+    position: relative;
+}
+.grocery__list_recipe_card .single__image img{
+    max-width: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+/* / grocery__list_recipe_card */

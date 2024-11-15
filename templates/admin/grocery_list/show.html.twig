@@ -10,7 +10,7 @@
         <div class="data row">
             <div class="ingredients__products col-6">
                 <h2>{{ 'app.admin.ingredients.title'|trans }}</h3>
-                <ul data-controller="listelementchecker">
+                <ul class="listelementchecker" data-controller="listelementchecker">
                     {% if elements is not empty %}
                         {% for element in elements %}
                             <li class="section">
@@ -50,7 +50,7 @@
                     {% if recipes is not empty %}
                         {% for recipe in recipes %}
                             <li>
-                                <strong>{#({{ recipe.id }})#} {{ recipe.title }}</strong>
+                                {{ include('admin/partials/grocerylist_recipe_card.html.twig') }}
                             </li>
                         {% endfor %}
                     {% else %}
