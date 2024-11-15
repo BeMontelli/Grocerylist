@@ -1,31 +1,30 @@
 <div class="grocery__list_recipe_card">
-
-        <div class="cols">
-            <div class="col__left">
-                <div class="single__image">
-                    {% if recipe.thumbnail is not empty %}
-                        <img src="{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
-                    {% else %}
-                        <span>NO IMAGE</span>
-                    {% endif %}
-                </div>
-            </div>
-            <div class="col__right">
-                <div class="single__pres">
-                        {% include 'admin/partials/flashes.html.twig' %}
-                    <div class="single__title">
-                        <h3>{{ recipe.title }}</h1>
-                    </div>
-                    <div class="single__price"><strong>Price</strong>: <span>{{ recipe.price }} €</span></div>
-
-                    <div class="single__categories">
-                        {% if recipe.category is defined and recipe.category.title is defined and recipe.category.title is not empty %}
-                            <span><a href="{{ url('admin.category.show', {id: recipe.category.id,slug: recipe.category.slug}) }}">{{ recipe.category.title }}</a></span>
-                        {% else %}
-                            <span>---</span>
-                        {% endif %}
-                    </div>
-                </div>
+    <div class="cols">
+        <div class="col__left">
+            <div class="single__image">
+                {% if recipe.thumbnail is not empty %}
+                    <img src="{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
+                {% else %}
+                    <span>NO IMAGE</span>
+                {% endif %}
             </div>
         </div>
+        <div class="col__right">
+            <div class="single__pres">
+                    {% include 'admin/partials/flashes.html.twig' %}
+                <div class="single__title">
+                    <h3>{{ recipe.title }}</h1>
+                </div>
+                <div class="single__price"><strong>Price</strong>: <span>{{ recipe.price }} €</span></div>
+                <div class="single__categories mb-2">
+                    {% if recipe.category is defined and recipe.category.title is defined and recipe.category.title is not empty %}
+                        <span><a href="{{ url('admin.category.show', {id: recipe.category.id,slug: recipe.category.slug}) }}">{{ recipe.category.title }}</a></span>
+                    {% else %}
+                        <span>---</span>
+                    {% endif %}
+                </div>
+                <a class="btn-primary btn mb-2" href="{{ path('admin.list.removeRecipeList', {'grocerylistId':grocery_list.id,'recipeId': recipe.id}) }}">{{ 'app.admin.lists.recipes.remove'|trans }}</a>
+            </div>
+        </div>
+    </div>
 </div>

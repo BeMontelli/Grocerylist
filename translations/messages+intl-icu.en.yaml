@@ -10,6 +10,7 @@ app:
         =1 {List}
         other {Lists}
       }
+    lists.recipes.remove: 'Remove from list'
     recipes.title: Recipes
     recipes.none: 'No recipes'
     recipes.sendtolistnotice: Your recipe will be sent to the grocery list with selected ingredients.

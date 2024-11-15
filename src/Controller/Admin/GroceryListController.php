@@ -116,6 +116,32 @@ class GroceryListController extends AbstractController
         ]);
     }
 
+    #[Route('/remove-recipe-list/{grocerylistId}/{recipeId}', name: 'removeRecipeList', requirements: ['grocerylistId' => Requirement::DIGITS,'recipeId' => Requirement::DIGITS,], methods: ['GET'])]
+    public function removeRecipeFromList(int $grocerylistId,int $recipeId,Request $request,EntityManagerInterface $em): Response
+    {
+        /** @var User $user */
+        $user = $this->security->getUser();
+
+        /** @var GroceryList $groceryList  */
+        $groceryList = $em->find(GroceryList::class,$grocerylistId);
+        /** @var Recipe $recipe  */
+        $recipe = $em->find(Recipe::class,$recipeId);
+
+        if(!$groceryList || !$recipe) {
+            return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        if($groceryList->getUser()->getId() === $user->getId()) {
+            $groceryList->removeRecipe($recipe);
+            $em->persist($groceryList);
+            $em->flush();
+            $this->groceryListIngredientService->removeRecipeIngredientsInGroceryList($recipe,$groceryList);
+            return $this->redirectToRoute('admin.list.show', ['slug'=> $groceryList->getSlug(),'id'=> $groceryList->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
+    }
+
     #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['POST'])]
     public function delete(Request $request, GroceryList $groceryList, EntityManagerInterface $entityManager): Response
     {

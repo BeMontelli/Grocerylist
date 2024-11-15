@@ -10,6 +10,7 @@ app:
         =1 {Liste}
         other {Listes}
       }
+    lists.recipes.remove: 'Retirer de la liste'
     recipes.title: Recettes
     recipes.none: 'Pas de recette'
     recipes.sendtolistnotice: Votre recette sera envoyée à la liste sélectionnée avec les ingrédients cible.
