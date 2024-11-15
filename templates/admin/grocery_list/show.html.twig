@@ -9,7 +9,10 @@
 
         <div class="data row">
             <div class="ingredients__products col-6">
-                <h2>{{ 'app.admin.ingredients.title'|trans }}</h3>
+                <div class="list__title">
+                    <h2>{{ 'app.admin.ingredients.title'|trans }}</h2>
+                    <a class="btn-primary btn mb-2" href="{{ path('admin.ingredient.index') }}"><i class='bx bx-plus'></i></a>
+                </div>
                 <ul class="listelementchecker" data-controller="listelementchecker">
                     {% if elements is not empty %}
                         {% for element in elements %}
@@ -47,7 +50,10 @@
             </div>
 
             <div class="recipes col-6">
-                <h2>{{ 'app.admin.recipes.title'|trans }}</h3>
+                <div class="list__title">
+                    <h2>{{ 'app.admin.recipes.title'|trans }}</h2>
+                    <a class="btn-primary btn mb-2" href="{{ path('admin.recipe.index') }}"><i class='bx bx-plus'></i></a>
+                </div>
                 <ul>
                     {% if recipes is not empty %}
                         {% for recipe in recipes %}
@@ -59,7 +65,6 @@
                         <li><strong class="section__elements__none">{{ 'app.admin.recipes.none'|trans }}</strong></li>
                     {% endif %}
                 </ul>
-                <a class="btn-primary btn mb-2" href="{{ path('admin.recipe.index') }}">{{ 'app.admin.recipes.cta'|trans }}</a>
             </div>
         </div>
 
