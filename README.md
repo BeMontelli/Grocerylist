@@ -8,9 +8,6 @@ You can also learn about these practices in [the official Symfony Book][5].
 TO DO LIST
 ------------
 
-  * Delete ingredients list
-  * Delete recipes list with ingredients related
-
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
 
   * translations
