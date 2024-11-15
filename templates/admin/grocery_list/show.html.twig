@@ -31,7 +31,8 @@
                                                 {% if ingredient.activation %}checked="checked"{% endif %}
                                                 data-ingredientid="{{ ingredient.id }}" 
                                                 data-listid="{{ grocery_list.id }}">
-                                            {#({{ ingredient.id }})#} <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
+                                            <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
+                                            <a class="btn-small btn-remove btn" href="{{ path('admin.list.removeIngredientList', {'grocerylistId':grocery_list.id,'ingredientId': ingredient.id}) }}"><i class='bx bx-x'></i></a>
                                         </div>
                                         </li>
                                         {% endif %}

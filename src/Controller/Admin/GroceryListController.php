@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\GroceryList;
+use App\Entity\Ingredient;
+use App\Entity\GroceryListIngredient;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\GroceryListType;
@@ -136,6 +138,41 @@ class GroceryListController extends AbstractController
             $em->persist($groceryList);
             $em->flush();
             $this->groceryListIngredientService->removeRecipeIngredientsInGroceryList($recipe,$groceryList);
+            return $this->redirectToRoute('admin.list.show', ['slug'=> $groceryList->getSlug(),'id'=> $groceryList->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/remove-ingredient-list/{grocerylistId}/{ingredientId}', name: 'removeIngredientList', requirements: ['grocerylistId' => Requirement::DIGITS,'ingredientId' => Requirement::DIGITS,], methods: ['GET'])]
+    public function removeIngredientFromList(int $grocerylistId,int $ingredientId,Request $request,EntityManagerInterface $em): Response
+    {
+        /** @var User $user */
+        $user = $this->security->getUser();
+
+        /** @var GroceryList $groceryList  */
+        $groceryList = $em->find(GroceryList::class,$grocerylistId);
+        /** @var Ingredient $ingredient  */
+        $ingredient = $em->find(Ingredient::class,$ingredientId);
+
+        if(!$groceryList || !$ingredient) {
+            return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        if($groceryList->getUser()->getId() === $user->getId()) {
+
+            $groceryListIngredients = $em->getRepository(GroceryListIngredient::class)
+            ->findBy([
+                'groceryList'=> $groceryList->getId(),
+                'ingredient'=> $ingredient->getId()
+            ]);
+
+            foreach ($groceryListIngredients as $groceryListIngredient) {
+                $em->remove($groceryListIngredient);
+            }
+
+            $em->flush();
+
             return $this->redirectToRoute('admin.list.show', ['slug'=> $groceryList->getSlug(),'id'=> $groceryList->getId()], Response::HTTP_SEE_OTHER);
         }
 

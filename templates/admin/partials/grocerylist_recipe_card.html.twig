@@ -23,7 +23,7 @@
                         <span>---</span>
                     {% endif %}
                 </div>
-                <a class="btn-primary btn mb-2" href="{{ path('admin.list.removeRecipeList', {'grocerylistId':grocery_list.id,'recipeId': recipe.id}) }}">{{ 'app.admin.lists.recipes.remove'|trans }}</a>
+                <a class="btn-remove btn mb-2" href="{{ path('admin.list.removeRecipeList', {'grocerylistId':grocery_list.id,'recipeId': recipe.id}) }}">{{ 'app.admin.lists.recipes.remove'|trans }}</a>
             </div>
         </div>
     </div>
