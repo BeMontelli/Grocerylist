@@ -41,6 +41,7 @@ class GroceryListIngredientService
                     $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()] = [
                         "id" => $ingredient->getId(),
                         "title" => $ingredient->getTitle(),
+                        "inList" => $groceryListIngredient->isInList(),
                         "activation" => $groceryListIngredient->isActive(),
                         "collection" => [$ingredient]
                     ];
@@ -52,6 +53,7 @@ class GroceryListIngredientService
                         $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()] = [
                             "id" => $ingredient->getId(),
                             "title" => $ingredient->getTitle(),
+                            "inList" => $groceryListIngredient->isInList(),
                             "activation" => $groceryListIngredient->isActive(),
                             "collection" => [$ingredient]
                         ];

@@ -21,15 +21,17 @@
                                 <div class="section__elements">
                                 <ul class="section__elements__list">
                                     {% for ingredient in element['ingredients'] %}
-                                    <li class="section__element__item">
-                                    <div class="section__element__content">
-                                        <input type="checkbox" id="{{ ingredient.id }}-{{ grocery_list.id }}"
-                                            {% if ingredient.activation %}checked="checked"{% endif %}
-                                            data-ingredientid="{{ ingredient.id }}" 
-                                            data-listid="{{ grocery_list.id }}">
-                                        {#({{ ingredient.id }})#} <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
-                                    </div>
-                                    </li>
+                                        {% if ingredient.inList %}
+                                        <li class="section__element__item">
+                                        <div class="section__element__content">
+                                            <input type="checkbox" id="{{ ingredient.id }}-{{ grocery_list.id }}"
+                                                {% if ingredient.activation %}checked="checked"{% endif %}
+                                                data-ingredientid="{{ ingredient.id }}" 
+                                                data-listid="{{ grocery_list.id }}">
+                                            {#({{ ingredient.id }})#} <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
+                                        </div>
+                                        </li>
+                                        {% endif %}
                                     {% endfor %}
                                 </ul>
                                 </div>
