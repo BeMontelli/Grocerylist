@@ -9,7 +9,6 @@ TO DO LIST
 ------------
 
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
-  * list ingredients : list related recipes if related
 
   * translations
   * responsive
