@@ -9,6 +9,7 @@ TO DO LIST
 ------------
 
   * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
+  * recipe in lists should have ingredients accordion and decide inList true/false
 
   * translations
   * responsive
@@ -18,6 +19,8 @@ TO DO LIST
   * Entities recipes / ingredients => list filter by categories / sections
 
   * CSS to SCSS and mixins ?
+
+  * Fixtures default data ?
 
   * Check **WIP** notes
 
