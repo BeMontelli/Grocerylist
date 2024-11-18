@@ -24,6 +24,7 @@ class GroceryListIngredientService
         foreach ($groceryListIngredients as $groceryListIngredient) {
             /** @var Ingredient $ingredient */
             $ingredient = $groceryListIngredient->getIngredient();
+            $recipe = $groceryListIngredient->getRecipe();
 
             /** @var Section $section */
             $section = $ingredient->getSection();
@@ -43,8 +44,10 @@ class GroceryListIngredientService
                         "title" => $ingredient->getTitle(),
                         "inList" => $groceryListIngredient->isInList(),
                         "activation" => $groceryListIngredient->isActive(),
-                        "collection" => [$ingredient]
+                        "collection" => [$ingredient],
+                        "recipes" => []
                     ];
+                    if($recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
                 } else {
                     if(
                         !array_key_exists($ingredient->getTitle(),$structure[$sectionTitle]["ingredients"]) || 
@@ -55,10 +58,13 @@ class GroceryListIngredientService
                             "title" => $ingredient->getTitle(),
                             "inList" => $groceryListIngredient->isInList(),
                             "activation" => $groceryListIngredient->isActive(),
-                            "collection" => [$ingredient]
+                            "collection" => [$ingredient],
+                            "recipes" => []
                         ];
+                        if($recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
                     } else {
                         $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["collection"][] = $ingredient;
+                        if($recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
                     }
                 }
             }
