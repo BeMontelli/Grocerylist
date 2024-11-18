@@ -14,6 +14,7 @@ TO DO LIST
   * Entity File for images ?
 
   * translations
+    * flashes
   * responsive
 
   * Entities Edit titles translate + structure rework
@@ -21,14 +22,16 @@ TO DO LIST
   * Entities recipes / ingredients => list filter by categories / sections
 
   * CSS to SCSS and mixins ?
-  * Layout styles rework (header etc)
-  * Confirm modals
-  * flashes rework into layout fix
+    * Layout styles rework (header etc)
+    * Confirm modals
+    * flashes rework into layout fix
 
   * Fixtures default data ?
 
-  * Check **WIP** notes
+WORK IN PROGESS
+------------
 
+  * Check **WIP** notes
 
 Data Schema
 ------------
