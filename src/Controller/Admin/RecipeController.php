@@ -138,6 +138,7 @@ class RecipeController extends AbstractController
             }
 
             $em->flush();
+            $this->addFlash('success', 'Recipe added to list !');
 
             return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
         }
