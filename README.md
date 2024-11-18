@@ -18,6 +18,8 @@ TO DO LIST
 
   * Entities recipes / ingredients => list filter by categories / sections
 
+  * CSS to SCSS and mixins ?
+
   * Check **WIP** notes
 
 
