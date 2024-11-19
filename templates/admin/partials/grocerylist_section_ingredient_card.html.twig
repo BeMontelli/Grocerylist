@@ -9,5 +9,5 @@
             <span class="recipe">{{recipe.title}}</span>
         {% endfor %}
     </ul>
-    <a class="btn-small btn-remove btn" href="{{ path('admin.list.removeIngredientList', {'grocerylistId':grocery_list.id,'ingredientId': ingredient.id}) }}"><i class='bx bx-x'></i></a>
+    <a class="btn-small btn-remove btn" href="{{ path('admin.list.toggleIngredientList', {'grocerylistId':grocery_list.id,'ingredientId': ingredient.id,inlist:ingredient.inList?'remove':'put'}) }}"><i class='bx bx-x'></i></a>
 </div>

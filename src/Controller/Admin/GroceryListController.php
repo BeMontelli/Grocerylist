@@ -153,8 +153,8 @@ class GroceryListController extends AbstractController
         return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/remove-ingredient-list/{grocerylistId}/{ingredientId}', name: 'removeIngredientList', requirements: ['grocerylistId' => Requirement::DIGITS,'ingredientId' => Requirement::DIGITS,], methods: ['GET'])]
-    public function removeIngredientFromList(int $grocerylistId,int $ingredientId,Request $request,EntityManagerInterface $em): Response
+    #[Route('/toggle-ingredient-list/{grocerylistId}/{ingredientId}/{inlist}', name: 'toggleIngredientList', requirements: ['grocerylistId' => Requirement::DIGITS,'ingredientId' => Requirement::DIGITS,'inlist' => 'remove|put'], methods: ['GET'])]
+    public function toggleIngredientFromList(int $grocerylistId,int $ingredientId,string $inlist,Request $request,EntityManagerInterface $em): Response
     {
         /** @var User $user */
         $user = $this->security->getUser();
@@ -170,6 +170,8 @@ class GroceryListController extends AbstractController
 
         if($groceryList->getUser()->getId() === $user->getId()) {
 
+            $inListTarget = !($inlist === 'remove');
+
             $groceryListIngredients = $em->getRepository(GroceryListIngredient::class)
             ->findBy([
                 'groceryList'=> $groceryList->getId(),
@@ -177,7 +179,9 @@ class GroceryListController extends AbstractController
             ]);
 
             foreach ($groceryListIngredients as $groceryListIngredient) {
-                $em->remove($groceryListIngredient);
+                $groceryListIngredient->setInList($inListTarget);
+                $groceryListIngredient->setActivation(false);
+                $em->persist($groceryListIngredient);
             }
 
             $em->flush();
