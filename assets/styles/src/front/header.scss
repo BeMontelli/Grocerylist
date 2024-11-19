@@ -1,33 +1,64 @@
-body {
-    accent-color: var(--main-green);
-    font-family: Arial, sans-serif;
-    color: var(--main-text-color);
-    background-color: var(--main-bg-color);
-    padding-top: 90px;
+
+header{
+    padding: 10px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background: rgba(203, 220, 215, 0.25);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5.9px);
+    -webkit-backdrop-filter: blur(5.9px);
+    border: 1px solid rgba(203, 220, 215, 0.07);
+}
+header .container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+header nav{
+    width: auto;
 }
 
-ul,li,a{
-    color: var(--main-text-color);
+header nav i{
+    font-size: 1.4rem;
+    line-height: 1rem;
 }
 
-a{
+header ul,header li,header a,header p{
+    color: var(--main-dark);
+    margin-bottom: 0;
+}
+
+header nav ul{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 0;
+}
+
+header nav ul li{
+    width: auto;
+    appearance: none;
+    list-style: none;
+}
+
+header li a{
+    text-decoration: none;
+    transition: all 0.5s ease;
+}
+
+header li a:hover{
     color: var(--main-green);
-    text-decoration: none;
     transition: all 0.5s ease;
-}
-a:hover,a:focus{
-    color: var(--main-green-alt);
-    text-decoration: none;
-    transition: all 0.5s ease;
-}
-a.hspec{
-    height: 38px;
-    display: block;
-}
-a.dashboard{
-    padding: 10px 20px 10px 10px;
 }
 
-input,input::placeholder,textarea,textarea::placeholder,button{
-    font-family: Arial, sans-serif;
+header a{
+    padding: 10px;
+    font-weight: bold;
+}
+
+header li:first-child a{
+    padding-left: 0;
 }

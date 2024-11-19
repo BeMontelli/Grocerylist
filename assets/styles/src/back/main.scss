@@ -31,3 +31,14 @@ a.dashboard{
 input,input::placeholder,textarea,textarea::placeholder,button{
     font-family: Arial, sans-serif;
 }
+
+.table__count{
+    margin-bottom: 10px;
+}
+
+.dropdown-item{
+    font-weight: 600;
+}
+.dropdown-item.active, .dropdown-item:active{
+    background-color: var(--main-green);
+}
