@@ -28,6 +28,8 @@ TO DO LIST
 
   * Fixtures default data ?
 
+  * 404 page
+
 WORK IN PROGESS
 ------------
 
