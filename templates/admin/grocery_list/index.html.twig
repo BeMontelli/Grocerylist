@@ -26,7 +26,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(grocery_lists, 'Id', 'l.id') }}</th>
                 <th{% if grocery_lists.isSorted('a.title') %} class="sorted"{% endif %}>
                     {{ knp_pagination_sortable(grocery_lists, 'Title', 'l.title') }}
                 </th>
@@ -42,7 +41,6 @@
             <tbody>
             {% for grocery_list in grocery_lists %}
                 <tr>
-                    <td>{{ grocery_list.id }}</td>
                     <td><a href="{{ path('admin.list.show', {'slug': grocery_list.slug,'id': grocery_list.id}) }}">{{ grocery_list.title }}</a></td>
                     <td>{{ grocery_list.slug }}</td>
                     {#<td>{{ grocery_list.createdAt ? grocery_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>

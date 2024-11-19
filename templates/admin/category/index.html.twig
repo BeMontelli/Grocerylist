@@ -31,7 +31,6 @@
         <thead>
         <tr>
             {# sorting of properties based on query components #}
-            <th>{{ knp_pagination_sortable(categories, 'Id', 'c.id') }}</th>
             <th{% if categories.isSorted('a.title') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(categories, 'Title', 'c.title') }}
             </th>
@@ -48,7 +47,6 @@
         {# table body #}
         {% for category in categories %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>{{ category.category.id }}</td>
                 <td><a href="{{ url('admin.category.show', {slug: category.category.slug, id: category.category.id}) }}">{{ category.category.title }}</a></td>
                 <td>{{ category.category.slug }}</td>
                 <td>{{ category.total }}</td>
