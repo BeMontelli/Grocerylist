@@ -1,31 +1,5 @@
-:root {
-    --main-dark: #2f4858;
-    --main-dark-light: #1e6074;
-    --main-dark-lighter: #007a89;
-
-    --main-dark-green: #009495;
-    --main-green-alt: #00ae97;
-    --main-green: #28c78e;
-
-    --main-white: #cbdcd7;
-
-    --main-bg-color: var(--main-dark);
-    --main-text-color: var(--main-white);
-}
-
-
-
-body {
-    font-family: Arial, sans-serif;
-    color: var(--main-text-color);
-    background-color: var(--main-bg-color);
-    padding-top: 60px;
-}
-
-ul,li,a,p{
-    color: var(--main-text-color);
-    transition: all 0.5s ease;
-}
+@use 'src/front/vars' as *;
+@use 'src/front/main' as *;
 
 header{
     padding: 10px;

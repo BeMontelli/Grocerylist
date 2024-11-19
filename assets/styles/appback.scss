@@ -1,57 +1,5 @@
-:root {
-    --main-darker: #313131;
-    --main-dark: #3e3e3e;
-    --main-dark-light: #525459;
-    --main-dark-lighter: #626d74;
-    --main-dark-green: #70878d;
-    --main-green-alt: #81a2a1;
-    --main-green: #99bdb1;
-    --main-white: #cbdcd7;
-    --main-pure-white: #f3f3f3;
-
-    --main-orange: #d48b37;
-
-    --main-red: #d14949;
-    --main-dark-red: #8b1c1c;
-
-    --main-bg-color: var(--main-dark);
-    --main-bg-input: var(--main-dark-light);
-    --main-text-color: var(--main-white);
-}
-
-body {
-    accent-color: var(--main-green);
-    font-family: Arial, sans-serif;
-    color: var(--main-text-color);
-    background-color: var(--main-bg-color);
-    padding-top: 90px;
-}
-
-ul,li,a{
-    color: var(--main-text-color);
-}
-
-a{
-    color: var(--main-green);
-    text-decoration: none;
-    transition: all 0.5s ease;
-}
-a:hover,a:focus{
-    color: var(--main-green-alt);
-    text-decoration: none;
-    transition: all 0.5s ease;
-}
-a.hspec{
-    height: 38px;
-    display: block;
-}
-a.dashboard{
-    padding: 10px 20px 10px 10px;
-}
-
-input,input::placeholder,textarea,textarea::placeholder,button{
-    font-family: Arial, sans-serif;
-}
+@use 'src/back/vars' as *;
+@use 'src/back/main' as *;
 
 header{
     padding: 10px;

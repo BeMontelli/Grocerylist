@@ -8,6 +8,6 @@ import './bootstrap.bundle.js';
  */
 import './styles/boxicons.min.css'; // Boxicons
 import './styles/bootstrap.min.css'; // Bootstrap
-import './styles/appback.css';
+import './styles/build/appback.css';
 
 console.log('This log comes from assets/appback.js - welcome to AssetMapper! 🎉');
