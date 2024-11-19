@@ -39,29 +39,13 @@ class GroceryListIngredientService
                         "section" => $section,
                         "ingredients" => []
                     ];
-                    $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()] = [
-                        "id" => $ingredient->getId(),
-                        "title" => $ingredient->getTitle(),
-                        "inList" => $groceryListIngredient->isInList(),
-                        "activation" => $groceryListIngredient->isActive(),
-                        "collection" => [$ingredient],
-                        "recipes" => []
-                    ];
-                    if($groceryListIngredient->isInList() && $recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
+                    $structure = $this->fillStructureElement($structure, $sectionTitle, $ingredient, $groceryListIngredient, $recipe);
                 } else {
                     if(
                         !array_key_exists($ingredient->getTitle(),$structure[$sectionTitle]["ingredients"]) || 
                         !array_key_exists("collection",$structure[$sectionTitle]["ingredients"][$ingredient->getTitle()])
                     ) {
-                        $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()] = [
-                            "id" => $ingredient->getId(),
-                            "title" => $ingredient->getTitle(),
-                            "inList" => $groceryListIngredient->isInList(),
-                            "activation" => $groceryListIngredient->isActive(),
-                            "collection" => [$ingredient],
-                            "recipes" => []
-                        ];
-                        if($groceryListIngredient->isInList() && $recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
+                        $structure = $this->fillStructureElement($structure, $sectionTitle, $ingredient, $groceryListIngredient, $recipe);
                     } else {
                         if($groceryListIngredient->isInList()){
                             $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]['inList'] = true;
@@ -72,6 +56,20 @@ class GroceryListIngredientService
                 }
             }
         }
+
+        return $structure;
+    }
+
+    private function fillStructureElement($structure, $sectionTitle, $ingredient, $groceryListIngredient, $recipe) {
+        $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()] = [
+            "id" => $ingredient->getId(),
+            "title" => $ingredient->getTitle(),
+            "inList" => $groceryListIngredient->isInList(),
+            "activation" => $groceryListIngredient->isActive(),
+            "collection" => [$ingredient],
+            "recipes" => []
+        ];
+        if($groceryListIngredient->isInList() && $recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
 
         return $structure;
     }
