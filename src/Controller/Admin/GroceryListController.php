@@ -192,6 +192,37 @@ class GroceryListController extends AbstractController
         return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
     }
 
+    #[Route('/toggle-grocerylistingredient-list/{grocerylistId}/{grocerylistingredientId}/{inlist}', name: 'toggleGroceryListIngredientList', requirements: ['grocerylistId' => Requirement::DIGITS,'grocerylistingredientId' => Requirement::DIGITS,'inlist' => 'remove|put'], methods: ['GET'])]
+    public function toggleGroceryListIngredientFromList(int $grocerylistId,int $grocerylistingredientId,string $inlist,Request $request,EntityManagerInterface $em): Response
+    {
+        /** @var User $user */
+        $user = $this->security->getUser();
+
+        /** @var GroceryList $groceryList  */
+        $groceryList = $em->find(GroceryList::class,$grocerylistId);
+        /** @var GroceryListIngredient $grocerylistingredientId  */
+        $groceryListIngredient = $em->find(GroceryListIngredient::class,$grocerylistingredientId);
+
+        if(!$groceryList || !$groceryListIngredient) {
+            return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        if($groceryList->getUser()->getId() === $user->getId()) {
+
+            $inListTarget = !($inlist === 'remove');
+
+            $groceryListIngredient->setInList($inListTarget);
+            $groceryListIngredient->setActivation(false);
+            $em->persist($groceryListIngredient);
+
+            $em->flush();
+
+            return $this->redirectToRoute('admin.list.show', ['slug'=> $groceryList->getSlug(),'id'=> $groceryList->getId()], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
+    }
+
     #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['POST'])]
     public function delete(Request $request, GroceryList $groceryList, EntityManagerInterface $entityManager): Response
     {

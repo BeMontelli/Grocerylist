@@ -1,5 +1,5 @@
 <div class="section__element__content">
-    <a class="" href="{{ path('admin.list.toggleIngredientList', {'grocerylistId':grocery_list.id,'ingredientId': groceryListIngredient.ingredient.id,inlist:groceryListIngredient.inList?'remove':'put'}) }}">
+    <a class="" href="{{ path('admin.list.toggleGroceryListIngredientList', {'grocerylistId':grocery_list.id,'grocerylistingredientId': groceryListIngredient.id,inlist:groceryListIngredient.inList?'remove':'put'}) }}">
         <input type="checkbox" id="{{ groceryListIngredient.ingredient.id }}-{{ grocery_list.id }}"
             {% if groceryListIngredient.inList %}checked="checked"{% endif %}
             data-ingredientid="{{ groceryListIngredient.ingredient.id }}" 
