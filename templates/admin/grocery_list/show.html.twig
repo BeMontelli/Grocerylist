@@ -16,9 +16,11 @@
                 <ul class="listelementchecker" data-controller="listelementchecker">
                     {% if elements is not empty %}
                         {% for element in elements %}
-                            <li class="section">
-                                {{ include('admin/partials/grocerylist_section_card.html.twig') }}
-                            </li>
+                            {% if element.hasElement is same as true %}
+                                <li class="section">
+                                    {{ include('admin/partials/grocerylist_section_card.html.twig') }}
+                                </li>
+                            {% endif %}
                         {% endfor %}
                     {% else %}
                         <li><strong class="section__elements__none">{{ 'app.admin.ingredients.none'|trans }}</strong></li>

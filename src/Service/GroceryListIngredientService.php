@@ -37,6 +37,7 @@ class GroceryListIngredientService
                 ) {
                     $structure[$sectionTitle] = [
                         "section" => $section,
+                        "hasElement" => false,
                         "ingredients" => []
                     ];
                     $structure = $this->fillStructureElement($structure, $sectionTitle, $ingredient, $groceryListIngredient, $recipe);
@@ -70,6 +71,8 @@ class GroceryListIngredientService
             "recipes" => []
         ];
         if($groceryListIngredient->isInList() && $recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
+
+        if($groceryListIngredient->isInList()) $structure[$sectionTitle]["hasElement"] = true;
 
         return $structure;
     }
