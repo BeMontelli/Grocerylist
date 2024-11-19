@@ -47,7 +47,7 @@ class GroceryListIngredientService
                         "collection" => [$ingredient],
                         "recipes" => []
                     ];
-                    if($recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
+                    if($groceryListIngredient->isInList() && $recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
                 } else {
                     if(
                         !array_key_exists($ingredient->getTitle(),$structure[$sectionTitle]["ingredients"]) || 
@@ -61,10 +61,13 @@ class GroceryListIngredientService
                             "collection" => [$ingredient],
                             "recipes" => []
                         ];
-                        if($recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
+                        if($groceryListIngredient->isInList() && $recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
                     } else {
+                        if($groceryListIngredient->isInList()){
+                            $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]['inList'] = true;
+                            if($recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
+                        }
                         $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["collection"][] = $ingredient;
-                        if($recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
                     }
                 }
             }
