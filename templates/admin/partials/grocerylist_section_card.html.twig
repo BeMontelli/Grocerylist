@@ -8,7 +8,7 @@
         {% for ingredient in element['ingredients'] %}
             {% if ingredient.inList %}
             <li class="section__element__item">
-                {{ include('admin/partials/grocerylist_ingredient_card.html.twig') }}
+                {{ include('admin/partials/grocerylist_section_ingredient_card.html.twig') }}
             </li>
             {% endif %}
         {% endfor %}

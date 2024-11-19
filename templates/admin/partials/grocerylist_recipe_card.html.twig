@@ -22,6 +22,17 @@
                         <span>---</span>
                     {% endif %}
                 </div>
+                <div class="ingredients">
+                    {% if recipe.groceryListIngredients is not empty %}
+                    <ul class="ingredients__list">
+                        {% for groceryListIngredient in recipe.groceryListIngredients %}
+                            <li>
+                            {{ include('admin/partials/grocerylist_recipe_ingredient_card.html.twig') }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
                 <a class="btn-remove btn mb-2" href="{{ path('admin.list.removeRecipeList', {'grocerylistId':grocery_list.id,'recipeId': recipe.id}) }}">{{ 'app.admin.lists.recipes.remove'|trans }}</a>
             </div>
         </div>

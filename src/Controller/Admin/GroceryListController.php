@@ -89,6 +89,15 @@ class GroceryListController extends AbstractController
         }
 
         $recipes = $groceryList->getRecipes();
+        // collection objects fully initialize if not
+        foreach ($recipes as $recipe) {
+            $groceryListIngredients = $recipe->getGroceryListIngredients();
+            foreach ($groceryListIngredients as $groceryListIngredient) {
+                if ($groceryListIngredient instanceof Proxy) {
+                    $entityManager->initializeObject($groceryListIngredient);
+                }
+            }
+        }
 
         return $this->render('admin/grocery_list/show.html.twig', [
             'grocery_list' => $groceryList,
