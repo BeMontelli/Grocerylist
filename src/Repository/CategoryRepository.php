@@ -29,7 +29,7 @@ class CategoryRepository extends ServiceEntityRepository
     public function paginateUserCategoriesWithRecipesTotal(int $page, User $user) : PaginationInterface {
 
         $queryBuilder = $this->createQueryBuilder('c')
-            ->select('c as category','COUNT(c.id) as total')
+            ->select('c as category', 'COUNT(r.id) as total')
             ->leftJoin('c.recipes', 'r')
             ->andWhere('c.user = :val')
             ->setParameter('val', $user->getId())
