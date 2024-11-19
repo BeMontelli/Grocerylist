@@ -8,8 +8,7 @@ You can also learn about these practices in [the official Symfony Book][5].
 TO DO LIST
 ------------
 
-  * recipe single tabs : ingredients/products && recipes (accordions ingredients detailed)
-  * recipe in lists should have ingredients accordion and decide inList true/false
+  * recipe single tabs : ingredients/products && recipes
   
   * Entity File for images ?
 
