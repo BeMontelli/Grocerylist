@@ -1,0 +1,15 @@
+<div class="section__element__content">
+    <input type="checkbox" id="{{ ingredient.id }}-{{ grocery_list.id }}"
+        {% if ingredient.activation %}checked="checked"{% endif %}
+        data-ingredientid="{{ ingredient.id }}" 
+        data-listid="{{ grocery_list.id }}">
+    <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
+    {% if ingredient.inList %}
+        <ul class="element__recipes__list">
+        {% for recipe in ingredient['recipes'] %}
+            <span class="recipe">{{recipe.title}}</span>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    <a class="btn-small btn-remove btn" href="{{ path('admin.list.removeIngredientList', {'grocerylistId':grocery_list.id,'ingredientId': ingredient.id}) }}"><i class='bx bx-x'></i></a>
+</div>
