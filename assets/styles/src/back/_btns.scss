@@ -1,10 +1,10 @@
 .btn-primary,.btn-remove{
     text-decoration: none;
-}
-.btn-primary i,.btn-remove i{
-    position: relative;
-    top: 2px;
-    font-size: 1.2rem;
+    i{
+        position: relative;
+        top: 2px;
+        font-size: 1.2rem;
+    }
 }
 
 .btn-small.btn{
@@ -16,11 +16,11 @@
     position: absolute;
     right: 3px;
     top: 3px;
-}
-.btn-small.btn i{
-    position: relative;
-    top: 1px !important;
-    font-size: 16px !important;
+    i{
+        position: relative;
+        top: 1px !important;
+        font-size: 16px !important;
+    }
 }
 
 .btn-primary.btn{
@@ -43,15 +43,14 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-}
-.btn-primary.btn:hover {
-    background-position: right center;
-    color: var(--main-pure-white);
-    text-decoration: none;
-}
-
-.btn-primary.btn:active {
-    transform: scale(0.95);
+    &:hover {
+        background-position: right center;
+        color: var(--main-pure-white);
+        text-decoration: none;
+    }
+    &:active {
+        transform: scale(0.95);
+    }
 }
 
 .btn-remove.btn{
@@ -75,15 +74,15 @@
     user-select: none;
     -webkit-user-select: none;
     touch-action: manipulation;
-}
-.btn-remove.btn i{
-    font-size: 1.5rem;
-}
-.btn-remove.btn:hover {
-    background-position: right center;
-    color: var(--main-pure-white);
-    text-decoration: none;
-}
-.btn-remove.btn:active {
-    transform: scale(0.95);
+    i{
+        font-size: 1.5rem;
+    }
+    &:hover {
+        background-position: right center;
+        color: var(--main-pure-white);
+        text-decoration: none;
+    }
+    &:active {
+        transform: scale(0.95);
+    }
 }

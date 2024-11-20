@@ -1,0 +1,17 @@
+.title__slug_row {
+    .row:first-child{
+        margin-bottom: 0 !important;
+    }
+    .row>label{
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .row>div{
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .row input{
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}

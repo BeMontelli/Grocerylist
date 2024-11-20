@@ -14,18 +14,18 @@ a{
     color: var(--main-green);
     text-decoration: none;
     transition: all 0.5s ease;
-}
-a:hover,a:focus{
-    color: var(--main-green-alt);
-    text-decoration: none;
-    transition: all 0.5s ease;
-}
-a.hspec{
-    height: 38px;
-    display: block;
-}
-a.dashboard{
-    padding: 10px 20px 10px 10px;
+    &:hover,&:focus{
+        color: var(--main-green-alt);
+        text-decoration: none;
+        transition: all 0.5s ease;
+    }
+    &.hspec{
+        height: 38px;
+        display: block;
+    }
+    &.dashboard{
+        padding: 10px 20px 10px 10px;
+    }
 }
 
 input,input::placeholder,textarea,textarea::placeholder,button{
@@ -38,11 +38,10 @@ input,input::placeholder,textarea,textarea::placeholder,button{
 
 .dropdown-item{
     font-weight: 600;
+    &.active, &:active{
+        background-color: var(--main-green);
+    }
 }
-.dropdown-item.active, .dropdown-item:active{
-    background-color: var(--main-green);
-}
-
 
 .card{
     background-color: var(--main-bg-color);
@@ -78,11 +77,11 @@ input[type=text], input[type=email], input[type=number], select, textarea {
 
 table{
     width: 100%;
-}
-table img{
-    max-width: 120px;
-    border-radius: 10px;
-    overflow: hidden;
+    img{
+        max-width: 120px;
+        border-radius: 10px;
+        overflow: hidden;
+    }
 }
 td.actions__edit{
     width: 100px;
@@ -104,9 +103,9 @@ hr {
 
 .page-link{
     color: var(--main-green);
-}
-.page-link:hover {
-    color: var(--main-dark);
+    &:hover {
+        color: var(--main-dark);
+    }
 }
 .active > .page-link, .page-link.active {
     color: var(--bs-pagination-active-color);
