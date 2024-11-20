@@ -1,3 +1,5 @@
+@use '../mixins/responsive' as responsive;
+
 body {
     accent-color: var(--main-green);
     font-family: Arial, sans-serif;
@@ -111,4 +113,10 @@ hr {
     color: var(--bs-pagination-active-color);
     background-color: var(--main-green);
     border-color: var(--main-green);
+}
+
+.mobile__hide{
+    @include responsive.responsiveTo(md) {
+        display: none;
+    }
 }

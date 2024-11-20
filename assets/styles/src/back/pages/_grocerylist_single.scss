@@ -1,5 +1,45 @@
+@use '../../mixins/responsive' as responsive;
+
 #grocerylist__single{
     position: relative;
+
+    .mobile__btns{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        button{
+            margin: 0 5px 10px;
+            opacity: 0.75;
+            &.active{
+                opacity: 1;
+            }
+        }
+    }
+
+    .cols{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        .col__left{
+            width: 50%;
+            margin: 0;
+            padding: 0 10px 0 0;
+            @include responsive.responsiveTo(lg) {
+                width: 100%;
+            }
+        }
+        .col__right{
+            width: 50%;
+            width: 50%;
+            margin: 0;
+            padding: 0 0 0 10px;
+            @include responsive.responsiveTo(lg) {
+                width: 100%;
+            }
+        }
+    }
+
     .current__list__notice{
         border: solid 1px var(--main-orange);
         background-color: var(--main-orange);
@@ -91,5 +131,22 @@
     .section__elements__none{
         font-weight: bold;
         color: var(--main-orange);
+    }
+
+    .mobile__hide{
+        @include responsive.responsiveTo(lg) {
+            display: none;
+        }
+    }
+    .mobile__show{
+        @include responsive.responsiveTo(lg) {
+            display: block;
+        }
+    }
+
+    .desktop__hide{
+        @include responsive.responsiveFrom(lg) {
+            display: none;
+        }
     }
 }
