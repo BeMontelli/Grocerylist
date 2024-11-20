@@ -7,14 +7,12 @@ You can also learn about these practices in [the official Symfony Book][5].
 
 TO DO LIST
 ------------
-
-  * recipe single tabs : ingredients/products && recipes
   
   * Entity File for images ?
 
   * translations
     * flashes
-  * responsive
+  * responsive to complete
 
   * Entities Edit titles translate + structure rework
 
