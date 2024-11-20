@@ -18,10 +18,9 @@ TO DO LIST
 
   * Entities recipes / ingredients => list filter by categories / sections
 
-  * CSS to SCSS and mixins ?
-    * Layout styles rework (header etc)
-    * Confirm modals
-    * flashes rework into layout fix
+  * Layout styles rework (header etc)
+  * Confirm modals
+  * flashes rework into layout fix
 
   * Fixtures default data ?
 
