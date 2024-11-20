@@ -1,0 +1,95 @@
+#grocerylist__single{
+    position: relative;
+    .current__list__notice{
+        border: solid 1px var(--main-orange);
+        background-color: var(--main-orange);
+        border-radius: 5px;
+        font-size: 14px !important;
+        padding: 3px 10px;
+        font-weight: bold;
+        position: relative;
+        top: -6px;
+    }
+
+    .list__title{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 10px 0;
+        a{
+            margin-left: 15px;
+        }
+    }    
+    
+    ul{
+        padding: 0 0 0;
+        margin-bottom: 2rem;
+        .listelementchecker{
+            padding: 0 0 15px;
+            margin-bottom: 0rem;
+        }
+    }
+    
+    li{
+        list-style: none;
+    }
+    
+    ul.section__elements__list{
+        padding: 0 0 15px;
+        margin-bottom: 0rem;
+        padding-left: 10px;
+    }
+
+    .section__element__item{
+        .section__element__content{
+            position: relative;
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+        }
+        
+        .section__element__content input{
+            position: relative;
+        }
+        
+        .section__element__content label{
+            position: relative;
+            margin: 0 10px 10px;
+        }
+        input:checked {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+        input:checked + .check__label {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+        
+        ul.element__recipes__list{
+            position: relative;
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: 20px;
+            margin-bottom: 0;
+        }
+         .element__recipes__list .recipe{
+            position: relative;
+            display: flex;
+            flex-wrap: wrap; 
+            margin-right: 8px;
+            margin-bottom: 8px;
+            padding: 0 8px;
+            font-size: 13px;
+            background-color: var(--main-dark);
+            color: var(--main-dark-lighter);
+            border: solid 1px var(--main-dark-lighter);
+            border-radius: 5px;
+        }
+    }
+    
+    .section__elements__none{
+        font-weight: bold;
+        color: var(--main-orange);
+    }
+}

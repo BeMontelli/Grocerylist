@@ -1,0 +1,59 @@
+#single__recipe{
+    position: relative;
+}
+#single__recipe .cols{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+#single__recipe .col__left{
+    max-width: 250px;
+}
+#single__recipe .col__right{
+    width: calc(100% - 250px);
+    padding-left: 30px;
+}
+#single__recipe .single__pres{
+    margin-bottom: 20px;
+}
+#single__recipe .single__title{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+#single__recipe .single__title h1{
+    margin:0 10px 10px 0;
+}
+#single__recipe .single__price{
+    margin: 20px 0 10px;
+}
+#single__recipe .single__image{
+    position: relative;
+}
+#single__recipe .single__image img{
+    max-width: 250px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+#single__recipe .notice{  
+    margin: 0 0 15px;
+    display: block;
+}
+
+.title__slug_row .row:first-child{
+    margin-bottom: 0 !important;
+}
+.title__slug_row .row>label{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+.title__slug_row .row>div{
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+.title__slug_row .row input{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}

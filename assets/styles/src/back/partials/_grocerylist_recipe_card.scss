@@ -1,0 +1,27 @@
+.grocery__list_recipe_card{
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.grocery__list_recipe_card .cols{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.grocery__list_recipe_card .col__left{
+    max-width: 150px;
+}
+.grocery__list_recipe_card .col__right{
+    width: calc(100% - 150px);
+    padding-left: 15px;
+}
+
+.grocery__list_recipe_card .single__image{
+    position: relative;
+}
+.grocery__list_recipe_card .single__image img{
+    max-width: 150px;
+    border-radius: 10px;
+    overflow: hidden;
+}
