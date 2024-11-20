@@ -9,7 +9,7 @@
         justify-content: flex-start;
         flex-wrap: wrap;
         button{
-            margin: 0 5px 10px;
+            margin: 0 10px 10px 0;
             opacity: 0.75;
             &.active{
                 opacity: 1;
@@ -27,6 +27,7 @@
             padding: 0 10px 0 0;
             @include responsive.responsiveTo(lg) {
                 width: 100%;
+                padding: 0 0 0 0;
             }
         }
         .col__right{
@@ -36,6 +37,7 @@
             padding: 0 0 0 10px;
             @include responsive.responsiveTo(lg) {
                 width: 100%;
+                padding: 0 0 0 0;
             }
         }
     }
@@ -58,6 +60,9 @@
         margin: 10px 0;
         a{
             margin-left: 15px;
+            @include responsive.responsiveTo(lg) {
+                margin: 0;
+            }
         }
     }    
     

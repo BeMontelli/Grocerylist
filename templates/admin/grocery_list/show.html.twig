@@ -8,12 +8,12 @@
         <h1>{{ grocery_list.title }} <i class="current__list__notice" style="font-size:0.65em">{{ 'app.admin.lists.current'|trans }}</i></h1>
 
         <div class="mobile__btns desktop__hide">
-            <button data-id="ingredients" class="btn-primary active btn mb-2">{{ 'app.admin.ingredients.title'|trans }}</button>
-            <button data-id="recipes" class="btn-primary btn mb-2">{{ 'app.admin.recipes.title'|trans }}</button>
+            <button data-group="grocerylist" data-id="ingredients" class="btn-toggler btn-primary active btn mb-2">{{ 'app.admin.ingredients.title'|trans }}</button>
+            <button data-group="grocerylist" data-id="recipes" class="btn-toggler btn-primary btn mb-2">{{ 'app.admin.recipes.title'|trans }}</button>
         </div>
 
         <div class="cols">
-            <div data-id="ingredients" class="col__left ingredients__products mobile__hide mobile__show">
+            <div data-group="grocerylist" data-id="ingredients" class="area-toggler col__left ingredients__products mobile__hide mobile__show">
                 <div class="list__title">
                     <h2 class="mobile__hide">{{ 'app.admin.ingredients.title'|trans }}</h2>
                     <a class="btn-primary btn mb-2" href="{{ path('admin.ingredient.index') }}"><i class='bx bx-plus'></i></a>
@@ -32,7 +32,7 @@
                     {% endif %}
                 </ul>
             </div>
-            <div data-id="recipes" class="col__right recipes mobile__hide">
+            <div data-group="grocerylist" data-id="recipes" class="area-toggler col__right recipes mobile__hide">
                 <div class="list__title">
                     <h2 class="mobile__hide">{{ 'app.admin.recipes.title'|trans }}</h2>
                     <a class="btn-primary btn mb-2" href="{{ path('admin.recipe.index') }}"><i class='bx bx-plus'></i></a>
