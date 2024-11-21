@@ -67,7 +67,9 @@ class RecipeController extends AbstractController
         }
 
         $search = new SearchRecipesDTO();
-        $formSearch = $this->createForm(SearchRecipesType::class,$search);
+        $formSearch = $this->createForm(SearchRecipesType::class,$search, [
+            'attr' => ['data-turbo' => 'false']
+        ]);
         $formSearch->handleRequest($request);
         if($formSearch->isSubmitted() && $formSearch->isValid()) {
             $title = $formSearch->get('title')->getData();
@@ -76,12 +78,13 @@ class RecipeController extends AbstractController
         } else {
             $recipes = $recipeRepository->paginateUserRecipes($currentPage,$user);
         }
-
+        
         return $this->render('admin/recipe/index.html.twig', [
             'recipes' => $recipes,
             'form' => $form,
             'formSearch' => $formSearch
         ]);
+
     }
 
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG], methods: ['GET','POST'])]
