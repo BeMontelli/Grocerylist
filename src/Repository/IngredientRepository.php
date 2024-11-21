@@ -43,6 +43,33 @@ class IngredientRepository extends ServiceEntityRepository
         ]);
     }
 
+    public function paginateUserSearchedIngredients(int $page, User $user, ?string $title, array $sections) : PaginationInterface {
+
+        $queryBuilder = $this->createQueryBuilder('i')
+            ->andWhere('i.user = :val')
+            ->setParameter('val', $user->getId());
+
+        if ($title !== null) {
+            $queryBuilder->andWhere('i.title LIKE :title')
+                ->setParameter('title', '%' . $title . '%');
+        }
+
+        if (!empty($sections)) {
+           $queryBuilder->andWhere('i.section IN (:sections)')
+                ->setParameter('sections', $sections);
+        }
+
+        $queryBuilder->orderBy('i.id', 'ASC');
+        $query = $queryBuilder->getQuery()->getResult();
+
+        return $this->paginator->paginate($query,$page,self::getPerPage(),[
+            'distinct' => true,
+            'sortFieldAllowList' => [
+                'i.id','i.title','i.slug'
+            ],
+        ]);
+    }
+
     public function findAvailableForRecipe()
     {
         return $this->createQueryBuilder('i')

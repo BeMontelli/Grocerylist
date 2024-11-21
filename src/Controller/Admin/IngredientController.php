@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\DTO\SearchIngredientsDTO;
 use App\Entity\Ingredient;
 use App\Entity\GroceryList;
 use App\Entity\GroceryListIngredient;
@@ -17,6 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use App\Service\GroceryListIngredientService;
+use App\Form\SearchIngredientsType;
 
 #[Route("/{_locale}/admin/products-ingredients", name: "admin.ingredient.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -36,7 +38,6 @@ class IngredientController extends AbstractController
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
-        $ingredients = $ingredientRepository->paginateUserIngredients($currentPage,$user);
 
         $ingredient = new Ingredient();
         $form = $this->createForm(IngredientType::class,$ingredient,[
@@ -59,9 +60,23 @@ class IngredientController extends AbstractController
             return $this->redirectToRoute('admin.ingredient.index');
         }
 
+        $search = new SearchIngredientsDTO();
+        $formSearch = $this->createForm(SearchIngredientsType::class,$search, [
+            'attr' => ['data-turbo' => 'false']
+        ]);
+        $formSearch->handleRequest($request);
+        if($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $title = $formSearch->get('title')->getData();
+            $sections = $formSearch->get('sections')->getData();
+            $ingredients = $ingredientRepository->paginateUserSearchedIngredients($currentPage,$user,$title,$sections);
+        } else {
+            $ingredients = $ingredientRepository->paginateUserIngredients($currentPage,$user);
+        }
+
         return $this->render('admin/ingredient/index.html.twig', [
             'ingredients' => $ingredients,
-            'form' => $form
+            'form' => $form,
+            'formSearch' => $formSearch
         ]);
     }
 
