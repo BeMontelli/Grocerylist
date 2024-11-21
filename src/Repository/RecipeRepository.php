@@ -44,6 +44,33 @@ class RecipeRepository extends ServiceEntityRepository
         ]);
     }
 
+    public function paginateUserSearchedRecipes(int $page, User $user, ?string $title, array $categories) : PaginationInterface {
+        
+        $queryBuilder = $this->createQueryBuilder('r')
+            ->andWhere('r.user = :val')
+            ->setParameter('val', $user->getId());
+
+        if ($title !== null) {
+            $queryBuilder->andWhere('r.title LIKE :title')
+                ->setParameter('title', '%' . $title . '%');
+        }
+
+        if (!empty($categories)) {
+            $queryBuilder->andWhere('r.category IN (:categories)')
+                ->setParameter('categories', $categories);
+        }
+
+        $queryBuilder->orderBy('r.id', 'ASC');
+        $query = $queryBuilder->getQuery()->getResult();
+
+        return $this->paginator->paginate($query,$page,self::getPerPage(),[
+            'distinct' => true,
+            'sortFieldAllowList' => [
+                'r.id','r.title','r.slug'
+            ],
+        ]);
+    }
+
     /*public function paginateRecipesWithCategories(int $page, int $limit): Paginator {
         $queryBuilder = $this->createQueryBuilder('r')
             ->setFirstResult(($page - 1) * $limit)

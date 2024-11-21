@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\DTO\SearchRecipesDTO;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\RecipeType;
@@ -21,6 +22,7 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 use App\Form\GroceryListRecipeIngredientsType;
 use App\Repository\GroceryListRepository;
 use App\Service\GroceryListIngredientService;
+use App\Form\SearchRecipesType;
 
 #[Route("/{_locale}/admin/recipes", name: "admin.recipe.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -44,7 +46,6 @@ class RecipeController extends AbstractController
         $user = $this->security->getUser();
 
         $currentPage = $request->query->getInt('page', 1);
-        $recipes = $recipeRepository->paginateUserRecipes($currentPage,$user);
 
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class,$recipe);
@@ -65,9 +66,21 @@ class RecipeController extends AbstractController
             return $this->redirectToRoute('admin.recipe.index');
         }
 
+        $search = new SearchRecipesDTO();
+        $formSearch = $this->createForm(SearchRecipesType::class,$search);
+        $formSearch->handleRequest($request);
+        if($formSearch->isSubmitted() && $formSearch->isValid()) {
+            $title = $formSearch->get('title')->getData();
+            $categories = $formSearch->get('categories')->getData();
+            $recipes = $recipeRepository->paginateUserSearchedRecipes($currentPage,$user,$title,$categories);
+        } else {
+            $recipes = $recipeRepository->paginateUserRecipes($currentPage,$user);
+        }
+
         return $this->render('admin/recipe/index.html.twig', [
             'recipes' => $recipes,
-            'form' => $form
+            'form' => $form,
+            'formSearch' => $formSearch
         ]);
     }
 

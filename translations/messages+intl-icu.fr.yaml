@@ -50,6 +50,7 @@ app:
         }
       show: Montrer
       save: Sauvegarder
+      search: Rechercher
       create: Créer
       submit: Soumettre
       update: 'Mettre à jour'
