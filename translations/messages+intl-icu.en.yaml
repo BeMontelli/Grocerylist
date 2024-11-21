@@ -46,6 +46,7 @@ app:
       show: Show
       save: Save
       search: Save
+      filters: Filters
       create: Create
       submit: Submit
       update: Update

@@ -51,6 +51,7 @@ app:
       show: Montrer
       save: Sauvegarder
       search: Rechercher
+      filters: Filtres
       create: Créer
       submit: Soumettre
       update: 'Mettre à jour'

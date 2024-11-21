@@ -1,0 +1,23 @@
+.search__filters__form{
+    position: relative;
+    margin-bottom: 15px;
+    .card-body{
+        padding-bottom: 0;
+    }
+    form>div{
+        display: flex;
+        align-content: flex-start;
+        justify-content: flex-start;
+    }
+    .row{
+        display: flex;
+        flex-direction: column;
+        min-width: 33%;
+        &>div{
+            width: calc(100% - 10px);
+        }
+    }
+    label{
+        width: auto;
+    }
+}

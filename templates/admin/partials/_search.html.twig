@@ -1,5 +1,14 @@
-{{ form_start(formSearch) }}
+<div class="search__filters__form">
+    <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSearch" aria-expanded="false" aria-controls="collapseSearch">
+        {{ 'app.admin.action.filters'|trans }} <i class='bx bx-filter'></i>
+    </button>
+    <div class="collapse" id="collapseSearch">
+        <div class="card card-body">
+            {{ form_start(formSearch) }}
 
-    {{ form_widget(formSearch) }}
+                {{ form_widget(formSearch) }}
 
-{{ form_end(formSearch) }}
+            {{ form_end(formSearch) }}
+        </div>
+    </div>
+</div>
