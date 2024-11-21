@@ -16,8 +16,6 @@ TO DO LIST
 
   * Entities Edit titles translate + structure rework
 
-  * Entities recipes / ingredients => list filter by categories / sections
-
   * Layout styles rework (header etc)
   * Confirm modals
   * flashes rework into layout fix
