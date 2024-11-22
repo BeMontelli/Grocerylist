@@ -188,6 +188,7 @@
     z-index: 1;
     transition: color 0.2s;
     a {
+        position: relative;
         display: block;
         transition: opacity 1s;
         color: var(--navbar-light-secondary);
@@ -198,8 +199,22 @@
         text-align: inherit;
         text-decoration: none;
         white-space: nowrap;
-        background-color: transparent;
+        background-coloGr: transparent;
         border: 0;
+        &:before{
+          content: "";
+          display: block;
+          position: absolute;
+          height: 6px;
+          width: 6px;
+          border-radius: 100%;
+          opacity: 0;
+          top: calc(50% - 3px);
+          background-color: var(--navbar-light-secondary);
+        }
+        &.active:before{
+          opacity: 1;
+        }
       }
     i{
         font-size: 25px;
