@@ -2,6 +2,7 @@
 
 #grocerylist__single{
     position: relative;
+    margin-bottom: 40px;
 
     .mobile__btns{
         display: flex;
@@ -96,6 +97,7 @@
         
         .section__element__content input{
             position: relative;
+            opacity: 0.6;
         }
         
         .section__element__content label{
