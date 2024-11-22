@@ -199,7 +199,7 @@
         text-align: inherit;
         text-decoration: none;
         white-space: nowrap;
-        background-coloGr: transparent;
+        background-color: transparent;
         border: 0;
         &:before{
           content: "";
@@ -225,50 +225,26 @@
         position: relative;
         top: -5px;
     }
-    &:nth-of-type(1):hover {
-        color: var(--navbar-dark-primary);
-    }
     &:nth-of-type(1):hover ~ #nav-content-highlight {
         top: 16px;
-    }
-    &:nth-of-type(2):hover {
-        color: var(--navbar-dark-primary);
     }
     &:nth-of-type(2):hover ~ #nav-content-highlight {
         top: 70px;
     }
-    &n:nth-of-type(3):hover {
-        color: var(--navbar-dark-primary);
-    }
     &:nth-of-type(3):hover ~ #nav-content-highlight {
         top: 128px;
-    }
-    &:nth-of-type(4):hover {
-        color: var(--navbar-dark-primary);
     }
     &:nth-of-type(4):hover ~ #nav-content-highlight {
         top: 186px;
     }
-    &:nth-of-type(5):hover {
-        color: var(--navbar-dark-primary);
-    }
     &:nth-of-type(5):hover ~ #nav-content-highlight {
         top: 240px;
-    }
-    &:nth-of-type(6):hover {
-        color: var(--navbar-dark-primary);
     }
     &:nth-of-type(6):hover ~ #nav-content-highlight {
         top: 298px;
     }
-    &:nth-of-type(7):hover {
-        color: var(--navbar-dark-primary);
-    }
     &:nth-of-type(7):hover ~ #nav-content-highlight {
         top: 353px;
-    }
-    &:nth-of-type(8):hover {
-        color: var(--navbar-dark-primary);
     }
     &:nth-of-type(8):hover ~ #nav-content-highlight {
         top: 410px;
