@@ -1,4 +1,4 @@
-<header>
+{#<header>
     <div class="container">
         <nav class="left">
             <ul class="main_list">
@@ -36,4 +36,96 @@
             </ul>
         </nav>
     </div>
-</header>
+</header>#}
+
+{#<header id="main-header">
+    <nav class="left">
+        <ul class="main_list">
+           <li><a class="hspec {{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i></a></li>
+            <li><a class="hspec dashboard {{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i></a></li>
+            <li>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item {{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}">{{ 'app.admin.recipes.title'|trans }}</a></li>
+                    <li><a class="dropdown-item {{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ url('admin.category.index') }}">{{ 'app.admin.categories.title'|trans }}</a></li>
+                </ul>
+            </li>
+            <li>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item {{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}">{{ 'app.admin.ingredients.title'|trans }}</a></li>
+                    <li><a class="dropdown-item {{ app.current_route starts with 'admin.section.' ? 'active' : '' }}" href="{{ url('admin.section.index') }}">{{ 'app.admin.sections.title'|trans }}</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <nav class="right">
+        <ul>
+            {% if app.user %}
+                <li><a class="hspec {{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bx-log-out-circle'></i></a></li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>#}
+
+<div id="nav-bar">
+
+  <input id="nav-toggle" type="checkbox" checked/>
+
+  <div id="nav-header">
+    <div id="nav-title">Administration</div>
+    <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
+    <hr/>
+  </div>
+
+  <div id="nav-content">
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i>Front</a>
+    </div>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i>Dashboard</a>
+    </div>
+
+    <hr/>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}"><i class='bx bxs-bowl-hot' ></i>{{ 'app.admin.recipes.title'|trans }}</a>
+    </div>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ url('admin.category.index') }}"><i class='bx bxs-category-alt'></i>{{ 'app.admin.categories.title'|trans }}</a>
+    </div>
+
+    <hr/>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}"><i class='bx bxs-bowl-rice'></i>{{ 'app.admin.ingredients.title'|trans }}</a>
+    </div>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'admin.section.' ? 'active' : '' }}" href="{{ url('admin.section.index') }}"><i class='bx bxs-category'></i>{{ 'app.admin.sections.title'|trans }}</a>
+    </div>
+
+    <hr/>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bxs-log-out-circle' ></i>Logout</a>
+    </div>
+
+    <div id="nav-content-highlight"></div>
+  </div>
+
+    {% if app.user %}
+        <div id="nav-footer">
+        <div id="nav-footer-heading">
+        <div id="nav-footer-avatar">
+            <img src="https://gravatar.com/avatar/"/>
+        </div>
+        <div id="nav-footer-titlebox">
+            <span id="nav-footer-title">{{ app.user.username }}</span>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+  
+</div>

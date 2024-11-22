@@ -17,4 +17,13 @@
     --main-bg-color: var(--main-dark);
     --main-bg-input: var(--main-dark-light);
     --main-text-color: var(--main-white);
+
+    /* HEADER */
+    --background: var(--main-pure-white);
+    --navbar-width: 450px;
+    --navbar-width-min: 80px;
+    --navbar-dark-primary: var(--main-white);
+    --navbar-dark-secondary: var(--main-pure-white);
+    --navbar-light-primary: var(--main-dark);
+    --navbar-light-secondary: var(--main-darker);
 }
