@@ -4,7 +4,11 @@
 
 {% block body %}
     <div class="container">
-        <h1>{{ 'app.admin.lists.title'|trans }}</h1>
+    
+        <div class="d-flex flex-row mb-3 align-items-center">
+            <i class='icon__page_title bx bx-list-ul' ></i>
+            <h1 class="p-2">{{ 'app.admin.lists.title'|trans }}</h1>
+        </div>
 
         <hr>
         {% include 'admin/partials/flashes.html.twig' %}
