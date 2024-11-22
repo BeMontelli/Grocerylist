@@ -41,7 +41,7 @@
   
   #nav-bar {
     position: fixed;
-    left: 1vw;
+    right: -35px;
     top: 1vw;
     height: 550px;
     background: var(--navbar-dark-primary);
@@ -53,6 +53,7 @@
     overflow: hidden;
     user-select: none;
     z-index: 999;
+    transition: all ease-in 0.2s;
     hr {
         margin: 0;
         position: relative;
@@ -67,6 +68,10 @@
     }
     input[type=checkbox] {
         display: none;
+    }
+    &:hover{
+        right: 1vw;
+        transition: all ease-in 0.2s;
     }
   }
   
@@ -318,4 +323,8 @@
     align-items: center;
     cursor: pointer;
     transition: transform 0.2s, opacity 0.2s;
+  }
+
+  #main-content{
+    padding: 60px 40px 0 0;
   }
