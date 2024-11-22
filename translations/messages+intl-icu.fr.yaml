@@ -1,7 +1,8 @@
 app:
   hdr:
     front: Site
-    dashboard: Administration
+    backoffice: Administration
+    dashboard: Tableau de bord
     logout: Déconnexion
   admin:
     default_title: "Bienvenue dans l'administration"

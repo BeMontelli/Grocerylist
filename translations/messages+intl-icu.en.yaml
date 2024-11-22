@@ -1,6 +1,7 @@
 app:
   hdr:
     front: Front
+    backoffice: Back Office
     dashboard: Dashboard
     logout: Logout
   admin:
