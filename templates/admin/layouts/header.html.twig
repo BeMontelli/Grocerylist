@@ -11,11 +11,11 @@
   <div id="nav-content">
 
     <div class="nav-button">
-        <a class="{{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i><span>Front</span></a>
+        <a class="{{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i><span>{{ 'app.hdr.front'|trans }}</span></a>
     </div>
 
     <div class="nav-button">
-        <a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i><span>Dashboard</span></a>
+        <a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i><span>{{ 'app.hdr.dashboard'|trans }}</span></a>
     </div>
 
     <hr/>
@@ -47,7 +47,7 @@
     <hr/>
 
     <div class="nav-button">
-        <a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bxs-log-out-circle' ></i><span>Logout</span></a>
+        <a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bxs-log-out-circle' ></i><span>{{ 'app.hdr.logout'|trans }}</span></a>
     </div>
 
     <div id="nav-content-highlight"></div>

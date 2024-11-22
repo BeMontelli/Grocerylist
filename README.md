@@ -16,7 +16,6 @@ TO DO LIST
 
   * Entities Edit titles translate + structure rework
 
-  * Layout styles rework (header etc)
   * Confirm modals
   * flashes rework into layout fix
 

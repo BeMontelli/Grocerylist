@@ -1,4 +1,8 @@
 app:
+  hdr:
+    front: Front
+    dashboard: Dashboard
+    logout: Logout
   admin:
     default_title: 'Welcome in Administration'
     welcome_title: Welcome
