@@ -79,37 +79,43 @@
   <div id="nav-content">
 
     <div class="nav-button">
-        <a class="{{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i>Front</a>
+        <a class="{{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i><span>Front</span></a>
     </div>
 
     <div class="nav-button">
-        <a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i>Dashboard</a>
-    </div>
-
-    <hr/>
-
-    <div class="nav-button">
-        <a class="{{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}"><i class='bx bxs-bowl-hot' ></i>{{ 'app.admin.recipes.title'|trans }}</a>
-    </div>
-
-    <div class="nav-button">
-        <a class="{{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ url('admin.category.index') }}"><i class='bx bxs-category-alt'></i>{{ 'app.admin.categories.title'|trans }}</a>
+        <a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i><span>Dashboard</span></a>
     </div>
 
     <hr/>
 
     <div class="nav-button">
-        <a class="{{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}"><i class='bx bxs-bowl-rice'></i>{{ 'app.admin.ingredients.title'|trans }}</a>
-    </div>
-
-    <div class="nav-button">
-        <a class="{{ app.current_route starts with 'admin.section.' ? 'active' : '' }}" href="{{ url('admin.section.index') }}"><i class='bx bxs-category'></i>{{ 'app.admin.sections.title'|trans }}</a>
+        <a class="{{ app.current_route starts with 'admin.list' ? 'active' : '' }}" href="{{ url('admin.list.index') }}"><i class='bx bx-list-ul' ></i><span>{{ 'app.admin.lists.title'|trans }}</span></a>
     </div>
 
     <hr/>
 
     <div class="nav-button">
-        <a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bxs-log-out-circle' ></i>Logout</a>
+        <a class="{{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}"><i class='bx bxs-bowl-hot' ></i><span>{{ 'app.admin.recipes.title'|trans }}</span></a>
+    </div>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ url('admin.category.index') }}"><i class='bx bxs-category-alt'></i><span>{{ 'app.admin.categories.title'|trans }}</span></a>
+    </div>
+
+    <hr/>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}"><i class='bx bxs-bowl-rice'></i><span>{{ 'app.admin.ingredients.title'|trans }}</span></a>
+    </div>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'admin.section.' ? 'active' : '' }}" href="{{ url('admin.section.index') }}"><i class='bx bxs-category'></i><span>{{ 'app.admin.sections.title'|trans }}</span></a>
+    </div>
+
+    <hr/>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bxs-log-out-circle' ></i><span>Logout</span></a>
     </div>
 
     <div id="nav-content-highlight"></div>

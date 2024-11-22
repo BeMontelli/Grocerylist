@@ -21,13 +21,6 @@
     background: var(--navbar-light-secondary);
     transform: translate(0, 0) rotate(0deg);
   }
-  #nav-toggle:checked ~ #nav-content .nav-button span {
-    opacity: 0;
-    transition: opacity 0.1s;
-  }
-  #nav-toggle:checked ~ #nav-content .nav-button .fas {
-    min-width: calc(100% - 16px);
-  }
   #nav-toggle:checked ~ #nav-footer #nav-footer-avatar {
     margin-left: 0;
     left: 50%;
@@ -43,7 +36,7 @@
     position: fixed;
     right: -35px;
     top: 1vw;
-    height: 550px;
+    height: 600px;
     background: var(--navbar-dark-primary);
     border-radius: 16px;
     display: flex;
@@ -213,6 +206,10 @@
         padding: 10px 25px 10px 15px;
         transition: min-width 0.2s;
     }
+    span{
+        position: relative;
+        top: -5px;
+    }
     &:nth-of-type(1):hover {
         color: var(--navbar-dark-primary);
     }
@@ -235,7 +232,7 @@
         color: var(--navbar-dark-primary);
     }
     &:nth-of-type(4):hover ~ #nav-content-highlight {
-        top: 182px;
+        top: 186px;
     }
     &:nth-of-type(5):hover {
         color: var(--navbar-dark-primary);
@@ -247,13 +244,19 @@
         color: var(--navbar-dark-primary);
     }
     &:nth-of-type(6):hover ~ #nav-content-highlight {
-        top: 295px;
+        top: 298px;
     }
     &:nth-of-type(7):hover {
         color: var(--navbar-dark-primary);
     }
     &:nth-of-type(7):hover ~ #nav-content-highlight {
         top: 353px;
+    }
+    &:nth-of-type(8):hover {
+        color: var(--navbar-dark-primary);
+    }
+    &:nth-of-type(8):hover ~ #nav-content-highlight {
+        top: 410px;
     }
   }
 

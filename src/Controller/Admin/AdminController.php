@@ -15,8 +15,9 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AdminController extends AbstractController
 {
     #[Route('/', name: 'dashboard')]
-    public function dashboard(Request $request): RedirectResponse 
+    public function dashboard(Request $request): Response 
     {
-        return $this->redirectToRoute('admin.list.index');
+        return $this->render('admin/pages/dashboard.html.twig', [
+        ]);
     }
 }
