@@ -4,6 +4,12 @@ app:
     backoffice: Administration
     dashboard: Tableau de bord
     logout: Déconnexion
+  err:
+    title: Oops !! Une erreur est survenue
+    error: Erreur
+    txt404: "La page que vous recherchez n'existe pas !"
+    txtback: "Vous pouvez retourner à l'accueil"
+    home: Accueil
   admin:
     default_title: "Bienvenue dans l'administration"
     welcome_title: Bienvenue

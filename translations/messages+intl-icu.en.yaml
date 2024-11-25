@@ -4,6 +4,12 @@ app:
     backoffice: Back Office
     dashboard: Dashboard
     logout: Logout
+  err:
+    title: Oops !! An error occured
+    error: Error
+    txt404: The page you are looking for do not exist !
+    txtback: You can go back to the Home
+    home: Home
   admin:
     default_title: 'Welcome in Administration'
     welcome_title: Welcome
