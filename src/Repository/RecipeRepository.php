@@ -36,7 +36,7 @@ class RecipeRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-        return $this->paginator->paginate($queryBuilder,$page,self::getPerPage(),[
+        return $this->paginator->paginate($queryBuilder,$page,self::getPerPageGrid(),[
             'distinct' => true,
             'sortFieldAllowList' => [
                 'r.id','r.title','r.slug'
@@ -63,7 +63,7 @@ class RecipeRepository extends ServiceEntityRepository
         $queryBuilder->orderBy('r.id', 'ASC');
         $query = $queryBuilder->getQuery()->getResult();
 
-        return $this->paginator->paginate($query,$page,self::getPerPage(),[
+        return $this->paginator->paginate($query,$page,self::getPerPageGrid(),[
             'distinct' => true,
             'sortFieldAllowList' => [
                 'r.id','r.title','r.slug'

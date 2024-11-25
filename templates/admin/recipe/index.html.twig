@@ -33,44 +33,23 @@
         {{ include('admin/partials/_search.html.twig') }}
     </div>
 
-    <table class="table">
-        <thead>
-        <tr>
-            {# sorting of properties based on query components #}
-            <th>Image</th>
-            <th{% if recipes.isSorted('a.title') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(recipes, 'Title', 'r.title') }}
-            </th>
-            <th>Categories</th>
-            <th{% if recipes.isSorted('a.slug') %} class="sorted"{% endif %}>
-                {{ knp_pagination_sortable(recipes, 'Slug', 'r.slug') }}
-            </th>
-            <th class="actions">Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-
-        {# table body #}
+    <div class="grid__archive row row-cols-3">
+    
         {% for recipe in recipes %}
-            <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td>
-                    {% if recipe.thumbnail is not empty %}
-                        <img src="{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
-                    {% else %}
-                        <span>NO IMAGE</span>
-                    {% endif %}
-                </td>
-                <td><a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></td>
-                <td>{{ recipe.category.title | default('---') }}</td>
-                <td>{{ recipe.slug }}</td>
-                <td class="actions">
-                    {{ include('admin/recipe/_delete_form.html.twig') }}
-                </td>
-            </tr>
+            <div class="col grid__item recipe__item">
+
+                <div class="img" style="background-image:url({% if recipe.thumbnail is not empty %}{{ recipe.thumbnail }}{% else %}{% endif %})">
+                </div>
+
+                <div class="title"><a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></div>
+                <div class="category">{{ recipe.category.title | default('---') }}</div>
+                
+                {{ include('admin/recipe/_delete_form.html.twig') }}
+            </div>
         {% endfor %}
 
-        </tbody>
-    </table>
+    </div>
+    
     {# display navigation #}
     <div class="navigation">
         {{ knp_pagination_render(recipes) }}
