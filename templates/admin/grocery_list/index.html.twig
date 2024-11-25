@@ -27,7 +27,7 @@
         <div class="table__count">
             {{ 'app.admin.lists.count'|trans({'%entity%': 1}) }} : {{ grocery_lists.getTotalItemCount }}
         </div>
-        <table class="table">
+        <table class="table table__thead__tbody">
             <thead>
             <tr>
                 <th{% if grocery_lists.isSorted('a.title') %} class="sorted"{% endif %}>

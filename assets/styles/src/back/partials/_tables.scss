@@ -1,0 +1,45 @@
+table.table{
+
+    --bs-table-color-type: initial;
+    --bs-table-bg-type: initial;
+    --bs-table-color-state: var(--main-text-color);
+    --bs-table-bg-state: initial;
+    --bs-table-color: var(--bs-emphasis-color);
+    --bs-table-bg: var(--main-dark-lighter);
+    --bs-table-border-color: var(--main-dark-light);
+    --bs-table-accent-bg: transparent;
+    --bs-table-striped-color: var(--bs-emphasis-color);
+    --bs-table-striped-bg: rgba(var(--bs-emphasis-color-rgb), 0.05);
+    --bs-table-active-color: var(--bs-emphasis-color);
+    --bs-table-active-bg: rgba(var(--bs-emphasis-color-rgb), 0.1);
+    --bs-table-hover-color: var(--bs-emphasis-color);
+    --bs-table-hover-bg: rgba(var(--bs-emphasis-color-rgb), 0.075);
+
+    width: 100%;
+    margin-bottom: 1rem;
+    vertical-align: top;
+    border-color: var(--bs-table-border-color);
+}
+
+table.table__thead__tbody{
+    position: relative;
+    thead tr{
+        th:first-child{
+            border-radius: 5px 0 0 0;
+        }
+        th:last-child{
+            border-radius: 0 5px 0 0;
+        }
+    }
+    tbody tr:last-child{
+        td{
+            border-bottom: none;
+        }
+        td:first-child{
+            border-radius: 0 0 0 5px;
+        }
+        td:last-child{
+            border-radius: 0 0 5px 0;
+        }
+    }
+}
