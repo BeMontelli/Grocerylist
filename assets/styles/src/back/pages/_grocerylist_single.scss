@@ -18,11 +18,11 @@
         }
     }
 
-    .cols{
+    .grocerylist__cols{
         display: flex;
         align-items: flex-start;
         justify-content: space-between;
-        .col__left{
+        .grocerylist__col__left{
             width: 50%;
             margin: 0;
             padding: 0 10px 0 0;
@@ -31,8 +31,7 @@
                 padding: 0 0 0 0;
             }
         }
-        .col__right{
-            width: 50%;
+        .grocerylist__col__right{
             width: 50%;
             margin: 0;
             padding: 0 0 0 10px;
@@ -96,17 +95,12 @@
         }
         
         .section__element__content input{
-            position: relative;
-            opacity: 0.6;
+            display: none;
         }
         
         .section__element__content label{
             position: relative;
-            margin: 0 10px 10px;
-        }
-        input:checked {
-            text-decoration: line-through;
-            opacity: 0.5;
+            margin: 0 10px 10px 0;
         }
         input:checked + .check__label {
             text-decoration: line-through;

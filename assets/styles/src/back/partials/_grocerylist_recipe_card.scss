@@ -8,10 +8,10 @@
         flex-wrap: wrap;
     }
     .col__left{
-        max-width: 150px;
+        max-width: 200px;
     }
     .col__right{
-        width: calc(100% - 150px);
+        width: calc(100% - 200px);
         padding-left: 15px;
     }
     
@@ -19,7 +19,7 @@
         position: relative;
     }
     .single__image img{
-        max-width: 150px;
+        max-width: 200px;
         border-radius: 10px;
         overflow: hidden;
     }
