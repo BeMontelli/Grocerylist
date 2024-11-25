@@ -1,0 +1,31 @@
+@use '../../mixins/responsive' as responsive;
+
+#dashboard__page{
+    position: relative;
+    margin-bottom: 40px;
+
+    hr{
+        margin: 0 0 20px;
+    }
+
+    .container>.d-flex a{
+        margin-right: 20px;
+        margin-bottom: 20px;
+        &:hover{
+            .card {
+                background-color: var(--main-white);
+                color: var(--main-dark);
+                transition: all 0.5s ease-in;
+            }
+        }
+    }
+
+    .card {
+        color: var(--main-white);
+        transition: all 0.5s ease-in;
+        i{
+            font-size: 2rem;
+            margin-right: 20px;
+        }
+    }
+}

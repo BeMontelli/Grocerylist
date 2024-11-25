@@ -7,6 +7,7 @@
 @use 'src/back/partials/_forms' as *;
 @use 'src/back/partials/_filters' as *;
 
+@use 'src/back/pages/dashboard' as *;
 @use 'src/back/pages/recipe_single' as *;
 @use 'src/back/pages/grocerylist_single' as *;
 
