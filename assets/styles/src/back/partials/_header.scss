@@ -1,5 +1,6 @@
   #nav-toggle:checked ~ #nav-header {
-    width: calc(var(--navbar-width-min) - 16px);
+    width: var(--navbar-width-min);
+    padding-left: 16px;
   }
   #nav-toggle:checked ~ #nav-content, #nav-toggle:checked ~ #nav-footer {
     width: var(--navbar-width-min);
@@ -36,7 +37,8 @@
     position: fixed;
     right: -35px;
     top: 1vw;
-    height: 600px;
+    height: auto;
+    max-height: 90vh;
     background: var(--navbar-dark-primary);
     border-radius: 16px;
     display: flex;
@@ -50,7 +52,7 @@
     hr {
         margin: 0;
         position: relative;
-        left: 16px;
+        left: 12px;
         width: calc(100% - 32px);
         border: none;
         border-top: solid 1px var(--navbar-dark-secondary);
@@ -71,7 +73,7 @@
   #nav-header {
     position: relative;
     width: var(--navbar-width);
-    left: 16px;
+    left: 6px;
     width: calc(var(--navbar-width) - 16px);
     min-height: 80px;
     background: var(--navbar-dark-primary);
@@ -89,6 +91,7 @@
   #nav-title {
     font-size: 1.5rem;
     transition: opacity 1s;
+    padding-left: 25px;
   }
   
   label[for=nav-toggle] {
@@ -127,8 +130,8 @@
   }
   
   #nav-content {
-    margin: -16px 0;
-    padding: 16px 0;
+    margin: -15px 0;
+    padding: 15px 0 32px;
     position: relative;
     flex: 1;
     width: var(--navbar-width);
@@ -147,6 +150,10 @@
     }
     &::-webkit-scrollbar-button {
       height: 16px;
+    }
+    
+    hr {
+      left: -15px;
     }
   }
   
@@ -178,7 +185,7 @@
   
   .nav-button {
     position: relative;
-    margin-left: 16px;
+    margin-left: 12px;
     height: 54px;
     display: flex;
     align-items: center;
@@ -218,7 +225,7 @@
       }
     i{
         font-size: 25px;
-        padding: 10px 25px 10px 15px;
+        padding: 10px 28px 10px 15px;
         transition: min-width 0.2s;
     }
     span{
@@ -226,28 +233,28 @@
         top: -5px;
     }
     &:nth-of-type(1):hover ~ #nav-content-highlight {
-        top: 16px;
+        top: 17px;
     }
     &:nth-of-type(2):hover ~ #nav-content-highlight {
-        top: 70px;
+        top: 69px;
     }
     &:nth-of-type(3):hover ~ #nav-content-highlight {
-        top: 128px;
+        top: 127px;
     }
     &:nth-of-type(4):hover ~ #nav-content-highlight {
-        top: 186px;
+        top: 185px;
     }
     &:nth-of-type(5):hover ~ #nav-content-highlight {
-        top: 240px;
+        top: 239px;
     }
     &:nth-of-type(6):hover ~ #nav-content-highlight {
-        top: 298px;
+        top: 297px;
     }
     &:nth-of-type(7):hover ~ #nav-content-highlight {
-        top: 353px;
+        top: 351px;
     }
     &:nth-of-type(8):hover ~ #nav-content-highlight {
-        top: 410px;
+        top: 409px;
     }
   }
 

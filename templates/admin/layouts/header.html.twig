@@ -2,11 +2,18 @@
 
   <input id="nav-toggle" type="checkbox" checked/>
 
-  <div id="nav-header">
-    <div id="nav-title">{{ 'app.hdr.backoffice'|trans }}</div>
-    <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
-    <hr/>
-  </div>
+    {% if app.user %}
+        <div id="nav-footer">
+        <div id="nav-footer-heading">
+        <div id="nav-footer-avatar">
+            <img src="https://gravatar.com/avatar/"/>
+        </div>
+        <div id="nav-footer-titlebox">
+            <span id="nav-footer-title">{{ app.user.username }}</span>
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
   <div id="nav-content">
 
@@ -53,17 +60,10 @@
     <div id="nav-content-highlight"></div>
   </div>
 
-    {% if app.user %}
-        <div id="nav-footer">
-        <div id="nav-footer-heading">
-        <div id="nav-footer-avatar">
-            <img src="https://gravatar.com/avatar/"/>
-        </div>
-        <div id="nav-footer-titlebox">
-            <span id="nav-footer-title">{{ app.user.username }}</span>
-            </div>
-        </div>
-    </div>
-    {% endif %}
+  <div id="nav-header">
+    <div id="nav-title">{{ 'app.hdr.backoffice'|trans }}</div>
+    <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
+    <hr/>
+  </div>
   
 </div>
