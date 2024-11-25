@@ -8,7 +8,7 @@
 <div class="container">
     <h1>{{ 'app.hdr.dashboard'|trans }}</h1>
 
-    <a class="mt-4 mb-4 btn btn-primary {{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}">
+    <a class="mt-4 mb-4 btn btn-primary btn-lg {{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}">
         <i class='bx bxs-home-circle' ></i>
         {{ 'app.hdr.front'|trans }}
     </a>
@@ -63,7 +63,7 @@
     <hr/>
 
     <div class="actions">
-        <a class="mt-4 btn btn-primary {{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}">
+        <a class="mt-4 btn btn-primary btn-lg {{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}">
             <i class='bx bxs-log-out-circle' ></i>
             {{ 'app.hdr.logout'|trans }}
         </a>
