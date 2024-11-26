@@ -30,26 +30,6 @@ WORK IN PROGESS
 
   * Check **WIP** notes
 
-Data Schema
-------------
-
-GroceryList
-- own recipes
-- own ingredients
-- own products
-- one tab for recipes listing
-- one tab for list ingredients/products by categories (list mixed types)
-
-Data Default
-------------
-
-* Recipe's Category
-- Entrée
-- Plat principal
-- Dessert
-- Apéritif
-- Autre
-
 Requirements
 ------------
 
