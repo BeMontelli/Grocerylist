@@ -12,6 +12,7 @@ TO DO LIST
 
   * translations
     * flashes
+    * no records notices
   * responsive to complete
 
   * Entities Edit titles translate + structure rework
