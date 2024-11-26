@@ -20,7 +20,10 @@ TO DO LIST
   * Confirm modals
   * flashes rework into layout fix
 
-  * Fixtures default data ?
+  * Fixtures default data
+    * Category
+    * Section
+    * Ingredient
 
 WORK IN PROGESS
 ------------
@@ -39,30 +42,6 @@ GroceryList
 
 Data Default
 ------------
-* User
-- Admin : test@example.com
-- test : test@test.com
-
-* Ingredient/Product's Section
-- Conserves
-- Hygiene
-- Ménage
-- Vaisselle
-- Cuisine
-- Matin/Biscuits
-- Boissons
-- Desserts
-- Apéritifs
-- Surgelés
-- Condiments/Sauces
-- Épicerie
-- Fruits
-- Légumes
-- Laitages
-- Fromages
-- Viandes
-- Poissons
-- Autres
 
 * Recipe's Category
 - Entrée
