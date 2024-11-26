@@ -28,7 +28,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
         $users = [
             [
                 "username" => "admin",
-                "email" => "adminlists@montellimard.fr",
+                "email" => "testgrocerylistadmin@yopmail.com",
                 "password" => "CU4JpB&o8jQiMq",
                 "roles" => ['ROLE_USER', 'ROLE_ADMIN'],
                 "verified" => true,
@@ -36,7 +36,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
             ],
             [
                 "username" => "benjmontellimard",
-                "email" => "benjmontellimard@gmail.com",
+                "email" => "testgrocerylist@yopmail.com",
                 "password" => "gaD&c@J6nzMTsU",
                 "roles" => ['ROLE_USER'],
                 "verified" => true,
@@ -48,7 +48,8 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
             $existing = $this->entityManager->getRepository(User::class)
                 ->findOneBy(['email' => $user["email"]]);
     
-            if (!$existing) $this->createUser($manager,$user,);
+            if (!$existing) $this->createUser($manager,$user);
+            else $this->addReference($user['reference'], $existing);
         }
     }
 
