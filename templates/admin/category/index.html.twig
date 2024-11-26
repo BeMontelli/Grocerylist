@@ -55,7 +55,11 @@
                     {{ include('admin/category/_delete_form.html.twig') }}
                 </td>
             </tr>
-        {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6">no records found</td>
+                </tr>
+            {% endfor %}
 
         </tbody>
     </table>
