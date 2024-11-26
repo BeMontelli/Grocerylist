@@ -96,7 +96,7 @@ app:
       email: 'Votre e-mail'
       email.placeholder: johndoe@gmail.com
       password: 'Mot de passe'
-      terms: 'Accpter les termes & conditions'
+      terms: 'Accepter les termes & conditions'
       btn: "S'inscrire"
     logout:
       action: 'Se déconnecter'
