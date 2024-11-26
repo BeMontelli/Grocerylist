@@ -14,6 +14,9 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     private UserPasswordHasherInterface $userPasswordHasher;
     private EntityManagerInterface $entityManager;
 
+    public const ADMIN_USER_REFERENCE = 'admin-user';
+    public const NORMAL_USER_REFERENCE = 'normal-user';
+
     public function __construct(UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager)
     {
         $this->userPasswordHasher = $userPasswordHasher;
@@ -29,6 +32,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
                 "password" => "CU4JpB&o8jQiMq",
                 "roles" => ['ROLE_USER', 'ROLE_ADMIN'],
                 "verified" => true,
+                'reference' => self::ADMIN_USER_REFERENCE,
             ],
             [
                 "username" => "benjmontellimard",
@@ -36,6 +40,7 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
                 "password" => "gaD&c@J6nzMTsU",
                 "roles" => ['ROLE_USER'],
                 "verified" => true,
+                'reference' => self::NORMAL_USER_REFERENCE,
             ],
         ];
 
@@ -48,20 +53,22 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     }
 
     public function createUser(ObjectManager $manager,array $user): void {
-        $userAdmin = new User();
-        $userAdmin->setUsername($user["username"]);
-        $userAdmin->setEmail($user["email"]);
-        $userAdmin->setRoles($user["roles"]);
-        $userAdmin->setVerified($user["verified"]);
+        $newUser = new User();
+        $newUser->setUsername($user["username"]);
+        $newUser->setEmail($user["email"]);
+        $newUser->setRoles($user["roles"]);
+        $newUser->setVerified($user["verified"]);
 
         $hashedPassword = $this->userPasswordHasher->hashPassword(
-            $userAdmin,
+            $newUser,
             $user['password']
         );
-        $userAdmin->setPassword($hashedPassword);
+        $newUser->setPassword($hashedPassword);
 
-        $manager->persist($userAdmin);
+        $manager->persist($newUser);
         $manager->flush();
+
+        $this->addReference($user['reference'], $newUser);
     }
 
     public static function getGroups(): array
