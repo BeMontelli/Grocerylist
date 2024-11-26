@@ -30,7 +30,12 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
+
             SectionFixtures::class,
+            // Ingredients
+
+            CategoryFixtures::class,
+            // Recipes
         ];
     }
 }
