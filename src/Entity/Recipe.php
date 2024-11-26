@@ -213,8 +213,9 @@ class Recipe
         return $this;
     }
 
-    public function getThumbnail(): ?string
+    public function getThumbnail(string $format = null): ?string
     {
+        if( !$this->thumbnail ) $this->thumbnail = '/images/placeholder-big.jpg';
         return $this->thumbnail;
     }
 
