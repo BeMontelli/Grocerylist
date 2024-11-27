@@ -18,6 +18,7 @@ TO DO LIST
     * no records notices
 
   * responsive to complete
+  * styles toggler items/recipes list single as navigation prev/next
 
   * Entities Edit titles translate + structure rework
 
