@@ -51,13 +51,14 @@ class GroceryListController extends AbstractController
         $form = $this->createForm(GroceryListType::class, $groceryList);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $groceryList->setUser($user);
-            $entityManager->persist($groceryList);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'List saved !');
-            return $this->redirectToRoute('admin.list.index');
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $groceryList->setUser($user);
+                $entityManager->persist($groceryList);
+                $entityManager->flush();
+                $this->addFlash('success', 'List saved !');
+                return $this->redirectToRoute('admin.list.index');
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/grocery_list/index.html.twig', [
@@ -114,11 +115,13 @@ class GroceryListController extends AbstractController
 
         $form = $this->createForm(GroceryListType::class, $groceryList);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-            $this->addFlash('success', 'List updated !');
 
-            return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $entityManager->flush();
+                $this->addFlash('success', 'List updated !');
+                return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/grocery_list/edit.html.twig', [

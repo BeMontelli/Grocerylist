@@ -44,20 +44,22 @@ class IngredientController extends AbstractController
             'user'=> $user,
         ]);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $ingredient->setUser($user);
-
-            $entityManager->persist($ingredient);
-            $entityManager->flush();
-
-            $groceryListIngredientService->linkIngredientToGroceryLists(
-                $ingredient,
-                null,
-                $ingredient->getTemporaryGroceryLists()
-            );
-
-            $this->addFlash('success', 'Ingredient saved !');
-            return $this->redirectToRoute('admin.ingredient.index');
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $ingredient->setUser($user);
+    
+                $entityManager->persist($ingredient);
+                $entityManager->flush();
+    
+                $groceryListIngredientService->linkIngredientToGroceryLists(
+                    $ingredient,
+                    null,
+                    $ingredient->getTemporaryGroceryLists()
+                );
+    
+                $this->addFlash('success', 'Ingredient saved !');
+                return $this->redirectToRoute('admin.ingredient.index');
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         $search = new SearchIngredientsDTO();
@@ -98,12 +100,14 @@ class IngredientController extends AbstractController
         ]);
         
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $formData = $form->getData();
-            $entityManager->persist($formData);
-            $entityManager->flush();
-            $this->addFlash('success', 'Ingredient updated !');
-            return $this->redirectToRoute('admin.ingredient.edit', ["id" => $ingredient->getId()]);
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $formData = $form->getData();
+                $entityManager->persist($formData);
+                $entityManager->flush();
+                $this->addFlash('success', 'Ingredient updated !');
+                return $this->redirectToRoute('admin.ingredient.edit', ["id" => $ingredient->getId()]);
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/ingredient/edit.html.twig', [

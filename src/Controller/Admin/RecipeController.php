@@ -50,20 +50,23 @@ class RecipeController extends AbstractController
         $recipe = new Recipe();
         $form = $this->createForm(RecipeType::class,$recipe);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $file = $form->get('thumbnailfile')->getData();
-            if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
-
-            /** @var Recipe $recipe */
-            $recipe = $form->getData();
-            if(!empty($thumbnailPath)) $recipe->setThumbnail($thumbnailPath);
-
-            $recipe = $form->getData();
-            $recipe->setUser($user);
-            $em->persist($recipe);
-            $em->flush();
-            $this->addFlash('success', 'Recipe saved !');
-            return $this->redirectToRoute('admin.recipe.index');
+        
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $file = $form->get('thumbnailfile')->getData();
+                if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
+    
+                /** @var Recipe $recipe */
+                $recipe = $form->getData();
+                if(!empty($thumbnailPath)) $recipe->setThumbnail($thumbnailPath);
+    
+                $recipe = $form->getData();
+                $recipe->setUser($user);
+                $em->persist($recipe);
+                $em->flush();
+                $this->addFlash('success', 'Recipe saved !');
+                return $this->redirectToRoute('admin.recipe.index');
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         $search = new SearchRecipesDTO();
@@ -162,26 +165,27 @@ class RecipeController extends AbstractController
         // FORM edit recipe
         $form = $this->createForm(RecipeType::class, $recipe);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-
-            /** @var Recipe $recipe */
-            $recipe = $form->getData();
-            $oldThumbnail = $recipe->getThumbnail();
-
-            $file = $form->get('thumbnailfile')->getData();
-            if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
-
-            if(!empty($thumbnailPath)) {
-                $fileDir = $this->getParameter('kernel.project_dir').'/public';
-                $this->fileUploader->deleteThumbnail($fileDir,$oldThumbnail);
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
                 /** @var Recipe $recipe */
-                $recipe->setThumbnail($thumbnailPath);
-            }
+                $recipe = $form->getData();
+                $oldThumbnail = $recipe->getThumbnail();
 
-            $em->persist($recipe);
-            $em->flush();
-            $this->addFlash('success', 'Recipe updated !');
-            return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
+                $file = $form->get('thumbnailfile')->getData();
+                if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
+
+                if(!empty($thumbnailPath)) {
+                    $fileDir = $this->getParameter('kernel.project_dir').'/public';
+                    $this->fileUploader->deleteThumbnail($fileDir,$oldThumbnail);
+                    /** @var Recipe $recipe */
+                    $recipe->setThumbnail($thumbnailPath);
+                }
+
+                $em->persist($recipe);
+                $em->flush();
+                $this->addFlash('success', 'Recipe updated !');
+                return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/recipe/show.html.twig', [

@@ -41,12 +41,15 @@ class CategoryController extends AbstractController
         $category = new Category();
         $form = $this->createForm(CategoryType::class,$category);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $category->setUser($user);
-            $entityManager->persist($category);
-            $entityManager->flush();
-            $this->addFlash('success', 'Category saved !');
-            return $this->redirectToRoute('admin.category.index');
+            
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $category->setUser($user);
+                $entityManager->persist($category);
+                $entityManager->flush();
+                $this->addFlash('success', 'Category saved !');
+                return $this->redirectToRoute('admin.category.index');
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/category/index.html.twig', [
@@ -75,12 +78,14 @@ class CategoryController extends AbstractController
 
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $formData = $form->getData();
-            $entityManager->persist($formData);
-            $entityManager->flush();
-            $this->addFlash('success', 'Category updated !');
-            return $this->redirectToRoute('admin.category.edit', ["id" => $category->getId()]);
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $category->setUser($user);
+                $entityManager->persist($category);
+                $entityManager->flush();
+                $this->addFlash('success', 'Category saved !');
+                return $this->redirectToRoute('admin.category.index');
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/category/edit.html.twig', [

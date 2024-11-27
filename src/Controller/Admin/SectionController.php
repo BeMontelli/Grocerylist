@@ -41,13 +41,14 @@ class SectionController extends AbstractController
         $form = $this->createForm(SectionType::class, $section);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $section->setUser($user);
-            $entityManager->persist($section);
-            $entityManager->flush();
-            $this->addFlash('success', 'Section saved !');
-
-            return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $section->setUser($user);
+                $entityManager->persist($section);
+                $entityManager->flush();
+                $this->addFlash('success', 'Section saved !');
+                return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/section/index.html.twig', [
@@ -68,11 +69,12 @@ class SectionController extends AbstractController
         $form = $this->createForm(SectionType::class, $section);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-            $this->addFlash('success', 'Section updated !');
-
-            return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $entityManager->flush();
+                $this->addFlash('success', 'Section updated !');
+                return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/section/edit.html.twig', [
