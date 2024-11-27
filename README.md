@@ -9,6 +9,8 @@ TO DO LIST
 ------------
   
   * Entity File for images ?
+    * & Gallery ?
+    * Drag & Drop file input ?
 
   * translations
     * flashes, notification alerts
