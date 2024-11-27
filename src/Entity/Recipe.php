@@ -12,8 +12,6 @@ use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
-#[UniqueEntity('title')]
-#[UniqueEntity('slug')]
 class Recipe
 {
     #[ORM\Id]
