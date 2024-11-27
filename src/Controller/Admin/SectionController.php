@@ -87,7 +87,9 @@ class SectionController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($section);
             $entityManager->flush();
-            $this->addFlash('success', 'Ingredient category '.$section->getTitle().' deleted !');
+            $this->addFlash('warning', 'Ingredient category '.$section->getTitle().' deleted !');
+        } else {
+            $this->addFlash('danger', 'Error occured !');
         }
 
         return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);

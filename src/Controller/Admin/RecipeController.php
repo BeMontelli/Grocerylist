@@ -192,14 +192,22 @@ class RecipeController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
-    public function delete(Recipe $recipe, EntityManagerInterface $em) {
-        $currentThumbnail = $recipe->getThumbnail();
-        $fileDir = $this->getParameter('kernel.project_dir').'/public';
-        $this->fileUploader->deleteThumbnail($fileDir,$currentThumbnail);
+    public function delete(Request $request,Recipe $recipe, EntityManagerInterface $em) {
 
-        $em->remove($recipe);
-        $em->flush();
-        $this->addFlash('success', 'Recipe '.$recipe->getTitle().' deleted !');
+        if ($this->isCsrfTokenValid('delete'.$recipe->getId(), $request->getPayload()->get('_token'))) {
+            $currentThumbnail = $recipe->getThumbnail();
+            if(!empty($currentThumbnail)) {
+                $fileDir = $this->getParameter('kernel.project_dir').'/public';
+                $this->fileUploader->deleteThumbnail($fileDir,$currentThumbnail);
+            }
+    
+            $em->remove($recipe);
+            $em->flush();
+            $this->addFlash('warning', 'Recipe '.$recipe->getTitle().' deleted !');
+        } else {
+            $this->addFlash('danger', 'Error occured !');
+        }
+
         return $this->redirectToRoute('admin.recipe.index');
     }
 }

@@ -113,10 +113,16 @@ class IngredientController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
-    public function delete(Ingredient $ingredient, EntityManagerInterface $entityManager) {
-        $entityManager->remove($ingredient);
-        $entityManager->flush();
-        $this->addFlash('success', 'Ingredient '.$ingredient->getTitle().' deleted !');
+    public function delete(Request $request, Ingredient $ingredient, EntityManagerInterface $entityManager) {
+        
+        if ($this->isCsrfTokenValid('delete'.$ingredient->getId(), $request->getPayload()->get('_token'))) {
+            $entityManager->remove($ingredient);
+            $entityManager->flush();
+            $this->addFlash('warning', 'Ingredient '.$ingredient->getTitle().' deleted !');
+        } else {
+            $this->addFlash('danger', 'Error occured !');
+        }
+
         return $this->redirectToRoute('admin.ingredient.index');
     }
 }

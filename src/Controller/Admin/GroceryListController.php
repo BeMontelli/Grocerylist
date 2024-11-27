@@ -235,7 +235,9 @@ class GroceryListController extends AbstractController
 
             $entityManager->remove($groceryList);
             $entityManager->flush();
-            $this->addFlash('success', 'List '.$groceryList->getTitle().' deleted !');
+            $this->addFlash('warning', 'List '.$groceryList->getTitle().' deleted !');
+        } else {
+            $this->addFlash('danger', 'Error occured !');
         }
 
         return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);

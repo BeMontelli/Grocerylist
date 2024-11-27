@@ -90,10 +90,16 @@ class CategoryController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
-    public function delete(Category $category, EntityManagerInterface $entityManager) {
-        $entityManager->remove($category);
-        $entityManager->flush();
-        $this->addFlash('success', 'Category '.$category->getTitle().' deleted !');
+    public function delete(Request $request, Category $category, EntityManagerInterface $entityManager) {
+
+        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->get('_token'))) {
+            $entityManager->remove($category);
+            $entityManager->flush();
+            $this->addFlash('warning', 'Category '.$category->getTitle().' deleted !');
+        } else {
+            $this->addFlash('danger', 'Error occured !');
+        }
+
         return $this->redirectToRoute('admin.category.index');
     }
 }
