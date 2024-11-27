@@ -10,6 +10,27 @@ app:
     txt404: "La page que vous recherchez n'existe pas !"
     txtback: "Vous pouvez retourner à l'accueil"
     home: Accueil
+  notif:
+    erroccur: Une erreur est survenue !
+    validerr: Le formulaire comporte une erreur !
+    saved: >-
+        {gender, select,
+          female   {Entité sauvegardée !}
+          male     {Entité sauvegardé !}
+          other    {Entité sauvegardée !}
+        }
+    edited: >-
+        {gender, select,
+          female   {Entité mise à jour !}
+          male     {Entité mis à jour !}
+          other    {Entité mis à jour !}
+        }
+    deleted: >-
+        {gender, select,
+          female   {Entité supprimée !}
+          male     {Entité supprimé !}
+          other    {Entité supprimé !}
+        }
   admin:
     default_title: "Bienvenue dans l'administration"
     welcome_title: Bienvenue

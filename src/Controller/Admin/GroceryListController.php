@@ -16,6 +16,7 @@ use App\Service\GroceryListIngredientService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -28,12 +29,14 @@ use Doctrine\Persistence\Proxy;
 class GroceryListController extends AbstractController
 {
     private $security;
+    private $translator;
     private $fileUploader;
     private $groceryListIngredientService;
 
-    public function __construct(Security $security, FileUploader $fileUploader, GroceryListIngredientService $groceryListIngredientService)
+    public function __construct(Security $security, TranslatorInterface $translator, FileUploader $fileUploader, GroceryListIngredientService $groceryListIngredientService)
     {
         $this->security = $security;
+        $this->translator = $translator;
         $this->fileUploader = $fileUploader;
         $this->groceryListIngredientService = $groceryListIngredientService;
     }
@@ -56,9 +59,9 @@ class GroceryListController extends AbstractController
                 $groceryList->setUser($user);
                 $entityManager->persist($groceryList);
                 $entityManager->flush();
-                $this->addFlash('success', 'List saved !');
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
                 return $this->redirectToRoute('admin.list.index');
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/grocery_list/index.html.twig', [
@@ -119,9 +122,9 @@ class GroceryListController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $entityManager->flush();
-                $this->addFlash('success', 'List updated !');
+                $this->addFlash('success', $this->translator->trans('app.notif.edited', ['%gender%' => 'female']));
                 return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/grocery_list/edit.html.twig', [
@@ -238,9 +241,9 @@ class GroceryListController extends AbstractController
 
             $entityManager->remove($groceryList);
             $entityManager->flush();
-            $this->addFlash('warning', 'List '.$groceryList->getTitle().' deleted !');
+            $this->addFlash('warning', $this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
-            $this->addFlash('danger', 'Error occured !');
+            $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
 
         return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);

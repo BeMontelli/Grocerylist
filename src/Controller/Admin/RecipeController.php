@@ -12,6 +12,7 @@ use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,12 +30,14 @@ use App\Form\SearchRecipesType;
 class RecipeController extends AbstractController
 {
     private $security;
+    private $translator;
     private $fileUploader;
     private $groceryListIngredientService;
 
-    public function __construct(Security $security, FileUploader $fileUploader,GroceryListIngredientService $groceryListIngredientService)
+    public function __construct(Security $security, TranslatorInterface $translator, FileUploader $fileUploader,GroceryListIngredientService $groceryListIngredientService)
     {
         $this->security = $security;
+        $this->translator = $translator;
         $this->fileUploader = $fileUploader;
         $this->groceryListIngredientService = $groceryListIngredientService;
     }

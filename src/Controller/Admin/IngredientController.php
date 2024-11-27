@@ -12,6 +12,7 @@ use App\Repository\IngredientRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -25,10 +26,12 @@ use App\Form\SearchIngredientsType;
 class IngredientController extends AbstractController
 {
     private $security;
+    private $translator;
 
-    public function __construct(Security $security)
+    public function __construct(Security $security,TranslatorInterface $translator)
     {
         $this->security = $security;
+        $this->translator = $translator;
     }
 
     #[Route('/', name: 'index')]
