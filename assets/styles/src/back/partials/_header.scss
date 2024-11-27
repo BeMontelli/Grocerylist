@@ -1,9 +1,18 @@
+@use '../../mixins/responsive' as responsive;
+
   #nav-toggle:checked ~ #nav-header {
     width: var(--navbar-width-min);
     padding-left: 16px;
   }
-  #nav-toggle:checked ~ #nav-content, #nav-toggle:checked ~ #nav-footer {
+  #nav-toggle:checked ~ #nav-content {
     width: var(--navbar-width-min);
+    @include responsive.responsiveTo(sm) {
+      display: none !important;
+    }
+  }
+  #nav-toggle:checked ~ #nav-footer {
+    width: var(--navbar-width-min);
+    display: block !important;
   }
   #nav-toggle:checked ~ #nav-header #nav-title {
     opacity: 0;
@@ -38,7 +47,7 @@
   #nav-bar {
     position: fixed;
     right: -35px;
-    top: 1vw;
+    top: 10px;
     height: auto;
     max-height: 90vh;
     background: var(--navbar-dark-primary);
@@ -51,6 +60,11 @@
     user-select: none;
     z-index: 999;
     transition: all ease-in 0.2s;
+    @include responsive.responsiveTo(md) {
+      top: inherit;
+      right: -40px;
+      bottom: 10px;
+    }
     hr {
         margin: 0;
         position: relative;
@@ -74,9 +88,9 @@
   
   #nav-header {
     position: relative;
-    width: var(--navbar-width);
     left: 6px;
-    width: calc(var(--navbar-width) - 16px);
+    width: var(--navbar-width);
+    max-width: 100vw;
     min-height: 80px;
     background: var(--navbar-dark-primary);
     border-radius: 16px;
@@ -138,11 +152,15 @@
     position: relative;
     flex: 1;
     width: var(--navbar-width);
+    max-width: 100vw;
     background: var(--navbar-dark-primary);
     box-shadow: 0 0 0 16px var(--navbar-dark-primary);
     direction: rtl;
     overflow-x: hidden;
     transition: width 0.2s;
+    @include responsive.responsiveTo(sm) {
+      display: block !important;
+    }
     &::-webkit-scrollbar {
       width: 8px;
       height: 8px;
@@ -264,6 +282,7 @@
   #nav-footer {
     position: relative;
     width: var(--navbar-width);
+    max-width: 100vw;
     height: 54px;
     background: var(--navbar-dark-secondary);
     border-radius: 16px;
