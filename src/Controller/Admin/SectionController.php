@@ -83,7 +83,7 @@ class SectionController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['POST'])]
+    #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
     public function delete(Request $request, Section $section, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->getPayload()->get('_token'))) {

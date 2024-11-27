@@ -226,7 +226,7 @@ class GroceryListController extends AbstractController
         return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['POST'])]
+    #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
     public function delete(Request $request, GroceryList $groceryList, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$groceryList->getId(), $request->getPayload()->get('_token'))) {
