@@ -11,8 +11,10 @@ TO DO LIST
   * Entity File for images ?
 
   * translations
-    * flashes
+    * flashes, notification alerts
+    * forms
     * no records notices
+
   * responsive to complete
 
   * Entities Edit titles translate + structure rework
@@ -22,8 +24,6 @@ TO DO LIST
   * Confirm modals
 
   * Fixtures default data
-    * Category
-    * Section
     * Ingredient
 
 WORK IN PROGESS
