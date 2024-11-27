@@ -6,9 +6,6 @@
     <div class="container">
         <h1>Edit Section</h1>
 
-        <hr>
-        {% include 'admin/partials/flashes.html.twig' %}
-
         {{ include('admin/section/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
 
         <a class="btn-primary btn mb-2" href="{{ path('admin.section.index') }}">{{ 'app.admin.action.backlist'|trans }}</a>

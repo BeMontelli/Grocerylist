@@ -10,9 +10,6 @@
             <h1 class="p-2">{{ 'app.admin.lists.title'|trans }}</h1>
         </div>
 
-        <hr>
-        {% include 'admin/partials/flashes.html.twig' %}
-
         <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
             {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.lists.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
         </button>
@@ -21,7 +18,6 @@
                 {{ include('admin/grocery_list/_form.html.twig') }}
             </div>
         </div>
-        <hr>
 
         {# total items count #}
         <div class="table__count">

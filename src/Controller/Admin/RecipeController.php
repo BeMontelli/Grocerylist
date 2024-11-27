@@ -126,7 +126,7 @@ class RecipeController extends AbstractController
 
             $groceryList = $em->getRepository(GroceryList::class)->find($groceryListId);
             if (!$groceryList) {
-                $this->addFlash('error', 'GroceryList do not exists.');
+                $this->addFlash('danger', 'GroceryList do not exists.');
                 return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
             }
 

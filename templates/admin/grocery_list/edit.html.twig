@@ -6,9 +6,6 @@
     <div class="container">
         <h1>Edit GroceryList</h1>
 
-        <hr>
-        {% include 'admin/partials/flashes.html.twig' %}
-
         <div class="list__form mb-4">
             {{ include('admin/grocery_list/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
         </div>
