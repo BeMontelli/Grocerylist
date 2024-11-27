@@ -17,8 +17,9 @@ TO DO LIST
 
   * Entities Edit titles translate + structure rework
 
+  * Profile page ?
+
   * Confirm modals
-  * flashes rework into layout fix
 
   * Fixtures default data
     * Category
