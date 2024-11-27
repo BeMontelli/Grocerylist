@@ -13,7 +13,7 @@ TO DO LIST
     * Drag & Drop file input ?
 
   * translations
-    * flashes, notification alerts
+    * flashes, notification alerts : rsc param name
     * forms
     * no records notices
 
@@ -22,6 +22,10 @@ TO DO LIST
   * Entities Edit titles translate + structure rework
 
   * Profile page ?
+
+  * Forms
+    * Select autocomplete : https://ux.symfony.com/autocomplete
+    * Drop zone upload file : https://ux.symfony.com/dropzone
 
   * Confirm modals
 
