@@ -32,9 +32,6 @@ TO DO LIST
 
   * Confirm modals
 
-  * Fixtures default data
-    * Ingredient
-
 WORK IN PROGESS
 ------------
 
