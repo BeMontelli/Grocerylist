@@ -19,7 +19,8 @@ TO DO LIST
 
   * responsive to complete
   * styles toggler items/recipes list single as navigation prev/next
-
+  * grocerylist single checbkox hidden full size for click
+  
   * Entities Edit titles translate + structure rework
 
   * Profile page ?
@@ -27,6 +28,7 @@ TO DO LIST
   * Forms
     * Select autocomplete : https://ux.symfony.com/autocomplete
     * Drop zone upload file : https://ux.symfony.com/dropzone
+    * textarea form wysiwyg : https://symfony.com/bundles/FOSCKEditorBundle/current/index.html
 
   * Confirm modals
 
