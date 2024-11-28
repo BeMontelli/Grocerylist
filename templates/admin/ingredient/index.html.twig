@@ -37,6 +37,7 @@
                 {{ knp_pagination_sortable(ingredients, 'Title', 'i.title') }}
             </th>
             <th>Sections</th>
+            <th>Recipes ready</th>
             <th{% if ingredients.isSorted('a.slug') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(ingredients, 'Slug', 'i.slug') }}
             </th>
@@ -50,6 +51,13 @@
             <tr {% if loop.index is odd %}class="color"{% endif %}>
                 <td><a href="{{ url('admin.ingredient.show', {slug: ingredient.slug, id: ingredient.id}) }}">{{ ingredient.title }}</a></td>
                 <td>{{ ingredient.section.title | default('---') }}</td>
+                <td>
+                {% if ingredient.availableRecipe is not empty %}
+                    <div class="table__notice good"><i class='bx bx-check'></i></div>
+                {% else %}
+                    <div class="table__notice bad"><i class='bx bx-block' ></i></div>
+                {% endif %}
+                </td>
                 <td>{{ ingredient.slug }}</td>
                 <td class="actions">
                     {{ include('admin/ingredient/_delete_form.html.twig') }}

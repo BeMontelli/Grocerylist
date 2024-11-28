@@ -43,3 +43,21 @@ table.table__thead__tbody{
         }
     }
 }
+
+.table__notice{
+    border: none;
+    color: var(--main-text-color);
+    background-color: var(--main-green);
+    display: flex;
+    padding: 4px;
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 20px;
+    &.good{
+        background-color: var(--main-green);
+    }
+    &.bad{
+        background-color: var(--main-red);
+    }
+}
