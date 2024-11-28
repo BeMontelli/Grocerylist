@@ -3,8 +3,8 @@
 const Encore = require('@symfony/webpack-encore');
 
 Encore
-    .setOutputPath('assets/styles/build/')
-    .setPublicPath('/styles/build')
+    .setOutputPath('assets/build/')
+    .setPublicPath('/build')
     .cleanupOutputBeforeBuild()
     //.enableBuildNotifications()
     .enableVersioning(Encore.isProduction())
