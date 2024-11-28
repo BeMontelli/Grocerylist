@@ -4,6 +4,7 @@
     left: 10px;
     min-width: 50%;
     max-width: calc(100% - 40px);
+    z-index: 99;
     .alert{
         --bs-alert-color: var(--bs-info-text-emphasis);
         --bs-alert-bg: var(--bs-info-bg-subtle);
