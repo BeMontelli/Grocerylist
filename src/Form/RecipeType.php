@@ -14,6 +14,8 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Form\CategoryAutocompleteField;
+use App\Form\IngredientAutocompleteField;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -43,24 +45,8 @@ class RecipeType extends AbstractType
                 ],
                 'label' => 'Recipe thumbnail'
             ])
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
-                'autocomplete' => true,
-                'label' => 'Recipe category',
-                'choice_label' => 'title',
-                'placeholder' => 'Select a category',
-            ])
-            ->add('ingredients', EntityType::class, [
-                'label' => 'Ingredients in',
-                'class' => Ingredient::class,
-                'choice_label' => 'title',
-                'multiple' => true,
-                'expanded' => true,
-                'query_builder' => function (IngredientRepository $er) {
-                    return $er->findAvailableForRecipe();
-                },
-                'by_reference' => false
-            ])
+            ->add('category', CategoryAutocompleteField::class)
+            ->add('ingredients', IngredientAutocompleteField::class)
             ->add('price',NumberType::class, [
                 'empty_data' => 0,
                 'label' => 'Price (€)',

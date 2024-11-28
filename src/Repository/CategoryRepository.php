@@ -46,6 +46,13 @@ class CategoryRepository extends ServiceEntityRepository
         ]);
     }
 
+    public function findForUser(User $user)
+    {
+        return $this->createQueryBuilder('i')
+                    ->where('i.user = :val')
+                    ->setParameter('val', $user->getId());
+    }
+
     //    /**
     //     * @return Recipe[] Returns an array of Recipe objects
     //     */

@@ -70,10 +70,12 @@ class IngredientRepository extends ServiceEntityRepository
         ]);
     }
 
-    public function findAvailableForRecipe()
+    public function findAvailableForRecipeAndUser(User $user)
     {
         return $this->createQueryBuilder('i')
-                    ->where('i.availableRecipe = :available')
+                    ->andWhere('i.user = :val')
+                    ->setParameter('val', $user->getId())
+                    ->andWhere('i.availableRecipe = :available')
                     ->setParameter('available', true);
     }
 
