@@ -13,12 +13,12 @@ use Symfony\Component\String\Slugger\AsciiSlugger;
 class IngredientFixtures extends Fixture
 {
     private EntityManagerInterface $entityManager;
-    private $sections = [];
+    private SectionRepository $sectionRepository;
 
     public function __construct(EntityManagerInterface $entityManager,SectionRepository $sectionRepository)
     {
         $this->entityManager = $entityManager;
-        $this->sections = $sectionRepository->findAll();
+        $this->sectionRepository = $sectionRepository;
     }
 
     public function load(ObjectManager $manager): void
@@ -758,16 +758,19 @@ class IngredientFixtures extends Fixture
 
         
         foreach ($users as $user) {
+
+            $sections = $this->sectionRepository->findAllByUser($user);
+
             foreach ($ingredients as $ingredient) {
                 $existing = $this->entityManager->getRepository(Section::class)
                     ->findOneBy(['title' => $ingredient['title'],'user' => $user]);
         
-                if (!$existing) $this->createIngredient($manager,$ingredient,$user);
+                if (!$existing) $this->createIngredient($manager,$ingredient,$user,$sections);
             }
         }
     }
 
-    public function createIngredient(ObjectManager $manager,array $ingredient,$user): void {
+    public function createIngredient(ObjectManager $manager,array $ingredient,$user,$sections): void {
         $slugger = new AsciiSlugger();
 
         $newIngredient = new Ingredient();
@@ -778,9 +781,14 @@ class IngredientFixtures extends Fixture
 
         $newIngredient->setAvailableRecipe(availableRecipe: $ingredient['recipeOK']);
 
-        //$this->sections;
-        //$newIngredient->setSection($section);
-
+        $titleToFind = $ingredient['section'];
+        $matchingSections = array_filter($sections, function($section) use ($titleToFind) {
+            return $section->getTitle() === $titleToFind;
+        });
+        $matchingSections = array_values($matchingSections);
+        if($matchingSections && count($matchingSections) > 0) {
+            $newIngredient->setSection($matchingSections[0]);
+        }
         $newIngredient->setUser($user);
 
         $newIngredient->setCreatedAt(new \DateTimeImmutable());
