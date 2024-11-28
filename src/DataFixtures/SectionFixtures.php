@@ -24,11 +24,11 @@ class SectionFixtures extends Fixture
             $this->getReference(UserFixtures::NORMAL_USER_REFERENCE),
         ];
 
+        // sections names used in IngredientFixtures
         $sections = [
             "Conserves",
             "Hygiene",
-            "Ménage",
-            "Vaisselle",
+            "Ménage/Vaisselle",
             "Cuisine",
             "Matin/Biscuits",
             "Boissons",
@@ -36,13 +36,16 @@ class SectionFixtures extends Fixture
             "Apéritifs",
             "Surgelés",
             "Condiments/Sauces",
+            "Pâtes/Riz",
+            "Plats cuisinés",
+            "Boulangerie",
             "Épicerie",
             "Fruits",
             "Légumes",
             "Laitages",
             "Fromages",
-            "Viandes",
-            "Poissons",
+            "Boucherie/Viandes",
+            "Poissonnerie/Poissons",
             "Autres"
         ];
 

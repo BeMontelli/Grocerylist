@@ -18,6 +18,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class AppFixtures extends Fixture implements DependentFixtureInterface
 {
+
     public function load(ObjectManager $manager): void
     {
         // $product = new Product();
@@ -32,7 +33,7 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             UserFixtures::class,
 
             SectionFixtures::class,
-            // Ingredients
+            IngredientFixtures::class,
 
             CategoryFixtures::class,
             // Recipes
