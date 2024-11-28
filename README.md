@@ -26,7 +26,6 @@ TO DO LIST
   * Profile page ?
 
   * Forms
-    * Select autocomplete : https://ux.symfony.com/autocomplete
     * Drop zone upload file : https://ux.symfony.com/dropzone
     * textarea form wysiwyg : https://symfony.com/bundles/FOSCKEditorBundle/current/index.html
 
