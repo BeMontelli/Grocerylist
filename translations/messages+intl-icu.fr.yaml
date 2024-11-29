@@ -10,6 +10,7 @@ app:
     txt404: "La page que vous recherchez n'existe pas !"
     txtback: "Vous pouvez retourner à l'accueil"
     home: Accueil
+    norecordfound: Pas de résultats trouvé
   notif:
     erroccur: Une erreur est survenue !
     validerr: Le formulaire comporte une erreur !

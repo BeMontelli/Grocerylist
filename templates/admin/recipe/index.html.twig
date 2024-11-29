@@ -43,7 +43,7 @@
                 {{ include('admin/recipe/_delete_form.html.twig') }}
             </div>
         {% else %}
-                <span>no records found</span>
+                <span>{{ 'app.err.norecordfound'|trans }}</span>
         {% endfor %}
 
     </div>

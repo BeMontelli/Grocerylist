@@ -10,6 +10,7 @@ app:
     txt404: The page you are looking for do not exist !
     txtback: You can go back to the Home
     home: Home
+    norecordfound: No records found
   notif:
     erroccur: Error occured !
     validerr: Form validation error !
