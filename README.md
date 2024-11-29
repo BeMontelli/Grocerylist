@@ -15,7 +15,6 @@ TO DO LIST
   * translations
     * flashes, notification alerts : rsc param name
     * forms
-    * no records notices
 
   * responsive to complete
   
