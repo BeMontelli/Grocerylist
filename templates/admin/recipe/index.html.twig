@@ -4,11 +4,11 @@
 
 {% block body %}
 
+    {{ include('admin/partials/page_title.html.twig', {'icon': "<i class='icon__page_title bx bxs-bowl-hot' ></i>",'title': 'app.admin.recipes.title'|trans}) }}
+   
 <div class="container">
     <div class="d-flex flex-row mb-3 align-items-center">
-        <i class='icon__page_title bx bxs-bowl-hot' ></i>
-        <div class="p-2"><h1>{{ 'app.admin.recipes.title'|trans }}</h1></div>
-        <div class="p-2"><a class="btn-primary btn" href="{{ url('admin.category.index') }}">{{ 'app.admin.categories.title'|trans }} <i class='bx bx-transfer-alt'></i></a></div>
+        <div class=""><a class="btn-primary btn" href="{{ url('admin.category.index') }}">{{ 'app.admin.categories.title'|trans }} <i class='bx bx-transfer-alt'></i></a></div>
     </div>
 
     <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">

@@ -5,10 +5,12 @@
 {% block body %}
 
 <div id="dashboard__page">
-<div class="container">
-    <h1>{{ 'app.hdr.dashboard'|trans }}</h1>
 
-    <a class="mt-4 mb-4 btn btn-primary btn-lg {{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}">
+{{ include('admin/partials/page_title.html.twig', {'icon': "<i class='bx bxs-dashboard' ></i>",'title': 'app.hdr.dashboard'|trans}) }}
+    
+<div class="container">
+
+    <a class="mb-4 btn btn-primary btn-lg {{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}">
         <i class='bx bxs-home-circle' ></i>
         {{ 'app.hdr.front'|trans }}
     </a>

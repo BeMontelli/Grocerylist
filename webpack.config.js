@@ -1,6 +1,7 @@
 // webpack.config.js
 
 const Encore = require('@symfony/webpack-encore');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 Encore
     .setOutputPath('assets/build/')
@@ -14,7 +15,6 @@ Encore
 
     .enableSassLoader()
 
-    // Active la prise en charge de PostCSS (pour autoprefixer notamment)
     .enablePostCssLoader((options) => {
         options.postcssOptions = {
             plugins: [
@@ -23,21 +23,18 @@ Encore
         };
     })
 
-    //.addEntry('app', './assets/app.js')
-
-    // Configuration de Babel (pour ES6/ES7)
-    /*.configureBabel((babelConfig) => {
-        babelConfig.presets.push('@babel/preset-env');
-    }, {
-        useBuiltIns: 'usage', // Polyfill automatique des fonctionnalités utilisées
-        corejs: 3
-    })*/
-
-    //.enableImageLoader()
-
     .disableSingleRuntimeChunk()
 
     .enableSourceMaps(!Encore.isProduction())
-;
+
+    .addPlugin(new CopyWebpackPlugin({
+        patterns: [
+            {
+                from: 'assets/build/images',
+                to: '../../public/build/images',
+                noErrorOnMissing: true 
+            }
+        ]
+    }));
 
 module.exports = Encore.getWebpackConfig();
