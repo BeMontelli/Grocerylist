@@ -6,11 +6,12 @@
 
     {{ include('admin/partials/page_title.html.twig', {'icon': "<i class='icon__page_title bx bxs-bowl-hot' ></i>",'title': 'app.admin.recipes.title'|trans}) }}
    
-<div class="container">
-    <div class="d-flex flex-row mb-3 align-items-center">
-        <div class=""><a class="btn-primary btn" href="{{ url('admin.category.index') }}">{{ 'app.admin.categories.title'|trans }} <i class='bx bx-transfer-alt'></i></a></div>
-    </div>
+<div class="container container_relative">
+    <a class="btn_page_title_overflow btn-primary btn" href="{{ url('admin.category.index') }}">{{ 'app.admin.categories.title'|trans }} <i class='bx bx-transfer-alt'></i></a>
+</div>
 
+<div class="container">
+    
     <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
         {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.recipes.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
     </button>
