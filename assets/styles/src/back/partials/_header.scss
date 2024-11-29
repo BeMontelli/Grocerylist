@@ -3,6 +3,10 @@
   #nav-toggle:checked ~ #nav-header {
     width: var(--navbar-width-min);
     padding-left: 16px;
+    border-radius: 16px;
+    @include responsive.responsiveTo(md) {
+      background-color: var(--navbar-dark-primary);
+    }
   }
   #nav-toggle:checked ~ #nav-content {
     width: var(--navbar-width-min);
@@ -20,7 +24,7 @@
     transition: opacity 0.1s;
   }
   #nav-toggle:checked ~ #nav-header label[for=nav-toggle] {
-    left: calc(50% - 8px);
+    left: 50%;
     transform: translate(-50%);
   }
   #nav-toggle:checked ~ #nav-header #nav-toggle-burger {
@@ -88,12 +92,12 @@
   
   #nav-header {
     position: relative;
-    left: 6px;
+    left: 0;
     width: var(--navbar-width);
     max-width: 100vw;
     min-height: 80px;
-    background: var(--navbar-dark-primary);
-    border-radius: 16px;
+    background: var(--background);
+    border-radius: 16px 0 0 16px;
     z-index: 2;
     display: flex;
     align-items: center;
@@ -112,7 +116,7 @@
   
   label[for=nav-toggle] {
     position: absolute;
-    right: 0;
+    right: -6px;
     width: 3rem;
     height: 100%;
     display: flex;
@@ -155,7 +159,7 @@
     max-width: 100vw;
     background: var(--navbar-dark-primary);
     box-shadow: 0 0 0 16px var(--navbar-dark-primary);
-    direction: rtl;
+    direction: ltr;
     overflow-x: hidden;
     transition: width 0.2s;
     @include responsive.responsiveTo(sm) {
@@ -174,7 +178,7 @@
     }
     
     hr {
-      left: -15px;
+      left: 15px;
     }
   }
   
