@@ -17,9 +17,9 @@
     
     <hr/>
 
-    <div class="d-flex flex-wrap">
-        <a class="{{ app.current_route starts with 'admin.list' ? 'active' : '' }}" href="{{ url('admin.list.index') }}">
-            <div class="card p-4 d-flex flex-row justify-content-center align-items-center">
+    <div class="d-flex flex-wrap row">
+        <a class="col">
+            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bx-list-ul' ></i>
                 <span>{{ 'app.admin.lists.title'|trans }}</span>
             </div>
@@ -28,16 +28,16 @@
 
     <hr/>
 
-    <div class="d-flex flex-wrap">
-        <a class="{{ app.current_route starts with 'admin.recipe.' ? 'active' : '' }}" href="{{ url('admin.recipe.index') }}">
-            <div class="card p-4 d-flex flex-row justify-content-center align-items-center">
+    <div class="d-flex flex-wrap row">
+        <a class="col">
+            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bxs-bowl-hot' ></i>
                 <span>{{ 'app.admin.recipes.title'|trans }}</span>
             </div>
         </a>
 
-        <a class="{{ app.current_route starts with 'admin.category.' ? 'active' : '' }}" href="{{ url('admin.category.index') }}">
-            <div class="card p-4 d-flex flex-row justify-content-center align-items-center">
+        <a class="col">
+            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bxs-category-alt'></i>
                 <span>{{ 'app.admin.categories.title'|trans }}</span>
             </div>
@@ -46,16 +46,16 @@
 
     <hr/>
 
-    <div class="d-flex flex-wrap">
-        <a class="{{ app.current_route starts with 'admin.ingredient.' ? 'active' : '' }}" href="{{ url('admin.ingredient.index') }}">
-            <div class="card p-4 d-flex flex-row justify-content-center align-items-center">
+    <div class="d-flex flex-wrap row">
+        <a class="col">
+            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bxs-bowl-rice'></i>
                 <span>{{ 'app.admin.ingredients.title'|trans }}</span>
             </div>
         </a>
 
-        <a class="{{ app.current_route starts with 'admin.section.' ? 'active' : '' }}" href="{{ url('admin.section.index') }}">
-            <div class="card p-4 mr-2 d-flex flex-row justify-content-center align-items-center">
+        <a class="col">
+            <div class="card p-4 mr-2 d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bxs-category'></i>
                 <span>{{ 'app.admin.sections.title'|trans }}</span>
             </div>
@@ -65,7 +65,7 @@
     <hr/>
 
     <div class="actions">
-        <a class="mt-4 btn btn-primary btn-lg {{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}">
+        <a class="mt-4 btn btn-primary btn-lg">
             <i class='bx bxs-log-out-circle' ></i>
             {{ 'app.hdr.logout'|trans }}
         </a>
