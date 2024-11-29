@@ -52,15 +52,19 @@ export default class extends Controller {
                 this.groups.map(group => {
                     if(group.groupName === groupTarget) {
                         group.btns.map(btn => {
-                            btn.classList.remove('active');
+                            btn.parentNode.classList.remove('disabled');
                             return btn;
                         })
                         group.areas.map(area => {
                             const idArea = area.getAttribute('data-id');
                             area.classList.remove('mobile__show');
+                            area.classList.add('mobile__hide');
                             if(idArea === idTarget) {
                                 area.classList.add('mobile__show');
-                                btn.classList.add('active');
+                                btn.parentNode.classList.add('disabled');
+
+                                const newUrl = `${window.location.pathname}?group=${groupTarget}&gid=${idTarget}`;
+                                history.replaceState(null, '', newUrl);
                             }
                             return area;
                         })

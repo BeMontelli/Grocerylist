@@ -1,3 +1,5 @@
+@use '../../mixins/responsive' as responsive;
+
 .grocery__list_recipe_card{
     position: relative;
     margin-bottom: 20px;
@@ -6,13 +8,25 @@
         align-items: flex-start;
         justify-content: space-between;
         flex-wrap: wrap;
+        @include responsive.responsiveTo(sm) {
+            flex-direction: column;
+        }
     }
     .col__left{
         max-width: 200px;
+        @include responsive.responsiveTo(sm) {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
     }
     .col__right{
         width: calc(100% - 200px);
         padding-left: 15px;
+        @include responsive.responsiveTo(sm) {
+            padding-left: 0;
+            width: 100%;
+        }
     }
     
     .single__image{
@@ -22,5 +36,17 @@
         max-width: 200px;
         border-radius: 10px;
         overflow: hidden;
+        @include responsive.responsiveTo(sm) {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    .card.ingredients{
+        padding: 10px;
+        margin-bottom: 15px;
+        ul{
+            margin-bottom: 0 !important;
+        }
     }
 }

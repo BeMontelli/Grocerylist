@@ -215,6 +215,7 @@ class GroceryListController extends AbstractController
 
         if($groceryList->getUser()->getId() === $user->getId()) {
 
+
             $inListTarget = !($inlist === 'remove');
 
             $groceryListIngredient->setInList($inListTarget);
@@ -223,7 +224,12 @@ class GroceryListController extends AbstractController
 
             $em->flush();
 
-            return $this->redirectToRoute('admin.list.show', ['slug'=> $groceryList->getSlug(),'id'=> $groceryList->getId()], Response::HTTP_SEE_OTHER);
+            $url = $this->generateUrl('admin.list.show', [
+                'slug' => $groceryList->getSlug(),
+                'id' => $groceryList->getId()
+            ]) . '?group=grocerylist&gid=recipes';
+
+            return $this->redirect($url, Response::HTTP_SEE_OTHER);
         }
 
         return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);

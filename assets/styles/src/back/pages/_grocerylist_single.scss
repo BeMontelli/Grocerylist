@@ -4,17 +4,16 @@
     position: relative;
     margin-bottom: 40px;
 
-    .mobile__btns{
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        button{
-            margin: 0 10px 10px 0;
-            opacity: 0.75;
-            &.active{
-                opacity: 1;
-            }
+    .mobile__btns {
+        ul.pagination{
+            margin: 20px 0 10px;
+        }
+        li{
+            cursor: pointer;
+        }
+
+        .disabled > .page-link, .page-link.disabled{
+            color: var(--main-green);
         }
     }
 
@@ -25,16 +24,33 @@
         .grocerylist__col__left{
             width: 50%;
             margin: 0;
-            padding: 0 10px 0 0;
+            padding: 0 40px 0 0;
+            position: relative;
+            &:after{
+                content: "";
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                background-color: var(--main-green);
+                border-radius: 2px;
+                width: 4px;
+                height: 100%;
+                border: none;
+            }
             @include responsive.responsiveTo(lg) {
                 width: 100%;
                 padding: 0 0 0 0;
+                &:after{
+                    display: none;
+                }
             }
         }
         .grocerylist__col__right{
             width: 50%;
             margin: 0;
-            padding: 0 0 0 10px;
+            padding: 0 0 0 40px;
             @include responsive.responsiveTo(lg) {
                 width: 100%;
                 padding: 0 0 0 0;
@@ -95,7 +111,13 @@
         }
         
         .section__element__content input{
-            display: none;
+            opacity: 0;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: -20px;
+            top: 0;
+            cursor: pointer;
         }
         
         .section__element__content label{
@@ -113,6 +135,7 @@
             flex-wrap: wrap;
             margin-right: 20px;
             margin-bottom: 0;
+            pointer-events: none;
         }
          .element__recipes__list .recipe{
             position: relative;
