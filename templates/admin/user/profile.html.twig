@@ -1,0 +1,47 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}WIP#PROFILE{% endblock %}
+
+{% block body %}
+
+    {{ include('admin/partials/page_title.html.twig', {'icon': "<i class='icon__page_title bx bx bxs-user' ></i>",'title': 'WIP#PROFILE'}) }}
+   
+   <div class="container">
+        <h1>User</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ user.id }}</td>
+                </tr>
+                <tr>
+                    <th>Username</th>
+                    <td>{{ user.username }}</td>
+                </tr>
+                <tr>
+                    <th>Roles</th>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                </tr>
+                <tr>
+                    <th>Password</th>
+                    <td>{{ user.password }}</td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <th>IsVerified</th>
+                    <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="{{ path('admin.user.index') }}">back to list</a>
+
+        <a href="{{ path('admin.user.edit', {'id': user.id}) }}">edit</a>
+
+   </div>
+    
+{% endblock %}

@@ -4,6 +4,7 @@
 
     {% if app.user %}
     <div id="nav-footer">
+        <a class="" href="{{ url('admin.user.profile') }}">
         <div id="nav-footer-heading">
         <div id="nav-footer-avatar">
             <img src="https://gravatar.com/avatar/"/>
@@ -12,6 +13,7 @@
             <span id="nav-footer-title">{{ app.user.username }}</span>
             </div>
         </div>
+        </a>
     </div>
     {% endif %}
 
@@ -52,6 +54,10 @@
     </div>
 
     <hr/>
+
+    <div class="nav-button">
+        <a class="{{ app.current_route starts with 'admin.user.' ? 'active' : '' }}" href="{{ url('admin.user.index') }}"><i class='bx bxs-group' ></i><span>WIP#USERS</span></a>
+    </div>
 
     <div class="nav-button">
         <a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bxs-log-out-circle' ></i><span>{{ 'app.hdr.logout'|trans }}</span></a>
