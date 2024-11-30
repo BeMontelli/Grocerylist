@@ -15,12 +15,14 @@ TO DO LIST
   * translations
     * flashes, notification alerts : rsc param name
     * forms
+    * All ... to translate (back buttons)
 
   * responsive to complete
   
   * Entities Edit titles translate + structure rework
 
   * Profile page WIP ?
+    * User process & layouts
     * User entity image(File) ?
 
   * Forms
