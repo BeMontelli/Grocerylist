@@ -3,12 +3,19 @@
 {% block title %}Edit - {{ section.title }}{% endblock %}
 
 {% block body %}
+
+    {{ include('admin/partials/page_title.html.twig', {
+        'icon': "<i class='icon__page_title bx bxs-bowl-rice' ></i>",
+        'title': 'Edit -' ~ section.title
+    }) }}
+   
+    <div class="container container_relative">
+        <a class="btn_page_title_overflow btn-primary btn" href="{{ url('admin.section.index') }}">All sections</a>
+    </div>
+
     <div class="container">
-        <h1>Edit Section</h1>
 
         {{ include('admin/section/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
-
-        <a class="btn-primary btn mb-2" href="{{ path('admin.section.index') }}">{{ 'app.admin.action.backlist'|trans }}</a>
 
         {{ include('admin/section/_delete_form.html.twig') }}
     </div>

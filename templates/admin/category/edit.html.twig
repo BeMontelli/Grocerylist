@@ -3,12 +3,18 @@
 {% block title %}Edit - {{ category.title }}{% endblock %}
 
 {% block body %}
+    {{ include('admin/partials/page_title.html.twig', {
+        'icon': "<i class='icon__page_title bx bxs-category-alt' ></i>",
+        'title': 'Edit - ' ~ category.title
+    }) }}
 
-<div class="container">
-    <h1>Edit - {{ category.title }}</h1>
-    <a class="btn-primary btn" href="{{ url('admin.category.index') }}">All categories</a>
+    <div class="container container_relative">
+        <a class="btn_page_title_overflow btn-primary btn" href="{{ url('admin.category.index') }}">All categories</a>
+    </div>
 
-    {{ include('admin/category/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
+    <div class="container">
 
-</div>
+        {{ include('admin/category/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
+
+    </div>
 {% endblock %}

@@ -3,8 +3,10 @@
 {% block title %}{{ 'app.admin.users.profile'|trans }}{% endblock %}
 
 {% block body %}
-
-    {{ include('admin/partials/page_title.html.twig', {'icon': "<i class='icon__page_title bx bx bxs-user' ></i>",'title': 'app.admin.users.profile'|trans }) }}
+    {{ include('admin/partials/page_title.html.twig', {
+        'icon': "<i class='icon__page_title bx bx bxs-user' ></i>",
+        'title': 'app.admin.users.profile'|trans 
+    }) }}
    
    <div class="container">
         <h1>User</h1>

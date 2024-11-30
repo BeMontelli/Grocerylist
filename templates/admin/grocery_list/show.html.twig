@@ -7,8 +7,17 @@
 
 {% block body %}
 <div id="grocerylist__single" data-controller="listmobiletoggle">
+    {{ include('admin/partials/page_title.html.twig', {
+        'icon': "<i class='icon__page_title bx bx-list-ul' ></i>",
+        'title': grocery_list.title
+    }) }}
+
+    <div class="container container_relative">
+        <a class="btn_page_title_overflow btn-primary btn" href="{{ path('admin.list.index') }}">{{ 'app.admin.action.backlist'|trans }}</a>
+    </div>
+
     <div class="container">
-        <h1>{{ grocery_list.title }} <i class="current__list__notice" style="font-size:0.65em">{{ 'app.admin.lists.current'|trans }}</i></h1>
+        <i class="current__list__notice" style="font-size:0.65em">{{ 'app.admin.lists.current'|trans }}</i>
 
         <div class="mobile__btns navigation desktop__hide">
             <nav>
@@ -67,8 +76,6 @@
                 </ul>
             </div>
         </div>
-
-        <a class="btn-primary btn mb-2" href="{{ path('admin.list.index') }}">{{ 'app.admin.action.backlist'|trans }}</a>
 
         <a class="btn-primary btn mb-2" href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
 

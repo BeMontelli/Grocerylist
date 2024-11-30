@@ -4,13 +4,19 @@
 
 {% block body %}
 
-<div class="container">
-    <h1>Edit - {{ ingredient.title }}</h1>
-    <a class="btn-primary btn" href="{{ url('admin.ingredient.index') }}">All ingredients</a>
-
-    <div class="list__form mb-4">
-        {{ include('admin/ingredient/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
+    {{ include('admin/partials/page_title.html.twig', {
+        'icon': "<i class='icon__page_title bx bxs-bowl-rice' ></i>",
+        'title': 'Edit -' ~ ingredient.title
+    }) }}
+   
+    <div class="container container_relative">
+        <a class="btn_page_title_overflow btn-primary btn" href="{{ url('admin.ingredient.index') }}">All ingredients</a>
     </div>
 
-</div>
+    <div class="container">
+        <div class="list__form mb-4">
+            {{ include('admin/ingredient/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
+        </div>
+
+    </div>
 {% endblock %}

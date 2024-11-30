@@ -3,14 +3,20 @@
 {% block title %}Edit - {{ grocery_list.title }}{% endblock %}
 
 {% block body %}
+    {{ include('admin/partials/page_title.html.twig', {
+        'icon': "<i class='icon__page_title bx bx-list-ul' ></i>",
+        'title': 'Edit - ' ~ grocery_list.title
+    }) }}
+
+    <div class="container container_relative">
+        <a class="btn_page_title_overflow btn-primary btn" href="{{ path('admin.list.show', {'slug': grocery_list.slug,'id': grocery_list.id}) }}">{{ 'app.admin.action.backlist'|trans }}</a>
+    </div>
+
     <div class="container">
-        <h1>Edit GroceryList</h1>
 
         <div class="list__form mb-4">
             {{ include('admin/grocery_list/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
         </div>
-
-        <a class="btn-primary btn mb-2" href="{{ path('admin.list.index') }}">{{ 'app.admin.action.backlist'|trans }}</a>
 
         {{ include('admin/grocery_list/_delete_form.html.twig') }}
     </div>
