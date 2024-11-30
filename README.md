@@ -20,7 +20,8 @@ TO DO LIST
   
   * Entities Edit titles translate + structure rework
 
-  * Profile page ?
+  * Profile page WIP ?
+    * User entity image(File) ?
 
   * Forms
     * Drop zone upload file : https://ux.symfony.com/dropzone
