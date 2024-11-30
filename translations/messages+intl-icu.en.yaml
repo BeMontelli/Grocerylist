@@ -59,6 +59,14 @@ app:
         =1 {Product/Ingredient Category}
         other {Product/Ingredient Categories}
       }
+    users.title: Users
+    users.none: 'No users'
+    users.entity: >-
+      {entity, plural,
+        =1 {User}
+        other {Users}
+      }
+    users.profile: Profile
     action:
       new: Create new
       show: Show

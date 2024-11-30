@@ -56,7 +56,7 @@
     <hr/>
 
     <div class="nav-button">
-        <a class="{{ app.current_route starts with 'admin.user.' ? 'active' : '' }}" href="{{ url('admin.user.index') }}"><i class='bx bxs-group' ></i><span>WIP#USERS</span></a>
+        <a class="{{ app.current_route starts with 'admin.user.' ? 'active' : '' }}" href="{{ url('admin.user.index') }}"><i class='bx bxs-group' ></i><span>{{ 'app.admin.users.title'|trans }}</span></a>
     </div>
 
     <div class="nav-button">

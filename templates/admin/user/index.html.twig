@@ -1,10 +1,10 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}WIP#USERS{% endblock %}
+{% block title %}{{ 'app.admin.users.title'|trans }}{% endblock %}
 
 {% block body %}
 
-    {{ include('admin/partials/page_title.html.twig', {'icon': "<i class='icon__page_title bx bx bxs-group' ></i>",'title': 'WIP#USERS'}) }}
+    {{ include('admin/partials/page_title.html.twig', {'icon': "<i class='icon__page_title bx bx bxs-group' ></i>",'title': 'app.admin.users.title'|trans }) }}
    
     <div class="container">
 

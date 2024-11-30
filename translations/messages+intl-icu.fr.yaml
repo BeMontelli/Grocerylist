@@ -74,6 +74,14 @@ app:
         =1 {Categorie de produit/ingredient}
         other {Categories de produit/ingredient}
       }
+    users.title: Utilisateurs
+    users.none: "Pas d'utilisateur"
+    users.entity: >-
+      {entity, plural,
+        =1 {Utilisateur}
+        other {Utilisateurs}
+      }
+    users.profile: Profil
     action:
       new:  >-
         {gender, select,
