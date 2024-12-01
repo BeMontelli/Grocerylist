@@ -26,11 +26,9 @@
                 </tr>
                 <tr>
                     <th>Roles</th>
-                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                </tr>
-                <tr>
-                    <th>Password</th>
-                    <td>{{ user.password }}</td>
+                    <td>
+                    {% for role in user.roles %}<span class="role__elem">{{ role }}</span>{% endfor %}
+                    </td>
                 </tr>
                 <tr>
                     <th>Email</th>

@@ -30,7 +30,9 @@
                 <tr>
                     <td>{{ user.id }}</td>
                     <td><a href="{{ path('admin.user.edit', {'id': user.id}) }}">{{ user.username }}</a></td>
-                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>
+                    {% for role in user.roles %}<span class="role__elem">{{ role }}</span>{% endfor %}
+                    </td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
                     <td class="actions">

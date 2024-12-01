@@ -61,3 +61,14 @@ table.table__thead__tbody{
         background-color: var(--main-red);
     }
 }
+
+.role__elem{
+    border: solid 1px var(--main-orange);
+    color: var(--main-text-color);
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    background-color: var(--main-orange-fade);
+}
