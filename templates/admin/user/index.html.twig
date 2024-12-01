@@ -11,8 +11,6 @@
    
     <div class="container">
 
-        <h1>User index</h1>
-
         <h2>Create new User</h2>
         {#{{ include('admin/user/_form.html.twig') }}#}
 
@@ -35,7 +33,7 @@
                     <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                    <td>
+                    <td class="actions">
                         {{ include('admin/user/_delete_form.html.twig') }}
                     </td>
                 </tr>

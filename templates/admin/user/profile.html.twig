@@ -8,8 +8,11 @@
         'title': 'app.admin.users.profile'|trans 
     }) }}
    
+    <div class="container container_relative">
+        <a class="btn_page_title_overflow btn-primary btn" href="{{ url('admin.dashboard') }}">{{ 'app.hdr.dashboard'|trans }}</a>
+    </div>
+   
    <div class="container">
-        <h1>User</h1>
 
         <table class="table">
             <tbody>
@@ -40,9 +43,7 @@
             </tbody>
         </table>
 
-        <a href="{{ path('admin.user.index') }}">back to list</a>
-
-        <a href="{{ path('admin.user.edit', {'id': user.id}) }}">edit</a>
+        <a class="btn btn-primary" href="{{ path('admin.user.edit', {'id': user.id}) }}">edit</a>
 
    </div>
     
