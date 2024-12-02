@@ -1,13 +1,12 @@
 <div class="grocery__list_recipe_card">
     <div class="cols">
         <div class="col__left">
-            <div class="single__image">
                 {% if recipe.thumbnail is not empty %}
-                    <img src="{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
+                    <div class="single__image" style="background-image:url({{ recipe.thumbnail }})">
+                    </div>
                 {% else %}
                     <span>NO IMAGE</span>
                 {% endif %}
-            </div>
         </div>
         <div class="col__right">
             <div class="single__pres">

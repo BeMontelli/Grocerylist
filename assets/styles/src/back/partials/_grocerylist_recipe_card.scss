@@ -31,13 +31,17 @@
     
     .single__image{
         position: relative;
-    }
-    .single__image img{
-        max-width: 200px;
+        width: 200px;
+        height: 200px;
         border-radius: 10px;
         overflow: hidden;
+        background-image: url('../../../../images/_grocerylist-placeholder-big.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
         @include responsive.responsiveTo(sm) {
             width: 100%;
+            min-height: 230px;
             max-width: 100%;
         }
     }
