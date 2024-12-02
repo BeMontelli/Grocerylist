@@ -4,6 +4,8 @@ app:
     backoffice: Administration
     dashboard: Tableau de bord
     logout: Déconnexion
+  ftr:
+    sign: "Créé par {name}, tous droits réservés."
   err:
     title: Oops !! Une erreur est survenue
     error: Erreur

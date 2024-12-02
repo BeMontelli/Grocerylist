@@ -4,6 +4,8 @@ app:
     backoffice: Back Office
     dashboard: Dashboard
     logout: Logout
+  ftr:
+    sign: "Created by {name}, all rights reserved."
   err:
     title: Oops !! An error occured
     error: Error
