@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Entity\User;
+use App\Entity\GroceryList;
 
 #[Route("/{_locale}/admin", name: "admin.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -28,7 +30,14 @@ class AdminController extends AbstractController
     #[Route('/', name: 'dashboard')]
     public function dashboard(Request $request): Response 
     {
+        /** @var User $user */
+        $user = $this->security->getUser();
+
+        /** @var GroceryList $currentGrocerylist */
+        $currentGrocerylist = ($user->getCurrentGroceryList()) ? $user->getCurrentGroceryList(): null;
+
         return $this->render('admin/pages/dashboard.html.twig', [
+            'currentGrocerylist' => $currentGrocerylist,
         ]);
     }
 }

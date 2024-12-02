@@ -27,6 +27,17 @@
                 <span>{{ 'app.admin.lists.title'|trans }}</span>
             </div>
         </a>
+        
+        {% if currentGrocerylist is not empty %}
+        <a href="{{ path('admin.list.show', {'slug': currentGrocerylist.slug,'id': currentGrocerylist.id}) }}" class="col">
+            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+                <i class='fav__icon bx bxs-star' ></i>
+                <i class='bx bx-list-ul' ></i>
+                <span>{{ currentGrocerylist.title }}</span>
+            </div>
+        </a>
+        {% endif %}
+
     </div>
 
     <hr/>
@@ -44,7 +55,7 @@
                 <i class='bx bxs-category-alt'></i>
                 <span>{{ 'app.admin.categories.title'|trans }}</span>
             </div>
-    </a>
+        </a>
     </div>
 
     <hr/>

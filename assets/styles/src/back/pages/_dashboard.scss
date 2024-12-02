@@ -21,8 +21,17 @@
     }
 
     .card {
+        height: 100%;
         color: var(--main-white);
         transition: all 0.5s ease-in;
+        i.fav__icon{
+            font-size: 1rem;
+            margin-right: 0;
+            position: absolute;
+            top: 21px;
+            left: 21px;
+            color: var(--main-orange);
+        }
         i{
             font-size: 2rem;
             margin-right: 20px;
