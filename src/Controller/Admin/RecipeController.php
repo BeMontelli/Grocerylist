@@ -116,7 +116,7 @@ class RecipeController extends AbstractController
             'ingredients' => $allIngredients->toArray(),
             'choices' => $choices,
             'currentGrocerylistId' => $currentGrocerylistId,
-        ]);
+        ],['attr' => ['class' => 'narrow__form']]);
         $formlist->handleRequest($request);
         if ($formlist->isSubmitted() && $formlist->isValid()) {
             $groceryListId = $formlist->get('groceryList')->getData();
@@ -166,7 +166,8 @@ class RecipeController extends AbstractController
         }
 
         // FORM edit recipe
-        $form = $this->createForm(RecipeType::class, $recipe);
+        $form = $this->createForm(RecipeType::class, $recipe
+        ,['attr' => ['class' => 'narrow__form']]);
         $form->handleRequest($request);
         if($form->isSubmitted()) {
             if($form->isValid()) {

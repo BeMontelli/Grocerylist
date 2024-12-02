@@ -1,3 +1,5 @@
+@use '../../mixins/responsive' as responsive;
+
 #single__recipe{
     position: relative;
     .cols{
@@ -5,13 +7,25 @@
         align-items: flex-start;
         justify-content: space-between;
         flex-wrap: wrap;
+        @include responsive.responsiveTo(md) {
+            flex-direction: column;
+        }
     }
     .col__left{
         max-width: 250px;
+        @include responsive.responsiveTo(md) {
+            margin-bottom: 10px;
+            width: 100%;
+            max-width: 100%;
+        }
     }
     .col__right{
         width: calc(100% - 250px);
-        padding-left: 30px;
+        padding-left: 20px;
+        @include responsive.responsiveTo(md) {
+            padding-left: 0;
+            width: 100%;
+        }
     }
     .single__pres{
         margin-bottom: 20px;
@@ -25,15 +39,21 @@
             margin:0 10px 10px 0;
         }
     }
-    .single__price{
+    .card{
+        color: var(--main-text-color);
         margin: 20px 0 10px;
+        padding: 10px;
     }
     .single__image{
         position: relative;
         img{
             max-width: 250px;
+            width: 100%;
             border-radius: 10px;
             overflow: hidden;
+            @include responsive.responsiveTo(md) {
+                max-width: 100%;
+            }
         }
     }
     .notice{  
