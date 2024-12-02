@@ -317,9 +317,10 @@
     overflow: hidden;
     transform: translate(0);
     transition: 0.2s;
-    img {
-        height: 100%;
-      }
+    background-image: url('../../../../images/_grocerylist-placeholder.jpg');
+    background-repeat: repeat;
+    background-position: center;
+    background-size: cover;
   }
   
   #nav-footer-titlebox {
