@@ -361,4 +361,7 @@
   #main-content{
     background-color: var(--main-bg-color);
     padding: 0 40px 4rem 0;
+    @include responsive.responsiveTo(sm) {
+      padding: 0 0 4rem 0;
+    }
   }

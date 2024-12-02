@@ -3,4 +3,7 @@
 #main-footer{
   position: relative;
   background-color: var(--main-dark-light);
+  @include responsive.responsiveTo(sm) {
+    padding: 0 40px 0 0;
+  }
 }
