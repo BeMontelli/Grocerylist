@@ -33,10 +33,10 @@
         <table class="table table__thead__tbody">
             <thead>
             <tr>
-                <th{% if sections.isSorted('a.title') %} class="sorted"{% endif %}>
+                <th{% if sections.isSorted('s.title') %} class="sorted"{% endif %}>
                     {{ knp_pagination_sortable(sections, 'Title', 's.title') }}
                 </th>
-                <th{% if sections.isSorted('a.slug') %} class="sorted"{% endif %}>
+                <th class="mobile__hide {% if sections.isSorted('s.slug') %}sorted{% endif %}">
                     {{ knp_pagination_sortable(sections, 'Slug', 's.slug') }}
                 </th>
                 <th class="actions">actions</th>
@@ -46,7 +46,7 @@
             {% for section in sections %}
                 <tr>
                     <td><a href="{{ path('admin.section.show', {'slug': section.slug,'id': section.id}) }}">{{ section.title }}</a></td>
-                    <td>{{ section.slug }}</td>
+                    <td class="mobile__hide">{{ section.slug }}</td>
                     <td class="actions">
                         {{ include('admin/section/_delete_form.html.twig') }}
                     </td>

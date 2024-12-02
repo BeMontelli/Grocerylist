@@ -43,7 +43,7 @@
             </th>
             <th>Sections</th>
             <th>Recipes ready</th>
-            <th{% if ingredients.isSorted('a.slug') %} class="sorted"{% endif %}>
+            <th class="mobile__hide {% if ingredients.isSorted('i.slug') %}sorted{% endif %}">
                 {{ knp_pagination_sortable(ingredients, 'Slug', 'i.slug') }}
             </th>
             <th class="actions">Actions</th>
@@ -63,7 +63,7 @@
                     <div class="table__notice bad"><i class='bx bx-block' ></i></div>
                 {% endif %}
                 </td>
-                <td>{{ ingredient.slug }}</td>
+                <td class="mobile__hide">{{ ingredient.slug }}</td>
                 <td class="actions">
                     {{ include('admin/ingredient/_delete_form.html.twig') }}
                 </td>

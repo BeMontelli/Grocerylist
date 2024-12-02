@@ -18,7 +18,6 @@
         <table class="table table__thead__tbody">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Username</th>
                     <th>Roles</th>
                     <th>Email</th>
@@ -29,7 +28,6 @@
             <tbody>
             {% for user in users %}
                 <tr>
-                    <td>{{ user.id }}</td>
                     <td><a href="{{ path('admin.user.edit', {'id': user.id}) }}">{{ user.username }}</a></td>
                     <td>
                     {% for role in user.roles %}<span class="role__elem">{{ role }}</span>{% endfor %}

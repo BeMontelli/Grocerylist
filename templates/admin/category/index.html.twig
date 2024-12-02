@@ -35,7 +35,7 @@
             <th{% if categories.isSorted('a.title') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(categories, 'Title', 'c.title') }}
             </th>
-            <th{% if categories.isSorted('a.slug') %} class="sorted"{% endif %}>
+            <th{% if categories.isSorted('c.slug') %} class="mobile__hide sorted"{% endif %}>
                 {{ knp_pagination_sortable(categories, 'Slug', 'c.slug') }}
             </th>
             <th>Count Recipes</th>
@@ -49,7 +49,7 @@
         {% for category in categories %}
             <tr {% if loop.index is odd %}class="color"{% endif %}>
                 <td><a href="{{ url('admin.category.show', {slug: category.category.slug, id: category.category.id}) }}">{{ category.category.title }}</a></td>
-                <td>{{ category.category.slug }}</td>
+                <td class="mobile__hide">{{ category.category.slug }}</td>
                 <td>{{ category.total }}</td>
                 <td class="actions">
                     {{ include('admin/category/_delete_form.html.twig') }}
@@ -64,7 +64,7 @@
         </tbody>
     </table>
     </div>
-    
+
     {# display navigation #}
     <div class="navigation">
         {{ knp_pagination_render(categories) }}

@@ -1,0 +1,6 @@
+@use '../../mixins/responsive' as responsive;
+
+#main-footer{
+  position: relative;
+  background-color: var(--main-dark-light);
+}

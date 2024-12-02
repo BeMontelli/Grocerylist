@@ -32,7 +32,7 @@
                 <th{% if grocery_lists.isSorted('a.title') %} class="sorted"{% endif %}>
                     {{ knp_pagination_sortable(grocery_lists, 'Title', 'l.title') }}
                 </th>
-                <th{% if grocery_lists.isSorted('a.slug') %} class="sorted"{% endif %}>
+                <th class="mobile__hide {% if grocery_lists.isSorted('li.slug') %}sorted{% endif %}">
                     {{ knp_pagination_sortable(grocery_lists, 'Slug', 'l.slug') }}
                 </th>
                 {#<th>CreatedAt</th>
@@ -45,7 +45,7 @@
             {% for grocery_list in grocery_lists %}
                 <tr>
                     <td><a href="{{ path('admin.list.show', {'slug': grocery_list.slug,'id': grocery_list.id}) }}">{{ grocery_list.title }}</a></td>
-                    <td>{{ grocery_list.slug }}</td>
+                    <td class="mobile__hide">{{ grocery_list.slug }}</td>
                     {#<td>{{ grocery_list.createdAt ? grocery_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ grocery_list.updatedAt ? grocery_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
                     <td class="actions__edit">
