@@ -134,6 +134,11 @@ class IngredientFixtures extends Fixture
                 'section' => 'Légumes',
                 'recipeOK' => true
             ],
+            [
+                "title" => 'Pommes de terre',
+                'section' => 'Légumes',
+                'recipeOK' => true
+            ],
 
             //Conserves
             [
@@ -160,6 +165,11 @@ class IngredientFixtures extends Fixture
             //Pâtes/Riz
             [
                 "title" => 'Riz Basmati',
+                'section' => 'Pâtes/Riz',
+                'recipeOK' => true
+            ],
+            [
+                "title" => 'Riz rond',
                 'section' => 'Pâtes/Riz',
                 'recipeOK' => true
             ],

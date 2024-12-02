@@ -29,6 +29,7 @@ class CategoryFixtures extends Fixture
             "Plat principal",
             "Dessert",
             "Apéritif",
+            "Boisson",
             "Autre"
         ];
 
