@@ -14,7 +14,8 @@
         <h2>Create new User</h2>
         {#{{ include('admin/user/_form.html.twig') }}#}
 
-        <table class="table">
+        <div class="table__container">
+        <table class="table table__thead__tbody">
             <thead>
                 <tr>
                     <th>Id</th>
@@ -48,5 +49,6 @@
             {% endfor %}
             </tbody>
         </table>
+        </div>
     </div>
 {% endblock %}

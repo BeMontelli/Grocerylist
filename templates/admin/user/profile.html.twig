@@ -14,7 +14,8 @@
    
    <div class="container">
 
-        <table class="table">
+        <div class="table__container">
+        <table class="table table__thead__tbody">
             <tbody>
                 <tr>
                     <th>Id</th>
@@ -40,6 +41,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
 
         <a class="btn btn-primary" href="{{ path('admin.user.edit', {'id': user.id}) }}">edit</a>
 

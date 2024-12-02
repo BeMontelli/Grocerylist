@@ -33,6 +33,7 @@
         {{ include('admin/partials/_search.html.twig') }}
     </div>
     
+    <div class="table__container">
     <table class="table table__thead__tbody">
         <thead>
         <tr>
@@ -75,6 +76,8 @@
 
         </tbody>
     </table>
+    </div>
+    
     {# display navigation #}
     <div class="navigation">
         {{ knp_pagination_render(ingredients) }}

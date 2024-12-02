@@ -1,3 +1,15 @@
+@use '../../mixins/responsive' as responsive;
+
+.table__container{
+    position: relative;
+    margin-bottom: 1rem;
+    @include responsive.responsiveTo(sm) {
+        width: calc(100% + 40px);
+        overflow-y: hidden;
+        overflow-x: scroll;  
+      }
+}
+
 table.table{
 
     --bs-table-color-type: initial;
@@ -16,7 +28,7 @@ table.table{
     --bs-table-hover-bg: rgba(var(--bs-emphasis-color-rgb), 0.075);
 
     width: 100%;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     vertical-align: top;
     border-color: var(--bs-table-border-color);
 }

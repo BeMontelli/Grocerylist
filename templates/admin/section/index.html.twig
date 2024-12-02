@@ -28,6 +28,8 @@
         <div class="table__count">
             {{ 'app.admin.lists.count'|trans({'%entity%': 1}) }} : {{ sections.getTotalItemCount }}
         </div>
+
+        <div class="table__container">
         <table class="table table__thead__tbody">
             <thead>
             <tr>
@@ -56,6 +58,8 @@
             {% endfor %}
             </tbody>
         </table>
+        </div>
+
         {# display navigation #}
         <div class="navigation">
             {{ knp_pagination_render(sections) }}
