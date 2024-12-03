@@ -40,12 +40,12 @@
             </div>
             <div class="col__right">
                 <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                    {{ 'app.admin.action.edit'|trans({'%gender%': 'female'}) }}
+                    <i class='bx bx-edit-alt' ></i>
                 </button>
                 <div class="single__edit">
                     <div class="collapse" id="collapseExample">
                         <div class="card card-body">
-                            {{ include('admin/recipe/_form.html.twig', {'button_label': 'app.admin.action.update'|trans}) }}
+                            {{ include('admin/recipe/_form.html.twig', {'button_label': "<i class='bx bx-edit-alt' ></i>"|raw}) }}
                         </div>
                     </div>
                 </div>

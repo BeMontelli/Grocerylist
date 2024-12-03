@@ -8,6 +8,6 @@
     {{ form_row(form.availableRecipe) }}
     {{ form_row(form.recipes) }}
     {{ form_row(form.groceryLists) }}
-    {{ form_row(form.save, {'label': button_label|default('app.admin.action.create'|trans)}) }}
+    {{ form_row(form.save, {'label_html': true, 'label': button_label|default('app.admin.action.create'|trans)}) }}
 
 {{ form_end(form) }}

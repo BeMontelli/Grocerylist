@@ -3,5 +3,5 @@
         {{ form_row(form.title) }}
         {{ form_row(form.slug) }}
     </div>
-    {{ form_row(form.save, {'label': button_label|default('app.admin.action.create'|trans)}) }}
+    {{ form_row(form.save, {'label_html': true, 'label': button_label|default('app.admin.action.create'|trans)}) }}
 {{ form_end(form) }}

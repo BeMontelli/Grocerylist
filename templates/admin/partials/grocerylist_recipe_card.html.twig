@@ -11,7 +11,7 @@
         <div class="col__right">
             <div class="single__pres">
                 <div class="single__title">
-                    <h3>{{ recipe.title }}</h1>
+                    <h3><a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></h1>
                 </div>
                 <div class="single__price"><strong>Price</strong>: <span>{{ recipe.price }} €</span></div>
                 <div class="single__categories mb-2">
@@ -32,7 +32,7 @@
                     </ul>
                     {% endif %}
                 </div>
-                <a class="btn-remove btn mb-2" href="{{ path('admin.list.removeRecipeList', {'grocerylistId':grocery_list.id,'recipeId': recipe.id}) }}">{{ 'app.admin.lists.recipes.remove'|trans }}</a>
+                <a class="btn-remove btn mb-2" href="{{ path('admin.list.removeRecipeList', {'grocerylistId':grocery_list.id,'recipeId': recipe.id}) }}"><i class='bx bx-x'></i> {{ 'app.admin.lists.recipes.remove'|trans }}</a>
             </div>
         </div>
     </div>
