@@ -148,12 +148,6 @@ const editorConfig = {
 				class: 'ck-heading_paragraph'
 			},
 			{
-				model: 'heading1',
-				view: 'h1',
-				title: 'Heading 1',
-				class: 'ck-heading_heading1'
-			},
-			{
 				model: 'heading2',
 				view: 'h2',
 				title: 'Heading 2',
@@ -218,5 +212,13 @@ const editorConfig = {
 
 const recipe_content = document.querySelector('#recipe_content');
 if(recipe_content) {
-	ClassicEditor.create(recipe_content, editorConfig);
+	ClassicEditor.create(recipe_content, editorConfig)
+	.then(editor => {
+		editor.model.document.on("change",(e => {
+			const editorData = editor.getData();
+			editor.value = editorData;
+		}));
+	}).catch(err => {
+		console.error(err.stack);
+	});
 }
