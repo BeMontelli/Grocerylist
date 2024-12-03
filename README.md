@@ -30,6 +30,9 @@ TO DO LIST
 
   * Confirm modals
 
+  * User entity
+    * complete edit/show/new/delete
+
 WORK IN PROGESS
 ------------
 
