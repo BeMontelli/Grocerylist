@@ -31,6 +31,8 @@ TO DO LIST
 
   * Confirm modals
 
+  * Search bar (recipes, ingredients, grocerylists)
+
   * User entity
     * complete edit/show/new/delete
 
