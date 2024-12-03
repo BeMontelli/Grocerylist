@@ -34,7 +34,7 @@
                 top: 0;
                 right: 0;
                 width: 100%;
-                background-color: var(--main-green);
+                background-color: var(--main-darker);
                 border-radius: 2px;
                 width: 4px;
                 height: 100%;
@@ -82,6 +82,11 @@
             }
         }
     }    
+
+    h3{
+        font-size: 1.25rem;
+        color: var(--main-grey);
+    }
     
     ul{
         padding: 0 0 0;

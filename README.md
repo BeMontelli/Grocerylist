@@ -18,6 +18,7 @@ TO DO LIST
     * All ... to translate (back buttons)
 
   * responsive to complete
+  * btns edit/delete setup top page banner ?
   
   * Entities Edit titles translate + structure rework
 
