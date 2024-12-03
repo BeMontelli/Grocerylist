@@ -12,7 +12,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use App\Entity\User;
 
 #[AsEntityAutocompleteField]
-class IngredientAutocompleteField extends AbstractType
+class IngredientsAutocompleteField extends AbstractType
 {
     private $security;
 

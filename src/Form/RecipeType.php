@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Form\CategoryAutocompleteField;
-use App\Form\IngredientAutocompleteField;
+use App\Form\IngredientsAutocompleteField;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -46,7 +46,7 @@ class RecipeType extends AbstractType
                 'label' => 'Recipe thumbnail'
             ])
             ->add('category', CategoryAutocompleteField::class)
-            ->add('ingredients', IngredientAutocompleteField::class)
+            ->add('ingredients', IngredientsAutocompleteField::class)
             ->add('price',NumberType::class, [
                 'empty_data' => 0,
                 'label' => 'Price (€)',
