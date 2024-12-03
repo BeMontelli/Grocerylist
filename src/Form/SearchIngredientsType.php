@@ -22,13 +22,7 @@ class SearchIngredientsType extends AbstractType
                 'label' => 'Search Text',
                 'required' => false,
             ])
-            ->add('sections', EntityType::class, [
-                'class' => Section::class,
-                'choice_label' => 'title',
-                'multiple' => true,
-                'expanded' => false,
-                'required' => false,
-            ])
+            ->add('sections', SectionsAutocompleteField::class)
             ->add('search', SubmitType::class, [
                 'label' => t('app.admin.action.search')
             ])

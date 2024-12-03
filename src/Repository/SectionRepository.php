@@ -53,6 +53,13 @@ class SectionRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
+    public function findForUser(User $user)
+    {
+        return $this->createQueryBuilder('s')
+                    ->where('s.user = :val')
+                    ->setParameter('val', $user->getId());
+    }
+
     //    /**
     //     * @return Section[] Returns an array of Section objects
     //     */
