@@ -37,7 +37,6 @@
                 </th>
                 {#<th>CreatedAt</th>
                 <th>UpdatedAt</th>#}
-                <th class="actions">edit</th>
                 <th class="actions">delete</th>
             </tr>
             </thead>
@@ -48,9 +47,6 @@
                     <td class="mobile__hide">{{ grocery_list.slug }}</td>
                     {#<td>{{ grocery_list.createdAt ? grocery_list.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                     <td>{{ grocery_list.updatedAt ? grocery_list.updatedAt|date('Y-m-d H:i:s') : '' }}</td>#}
-                    <td class="actions__edit">
-                        <a class="btn-primary btn" href="{{ path('admin.list.edit', {'id': grocery_list.id}) }}">{{ 'app.admin.action.edit'|trans }}</a>
-                    </td>
                     <td class="actions__delete">
                         {{ include('admin/grocery_list/_delete_form.html.twig') }}
                     </td>
