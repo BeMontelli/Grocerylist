@@ -27,7 +27,7 @@ TO DO LIST
 
   * Forms
     * Drop zone upload file : https://ux.symfony.com/dropzone
-    * textarea form wysiwyg : https://symfony.com/bundles/FOSCKEditorBundle/current/index.html
+    * textarea form wysiwyg : https://ckeditor.com/ckeditor
 
   * Confirm modals
 
