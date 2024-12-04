@@ -16,6 +16,7 @@ app:
   notif:
     erroccur: Une erreur est survenue !
     validerr: Le formulaire comporte une erreur !
+    fileinvalid: Le fichier est invalide !
     saved: >-
         {gender, select,
           female   {Entité sauvegardée !}

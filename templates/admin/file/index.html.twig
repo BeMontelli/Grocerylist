@@ -10,7 +10,7 @@
 
 <div class="container">
     <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.files.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
+        {{ 'app.admin.action.new'|trans({'%gender%': 'male'}) }} {{ 'app.admin.files.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
     </button>
     <div class="collapse" id="collapseExample">
         <div class="card card-body">
@@ -23,8 +23,7 @@
         <thead>
         <tr>
             <th>Title</th>
-            <th>Slug</th>
-            <th>Count Recipes</th>
+            <th>Extension</th>
             <th class="actions">Actions</th>
         </tr>
 
@@ -33,9 +32,8 @@
 
         {% for file in files %}
             <tr>
-                <td><a href="{{ path('admin.file.edit', {'id': file.id}) }}">{{ file.title }}</a></td>
+                <td><a href="{{ path('admin.file.show', {'id': file.id}) }}">{{ file.title }}</a></td>
                 <td>{{ file.extension }}</td>
-                <td>{{ file.url }}</td>
                 <td>
                     {{ include('admin/file/_delete_form.html.twig') }}
                 </td>

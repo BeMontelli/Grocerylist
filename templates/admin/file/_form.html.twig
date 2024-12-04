@@ -1,6 +1,4 @@
 {{ form_start(form) }}
-        {{ form_row(form.title) }}
-        {{ form_row(form.extension) }}
-        {{ form_row(form.url) }}
-    {{ form_row(form.save, {'label_html': true, 'label': button_label|default('app.admin.action.create'|trans)}) }}
+        {{ form_row(form.file) }}
+        {{ form_row(form.save, {'label_html': true, 'label': button_label|default('app.admin.action.create'|trans)}) }}
 {{ form_end(form) }}

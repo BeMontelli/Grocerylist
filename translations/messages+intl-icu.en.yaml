@@ -16,6 +16,7 @@ app:
   notif:
     erroccur: Error occured !
     validerr: Form validation error !
+    fileinvalid: Le fichier est invalide !
     saved: Entity saved !
     edited: Entity updated !
     deleted: Entity deleted !

@@ -10,6 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bundle\SecurityBundle\Security;
+use Symfony\Contracts\Translation\TranslatorInterface;
+use App\Service\FileUploader;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Routing\Requirement\Requirement;
 
@@ -17,6 +20,17 @@ use Symfony\Component\Routing\Requirement\Requirement;
 #[IsGranted('ROLE_ADMIN')]
 class FileController extends AbstractController
 {
+    private $security;
+    private $translator;
+    private $fileUploader;
+
+    public function __construct(Security $security, TranslatorInterface $translator, FileUploader $fileUploader)
+    {
+        $this->security = $security;
+        $this->translator = $translator;
+        $this->fileUploader = $fileUploader;
+    }
+
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
     public function index(Request $request, EntityManagerInterface $entityManager, FileRepository $fileRepository): Response
     {
@@ -24,33 +38,35 @@ class FileController extends AbstractController
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($file);
-            $entityManager->flush();
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $formFile = $form->get('file')->getData();
+                if ($formFile) {
+                    $extension = $formFile->getClientOriginalExtension();
+                    $titleFile = str_replace(".".$extension, "", $formFile->getClientOriginalName());
+                    $filePath = $this->fileUploader->uploadRecipeThumbnail($formFile);
+                    
+                    $file->setTitle($titleFile);
+                    $file->setUrl($filePath);
+                    $file->setExtension($extension);
 
-            return $this->redirectToRoute('admin.file.index', [], Response::HTTP_SEE_OTHER);
+                    $entityManager->persist($file);
+                    $entityManager->flush();
+                } else $this->addFlash('danger', $this->translator->trans('app.notif.fileinvalid'));
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
+
         return $this->render('admin/file/index.html.twig', [
             'files' => $fileRepository->findAll(),
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET', 'POST'])]
-    public function edit(Request $request, File $file, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'show', requirements: ['id' => Requirement::DIGITS], methods: ['GET', 'POST'])]
+    public function show(Request $request, File $file, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(FileType::class, $file);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            return $this->redirectToRoute('admin.file.index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->render('admin/file/edit.html.twig', [
-            'file' => $file,
-            'form' => $form,
+        return $this->render('admin/file/show.html.twig', [
+            'file' => $file
         ]);
     }
 
@@ -58,8 +74,17 @@ class FileController extends AbstractController
     public function delete(Request $request, File $file, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$file->getId(), $request->getPayload()->get('_token'))) {
+            $currentThumbnail = $file->getUrl();
+            if(!empty($currentThumbnail)) {
+                $fileDir = $this->getParameter('kernel.project_dir').'/public';
+                $this->fileUploader->deleteThumbnail($fileDir,$currentThumbnail);
+            }
+    
             $entityManager->remove($file);
             $entityManager->flush();
+            $this->addFlash('warning', 'File deleted !');
+        } else {
+            $this->addFlash('danger', 'Error occured !');
         }
 
         return $this->redirectToRoute('admin.file.index', [], Response::HTTP_SEE_OTHER);
