@@ -1,0 +1,53 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block title %}{{ 'app.admin.files.title'|trans }}{% endblock %}
+
+{% block body %}
+    {{ include('admin/partials/page_title.html.twig', {
+        'icon': "<i class='icon__page_title bx bx bx-images' ></i>",
+        'title': 'app.admin.files.title'|trans
+    }) }}
+
+<div class="container">
+    <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.files.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
+    </button>
+    <div class="collapse" id="collapseExample">
+        <div class="card card-body">
+            {{ include('admin/file/_form.html.twig') }}
+        </div>
+    </div>
+    
+    <div class="table__container">
+    <table class="table table__thead__tbody">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Slug</th>
+            <th>Count Recipes</th>
+            <th class="actions">Actions</th>
+        </tr>
+
+        </thead>
+        <tbody>
+
+        {% for file in files %}
+            <tr>
+                <td><a href="{{ path('admin.file.edit', {'id': file.id}) }}">{{ file.title }}</a></td>
+                <td>{{ file.extension }}</td>
+                <td>{{ file.url }}</td>
+                <td>
+                    {{ include('admin/file/_delete_form.html.twig') }}
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    </div>
+</div>
+{% endblock %}

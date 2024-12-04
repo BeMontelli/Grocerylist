@@ -69,6 +69,13 @@ app:
         other {Users}
       }
     users.profile: Profile
+    files.title: Gallery
+    files.none: 'No files'
+    files.entity: >-
+      {entity, plural,
+        =1 {File}
+        other {Files}
+      }
     action:
       new: Create new
       show: Show

@@ -84,6 +84,13 @@ app:
         other {Utilisateurs}
       }
     users.profile: Profil
+    files.title: Gallerie
+    files.none: "Pas de fichier"
+    files.entity: >-
+      {entity, plural,
+        =1 {Fichier}
+        other {Fichiers}
+      }
     action:
       new:  >-
         {gender, select,

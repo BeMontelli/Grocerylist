@@ -284,7 +284,10 @@
         top: 409px;
     }
     &:nth-of-type(9):hover ~ #nav-content-highlight {
-        top: 462px;
+        top: 467px;
+    }
+    &:nth-of-type(10):hover ~ #nav-content-highlight {
+        top: 522px;
     }
   }
 
