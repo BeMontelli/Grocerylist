@@ -6,7 +6,6 @@ use App\Entity\File;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\FileType as SymfonyFileType;
 
 class FileType extends AbstractType
@@ -16,10 +15,7 @@ class FileType extends AbstractType
         $builder
             ->add('file', SymfonyFileType::class, [
                 'mapped' => false,
-                'required' => true,
-            ])
-            ->add('save', SubmitType::class, [
-                'label' => 'Save Category'
+                'required' => true
             ])
         ;
     }

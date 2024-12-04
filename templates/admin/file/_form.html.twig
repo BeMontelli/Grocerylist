@@ -1,4 +1,3 @@
-{{ form_start(form) }}
+{{ form_start(form, { attr: { 'class': 'autoupload__form','data-controller': 'autoupload' } }) }}
         {{ form_row(form.file) }}
-        {{ form_row(form.save, {'label_html': true, 'label': button_label|default('app.admin.action.create'|trans)}) }}
 {{ form_end(form) }}

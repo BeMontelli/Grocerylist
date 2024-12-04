@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\File;
 use App\Form\FileType;
+use App\Entity\User;
 use App\Repository\FileRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,6 +35,9 @@ class FileController extends AbstractController
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
     public function index(Request $request, EntityManagerInterface $entityManager, FileRepository $fileRepository): Response
     {
+        /** @var User $user */
+        $user = $this->security->getUser();
+
         $file = new File();
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
@@ -49,15 +53,19 @@ class FileController extends AbstractController
                     $file->setTitle($titleFile);
                     $file->setUrl($filePath);
                     $file->setExtension($extension);
+                    $file->setUser($user);
 
                     $entityManager->persist($file);
                     $entityManager->flush();
+
+                    $this->addFlash('success', 'File saved !');
+                    return $this->redirectToRoute('admin.file.index');
                 } else $this->addFlash('danger', $this->translator->trans('app.notif.fileinvalid'));
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/file/index.html.twig', [
-            'files' => $fileRepository->findAll(),
+            'files' => $fileRepository->findAllByUser(user: $user),
             'form' => $form,
         ]);
     }

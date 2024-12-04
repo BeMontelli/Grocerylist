@@ -9,15 +9,9 @@
     }) }}
 
 <div class="container">
-    <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-        {{ 'app.admin.action.new'|trans({'%gender%': 'male'}) }} {{ 'app.admin.files.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
-    </button>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-            {{ include('admin/file/_form.html.twig') }}
-        </div>
-    </div>
-    
+
+    {{ include('admin/file/_form.html.twig') }}
+
     <div class="table__container">
     <table class="table table__thead__tbody">
         <thead>
