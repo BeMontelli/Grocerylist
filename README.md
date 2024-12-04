@@ -7,10 +7,6 @@ You can also learn about these practices in [the official Symfony Book][5].
 
 TO DO LIST
 ------------
-  
-  * Entity File for images ?
-    * & Gallery ?
-    * Drag & Drop file input ?
 
   * translations
     * flashes, notification alerts : rsc param name
@@ -24,12 +20,14 @@ TO DO LIST
 
   * Profile page WIP ?
     * User process & layouts
-    * User entity image(File) ?
+    * User entity file thumbnail
   * User entity
     * complete edit/show/new/delete
+    * Remove user's files when delete recipe
 
-  * Forms
-    * Drop zone upload file : https://ux.symfony.com/dropzone
+  * Recipe entity
+    * Recipe entity file thumbnail
+    * Remove thumbnail when delete recipe
 
   * Confirm modals
 
