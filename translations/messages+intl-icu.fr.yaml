@@ -85,7 +85,7 @@ app:
         other {Utilisateurs}
       }
     users.profile: Profil
-    files.title: Gallerie
+    files.title: Galerie
     files.none: "Pas de fichier"
     files.entity: >-
       {entity, plural,
