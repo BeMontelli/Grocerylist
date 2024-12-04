@@ -25,6 +25,8 @@ TO DO LIST
   * Profile page WIP ?
     * User process & layouts
     * User entity image(File) ?
+  * User entity
+    * complete edit/show/new/delete
 
   * Forms
     * Drop zone upload file : https://ux.symfony.com/dropzone
@@ -32,9 +34,6 @@ TO DO LIST
   * Confirm modals
 
   * Search bar (recipes, ingredients, grocerylists)
-
-  * User entity
-    * complete edit/show/new/delete
 
 WORK IN PROGESS
 ------------
