@@ -275,6 +275,9 @@
             "./config/routes/ux_autocomplete.yaml"
         ]
     },
+    "symfony/ux-dropzone": {
+        "version": "v2.22.0"
+    },
     "symfony/ux-toggle-password": {
         "version": "v2.17.0"
     },

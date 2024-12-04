@@ -8,38 +8,39 @@
         'title': 'app.admin.files.title'|trans
     }) }}
 
-<div class="container">
+<div class="container file__archive">
 
     {{ include('admin/file/_form.html.twig') }}
 
-    <div class="table__container">
-    <table class="table table__thead__tbody">
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Extension</th>
-            <th class="actions">Actions</th>
-        </tr>
+    <div class="row">
+    {% for file in files %}
 
-        </thead>
-        <tbody>
-
-        {% for file in files %}
-            <tr>
-                <td><a href="{{ path('admin.file.show', {'id': file.id}) }}">{{ file.title }}</a></td>
-                <td>{{ file.extension }}</td>
-                <td>
+        <div class="file__card col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+            <div class="card">
+                <div class="card-body" style="background-image:url({{ file.url }})">
+                    <div class="file__filter"></div>
+                    <a class="file__link" href="{{ path('admin.file.show', {'id': file.id}) }}"></a>
                     {{ include('admin/file/_delete_form.html.twig') }}
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
+                </div>
+            </div>
+        </div>
 
-        </tbody>
-    </table>
+    {% else %}
+
+        <div class="table__container">
+        <table class="table table__thead__tbody">
+            <tbody>
+
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+
+            </tbody>
+        </table>
+        </div>
+
+    {% endfor %}
     </div>
+
 </div>
 {% endblock %}

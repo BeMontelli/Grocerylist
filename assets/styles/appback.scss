@@ -18,5 +18,6 @@
 @use 'src/back/pages/dashboard' as *;
 @use 'src/back/pages/recipe_single' as *;
 @use 'src/back/pages/grocerylist_single' as *;
+@use 'src/back/pages/file_archive' as *;
 
 @use 'src/back/partials/grocerylist_recipe_card' as *;
