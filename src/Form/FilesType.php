@@ -9,13 +9,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType as SymfonyFileType;
 use Symfony\UX\Dropzone\Form\DropzoneType;
 
-class FileType extends AbstractType
+class FilesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('file', DropzoneType::class, [
+            ->add('files', DropzoneType::class, [
                 'mapped' => false,
+                'multiple' => true,
                 'required' => true
             ])
         ;

@@ -1,10 +1,17 @@
 .flash__alerts{
     position: fixed;
+    z-index: 99; 
     bottom: 10px;
     left: 10px;
     min-width: 50%;
     max-width: calc(100% - 40px);
-    z-index: 99;
+    max-height: 80vh;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
     .alert{
         --bs-alert-color: var(--bs-info-text-emphasis);
         --bs-alert-bg: var(--bs-info-bg-subtle);

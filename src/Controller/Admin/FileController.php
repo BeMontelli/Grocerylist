@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\File;
-use App\Form\FileType;
+use App\Form\FilesType;
 use App\Entity\User;
 use App\Repository\FileRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,28 +39,34 @@ class FileController extends AbstractController
         $user = $this->security->getUser();
 
         $file = new File();
-        $form = $this->createForm(FileType::class, $file);
+        $form = $this->createForm(FilesType::class, $file);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $formFile = $form->get('file')->getData();
-                if ($formFile) {
-                    $extension = $formFile->getClientOriginalExtension();
-                    $titleFile = str_replace(".".$extension, "", $formFile->getClientOriginalName());
-                    $filePath = $this->fileUploader->uploadRecipeThumbnail($formFile);
-                    
-                    $file->setTitle($titleFile);
-                    $file->setUrl($filePath);
-                    $file->setExtension($extension);
-                    $file->setUser($user);
-
-                    $entityManager->persist($file);
-                    $entityManager->flush();
-
-                    $this->addFlash('success', 'File saved !');
+                $formFiles = $form->get('files')->getData();
+                if(!empty($formFiles)) {
+                    foreach ($formFiles as $formFile) {
+                        if ($formFile) {
+                            $extension = $formFile->getClientOriginalExtension();
+                            $titleFile = str_replace(".".$extension, "", $formFile->getClientOriginalName());
+                            $filePath = $this->fileUploader->uploadRecipeThumbnail($formFile);
+                            
+                            $file = new File();
+                            $file->setTitle($titleFile);
+                            $file->setUrl($filePath);
+                            $file->setExtension($extension);
+                            $file->setUser($user);
+        
+                            $entityManager->persist($file);
+                            $entityManager->flush();
+        
+                            $this->addFlash('success', 'File saved !');
+                        } else $this->addFlash('danger', $this->translator->trans('app.notif.fileinvalid'));
+                    }
                     return $this->redirectToRoute('admin.file.index');
-                } else $this->addFlash('danger', $this->translator->trans('app.notif.fileinvalid'));
+                }
+                else $this->addFlash('danger', $this->translator->trans('app.notif.nofile'));
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
