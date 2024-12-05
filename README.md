@@ -26,7 +26,7 @@ TO DO LIST
     * Remove user's files when delete recipe
 
   * Recipe entity
-    * Recipe entity file thumbnail
+    * Recipe entity file thumbnail (thumbnailfile => selectfile/uploadfile)
     * Remove thumbnail when delete recipe
 
   * Confirm modals
