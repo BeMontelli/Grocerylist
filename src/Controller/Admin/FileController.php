@@ -48,15 +48,8 @@ class FileController extends AbstractController
                 if(!empty($formFiles)) {
                     foreach ($formFiles as $formFile) {
                         if ($formFile) {
-                            $extension = $formFile->getClientOriginalExtension();
-                            $titleFile = str_replace(".".$extension, "", $formFile->getClientOriginalName());
-                            $filePath = $this->fileUploader->uploadRecipeThumbnail($formFile);
-                            
-                            $file = new File();
-                            $file->setTitle($titleFile);
-                            $file->setUrl($filePath);
-                            $file->setExtension($extension);
-                            $file->setUser($user);
+                            /** @var File $file */
+                            $file = $this->fileUploader->uploadFile($formFile,$user);
         
                             $entityManager->persist($file);
                             $entityManager->flush();

@@ -4,6 +4,7 @@ namespace App\Service;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use App\Entity\File;
 
 class FileUploader
 {
@@ -12,6 +13,20 @@ class FileUploader
     public function __construct(string $projectDir)
     {
         $this->projectDir = $projectDir;
+    }
+
+    public function uploadFile($formFile, $user) {
+        $extension = $formFile->getClientOriginalExtension();
+        $titleFile = str_replace(".".$extension, "", $formFile->getClientOriginalName());
+        $filePath = $this->uploadRecipeThumbnail($formFile);
+                        
+        $file = new File();
+        $file->setTitle($titleFile);
+        $file->setUrl($filePath);
+        $file->setExtension($extension);
+        $file->setUser($user);
+        
+        return $file;
     }
 
     public function uploadRecipeThumbnail(UploadedFile $file): string

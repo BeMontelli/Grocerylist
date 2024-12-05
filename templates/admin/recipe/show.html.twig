@@ -20,11 +20,11 @@
         <div class="cols">
             <div class="col__left">
                 <div class="single__image">
-                    {% if recipe.thumbnail is not empty %}
-                        <img src="{{ recipe.thumbnail }}" alt="{{ recipe.title }}">
-                    {% else %}
-                        <span>NO IMAGE</span>
-                    {% endif %}
+                {% if recipe.thumbnail is not empty and recipe.thumbnail.url is not empty %}
+                    <img src="{{ recipe.thumbnail.url }}" alt="{{ recipe.thumbnail.title }}">
+                {% else %}
+                    <img src="{{ asset('images/_grocerylist-placeholder.jpg') }}" alt="placeholder">
+                {% endif %}
                 </div>
 
                 <div class="card">

@@ -84,7 +84,7 @@ class GroceryListController extends AbstractController
         $entityManager->flush();
 
         $groceryListIngredients = $groceryList->getGroceryListIngredients();
-        // collection objects fully initialize if not
+        // PROXY collection objects fully initialize if not
         foreach ($groceryListIngredients as $groceryListIngredient) {
             $ingredient = $groceryListIngredient->getIngredient();
             if ($ingredient instanceof Proxy) {
@@ -93,7 +93,7 @@ class GroceryListController extends AbstractController
         }
 
         $recipes = $groceryList->getRecipes();
-        // collection objects fully initialize if not
+        // PROXY collection objects fully initialize if not
         foreach ($recipes as $recipe) {
             $recipeGroceryListIngredients = $recipe->getGroceryListIngredients();
             foreach ($recipeGroceryListIngredients as $groceryListIngredient) {

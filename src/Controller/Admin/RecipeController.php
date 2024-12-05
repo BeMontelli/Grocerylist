@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\DTO\SearchRecipesDTO;
+use App\Entity\File;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\RecipeType;
@@ -24,6 +25,7 @@ use App\Form\GroceryListRecipeIngredientsType;
 use App\Repository\GroceryListRepository;
 use App\Service\GroceryListIngredientService;
 use App\Form\SearchRecipesType;
+use Doctrine\Persistence\Proxy;
 
 #[Route("/{_locale}/admin/recipes", name: "admin.recipe.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -56,12 +58,25 @@ class RecipeController extends AbstractController
         
         if($form->isSubmitted()) {
             if($form->isValid()) {
-                $file = $form->get('thumbnailfile')->getData();
-                if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
-    
+                $uploadfile = $form->get('uploadfile')->getData();
+                $selectfile = $form->get('selectfile')->getData();
+
                 /** @var Recipe $recipe */
                 $recipe = $form->getData();
-                if(!empty($thumbnailPath)) $recipe->setThumbnail($thumbnailPath);
+
+                if ($uploadfile) {
+                    // if file uploaded, priority to this file
+                    $newFile = $this->fileUploader->uploadFile($uploadfile, $user);
+                    $em->persist($newFile);
+                    $em->flush();
+
+                    $recipe->setThumbnail($newFile);
+                } else {
+                    if (!empty($selectfile) && $selectfile instanceof File) {
+                        // if no file uploaded but file selected => link file to recipe
+                        $recipe->setThumbnail($selectfile);
+                    }
+                }
     
                 $recipe = $form->getData();
                 $recipe->setUser($user);
@@ -85,6 +100,14 @@ class RecipeController extends AbstractController
             $recipes = $recipeRepository->paginateUserRecipes($currentPage,$user);
         }
         
+        // PROXY collection objects fully initialize if not
+        foreach ($recipes as $recipe) {
+            $thumbnail = $recipe->getThumbnail();
+            if ($thumbnail instanceof Proxy) {
+                $em->initializeObject($thumbnail);
+            }
+        }
+
         return $this->render('admin/recipe/index.html.twig', [
             'recipes' => $recipes,
             'form' => $form,
@@ -173,16 +196,22 @@ class RecipeController extends AbstractController
             if($form->isValid()) {
                 /** @var Recipe $recipe */
                 $recipe = $form->getData();
-                $oldThumbnail = $recipe->getThumbnail();
 
-                $file = $form->get('thumbnailfile')->getData();
-                if ($file) $thumbnailPath = $this->fileUploader->uploadRecipeThumbnail($file);
+                $uploadfile = $form->get('uploadfile')->getData();
+                $selectfile = $form->get('selectfile')->getData();
 
-                if(!empty($thumbnailPath)) {
-                    $fileDir = $this->getParameter('kernel.project_dir').'/public';
-                    $this->fileUploader->deleteThumbnail($fileDir,$oldThumbnail);
-                    /** @var Recipe $recipe */
-                    $recipe->setThumbnail($thumbnailPath);
+                /** @var Recipe $recipe */
+                $recipe = $form->getData();
+
+                if ($uploadfile) {
+                    // if file uploaded, priority to this file
+                    $newFile = $this->fileUploader->uploadFile($uploadfile, $user);
+                    $recipe->setThumbnail($newFile);
+                } else {
+                    if (!empty($selectfile) && $selectfile instanceof File) {
+                        // if no file uploaded but file selected => link file to recipe
+                        $recipe->setThumbnail($selectfile);
+                    }
                 }
 
                 $em->persist($recipe);
@@ -190,6 +219,12 @@ class RecipeController extends AbstractController
                 $this->addFlash('success', 'Recipe updated !');
                 return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
             } else $this->addFlash('danger', 'Form validation error !');
+        }
+        
+        // PROXY object fully initialize if not
+        $thumbnail = $recipe->getThumbnail();
+        if ($thumbnail instanceof Proxy) {
+            $em->initializeObject($thumbnail);
         }
 
         return $this->render('admin/recipe/show.html.twig', [
@@ -203,12 +238,6 @@ class RecipeController extends AbstractController
     public function delete(Request $request,Recipe $recipe, EntityManagerInterface $em) {
 
         if ($this->isCsrfTokenValid('delete'.$recipe->getId(), $request->getPayload()->get('_token'))) {
-            $currentThumbnail = $recipe->getThumbnail();
-            if(!empty($currentThumbnail)) {
-                $fileDir = $this->getParameter('kernel.project_dir').'/public';
-                $this->fileUploader->deleteThumbnail($fileDir,$currentThumbnail);
-            }
-    
             $em->remove($recipe);
             $em->flush();
             $this->addFlash('warning', 'Recipe '.$recipe->getTitle().' deleted !');

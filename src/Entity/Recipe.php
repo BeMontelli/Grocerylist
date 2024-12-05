@@ -71,10 +71,6 @@ class Recipe
     #[Groups(['recipes.index','recipes.show'])]
     private Collection $ingredients;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['recipes.*','categories.*','ingredients.*'])]
-    private ?string $thumbnail = null;
-
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
@@ -90,6 +86,9 @@ class Recipe
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'recipe')]
     private Collection $groceryListIngredients;
+
+    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    private ?File $thumbnail = null;
 
     public function __construct()
     {
@@ -211,19 +210,6 @@ class Recipe
         return $this;
     }
 
-    public function getThumbnail(string $format = null): ?string
-    {
-        if( !$this->thumbnail ) $this->thumbnail = '/images/placeholder-big.jpg';
-        return $this->thumbnail;
-    }
-
-    public function setThumbnail(?string $thumbnail): static
-    {
-        $this->thumbnail = $thumbnail;
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -289,6 +275,18 @@ class Recipe
                 $groceryListIngredient->setRecipe(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getThumbnail(): ?File
+    {
+        return $this->thumbnail;
+    }
+
+    public function setThumbnail(?File $thumbnail): static
+    {
+        $this->thumbnail = $thumbnail;
 
         return $this;
     }

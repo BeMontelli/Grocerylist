@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\File;
 use App\Entity\Ingredient;
 use App\Entity\Recipe;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -41,9 +42,6 @@ class RecipeType extends AbstractType
             ->add('selectfile', FileAutocompleteField::class, [
                 'mapped' => false,
                 'required' => false,
-                'constraints' => [
-                    new Image()
-                ],
                 'label' => 'Select thumbnail',
                 'attr' => [
                     'data-controller' => 'fileselector',
