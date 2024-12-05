@@ -30,7 +30,7 @@ export default class extends Controller {
                         let options = selectElement.querySelectorAll('.option:not(.imagefiled)');
                         if(options.length > 0) {
                             options.forEach(option => {
-                                if (!option.classList.contains('imagefiled')) {
+                                if(!(option.classList.contains('no-more-results') || option.classList.contains('imagefiled'))) {
                                     let imageUrl = option.textContent.trim();
                                     option.innerHTML = `<div class="img__disp" style="background-image:url(${imageUrl})" alt="Thumbnail ${imageUrl}" aria-label="${imageUrl}">`;
                                     option.classList.add('imagefiled');
