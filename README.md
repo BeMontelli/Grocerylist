@@ -26,8 +26,8 @@ TO DO LIST
     * Remove user's files when delete recipe
 
   * Recipe entity
-    * Recipe entity file thumbnail (thumbnailfile => selectfile/uploadfile)
-    * Remove thumbnail when delete recipe
+    * CANT DELETE if related to a grocerylist
+    * edit prefill fields select category/ingredients/image
 
   * Confirm modals
 
