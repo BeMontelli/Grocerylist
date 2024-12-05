@@ -9,13 +9,14 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Event\PostSubmitEvent;
 use Symfony\Component\Form\Event\PreSubmitEvent;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\UX\Dropzone\Form\DropzoneType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use App\Form\CategoryAutocompleteField;
 use App\Form\IngredientsAutocompleteField;
+use App\Form\FileAutocompleteField;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,13 +38,25 @@ class RecipeType extends AbstractType
                 'required' => false,
                 'label' => 'Slug'
             ])
-            ->add('thumbnailfile',FileType::class, [
+            ->add('selectfile', FileAutocompleteField::class, [
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
                     new Image()
                 ],
-                'label' => 'Recipe thumbnail'
+                'label' => 'Select thumbnail',
+                'attr' => [
+                    'data-controller' => 'fileselector',
+                    'class' => 'fileselector',
+                ]
+            ])
+            ->add('uploadfile', DropzoneType::class, [
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new Image()
+                ],
+                'label' => 'Upload thumbnail'
             ])
             ->add('category', CategoryAutocompleteField::class)
             ->add('ingredients', IngredientsAutocompleteField::class)

@@ -17,6 +17,40 @@
         margin-bottom: 0 !important;
     }
 }
+.title__file_row {
+    .row:first-child{
+        margin-bottom: 3px !important;
+    }
+    .row>label{
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .row>div{
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .row input{
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+.image__display{
+    display: flex;
+    flex-wrap: wrap;
+}
+.imagefiled {
+    width: 120px;
+    .img__disp{
+        width: 120px;
+        height: 120px;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
+        border-radius: 4px;
+    }
+}
 
 .narrow__form{
     .row{

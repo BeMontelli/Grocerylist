@@ -27,6 +27,13 @@ class FileRepository extends ServiceEntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
+    public function findForUser(User $user)
+    {
+        return $this->createQueryBuilder('i')
+                    ->where('i.user = :val')
+                    ->setParameter('val', $user->getId());
+    }
+
     //    /**
     //     * @return File[] Returns an array of File objects
     //     */

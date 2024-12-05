@@ -4,7 +4,12 @@
         {{ form_row(form.title) }}
         {{ form_row(form.slug) }}
     </div>
-    {{ form_row(form.thumbnailfile) }}
+
+    <div class="title__file_row">
+    {{ form_row(form.selectfile) }}
+    {{ form_row(form.uploadfile) }}
+    </div>
+
     {{ form_row(form.category) }}
     {{ form_row(form.ingredients) }}
     {{ form_row(form.price) }}
