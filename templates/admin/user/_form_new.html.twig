@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+
+    {{ form_row(form.username, {'label': button_label|default('app.admin.usernew.username'|trans)}) }}
+    <hr>
+    <div class="duo__field_row">
+    {{ form_row(form.email, {'label': button_label|default('app.admin.usernew.email'|trans)}) }}
+    {{ form_row(form.emailconfirm, {'label': button_label|default('app.admin.usernew.email.confirm'|trans),'attr':{'placeholder': button_label|default('app.admin.usernew.email.confirm'|trans)}}) }}
+    </div>
+    <hr>
+    <div class="duo__field_row">
+    {{ form_row(form.password, {'label': button_label|default('app.admin.usernew.password'|trans)}) }}
+    {{ form_row(form.passwordconfirm, {'label': button_label|default('app.admin.usernew.password.confirm'|trans),'attr':{'placeholder': button_label|default('app.admin.usernew.password.confirm'|trans)}}) }}
+    </div>
+    <hr>
+    {{ form_row(form.save, {'label': button_label|default('app.admin.usernew.btn'|trans)}) }}
+
+{{ form_end(form) }}

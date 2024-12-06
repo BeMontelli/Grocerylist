@@ -11,8 +11,14 @@
    
     <div class="container">
 
-        <h2>Create new User</h2>
-        {#{{ include('admin/user/_form.html.twig') }}#}
+        <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            {{ 'app.admin.action.new'|trans({'%gender%': 'male'}) }} {{ 'app.admin.users.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
+        </button>
+        <div class="collapse" id="collapseExample">
+            <div class="card card-body">
+        {{ include('admin/user/_form_new.html.twig') }}
+            </div>
+        </div>
 
         <div class="table__container">
         <table class="table table__thead__tbody">

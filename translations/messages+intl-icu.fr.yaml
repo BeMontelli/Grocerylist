@@ -120,6 +120,16 @@ app:
       password: 'Nouveau mot de passe'
       password.confirm: 'Confirmer le nouveau mot de passe'
       btn: "Mettre à jour"
+    usernew:
+      action: Ajouter
+      username: 'Login'
+      username.placeholder: 'John Doe'
+      email: 'E-mail'
+      email.confirm: "Confirmer l'E-mail"
+      email.placeholder: johndoe@gmail.com
+      password: 'Mot de passe'
+      password.confirm: 'Confirmer le mot de passe'
+      btn: "Créer"
   front:
     form:
       name: 'Votre nom'
