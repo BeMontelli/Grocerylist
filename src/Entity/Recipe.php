@@ -10,6 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Entity\File;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 class Recipe
@@ -87,7 +88,8 @@ class Recipe
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'recipe')]
     private Collection $groceryListIngredients;
 
-    #[ORM\ManyToOne(inversedBy: 'recipes')]
+    #[ORM\ManyToOne(targetEntity: File::class, inversedBy: 'recipes')]
+    #[ORM\JoinColumn(name: 'thumbnail_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
     private ?File $thumbnail = null;
 
     public function __construct()

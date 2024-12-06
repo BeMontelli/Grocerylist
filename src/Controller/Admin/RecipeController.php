@@ -8,6 +8,7 @@ use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\RecipeType;
 use App\Entity\GroceryList;
+use App\Entity\GroceryListIngredient;
 use App\Repository\RecipeRepository;
 use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
@@ -238,6 +239,13 @@ class RecipeController extends AbstractController
     public function delete(Request $request,Recipe $recipe, EntityManagerInterface $em) {
 
         if ($this->isCsrfTokenValid('delete'.$recipe->getId(), $request->getPayload()->get('_token'))) {
+
+            /** @var GroceryListIngredient $groceryListIngredient */
+            foreach ($recipe->getGroceryListIngredients() as $groceryListIngredient) {
+                $em->remove($groceryListIngredient);
+                $em->flush();
+            }
+            
             $em->remove($recipe);
             $em->flush();
             $this->addFlash('warning', 'Recipe '.$recipe->getTitle().' deleted !');

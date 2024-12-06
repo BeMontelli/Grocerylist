@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\File;
+use App\Entity\Recipe;
 use App\Form\FilesType;
 use App\Entity\User;
 use App\Repository\FileRepository;
@@ -85,6 +86,11 @@ class FileController extends AbstractController
             if(!empty($currentThumbnail)) {
                 $fileDir = $this->getParameter('kernel.project_dir').'/public';
                 $this->fileUploader->deleteThumbnail($fileDir,$currentThumbnail);
+            }
+
+            /** @var Recipe $recipe */
+            foreach ($file->getRecipes() as $recipe) {
+                $recipe->setThumbnail(null);
             }
     
             $entityManager->remove($file);
