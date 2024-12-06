@@ -29,19 +29,8 @@ a{
     }
 }
 
-input,input::placeholder,textarea,textarea::placeholder,button{
-    font-family: Arial, sans-serif;
-}
-
 .table__count{
     margin-bottom: 10px;
-}
-
-.dropdown-item{
-    font-weight: 600;
-    &.active, &:active{
-        background-color: var(--main-green);
-    }
 }
 
 .card{
@@ -54,26 +43,6 @@ input,input::placeholder,textarea,textarea::placeholder,button{
 .accordion-button:not(.collapsed){
     color: var(--main-bg-input);
     background-color: var(--main-green);
-}
-
-fieldset{
-    border: solid 1px var(--main-green-alt);
-    border-radius: 5px;
-    padding: 5px;
-    margin: 10px 0 20px;
-}
-
-input[type=text], input[type=email], input[type=number], select, textarea {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid var(--main-darker);
-    border-radius: 4px;
-    box-sizing: border-box;
-    color: var(--main-text-color);
-    background-color: var(--main-bg-input);
-    font-weight: 600;
 }
 
 table{

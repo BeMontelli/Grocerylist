@@ -90,6 +90,16 @@ app:
       edit: Edit
       delete: Delete
       backlist: Back to List
+    userform:
+      action: Update
+      username: 'Username'
+      username.placeholder: 'John Doe'
+      email: 'Email'
+      email.confirm: 'Confirm new Email'
+      email.placeholder: johndoe@gmail.com
+      password: 'New password'
+      password.confirm: 'Confirm new password'
+      btn: 'Update'
   front:
     form:
       name: 'Your name'

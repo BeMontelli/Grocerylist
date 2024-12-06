@@ -1,4 +1,16 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    {{ form_row(form.save, {'label': button_label|default('app.admin.action.create'|trans)}) }}
+
+    {{ form_row(form.username) }}
+    <hr>
+    <div class="duo__field_row">
+    {{ form_row(form.email) }}
+    {{ form_row(form.emailconfirm) }}
+    </div>
+    <hr>
+    <div class="duo__field_row">
+    {{ form_row(form.password) }}
+    {{ form_row(form.passwordconfirm) }}
+    </div>
+    <hr>
+    {{ form_row(form.save) }}
 {{ form_end(form) }}

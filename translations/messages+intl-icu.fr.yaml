@@ -110,6 +110,16 @@ app:
       edit: Editer
       delete: Supprimer
       backlist: Retourner à la liste
+    userform:
+      action: Mettre à jour
+      username: 'Login'
+      username.placeholder: 'John Doe'
+      email: 'E-mail'
+      email.confirm: 'Confirmer le nouveau E-mail'
+      email.placeholder: johndoe@gmail.com
+      password: 'Nouveau mot de passe'
+      password.confirm: 'Confirmer le nouveau mot de passe'
+      btn: "Mettre à jour"
   front:
     form:
       name: 'Votre nom'

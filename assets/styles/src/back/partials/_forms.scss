@@ -17,7 +17,26 @@
         margin-bottom: 0 !important;
     }
 }
+
 .title__file_row {
+    .row:first-child{
+        margin-bottom: 3px !important;
+    }
+    .row>label{
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .row>div{
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+    }
+    .row input{
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+}
+
+.duo__field_row {
     .row:first-child{
         margin-bottom: 3px !important;
     }
@@ -71,4 +90,43 @@
             }
         }
     }
+}
+
+.dropdown-item{
+    font-weight: 600;
+    &.active, &:active{
+        background-color: var(--main-green);
+    }
+}
+
+input,input::placeholder,textarea,textarea::placeholder,button{
+    font-family: Arial, sans-serif;
+}
+
+fieldset{
+    border: solid 1px var(--main-green-alt);
+    border-radius: 5px;
+    padding: 5px;
+    margin: 10px 0 20px;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=number], select, textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid var(--main-darker);
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: var(--main-text-color);
+    background-color: var(--main-bg-input);
+    font-weight: 600;
+}
+
+.toggle-password-button{
+    top: 18px !important;
+    bottom: auto !important;
+    right: 5px !important;
+    font-size: 0 !important;
+    color: var(--main-dark);
 }
