@@ -23,10 +23,8 @@ TO DO LIST
     * User entity file thumbnail
   * User entity
     * complete edit/show/new/delete
-    * Remove user's files when delete recipe
 
   * Recipe entity
-    * CANT DELETE if related to a grocerylist
     * edit prefill fields select category/ingredients/image
 
   * Confirm modals
