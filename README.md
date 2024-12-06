@@ -36,6 +36,10 @@ WORK IN PROGESS
 
   * Check **WIP** notes
 
+  * User create
+  * User create formtype
+  * User Forms constraints required? & same as (emails,passwords)
+
 Requirements
 ------------
 
