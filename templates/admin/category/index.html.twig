@@ -35,7 +35,7 @@
             <th{% if categories.isSorted('a.title') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(categories, 'Title', 'c.title') }}
             </th>
-            <th{% if categories.isSorted('c.slug') %} class="mobile__hide sorted"{% endif %}>
+            <th class="mobile__hide {% if categories.isSorted('c.slug') %}sorted{% endif %}">
                 {{ knp_pagination_sortable(categories, 'Slug', 'c.slug') }}
             </th>
             <th>Count Recipes</th>

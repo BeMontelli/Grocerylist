@@ -25,32 +25,33 @@ class UserType extends AbstractType
         $builder
             ->add('username',TextType::class, [
                 'empty_data' => '',
+                'required' => false,
                 'attr' => ['placeholder' => t('app.admin.userform.username.placeholder')],
                 'label' => t('app.admin.userform.username')
             ])
             ->add('email',EmailType::class, [
                 'empty_data' => '',
+                'required' => false,
                 'attr' => ['placeholder' => t('app.admin.userform.email.placeholder')],
                 'label' => t('app.admin.userform.email')
             ])
             ->add('emailconfirm',EmailType::class, [
                 'empty_data' => '',
                 'mapped' => false,
+                'required' => false,
                 'attr' => ['placeholder' => t('app.admin.userform.email.confirm')],
                 'label' => false
             ])
             ->add('password', PasswordType::class, [
                 'label' => t('app.admin.userform.password'),
                 'mapped' => false,
+                'required' => false,
                 'attr' => [
                     'autocomplete' => 'new-password',
                     'placeholder' => '**********'
                 ],
                 'toggle' => true,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
@@ -61,15 +62,13 @@ class UserType extends AbstractType
             ->add('passwordconfirm', PasswordType::class, [
                 'label' => false,
                 'mapped' => false,
+                'required' => false,
                 'attr' => [
                     'autocomplete' => 'new-password',
                     'placeholder' => t('app.admin.userform.password.confirm')
                 ],
                 'toggle' => true,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',

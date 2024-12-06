@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 #[Route("/{_locale}/admin/users", name: "admin.user.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -38,15 +39,43 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                
+                $emailConfirm = $form->get('emailconfirm')->getData();
+                $passwordConfirm = $form->get('passwordconfirm')->getData();
 
-            return $this->redirectToRoute('admin.user.index', [], Response::HTTP_SEE_OTHER);
+                $newEmail = $form->get('email')->getData();
+                if ($newEmail && $newEmail !== $user->getEmail()) {
+                    if ($newEmail === $emailConfirm) {
+                        $user->setEmail($newEmail);
+                    } else {
+                        $this->addFlash('danger', 'Email confirmation does not match!');
+                        return $this->redirectToRoute('edit', ['id' => $user->getId()]);
+                    }
+                }
+
+                $newPassword = $form->get('password')->getData();
+                if ($newPassword && !$userPasswordHasher->isPasswordValid($user, $newPassword)) {
+                    if ($newPassword === $passwordConfirm) {
+                        $hashedPassword = $userPasswordHasher->hashPassword($user, $newPassword);
+                        $user->setPassword($hashedPassword);
+                    } else {
+                        $this->addFlash('danger', 'Password confirmation does not match!');
+                        return $this->redirectToRoute('edit', ['id' => $user->getId()]);
+                    }
+                }
+
+                $em->flush();
+
+                $this->addFlash('success', 'Changes saved !');
+                return $this->redirectToRoute('admin.user.index', [], Response::HTTP_SEE_OTHER);
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/user/edit.html.twig', [
