@@ -22,7 +22,7 @@ TO DO LIST
     * User process & layouts
     * User entity file thumbnail
   * User entity
-    * complete /new/delete
+    * complete /new
 
   * Recipe entity
     * edit prefill fields select category/ingredients/image
