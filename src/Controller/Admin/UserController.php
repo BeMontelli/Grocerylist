@@ -2,6 +2,12 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Category;
+use App\Entity\Section;
+use App\Entity\File;
+use App\Entity\GroceryList;
+use App\Entity\Recipe;
+use App\Entity\Ingredient;
 use App\Entity\User;
 use App\Form\UserType;
 use App\Repository\UserRepository;
@@ -13,6 +19,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Requirement\Requirement;
+use App\Service\FileUploader;
 
 #[Route("/{_locale}/admin/users", name: "admin.user.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('ROLE_ADMIN')]
@@ -38,7 +46,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $form = $this->createForm(UserType::class, $user);
@@ -84,12 +92,60 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'delete', methods: ['POST'])]
-    public function delete(Request $request, User $user, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
+    public function delete(Request $request, User $user, EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->get('_token'))) {
-            $entityManager->remove($user);
-            $entityManager->flush();
+            
+            /** @var GroceryList $grocerylist */
+            foreach ($user->getGroceryLists() as $grocerylist) {
+                foreach ($grocerylist->getGroceryListIngredients() as $groceryListIngredient) {
+                    $em->remove($groceryListIngredient);
+                }
+                $em->remove($grocerylist);
+                $em->flush();
+            }
+
+            /** @var Ingredient $ingredient */
+            foreach ($user->getIngredients() as $ingredient) {
+                $em->remove($ingredient);
+                $em->flush();
+            }
+            
+            /** @var Recipe $recipe */
+            foreach ($user->getRecipes() as $recipe) {
+                $em->remove($recipe);
+                $em->flush();
+            }
+
+            /** @var Section $section */
+            foreach ($user->getSections() as $section) {
+                $em->remove($section);
+                $em->flush();
+            }
+
+            /** @var Category $category */
+            foreach ($user->getCategories() as $category) {
+                $em->remove($category);
+                $em->flush();
+            }
+
+            /** @var File $file */
+            foreach ($user->getFiles() as $file) {
+                $currentThumbnail = $file->getUrl();
+                if(!empty($currentThumbnail)) {
+                    $fileDir = $this->getParameter('kernel.project_dir').'/public';
+                    $fileUploader->deleteThumbnail($fileDir,$currentThumbnail);
+                }
+                $em->remove($file);
+                $em->flush();
+            }
+
+            $em->remove($user);
+            $em->flush();
+            $this->addFlash('warning', 'User '.$user->getUsername().' deleted !');
+        } else {
+            $this->addFlash('danger', 'Error occured !');
         }
 
         return $this->redirectToRoute('admin.user.index', [], Response::HTTP_SEE_OTHER);
