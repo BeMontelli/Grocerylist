@@ -19,7 +19,6 @@ TO DO LIST
   * Entities Edit titles translate + structure rework
 
   * Profile page WIP ?
-    * User process & layouts
     * User entity file thumbnail
   * User entity
     * complete /new process
