@@ -28,6 +28,10 @@ TO DO LIST
 
   * Search bar (recipes, ingredients, grocerylists)
 
+  * Change admin access allowed to ROLE_USER
+  * Limit /users access to ROLE_ADMIN
+  * Limit edit /user to own (profile) if not ROLE_ADMIN
+
 WORK IN PROGESS
 ------------
 
