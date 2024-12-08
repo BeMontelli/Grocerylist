@@ -20,8 +20,6 @@ TO DO LIST
 
   * Profile page WIP ?
     * User entity file thumbnail
-  * User entity
-    * complete /new process
 
   * Recipe entity
     * edit prefill fields select category/ingredients/image
@@ -34,10 +32,6 @@ WORK IN PROGESS
 ------------
 
   * Check **WIP** notes
-
-  * User create
-  * User create formtype
-  * User Forms constraints required? & same as (emails,passwords)
 
 Requirements
 ------------

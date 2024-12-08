@@ -31,7 +31,6 @@ class UserController extends AbstractController
     public function index(Request $request, EntityManagerInterface $em,UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
-        // WIP UserCreateType (+ constraints & required)
         $form = $this->createForm(UserCreateType::class, $user);
         $form->handleRequest($request);
 
