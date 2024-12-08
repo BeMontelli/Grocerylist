@@ -99,8 +99,7 @@ class GroceryListIngredientService
         $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
         ->findBy([
             'recipe' => $recipe,
-            'groceryList' => $groceryList,
-            // User ID maybe ? WIP
+            'groceryList' => $groceryList
         ]);
         foreach ($existingRelations as $relation) {
             $this->entityManager->remove($relation);
@@ -114,8 +113,7 @@ class GroceryListIngredientService
         $existingRelations = $this->entityManager->getRepository(GroceryListIngredient::class)
         ->findBy([
             'ingredient' => $ingredient,
-            'recipe' => $recipe,
-            // User ID maybe ? WIP
+            'recipe' => $recipe
         ]);
         foreach ($existingRelations as $relation) {
             $this->entityManager->remove($relation);

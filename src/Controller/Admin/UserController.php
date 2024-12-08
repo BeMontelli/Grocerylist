@@ -9,7 +9,8 @@ use App\Entity\GroceryList;
 use App\Entity\Recipe;
 use App\Entity\Ingredient;
 use App\Entity\User;
-use App\Form\UserType;
+use App\Form\UserCreateType;
+use App\Form\UserEditType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,17 +28,37 @@ use App\Service\FileUploader;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
-    public function index(Request $request, EntityManagerInterface $entityManager,UserRepository $userRepository): Response
+    public function index(Request $request, EntityManagerInterface $em,UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        // WIP UserCreateType (+ constraints & required)
+        $form = $this->createForm(UserCreateType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($user);
-            $entityManager->flush();
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                
+                $emailConfirm = $form->get('emailconfirm')->getData();
+                $passwordConfirm = $form->get('passwordconfirm')->getData();
 
-            return $this->redirectToRoute('index', [], Response::HTTP_SEE_OTHER);
+                $email = $form->get('email')->getData();
+                $password = $form->get(name: 'password')->getData();
+
+                if ($email === $emailConfirm && $password === $passwordConfirm) {
+                    $user->setEmail($email);
+                    $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
+                    $user->setPassword($hashedPassword);
+                    $user->setRoles(['ROLE_USER']);
+                    $user->setVerified(true);
+                    $em->persist($user);
+                    $em->flush();
+                    $this->addFlash('success', 'Changes saved !');
+                } else {
+                    $this->addFlash('danger', 'Email or Password confirmation does not match!');
+                }
+
+                return $this->redirectToRoute('admin.user.index', [], Response::HTTP_SEE_OTHER);
+            } else $this->addFlash('danger', 'Form validation error !');
         }
 
         return $this->render('admin/user/index.html.twig', [
@@ -49,7 +70,7 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted()) {
@@ -130,6 +151,7 @@ class UserController extends AbstractController
                 $em->flush();
             }
 
+            // WIP remove user thumbnail if exist
             /** @var File $file */
             foreach ($user->getFiles() as $file) {
                 $currentThumbnail = $file->getUrl();
