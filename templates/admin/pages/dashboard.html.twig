@@ -13,13 +13,6 @@
     
 <div class="container">
 
-    <a class="mb-4 btn btn-primary btn-lg {{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}">
-        <i class='bx bxs-home-circle' ></i>
-        {{ 'app.hdr.front'|trans }}
-    </a>
-    
-    <hr/>
-
     <div class="d-flex flex-wrap row">
         <a href="{{ url('admin.list.index') }}" class="col">
             <div class="card p-4 d-flex flex-row justify-content-start align-items-center">

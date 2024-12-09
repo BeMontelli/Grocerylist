@@ -1,18 +1,22 @@
 :root {
-    --main-dark: #2f4858;
-    --main-dark-light: #1e6074;
-    --main-dark-lighter: #007a89;
-
-    --main-dark-green: #009495;
-    --main-green-alt: #00ae97;
-    --main-green: #28c78e;
-
+    --main-darker: #313131;
+    --main-dark: #3e3e3e;
+    --main-dark-light: #525459;
+    --main-dark-lighter: #626d74;
+    --main-dark-green: #70878d;
+    --main-green-alt: #81a2a1;
+    --main-green: #99bdb1;
+    --main-grey: #909d99;
     --main-white: #cbdcd7;
-    --main-white-alt: #a1aca9;
+    --main-pure-white: #f3f3f3;
+
+    --main-orange: #d48b37;
+    --main-orange-fade: rgba(212, 139, 55, 0.25);
+
+    --main-red: #d14949;
+    --main-dark-red: #8b1c1c;
 
     --main-bg-color: var(--main-dark);
+    --main-bg-input: var(--main-dark-light);
     --main-text-color: var(--main-white);
-
-    // tables vars table.table // assets\styles\src\back\partials\_tables.scss
-    // flashes vars .flash__alerts // assets\styles\src\back\partials\_flashes.scss
 }

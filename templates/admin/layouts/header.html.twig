@@ -19,10 +19,6 @@
   <div id="nav-content">
 
     <div class="nav-button">
-        <a class="{{ app.current_route starts with 'page.home' ? 'active' : '' }}" href="{{ url('page.home') }}"><i class='bx bxs-home-circle' ></i><span>{{ 'app.hdr.front'|trans }}</span></a>
-    </div>
-
-    <div class="nav-button">
         <a class="{{ app.current_route starts with 'admin.dashboard' ? 'active' : '' }}" href="{{ url('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i><span>{{ 'app.hdr.dashboard'|trans }}</span></a>
     </div>
 

@@ -6,5 +6,15 @@
 
 <div class="container">
     <h1>Front</h1>
+
+    {% if app.user.id is not defined %}
+        <nav class="right">
+            <ul>
+                <li><a class="{{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">{{ 'app.front.login.action'|trans }}</a></li>
+                <li><a class="{{ app.current_route starts with 'app_register' ? 'active' : '' }}" href="{{ url('app_register') }}">{{ 'app.front.register.action'|trans }}</a></li>
+            </ul>
+        </nav>
+    {% endif %}
+
 </div>
 {% endblock %}
