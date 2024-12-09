@@ -28,12 +28,7 @@ TO DO LIST
 
   * Search bar (recipes, ingredients, grocerylists)
 
-  * Change admin access allowed to ROLE_USER
-  * Limit /users access to ROLE_ADMIN
   * Limit edit /user to own (profile) if not ROLE_ADMIN
-
-  * if connected redirect to /admin from front
-  * remove front access from header(s) && dashboard && error page
 
 WORK IN PROGESS
 ------------
