@@ -22,6 +22,7 @@ use Doctrine\Persistence\Proxy;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route("/admin/ajax", name: "admin.ajax.")]
+#[IsGranted('IS_AUTHENTICATED_FULLY')]
 class AjaxController extends AbstractController
 {
     public function __construct()

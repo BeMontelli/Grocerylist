@@ -15,6 +15,7 @@ use App\Entity\User;
 use App\Entity\GroceryList;
 
 #[Route("/{_locale}/admin", name: "admin.", requirements: ['_locale' => 'fr|en'])]
+#[IsGranted('IS_AUTHENTICATED_FULLY')]
 class AdminController extends AbstractController
 {
     private $security;

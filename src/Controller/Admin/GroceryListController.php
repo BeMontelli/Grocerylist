@@ -25,6 +25,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Doctrine\Persistence\Proxy;
 
 #[Route("/{_locale}/admin/lists", name: "admin.list.", requirements: ['_locale' => 'fr|en'])]
+#[IsGranted('IS_AUTHENTICATED_FULLY')]
 class GroceryListController extends AbstractController
 {
     private $security;

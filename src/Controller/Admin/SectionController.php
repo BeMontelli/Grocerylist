@@ -18,6 +18,7 @@ use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route("/{_locale}/admin/sections", name: "admin.section.", requirements: ['_locale' => 'fr|en'])]
+#[IsGranted('IS_AUTHENTICATED_FULLY')]
 class SectionController extends AbstractController
 {
     private $security;

@@ -8,9 +8,15 @@
         'title': 'Edit -' ~ user.username
     }) }}
    
-    <div class="container container_relative">
-        <a class="btn_page_title_overflow btn-primary btn" href="{{ path('admin.user.index') }}"><i class='bx bx-left-arrow-alt'></i> All users</a>
-    </div>
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="container container_relative">
+            <a class="btn_page_title_overflow btn-primary btn" href="{{ path('admin.user.index') }}"><i class='bx bx-left-arrow-alt'></i> All users</a>
+        </div>
+    {% else %}
+        <div class="container container_relative">
+            <a class="btn_page_title_overflow btn-primary btn" href="{{ path('admin.user.profile') }}"><i class='bx bx-left-arrow-alt'></i> Profile</a>
+        </div>
+    {% endif %}
    
    <div class="container">
 

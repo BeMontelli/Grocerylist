@@ -24,6 +24,7 @@ use Symfony\Component\Routing\Requirement\Requirement;
 use App\Service\FileUploader;
 
 #[Route("/{_locale}/admin/users", name: "admin.user.", requirements: ['_locale' => 'fr|en'])]
+#[IsGranted('IS_AUTHENTICATED_FULLY')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
@@ -88,9 +89,19 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher, FileUploader $fileUploader): Response
+    public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher, FileUploader $fileUploader, Security $security): Response
     {
-        // WIP check and constraint user own edit if not admin
+        /** @var User $userLogged */
+        $userLogged = $security->getUser();
+
+        $redirectRoute = 'admin.user.index';
+        if(
+            $userLogged->getId() !== $user->getId()
+            && !in_array('ROLE_ADMIN', $userLogged->getRoles(), true)
+        ) {
+            $redirectRoute = 'admin.dashboard';
+            return $this->redirectToRoute($redirectRoute, [], Response::HTTP_SEE_OTHER);
+        }
 
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
@@ -142,7 +153,7 @@ class UserController extends AbstractController
                 $em->flush();
 
                 $this->addFlash('success', 'Changes saved !');
-                return $this->redirectToRoute('admin.user.index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute($redirectRoute, [], Response::HTTP_SEE_OTHER);
             } else $this->addFlash('danger', 'Form validation error !');
         }
 
