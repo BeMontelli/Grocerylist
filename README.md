@@ -18,8 +18,8 @@ TO DO LIST
   
   * Entities Edit titles translate + structure rework
 
-  * Profile page WIP ?
-    * User entity file thumbnail
+  * User entity
+    * edit prefill field picture
 
   * Recipe entity
     * edit prefill fields select category/ingredients/image
