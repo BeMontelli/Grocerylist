@@ -5,12 +5,15 @@
 {% block body %}
     {{ include('admin/partials/page_title.html.twig', {
         'icon': "<i class='icon__page_title bx bx bxs-user' ></i>",
-        'title': 'app.admin.users.profile'|trans 
+        'title': 'app.admin.users.profile'|trans ,
+        'links': [
+            {
+                'url': path('admin.dashboard'),
+                'label': "<i class='bx bx-left-arrow-alt'></i> " ~ 'app.hdr.dashboard'|trans,
+                'class': 'btn_page_title_overflow btn-primary btn'
+            }
+        ]
     }) }}
-   
-    <div class="container container_relative">
-        <a class="btn_page_title_overflow btn-primary btn" href="{{ url('admin.dashboard') }}"><i class='bx bx-left-arrow-alt'></i> {{ 'app.hdr.dashboard'|trans }}</a>
-    </div>
    
    <div class="container">
 

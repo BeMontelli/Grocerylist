@@ -6,12 +6,15 @@
 
     {{ include('admin/partials/page_title.html.twig', {
         'icon': "<i class='icon__page_title bx bxs-category' ></i>",
-        'title': 'app.admin.sections.title'|trans
+        'title': 'app.admin.sections.title'|trans,
+        'links': [
+            {
+                'url': path('admin.ingredient.index'),
+                'label': 'app.admin.ingredients.title'|trans ~ "<i class='bx bx-transfer-alt'></i>",
+                'class': 'btn_page_title_overflow btn-primary btn'
+            }
+        ]
     }) }}
-   
-    <div class="container container_relative">
-        <a class="btn_page_title_overflow btn-primary btn" href="{{ url('admin.ingredient.index') }}">{{ 'app.admin.ingredients.title'|trans }} <i class='bx bx-transfer-alt'></i></a>
-    </div>
 
     <div class="container">
         

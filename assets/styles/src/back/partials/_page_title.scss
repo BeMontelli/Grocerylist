@@ -2,25 +2,39 @@
 
 .page__title{
   position: relative;
-  background-image: url('../../../../images/_grocerylist-pattern.jpg');
-  background-repeat: repeat;
-  background-position: center;
   padding: 50px 0 40px;
-  background-size: 250px;
-  width: calc(100% + 40px);
   margin-bottom: 40px;
-  @include responsive.responsiveTo(sm) {
-    width: 100%;
-  }
-  .page__title_filter{
+  width: 100%;
+  .page__title_bg{
     position: absolute;
     z-index: 1;
     top: 0;
     left: 0;
     height: 100%;
     width: 100%;
+    background-image: url('../../../../images/_grocerylist-pattern.jpg');
+    background-repeat: repeat;
+    background-position: center;
+    background-size: 250px;
+    opacity: 1;
+    width: calc(100% + 40px);
+    @include responsive.responsiveTo(sm) {
+      width: 100%;
+    }
+  }
+  .page__title_filter{
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
     background-color: var(--main-pure-white);
     opacity: 0.5;
+    width: calc(100% + 40px);
+    @include responsive.responsiveTo(sm) {
+      width: 100%;
+    }
   }
   .page__title_content{
     position: relative;
@@ -47,7 +61,7 @@
 .btn_page_title_overflow{
   position: absolute;
   z-index: 10;
-  top: -60px;
+  top: 20px;
 }
 
 .icon__page_title{

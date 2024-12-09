@@ -5,12 +5,15 @@
 {% block body %}
     {{ include('admin/partials/page_title.html.twig', {
         'icon': "<i class='icon__page_title bx bxs-category-alt' ></i>",
-        'title': 'Edit - ' ~ category.title
+        'title': 'Edit - ' ~ category.title,
+        'links': [
+            {
+                'url': path('admin.category.index'),
+                'label': "<i class='bx bx-left-arrow-alt'></i> All categories",
+                'class': 'btn_page_title_overflow btn-primary btn'
+            }
+        ]
     }) }}
-
-    <div class="container container_relative">
-        <a class="btn_page_title_overflow btn-primary btn" href="{{ url('admin.category.index') }}"><i class='bx bx-left-arrow-alt'></i> All categories</a>
-    </div>
 
     <div class="container">
 
