@@ -6,8 +6,9 @@ import './bootstrap.bundle.js';
  * This file will be included onto the page via the importmap() Twig function,
  * which should already be in your base.html.twig.
  */
-import './styles/boxicons.min.css'; // Boxicons
-import './styles/bootstrap.min.css'; // Bootstrap
+import './styles/vendor/boxicons.min.css'; // Boxicons
+import './styles/vendor/bootstrap.min.css'; // Bootstrap
+
 import './build/app.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
