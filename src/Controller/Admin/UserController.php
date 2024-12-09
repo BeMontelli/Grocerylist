@@ -24,10 +24,10 @@ use Symfony\Component\Routing\Requirement\Requirement;
 use App\Service\FileUploader;
 
 #[Route("/{_locale}/admin/users", name: "admin.user.", requirements: ['_locale' => 'fr|en'])]
-#[IsGranted('ROLE_ADMIN')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(Request $request, EntityManagerInterface $em,UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, FileUploader $fileUploader): Response
     {
         $user = new User();
@@ -90,6 +90,8 @@ class UserController extends AbstractController
     #[Route('/{id}/edit', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher, FileUploader $fileUploader): Response
     {
+        // WIP check and constraint user own edit if not admin
+
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
 
@@ -151,6 +153,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, User $user, EntityManagerInterface $em, FileUploader $fileUploader): Response
     {
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->getPayload()->get('_token'))) {

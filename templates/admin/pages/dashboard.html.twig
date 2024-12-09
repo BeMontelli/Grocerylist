@@ -90,12 +90,14 @@
             </div>
         </a>
         
-        <a href="{{ path('admin.user.index') }}" class="col">
-            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
-                <i class='bx bxs-group' ></i>
-                <span>{{ 'app.admin.users.title'|trans }}</span>
-            </div>
-        </a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('admin.user.index') }}" class="col">
+                <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+                    <i class='bx bxs-group' ></i>
+                    <span>{{ 'app.admin.users.title'|trans }}</span>
+                </div>
+            </a>
+        {% endif %}
 
     </div>
 

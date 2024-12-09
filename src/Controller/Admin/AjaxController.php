@@ -22,7 +22,6 @@ use Doctrine\Persistence\Proxy;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 #[Route("/admin/ajax", name: "admin.ajax.")]
-#[IsGranted('ROLE_ADMIN')]
 class AjaxController extends AbstractController
 {
     public function __construct()

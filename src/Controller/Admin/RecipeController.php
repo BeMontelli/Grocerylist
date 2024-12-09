@@ -29,7 +29,6 @@ use App\Form\SearchRecipesType;
 use Doctrine\Persistence\Proxy;
 
 #[Route("/{_locale}/admin/recipes", name: "admin.recipe.", requirements: ['_locale' => 'fr|en'])]
-#[IsGranted('ROLE_ADMIN')]
 class RecipeController extends AbstractController
 {
     private $security;

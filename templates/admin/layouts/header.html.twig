@@ -6,7 +6,10 @@
     <div id="nav-footer">
         <a class="" href="{{ url('admin.user.profile') }}">
         <div id="nav-footer-heading">
-        <div id="nav-footer-avatar" {% if app.user.picture is defined and app.user.picture.url is not empty %}style="background-image:url({{app.user.picture.url}})"{% endif %}>
+        <div id="nav-footer-avatar" 
+            {% if app.user is not empty and app.user.picture is not empty and app.user.picture.url is not empty %}
+                style="background-image:url({{ app.user.picture.url }})"
+            {% endif %}>
         </div>
         <div id="nav-footer-titlebox">
             <span id="nav-footer-title">{{ app.user.username }}</span>
@@ -56,9 +59,11 @@
 
     <hr/>
 
+    {% if is_granted('ROLE_ADMIN') %}
     <div class="nav-button">
         <a class="{{ app.current_route starts with 'admin.user.' ? 'active' : '' }}" href="{{ url('admin.user.index') }}"><i class='bx bxs-group' ></i><span>{{ 'app.admin.users.title'|trans }}</span></a>
     </div>
+    {% endif %}
 
     <div class="nav-button">
         <a class="{{ app.current_route starts with 'app_logout' ? 'active' : '' }}" href="{{ url('app_logout') }}"><i class='bx bxs-log-out-circle' ></i><span>{{ 'app.hdr.logout'|trans }}</span></a>

@@ -19,7 +19,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Routing\Requirement\Requirement;
 
 #[Route("/{_locale}/admin/files", name: "admin.file.", requirements: ['_locale' => 'fr|en'])]
-#[IsGranted('ROLE_ADMIN')]
 class FileController extends AbstractController
 {
     private $security;

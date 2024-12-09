@@ -19,7 +19,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
 #[Route("/{_locale}/admin/categories", name: "admin.category.", requirements: ['_locale' => 'fr|en'])]
-#[IsGranted('ROLE_ADMIN')]
 class CategoryController extends AbstractController
 {
     private $security;

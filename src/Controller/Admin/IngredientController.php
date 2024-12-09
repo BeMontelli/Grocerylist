@@ -22,7 +22,6 @@ use App\Service\GroceryListIngredientService;
 use App\Form\SearchIngredientsType;
 
 #[Route("/{_locale}/admin/products-ingredients", name: "admin.ingredient.", requirements: ['_locale' => 'fr|en'])]
-#[IsGranted('ROLE_ADMIN')]
 class IngredientController extends AbstractController
 {
     private $security;
