@@ -6,14 +6,30 @@
 
     .mobile__btns {
         ul.pagination{
-            margin: 20px 0 10px;
+            margin: 10px 0 10px;
         }
         li{
             cursor: pointer;
+            width: 100%;
+            text-align: center;
+            &.disabled{
+                cursor: default;
+            }
+        }
+
+        .page-item{
+            display: table;
+        }
+
+        .page-link{
+            padding: 12px 10px 10px;
+            display: table-cell;
+            vertical-align: middle;
         }
 
         .disabled > .page-link, .page-link.disabled{
-            color: var(--main-green);
+            background-color: var(--main-green);
+            color: var(--main-darker);
             font-weight: bolder;
         }
     }
@@ -161,6 +177,11 @@
     .section__elements__none{
         font-weight: bold;
         color: var(--main-orange);
+        border: solid 1px var(--main-orange);
+        padding: 10px;
+        width: 100%;
+        display: block;
+        border-radius: 5px;
     }
 
     .mobile__hide{

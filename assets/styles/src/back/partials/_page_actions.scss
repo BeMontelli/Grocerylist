@@ -1,0 +1,10 @@
+@use '../../mixins/responsive' as responsive;
+
+.page__actions{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  &>a{
+    margin-right: 10px;
+  }
+}
