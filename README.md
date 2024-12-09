@@ -28,8 +28,6 @@ TO DO LIST
 
   * Search bar (recipes, ingredients, grocerylists)
 
-  * Limit edit /user to own (profile) if not ROLE_ADMIN
-
 WORK IN PROGESS
 ------------
 
