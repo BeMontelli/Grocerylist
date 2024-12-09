@@ -82,6 +82,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: File::class, mappedBy: 'user', orphanRemoval: true)]
     private Collection $files;
 
+    #[ORM\ManyToOne]
+    private ?File $picture = null;
+
     public function __construct()
     {
         $this->groceryLists = new ArrayCollection();
@@ -373,6 +376,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->files->add($file);
             $file->setUser($this);
         }
+
+        return $this;
+    }
+
+    public function getPicture(): ?File
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(?File $picture): static
+    {
+        $this->picture = $picture;
 
         return $this;
     }
