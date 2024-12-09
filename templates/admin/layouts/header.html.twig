@@ -6,8 +6,7 @@
     <div id="nav-footer">
         <a class="" href="{{ url('admin.user.profile') }}">
         <div id="nav-footer-heading">
-        <div id="nav-footer-avatar">
-            
+        <div id="nav-footer-avatar" {% if app.user.picture is defined and app.user.picture.url is not empty %}style="background-image:url({{app.user.picture.url}})"{% endif %}>
         </div>
         <div id="nav-footer-titlebox">
             <span id="nav-footer-title">{{ app.user.username }}</span>

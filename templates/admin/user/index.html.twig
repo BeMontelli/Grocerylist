@@ -24,6 +24,7 @@
         <table class="table table__thead__tbody">
             <thead>
                 <tr>
+                    <th>Picture</th>
                     <th>Username</th>
                     <th>Roles</th>
                     <th>Email</th>
@@ -34,6 +35,7 @@
             <tbody>
             {% for user in users %}
                 <tr>
+                    <td class="user__picture" {% if user.picture is not empty and user.picture.url is not empty %}style="background-image:url({{user.picture.url}})"{% endif %}></td>
                     <td><a href="{{ path('admin.user.edit', {'id': user.id}) }}">{{ user.username }}</a></td>
                     <td>
                     {% for role in user.roles %}<span class="role__elem">{{ role }}</span>{% endfor %}

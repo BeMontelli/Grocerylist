@@ -16,6 +16,8 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\UX\Dropzone\Form\DropzoneType;
+use Symfony\Component\Validator\Constraints\Image;
 use function Symfony\Component\Translation\t;
 
 class UserEditType extends AbstractType
@@ -23,6 +25,23 @@ class UserEditType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('selectfile', FileAutocompleteField::class, [
+                'mapped' => false,
+                'required' => false,
+                'label' => 'Select thumbnail',
+                'attr' => [
+                    'data-controller' => 'fileselector',
+                    'class' => 'fileselector',
+                ]
+            ])
+            ->add('uploadfile', DropzoneType::class, [
+                'mapped' => false,
+                'required' => false,
+                'constraints' => [
+                    new Image()
+                ],
+                'label' => 'Upload thumbnail'
+            ])
             ->add('username',TextType::class, [
                 'empty_data' => '',
                 'required' => false,

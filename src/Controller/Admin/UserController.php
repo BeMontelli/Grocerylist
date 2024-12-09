@@ -28,7 +28,7 @@ use App\Service\FileUploader;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
-    public function index(Request $request, EntityManagerInterface $em,UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function index(Request $request, EntityManagerInterface $em,UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, FileUploader $fileUploader): Response
     {
         $user = new User();
         $form = $this->createForm(UserCreateType::class, $user);
@@ -43,12 +43,33 @@ class UserController extends AbstractController
                 $email = $form->get('email')->getData();
                 $password = $form->get(name: 'password')->getData();
 
+                $uploadfile = $form->get('uploadfile')->getData();
+                $selectfile = $form->get('selectfile')->getData();
+
                 if ($email === $emailConfirm && $password === $passwordConfirm) {
                     $user->setEmail($email);
                     $hashedPassword = $userPasswordHasher->hashPassword($user, $password);
                     $user->setPassword($hashedPassword);
                     $user->setRoles(['ROLE_USER']);
                     $user->setVerified(true);
+    
+                    /** @var Recipe $recipe */
+                    $recipe = $form->getData();
+    
+                    if ($uploadfile) {
+                        // if file uploaded, priority to this file
+                        $newFile = $fileUploader->uploadFile($uploadfile, $user);
+                        $em->persist($newFile);
+                        $em->flush();
+    
+                        $recipe->setThumbnail($newFile);
+                    } else {
+                        if (!empty($selectfile) && $selectfile instanceof File) {
+                            // if no file uploaded but file selected => link file to recipe
+                            $recipe->setThumbnail($selectfile);
+                        }
+                    }
+
                     $em->persist($user);
                     $em->flush();
                     $this->addFlash('success', 'Changes saved !');
@@ -67,7 +88,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', requirements: ['id' => Requirement::DIGITS], methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher): Response
+    public function edit(Request $request, User $user, EntityManagerInterface $em, UserPasswordHasherInterface $userPasswordHasher, FileUploader $fileUploader): Response
     {
         $form = $this->createForm(UserEditType::class, $user);
         $form->handleRequest($request);
@@ -96,6 +117,23 @@ class UserController extends AbstractController
                     } else {
                         $this->addFlash('danger', 'Password confirmation does not match!');
                         return $this->redirectToRoute('edit', ['id' => $user->getId()]);
+                    }
+                }
+
+                $uploadfile = $form->get('uploadfile')->getData();
+                $selectfile = $form->get('selectfile')->getData();
+
+                /** @var User $user */
+                $user = $form->getData();
+
+                if ($uploadfile) {
+                    // if file uploaded, priority to this file
+                    $newFile = $fileUploader->uploadFile($uploadfile, $user);
+                    $user->setPicture($newFile);
+                } else {
+                    if (!empty($selectfile) && $selectfile instanceof File) {
+                        // if no file uploaded but file selected => link file to recipe
+                        $user->setPicture($selectfile);
                     }
                 }
 

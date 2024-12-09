@@ -2,6 +2,9 @@
 
     {{ form_row(form.username, {'label': button_label|default('app.admin.usernew.username'|trans)}) }}
     <hr>
+    {{ form_row(form.selectfile) }}
+    {{ form_row(form.uploadfile) }}
+    <hr>
     <div class="duo__field_row">
     {{ form_row(form.email, {'label': button_label|default('app.admin.usernew.email'|trans)}) }}
     {{ form_row(form.emailconfirm, {'label': button_label|default('app.admin.usernew.email.confirm'|trans),'attr':{'placeholder': button_label|default('app.admin.usernew.email.confirm'|trans)}}) }}

@@ -29,6 +29,13 @@ table.table{
     margin-bottom: 0;
     vertical-align: top;
     border-color: var(--bs-table-border-color);
+
+    .user__picture{
+        background-image: url('../../../../images/_grocerylist-placeholder.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
 }
 
 table.table__thead__tbody{
