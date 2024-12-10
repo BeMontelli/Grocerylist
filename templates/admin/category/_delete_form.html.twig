@@ -3,8 +3,8 @@
     action="{{ path('admin.category.delete', {'id': category.category.id}) }}" 
     class="delete__form" 
     onsubmit="return confirm('Are you sure you want to delete this item?');"
-    data-title="Delete item ?"
-    data-txts="<p>Are you sure you want to delete this item ?</p>"
+    data-title="{{ 'app.admin.categories.deletetitle'|trans }}"
+    data-txts="{{ 'app.files.categories.deleteconfirm'|trans }}"
     data-confirm="<i class='bx bx-trash' ></i>"
     data-cancel="<i class='bx bx-arrow-back' ></i>"
 >

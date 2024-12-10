@@ -49,6 +49,8 @@ app:
         other {Listes}
       }
     lists.recipes.remove: 'Retirer de la liste'
+    lists.deletetitle: "Supprimer la liste ?"
+    lists.deleteconfirm: "Êtes vous sur de vouloir supprimer la liste ?"
     recipes.title: Recettes
     recipes.none: 'Pas de recette'
     recipes.sendtolistnotice: Votre recette sera envoyée à la liste sélectionnée avec les ingrédients cible.
@@ -59,12 +61,16 @@ app:
         =1 {Recette}
         other {Recettes}
       }
+    recipes.deletetitle: "Supprimer la recette ?"
+    recipes.deleteconfirm: "Êtes vous sur de vouloir supprimer la recette ?"
     categories.title: 'Categories de recette'
     categories.entity: >-
       {entity, plural,
         =1 {Categorie de recette}
         other {Categories de recette}
       }
+    categories.deletetitle: "Supprimer la categorie ?"
+    categories.deleteconfirm: "Êtes vous sur de vouloir supprimer la categorie ?"
     ingredients.title: Produits/Ingredients
     ingredients.none: "Pas de produit/ingredient"
     ingredients.entity: >-
@@ -72,12 +78,16 @@ app:
         =1 {Produit/Ingredient}
         other {Produits/Ingredients}
       }
+    ingredients.deletetitle: "Supprimer le produit/ingredient ?"
+    ingredients.deleteconfirm: "Êtes vous sur de vouloir supprimer le produit/ingredient ?"
     sections.title: "Categories de produit/ingredient"
     sections.entity: >-
       {entity, plural,
         =1 {Categorie de produit/ingredient}
         other {Categories de produit/ingredient}
       }
+    sections.deletetitle: "Supprimer la section ?"
+    sections.deleteconfirm: "Êtes vous sur de vouloir supprimer la section ?"
     users.title: Utilisateurs
     users.none: "Pas d'utilisateur"
     users.entity: >-
@@ -85,6 +95,8 @@ app:
         =1 {Utilisateur}
         other {Utilisateurs}
       }
+    users.deletetitle: "Supprimer l'utilisateur ?"
+    users.deleteconfirm: "Êtes vous sur de vouloir supprimer l'utilisateur ?"
     users.profile: Profil
     files.title: Galerie
     files.none: "Pas de fichier"
@@ -93,6 +105,8 @@ app:
         =1 {Fichier}
         other {Fichiers}
       }
+    files.deletetitle: "Supprimer le fichier ?"
+    files.deleteconfirm: "Êtes vous sur de vouloir supprimer le fichier ?"
     action:
       new:  >-
         {gender, select,

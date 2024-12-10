@@ -33,6 +33,8 @@ app:
         =1 {List}
         other {Lists}
       }
+    lists.deletetitle: "Delete list ?"
+    lists.deleteconfirm: "Are you to sure to delete the list ?"
     lists.recipes.remove: 'Remove from list'
     recipes.title: Recipes
     recipes.none: 'No recipes'
@@ -44,12 +46,16 @@ app:
         =1 {Recipe}
         other {Recipes}
       }
+    recipes.deletetitle: "Delete recipe ?"
+    recipes.deleteconfirm: "Are you to sure to delete the recipe ?"
     categories.title: 'Recipe Categories'
     categories.entity: >-
       {entity, plural,
         =1 {Recipe Category}
         other {Recipe Categories}
       }
+    categories.deletetitle: "Delete category ?"
+    categories.deleteconfirm: "Are you to sure to delete the category ?"
     ingredients.title: Products/Ingredients
     ingredients.none: 'No products/ingredients'
     ingredients.entity: >-
@@ -57,12 +63,16 @@ app:
         =1 {Product/Ingredient}
         other {Products/Ingredients}
       }
+    ingredients.deletetitle: "Delete product/ingredient ?"
+    ingredients.deleteconfirm: "Are you to sure to delete the product/ingredient ?"
     sections.title: 'Product/Ingredient Categories'
     sections.entity: >-
       {entity, plural,
         =1 {Product/Ingredient Category}
         other {Product/Ingredient Categories}
       }
+    sections.deletetitle: "Delete section ?"
+    sections.deleteconfirm: "Are you to sure to delete the section ?"
     users.title: Users
     users.none: 'No users'
     users.entity: >-
@@ -70,6 +80,8 @@ app:
         =1 {User}
         other {Users}
       }
+    users.deletetitle: "Delete user ?"
+    users.deleteconfirm: "Are you to sure to delete the user ?"
     users.profile: Profile
     files.title: Gallery
     files.none: 'No files'
@@ -78,6 +90,8 @@ app:
         =1 {File}
         other {Files}
       }
+    files.deletetitle: "Delete file ?"
+    files.deleteconfirm: "Are you to sure to delete the files ?"
     action:
       new: Create new
       show: Show
