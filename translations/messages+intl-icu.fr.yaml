@@ -155,7 +155,7 @@ app:
       send: Envoyer
     login:
       action: Connexion
-      page_title: 'Se connecter!'
+      page_title: 'GroceryList - Se connecter!'
       title: 'Merci de vous connecter'
       status: 'Vous êtes connecté en tant que'
       username: 'Login'
@@ -164,7 +164,7 @@ app:
       signin: 'Se connecter'
     register:
       action: "S'inscrire"
-      page_title: "S'inscrire"
+      page_title: "GroceryList - S'inscrire"
       title: 'Vous pouvez vous inscrire ici !'
       username: 'Login'
       username.placeholder: 'John Doe'

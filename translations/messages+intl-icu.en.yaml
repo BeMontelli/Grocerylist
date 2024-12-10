@@ -135,7 +135,7 @@ app:
       send: Send
     login:
       action: Login
-      page_title: 'Log in!'
+      page_title: 'GroceryList - Log in!'
       title: 'Please sign in'
       status: 'You are logged in as'
       username: 'Username'
@@ -144,7 +144,7 @@ app:
       signin: 'Sign in'
     register:
       action: Register
-      page_title: Register
+      page_title: 'GroceryList - Register'
       title: 'You can register here !'
       username: 'Username'
       username.placeholder: 'John Doe'

@@ -4,40 +4,51 @@
 
 {% block body %}
 
-    <div class="container">
-    {% if not app.user %}
-        
-        <form method="post">
-            {% if error %}
-                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-            {% endif %}
+    <div class="login__page container">
+        {% if app.user %}
+            <div class="mb-3">
+                <p>{{ 'app.front.login.status'|trans }} {{ app.user.userIdentifier }}</p>
 
-            <h1 class="mb-3">{{ 'app.front.login.title'|trans }}</h1>
-
-            <div class="form-group">
-                <label for="username">{{ 'app.front.login.username'|trans }}</label>
-                <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
+                <ul class="mt-3">
+                    <li class="mb-3">
+                        <a class="btn-primary btn" href="{{ path('admin.dashboard') }}"><i class='bx bxs-dashboard' ></i> {{ 'app.hdr.dashboard'|trans }}</a>
+                    </li>
+                    <li>
+                        <a class="btn-primary btn" href="{{ path('app_logout') }}">{{ 'app.front.logout.action'|trans }}</a>
+                    </li>
+                </ul>
             </div>
-            <div class="form-group toggle-password-container">
-                <label for="password">{{ 'app.front.login.password'|trans }}</label>
-                <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" {{ stimulus_controller('symfony/ux-toggle-password/toggle-password', {buttonClasses: ['toggle-password-button'],}) }} required>
-            </div>
+        {% else %}
+            <form method="post">
+                {% if error %}
+                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
 
-            <input type="hidden" name="_csrf_token"
-                   value="{{ csrf_token('authenticate') }}"
-            >
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> {{ 'app.front.login.remember'|trans }}
-                </label>
-            </div>
+                <h1 class="mb-3">{{ 'app.front.login.title'|trans }}</h1>
 
-            <button class="btn btn-primary" type="submit">
-                {{ 'app.front.login.signin'|trans }}
-            </button>
-        </form>
-        
-    {% endif %}
+                <div class="form-group">
+                    <label for="username">{{ 'app.front.login.username'|trans }}</label>
+                    <input type="text" value="{{ last_username }}" name="_username" id="username" class="form-control" autocomplete="username" required autofocus>
+                </div>
+                <div class="form-group toggle-password-container">
+                    <label for="password">{{ 'app.front.login.password'|trans }}</label>
+                    <input type="password" name="_password" id="password" class="form-control" autocomplete="current-password" {{ stimulus_controller('symfony/ux-toggle-password/toggle-password', {buttonClasses: ['toggle-password-button'],}) }} required>
+                </div>
+
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> {{ 'app.front.login.remember'|trans }}
+                    </label>
+                </div>
+
+                <button class="btn btn-primary" type="submit">
+                    {{ 'app.front.login.signin'|trans }}
+                </button>
+            </form>
+        {% endif %}
     </div>
 
 {% endblock %}

@@ -6,32 +6,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Bundle\SecurityBundle\Security;
-use App\Entity\User;
 
 class SecurityController extends AbstractController
 {
     #[Route(path: '/{_locale}/login', name: 'app_login', requirements: ['_locale' => 'fr|en'])]
-    public function login(AuthenticationUtils $authenticationUtils, Security $security): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        /** @var User $user */
-        $user = $security->getUser();
-        if($user) {
-            return $this->redirectToRoute('admin.dashboard');
-        } else {
 
-            // get the login error if there is one
-            $error = $authenticationUtils->getLastAuthenticationError();
-    
-            // last username entered by the user
-            $lastUsername = $authenticationUtils->getLastUsername();
-    
-            return $this->render('security/login.html.twig', [
-                'last_username' => $lastUsername,
-                'error' => $error,
-            ]);
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
 
-        }
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', [
+            'last_username' => $lastUsername,
+            'error' => $error,
+        ]);
     }
 
     #[Route(path: '/{_locale}/logout', name: 'app_logout', requirements: ['_locale' => 'fr|en'])]
