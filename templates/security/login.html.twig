@@ -5,11 +5,8 @@
 {% block body %}
 
     <div class="container">
-    {% if app.user %}
-        <div class="mb-3">
-            {{ 'app.front.login.status'|trans }} {{ app.user.userIdentifier }}, <a class="btn-primary btn" href="{{ path('app_logout') }}">{{ 'app.front.logout.action'|trans }}</a>
-        </div>
-    {% else %}
+    {% if not app.user %}
+        
         <form method="post">
             {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -39,6 +36,7 @@
                 {{ 'app.front.login.signin'|trans }}
             </button>
         </form>
+        
     {% endif %}
     </div>
 
