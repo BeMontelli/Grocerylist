@@ -207,6 +207,9 @@ class RecipeController extends AbstractController
                 if ($uploadfile) {
                     // if file uploaded, priority to this file
                     $newFile = $this->fileUploader->uploadFile($uploadfile, $user);
+                    $em->persist($newFile);
+                    $em->flush();
+                    
                     $recipe->setThumbnail($newFile);
                 } else {
                     if (!empty($selectfile) && $selectfile instanceof File) {

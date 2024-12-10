@@ -51,7 +51,6 @@ class FileController extends AbstractController
                         if ($formFile) {
                             /** @var File $file */
                             $file = $this->fileUploader->uploadFile($formFile,$user);
-        
                             $entityManager->persist($file);
                             $entityManager->flush();
         

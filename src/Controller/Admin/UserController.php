@@ -142,6 +142,9 @@ class UserController extends AbstractController
                 if ($uploadfile) {
                     // if file uploaded, priority to this file
                     $newFile = $fileUploader->uploadFile($uploadfile, $user);
+                    $em->persist($newFile);
+                    $em->flush();
+                    
                     $user->setPicture($newFile);
                 } else {
                     if (!empty($selectfile) && $selectfile instanceof File) {
@@ -150,6 +153,7 @@ class UserController extends AbstractController
                     }
                 }
 
+                $em->persist($user);
                 $em->flush();
 
                 $this->addFlash('success', 'Changes saved !');
