@@ -103,6 +103,9 @@
     align-items: center;
     transition: width 0.2s;
     direction: rtl;
+    @include responsive.responsiveTo(sm) {
+      max-width: calc(100vw - 30px);
+    }
     hr {
         position: absolute;
         bottom: 0;
@@ -166,6 +169,7 @@
     transition: width 0.2s;
     @include responsive.responsiveTo(sm) {
       display: block !important;
+      max-width: calc(100vw - 30px);
     }
     &::-webkit-scrollbar {
       width: 8px;
@@ -302,6 +306,9 @@
     flex-direction: column;
     z-index: 2;
     transition: width 0.2s, height 0.2s;
+    @include responsive.responsiveTo(sm) {
+      max-width: calc(100vw - 30px);
+    }
   }
   
   #nav-footer-heading {

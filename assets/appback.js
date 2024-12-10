@@ -13,3 +13,5 @@ import './styles/vendor/bootstrap.min.css'; // Bootstrap
 import './styles/vendor/ckeditor5.css'; // Ckeditor 5
 
 import './build/appback.css';
+
+// production deploy > php bin/console asset-map:compile

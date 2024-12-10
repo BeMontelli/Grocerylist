@@ -10,3 +10,5 @@ import './styles/vendor/boxicons.min.css'; // Boxicons
 import './styles/vendor/bootstrap.min.css'; // Bootstrap
 
 import './build/app.css';
+
+// production deploy > php bin/console asset-map:compile
