@@ -92,6 +92,14 @@ class FileController extends AbstractController
             foreach ($file->getRecipes() as $recipe) {
                 $recipe->setThumbnail(null);
             }
+
+            /** @var User $fileUser */
+            $fileUser = $file->getUser();
+            
+            /** @var File $picture */
+            $picture = $fileUser->getPicture();
+            if($picture && $picture->getId() === $file->getId()) $fileUser->setPicture(null);
+            $entityManager->persist($fileUser);
     
             $entityManager->remove($file);
             $entityManager->flush();
