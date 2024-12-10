@@ -23,8 +23,6 @@ TO DO LIST
   * Recipe entity
     * edit prefill fields select category/ingredients/image
 
-  * Confirm modals
-
   * Search bar (recipes, ingredients, grocerylists)
 
 WORK IN PROGESS
