@@ -27,16 +27,16 @@ class UserFixtures extends Fixture implements FixtureGroupInterface
     {
         $users = [
             [
-                "username" => "admin",
-                "email" => "testgrocerylistadmin@yopmail.com",
+                "username" => "gladmin",
+                "email" => "gladmin@montellimard.fr",
                 "password" => "CU4JpB&o8jQiMq",
                 "roles" => ['ROLE_USER', 'ROLE_ADMIN'],
                 "verified" => true,
                 'reference' => self::ADMIN_USER_REFERENCE,
             ],
             [
-                "username" => "benjmontellimard",
-                "email" => "testgrocerylist@yopmail.com",
+                "username" => "benjmonte",
+                "email" => "benjmontellimard@gmail.com",
                 "password" => "gaD&c@J6nzMTsU",
                 "roles" => ['ROLE_USER'],
                 "verified" => true,
