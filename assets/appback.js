@@ -13,5 +13,3 @@ import './styles/vendor/bootstrap.min.css'; // Bootstrap
 import './styles/vendor/ckeditor5.css'; // Ckeditor 5
 
 import './build/appback.css';
-
-console.log('This log comes from assets/appback.js - welcome to AssetMapper! 🎉');

@@ -10,5 +10,3 @@ import './styles/vendor/boxicons.min.css'; // Boxicons
 import './styles/vendor/bootstrap.min.css'; // Bootstrap
 
 import './build/app.css';
-
-console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
