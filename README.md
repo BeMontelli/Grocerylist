@@ -12,8 +12,6 @@ TO DO LIST
     * flashes, notification alerts : rsc param name
     * forms
     * All ... to translate (back buttons)
-
-  * responsive to complete
   
   * Entities Edit titles translate + structure rework
 
