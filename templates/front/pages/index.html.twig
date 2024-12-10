@@ -4,14 +4,17 @@
 
 {% block body %}
 
-<div class="container">
-    <h1>Front</h1>
+<div id="site__home" class="container">
+    <span class="bg__deco" aria-hidden="true">Vos listes de course</span>
+    <h1 class="mt-3">Vos listes de course</h1>
+
+    <img class="site__logo" src="{{ asset('images/grocerylist-logo.png') }}" alt="GroceryList">
 
     {% if app.user.id is not defined %}
         <nav class="right">
             <ul>
-                <li><a class="{{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">{{ 'app.front.login.action'|trans }}</a></li>
-                <li><a class="{{ app.current_route starts with 'app_register' ? 'active' : '' }}" href="{{ url('app_register') }}">{{ 'app.front.register.action'|trans }}</a></li>
+                <li><a class="btn btn-primary btn-lg mb-3 {{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">{{ 'app.front.login.action'|trans }}</a></li>
+                <li><a class="btn btn-primary btn-lg {{ app.current_route starts with 'app_register' ? 'active' : '' }}" href="{{ url('app_register') }}">{{ 'app.front.register.action'|trans }}</a></li>
             </ul>
         </nav>
     {% endif %}

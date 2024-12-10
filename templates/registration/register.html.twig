@@ -9,7 +9,7 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>{{ 'app.front.register.title'|trans }}</h1>
+    <h1 class="mb-3">{{ 'app.front.register.title'|trans }}</h1>
 
     {{ form_errors(registrationForm) }}
 
@@ -23,7 +23,7 @@
 
     {{ form_row(registrationForm.agreeTerms) }}
 
-        <button class="btn btn-lg btn-primary" type="submit">
+        <button class="btn btn-primary" type="submit">
             {{ 'app.front.register.btn'|trans }}
         </button>
     {{ form_end(registrationForm) }}
