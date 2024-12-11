@@ -25,7 +25,6 @@ TO DO LIST
 
   * Styles fix
     * mobile filters display
-    * loading bar background-color : .turbo-progress-bar ?
 
 WORK IN PROGESS
 ------------
