@@ -31,6 +31,12 @@ WORK IN PROGESS
 
   * Check **WIP** notes
 
+Production deploy
+------------
+
+  * > npm run build
+  * > php bin/console asset-map:compile
+
 Requirements
 ------------
 
