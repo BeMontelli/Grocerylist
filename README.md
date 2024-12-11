@@ -23,9 +23,6 @@ TO DO LIST
 
   * Search bar (recipes, ingredients, grocerylists)
 
-  * Styles fix
-    * mobile filters display
-
 WORK IN PROGESS
 ------------
 

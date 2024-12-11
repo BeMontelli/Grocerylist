@@ -2,12 +2,12 @@
   "entrypoints": {
     "appback": {
       "css": [
-        "/build/appback.5c2a6e15.css"
+        "/build/appback.css"
       ]
     },
     "app": {
       "css": [
-        "/build/app.2df35fc4.css"
+        "/build/app.css"
       ]
     }
   }

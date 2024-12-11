@@ -51,8 +51,11 @@
             border-radius: 6px;
             color: var(--main-text-color);
             background-color: var(--main-darker);
-            font-size: 1rem;
-            padding: 2px 5px 2px;
+            font-size: 0.75rem;
+            padding: 2px 5px 1px;
+            a{
+                color: var(--main-text-color);
+            }
         }
 
         .btn-remove{
