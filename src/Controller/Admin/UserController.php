@@ -24,7 +24,7 @@ use Symfony\Component\Routing\Requirement\Requirement;
 use App\Service\FileUploader;
 
 #[Route("/{_locale}/admin/users", name: "admin.user.", requirements: ['_locale' => 'fr|en'])]
-#[IsGranted('IS_AUTHENTICATED_FULLY')]
+#[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
 class UserController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]

@@ -19,7 +19,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Routing\Requirement\Requirement;
 
 #[Route("/{_locale}/admin/files", name: "admin.file.", requirements: ['_locale' => 'fr|en'])]
-#[IsGranted('IS_AUTHENTICATED_FULLY')]
+#[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
 class FileController extends AbstractController
 {
     private $security;
