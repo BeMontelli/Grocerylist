@@ -30,7 +30,6 @@ TO DO LIST
   * mobile filters display
   * mobile dashboard line-height cards
   * loading bar background-color : .turbo-progress-bar ?
-  * dashboard remove logout btn
 
 WORK IN PROGESS
 ------------
