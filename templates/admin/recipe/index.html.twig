@@ -36,21 +36,22 @@
         {{ include('admin/partials/_search.html.twig') }}
     </div>
 
-    <div class="grid__archive row row-cols-1 row-cols-sm-2 row-cols-md-3">
+    <div class="grid__archive row">
     
         {% for recipe in recipes %}
             <div class="col grid__item recipe__item">
 
                 {% if recipe.thumbnail is not empty and recipe.thumbnail.url is not empty %}
                     <div class="img" style="background-image:url({{ recipe.thumbnail.url }})">
+                        <div class="category">{{ recipe.category.title | default('---') }}</div>
                     </div>
                 {% else %}
                     <div class="img img__placeholder" style="background-image:url({{ asset('images/_grocerylist-placeholder.jpg') }})">
+                        <div class="category">{{ recipe.category.title | default('---') }}</div>
                     </div>
                 {% endif %}
 
                 <div class="title"><a href="{{ url('admin.recipe.show', {slug: recipe.slug, id: recipe.id}) }}">{{ recipe.title }}</a></div>
-                <div class="category">{{ recipe.category.title | default('---') }}</div>
                 
                 {{ include('admin/recipe/_delete_form.html.twig') }}
             </div>

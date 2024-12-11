@@ -6,11 +6,39 @@
     .grid__item{
         margin-bottom: 20px;
     }
+
+    @include responsive.responsiveFrom(lg) {
+        & > * {
+          flex: 0 0 auto;
+          width: 25%;
+        }
+    }
+    @include responsive.responsiveTo(lg) {
+        & > * {
+          flex: 0 0 auto;
+          width: 33.33333333%;
+        }
+    }
+    @include responsive.responsiveTo(md) {
+        & > * {
+          flex: 0 0 auto;
+          width: 50%;
+        }
+    }
+    @include responsive.responsiveTo(s) {
+        & > * {
+          flex: 0 0 auto;
+          width: 100%;
+        }
+    }
+    /*@media (min-width: 768px) {
+    }*/
 }
 
 .recipe__item{
     position: relative;
     .img{
+        position: relative;
         border-radius: 10px;
         width: 100%;
         background-size: cover;
@@ -22,13 +50,24 @@
             padding-bottom: 100%;
         }
     }
+    .category{
+        position: absolute;
+        left: 5px;
+        bottom: 5px;
+        border-radius: 6px;
+        color: var(--main-text-color);
+        background-color: var(--main-darker);
+        font-size: 1rem;
+        padding: 2px 5px 0;
+    }
     .title{
         margin-top: 5px;
-        font-size: 1.25rem;
+        font-size: 1rem;;
+        line-height: 1.2rem;
     }
     .delete__form{
         position: absolute;
-        top: 10px;
-        right: 20px;
+        top: 6px;
+        right: 17px;
     }
 }

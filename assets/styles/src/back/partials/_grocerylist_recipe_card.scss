@@ -17,7 +17,7 @@
         @include responsive.responsiveTo(sm) {
             width: 100%;
             max-width: 100%;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
     }
     .col__right{
@@ -43,6 +43,24 @@
             width: 100%;
             min-height: 230px;
             max-width: 100%;
+        }
+        .category__thumbnail{
+            position: absolute;
+            left: 5px;
+            bottom: 5px;
+            border-radius: 6px;
+            color: var(--main-text-color);
+            background-color: var(--main-darker);
+            font-size: 1rem;
+            padding: 2px 5px 2px;
+        }
+
+        .btn-remove{
+            position: absolute;
+            top: 5px;
+            right: 5px;  
+            font-size: 1.5rem;
+            line-height: 32px;
         }
     }
 

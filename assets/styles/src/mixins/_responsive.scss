@@ -3,15 +3,16 @@
 $grid-breakpoints: (
   xs: 0,
   // container 100% - 20px
-  sm: 560px,
+  s: 350px,
+  sm: 576px,
   // 550px container
-  md: 780px,
+  md: 768px,
   // 740px container
-  lg: 990px,
+  lg: 992px,
   // 950px container
-  xl: 1240px,
+  xl: 1200px,
   // 1200px container
-  xxl: 1440px // 1400px container
+  xxl: 1400px // 1400px container
 );
 
 @mixin responsiveFrom($breakpoint) {
