@@ -73,7 +73,19 @@
   </div>
 
   <div id="nav-header">
-    <div id="nav-title">{{ 'app.hdr.backoffice'|trans }}</div>
+
+    {% if app.user and app.user.currentGroceryList %}
+        <div id="nav-title">
+            <a href="{{ path('admin.list.show', {'slug': app.user.current_grocery_list.slug,'id': app.user.current_grocery_list.id}) }}" class="current__list">
+                <i class='fav__icon bx bxs-star' ></i>
+                <i class='list__icon bx bx-list-ul' ></i>
+                <span>{{ app.user.current_grocery_list.title }}</span>
+            </a>
+        </div>
+    {% else %}
+        <div id="nav-title">{{ 'app.hdr.backoffice'|trans }}</div>
+    {% endif %}
+
     <label for="nav-toggle"><span id="nav-toggle-burger"></span></label>
     <hr/>
   </div>

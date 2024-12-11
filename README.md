@@ -23,6 +23,8 @@ TO DO LIST
 
   * Search bar (recipes, ingredients, grocerylists)
 
+  * Gallery grid mobile too big
+
 WORK IN PROGESS
 ------------
 

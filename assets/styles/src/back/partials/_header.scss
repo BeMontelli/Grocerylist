@@ -113,9 +113,33 @@
   }
   
   #nav-title {
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     transition: opacity 1s;
     padding-right: 25px;
+    .current__list{
+      position: relative;  
+      direction: ltr;
+      display: block;
+      color: var(--main-bg-color);
+      transition: all 0.2 ease-in;
+      &:hover{
+        color: var(--main-orange);
+        transition: all 0.2 ease-in;
+      }
+      .fav__icon{
+        font-size: 0.75rem;
+        margin-right: 0;
+        position: absolute;
+        top: 5px;
+        color: var(--main-orange);
+        z-index: 2;
+        left: -4px;
+      }
+      .list__icon{
+        position: relative;
+        top: 2px;
+      }
+    }
   }
   
   label[for=nav-toggle] {

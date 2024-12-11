@@ -355,6 +355,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->current_grocery_list;
     }
 
+    /**
+     * method used to retrieve getcurrent_grocery_list for twig templates
+     * used with : app.user.current_grocery_list
+     * @return GroceryList|null
+     */
+    public function getcurrent_grocery_list(): ?GroceryList
+    {
+        return $this->current_grocery_list;
+    }
+
     public function setCurrentGroceryList(?GroceryList $current_grocery_list): static
     {
         $this->current_grocery_list = $current_grocery_list;
