@@ -15,7 +15,7 @@
 
     <div class="d-flex flex-wrap row">
         <a href="{{ url('admin.list.index') }}" class="col">
-            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+            <div class="card d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bx-list-ul' ></i>
                 <span>{{ 'app.admin.lists.title'|trans }}</span>
             </div>
@@ -23,7 +23,7 @@
         
         {% if currentGrocerylist is not empty %}
         <a href="{{ path('admin.list.show', {'slug': currentGrocerylist.slug,'id': currentGrocerylist.id}) }}" class="col">
-            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+            <div class="card d-flex flex-row justify-content-start align-items-center">
                 <i class='fav__icon bx bxs-star' ></i>
                 <i class='bx bx-list-ul' ></i>
                 <span>{{ currentGrocerylist.title }}</span>
@@ -37,14 +37,14 @@
 
     <div class="d-flex flex-wrap row">
         <a href="{{ url('admin.recipe.index') }}" class="col">
-            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+            <div class="card d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bxs-bowl-hot' ></i>
                 <span>{{ 'app.admin.recipes.title'|trans }}</span>
             </div>
         </a>
 
         <a href="{{ url('admin.category.index') }}" class="col">
-            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+            <div class="card d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bxs-category-alt'></i>
                 <span>{{ 'app.admin.categories.title'|trans }}</span>
             </div>
@@ -55,14 +55,14 @@
 
     <div class="d-flex flex-wrap row">
         <a href="{{ url('admin.ingredient.index') }}" class="col">
-            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+            <div class="card d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bxs-bowl-rice'></i>
                 <span>{{ 'app.admin.ingredients.title'|trans }}</span>
             </div>
         </a>
 
         <a href="{{ url('admin.category.index') }}" class="col">
-            <div class="card p-4 mr-2 d-flex flex-row justify-content-start align-items-center">
+            <div class="card mr-2 d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bxs-category'></i>
                 <span>{{ 'app.admin.sections.title'|trans }}</span>
             </div>
@@ -73,7 +73,7 @@
 
     <div class="d-flex flex-wrap row">
         <a href="{{ url('admin.file.index') }}" class="col">
-            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+            <div class="card d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bx-images' ></i>
                 <span>{{ 'app.admin.files.title'|trans }}</span>
             </div>
@@ -84,7 +84,7 @@
     
     <div class="d-flex flex-wrap row">
         <a href="{{ url('admin.user.profile') }}" class="col">
-            <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+            <div class="card d-flex flex-row justify-content-start align-items-center">
                 <i class='bx bxs-user'></i>
                 <span>{{ 'app.admin.users.profile'|trans }}</span>
             </div>
@@ -92,7 +92,7 @@
         
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('admin.user.index') }}" class="col">
-                <div class="card p-4 d-flex flex-row justify-content-start align-items-center">
+                <div class="card d-flex flex-row justify-content-start align-items-center">
                     <i class='bx bxs-group' ></i>
                     <span>{{ 'app.admin.users.title'|trans }}</span>
                 </div>
@@ -100,7 +100,7 @@
         {% endif %}
 
     </div>
-    
+
 </div>
 </div>
 {% endblock %}

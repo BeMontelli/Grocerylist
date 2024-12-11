@@ -24,12 +24,11 @@ TO DO LIST
   * Search bar (recipes, ingredients, grocerylists)
 
   * Styles fix
-  * desktop recipes list 4/line
-  * remove recipe from list : X btn sur l'image
-  * grocerylist single sub sections tabs → hr
-  * mobile filters display
-  * mobile dashboard line-height cards
-  * loading bar background-color : .turbo-progress-bar ?
+    * desktop recipes list 4/line
+    * remove recipe from list : X btn sur l'image
+    * grocerylist single sub sections tabs → hr
+    * mobile filters display
+    * loading bar background-color : .turbo-progress-bar ?
 
 WORK IN PROGESS
 ------------
