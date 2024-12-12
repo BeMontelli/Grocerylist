@@ -13,7 +13,7 @@ import { Controller } from '@hotwired/stimulus';
 export default class extends Controller {
     connect() {
 
-        this.modal = document.querySelector('.modal');
+        this.modal = document.querySelector('.modal__confirm');
 
         this.forms = document.querySelectorAll('.delete__form');
 

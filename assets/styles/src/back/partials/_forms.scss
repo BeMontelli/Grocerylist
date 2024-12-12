@@ -112,11 +112,11 @@ fieldset{
 
 input[type=text], input[type=password], input[type=email], input[type=number], select, textarea {
     width: 100%;
-    padding: 12px 20px;
+    padding: 8px 20px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid var(--main-darker);
-    border-radius: 4px;
+    border-radius: 7px;
     box-sizing: border-box;
     color: var(--main-text-color);
     background-color: var(--main-bg-input);
@@ -129,4 +129,11 @@ input[type=text], input[type=password], input[type=email], input[type=number], s
     right: 5px !important;
     font-size: 0 !important;
     color: var(--main-dark);
+}
+
+.form-select{
+    padding: 2px 1px 2px 1px;
+    .ts-control{
+        border: none;
+    }
 }

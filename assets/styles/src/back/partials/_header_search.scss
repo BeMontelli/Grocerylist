@@ -1,0 +1,49 @@
+@use '../../mixins/responsive' as responsive;
+
+#nav-bar-search{
+  position: relative;
+}
+
+#btnsearch{
+  position: fixed;
+  width: var(--navbar-width-min);
+  border-radius: 16px;
+  border: none;
+  max-width: calc(100vw + 30px);
+  min-height: 60px;
+  right: -35px;
+  bottom: 10px;
+  transition: all ease-in 0.2s;
+  z-index: 999;
+  @include responsive.responsiveTo(md) {
+    right: -40px;
+  }
+  @include responsive.responsiveTo(sm) {
+    bottom: 135px;
+  }
+  &:hover{
+      right: 1vw;
+      transition: all ease-in 0.2s;
+  }
+  i{
+    position: relative;
+    top: 3px;
+    font-size: 1.5rem;
+  }
+}
+
+#modalsearch{
+  .modal-header{
+    display: flex;
+    justify-content: space-between;
+  }
+  .modal-body{
+    display: none;
+  }
+  #search{
+    margin: 0;
+  }
+  .modal__cancel{
+    margin-left: 10px;
+  }
+}
