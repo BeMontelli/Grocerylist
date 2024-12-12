@@ -21,6 +21,7 @@ WORK IN PROGESS
 ------------
 
   * Check **WIP** notes
+    * Ajax complete request search with $title
 
 Production deploy
 ------------

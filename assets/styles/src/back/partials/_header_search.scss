@@ -39,6 +39,9 @@
   }
   .modal-body{
     display: none;
+    &.show{
+      display: block;
+    }
   }
   #search{
     margin: 0;

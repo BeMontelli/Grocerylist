@@ -58,4 +58,31 @@ class AjaxController extends AbstractController
         
         return new JsonResponse(['success' => true, 'ingredientId' => $ingredientId, 'listId' => $listId]);
     }
+
+    #[Route('/search-by-title/', name: 'searchTitle', methods: ['POST'])]
+    public function searchByTitle(Request $request, Security $security, EntityManagerInterface $entityManager): JsonResponse
+    {
+        /** @var User $user */
+        $user = $security->getUser();
+
+        $data = json_decode($request->getContent(), true);
+        $title = $data['title'] ?? null;
+
+        if ($title === null) {
+            return new JsonResponse(['error' => 'Title to search not provided'], Response::HTTP_BAD_REQUEST);
+        }
+
+        // WIP : complete request search with $title
+        // ==> SearchRepository SQL query : return array ?
+
+        /*$groceryListIngredients = $entityManager->getRepository(GroceryListIngredient::class)->findBy(['ingredient' => $ingredientId,'groceryList' => $listId]);
+        foreach ($groceryListIngredients as $groceryListIngredient) {
+            $status = $groceryListIngredient->isActive();
+            $groceryListIngredient->setActivation(!$status);
+            $entityManager->persist($groceryListIngredient);
+        }
+        $entityManager->flush();
+        
+        return new JsonResponse(['success' => true, 'ingredientId' => $ingredientId, 'listId' => $listId]);*/
+    }
 }
