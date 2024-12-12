@@ -15,13 +15,10 @@ TO DO LIST
   
   * Entities Edit titles translate + structure rework
 
-  * Search bar (recipes, ingredients, grocerylists)
-
 WORK IN PROGESS
 ------------
 
   * Check **WIP** notes
-    * Ajax complete request search with $title
 
 Production deploy
 ------------
