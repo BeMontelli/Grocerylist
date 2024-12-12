@@ -12,10 +12,10 @@
 
     {{ include('admin/file/_form.html.twig') }}
 
-    <div class="row">
+    <div class="row files__row">
     {% for file in files %}
 
-        <div class="file__card col-6 col-sm-6 col-md-4 col-lg-3 mb-4">
+        <div class="file__card">
             <div class="card">
                 <div class="card-body" style="background-image:url({{ file.url }})">
                     <div class="file__filter"></div>

@@ -1,3 +1,5 @@
+@use '../../mixins/responsive' as responsive;
+
 .file__archive{
     position: relative;
     .autoupload__form .row{
@@ -8,12 +10,44 @@
             width: 100%;
         }
     }
+    
+    .files__row{
+        position: relative;
+        margin-bottom: 20px;
+        .file__card{
+            margin-bottom: 20px;
+        }
+
+        @include responsive.responsiveFrom(lg) {
+            & > * {
+            flex: 0 0 auto;
+            width: 25%;
+            }
+        }
+        @include responsive.responsiveTo(lg) {
+            & > * {
+            flex: 0 0 auto;
+            width: 33.33333333%;
+            }
+        }
+        @include responsive.responsiveTo(md) {
+            & > * {
+            flex: 0 0 auto;
+            width: 50%;
+            }
+        }
+        @include responsive.responsiveTo(s) {
+            & > * {
+            flex: 0 0 auto;
+            width: 100%;
+            }
+        }
+        /*@media (min-width: 768px) {
+        }*/
+    }
 
     .file__card{
         position: relative;
-        @media (max-width:500px) {
-            width: 100%;
-        }
         .card{
             overflow: hidden;
             border-radius: 10px;
