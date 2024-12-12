@@ -24,14 +24,14 @@ class Recipe
     #[ORM\Column(length: 255)]
     #[Assert\Sequentially([
         new Assert\NotBlank(),
-        new Assert\Length(min: 10),
+        new Assert\Length(min: 4),
     ])]
     #[Groups(['recipes.*','categories.*','ingredients.*'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\Sequentially([
-        new Assert\Length(min: 10),
+        new Assert\Length(min: 4),
         new Assert\Regex(
             pattern: "/^[a-z0-9]+(?:-[a-z0-9]+)*$/",
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
