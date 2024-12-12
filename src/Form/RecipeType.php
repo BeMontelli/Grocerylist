@@ -29,6 +29,8 @@ class RecipeType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var Recipe $recipe */
+        $recipe = $options['data'];
         $builder
             ->add('title',TextType::class, [
                 'empty_data' => '',
@@ -46,7 +48,8 @@ class RecipeType extends AbstractType
                 'attr' => [
                     'data-controller' => 'fileselector',
                     'class' => 'fileselector',
-                ]
+                ],
+                'data' => $recipe->getThumbnail() ? $recipe->getThumbnail() : null,
             ])
             ->add('uploadfile', DropzoneType::class, [
                 'mapped' => false,

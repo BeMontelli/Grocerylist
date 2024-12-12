@@ -24,6 +24,8 @@ class UserEditType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+        /** @var User $user */
+        $user = $options['data'];
         $builder
             ->add('selectfile', FileAutocompleteField::class, [
                 'mapped' => false,
@@ -32,7 +34,8 @@ class UserEditType extends AbstractType
                 'attr' => [
                     'data-controller' => 'fileselector',
                     'class' => 'fileselector',
-                ]
+                ],
+                'data' => $user->getPicture() ? $user->getPicture() : null,
             ])
             ->add('uploadfile', DropzoneType::class, [
                 'mapped' => false,
