@@ -23,13 +23,10 @@ TO DO LIST
 
   * Search bar (recipes, ingredients, grocerylists)
 
-  * Gallery grid mobile too big
-
 WORK IN PROGESS
 ------------
 
   * Check **WIP** notes
-    * Header Fix btn mobile closed
 
 Production deploy
 ------------
