@@ -41,9 +41,6 @@ export default class extends Controller {
     }
 
     inputTyping(event) {
-        console.log('Current value:', this.searchInput.value);
-
-        // Debounce pour exécuter après 1.5 secondes
         clearTimeout(this.debounceTimer);
         this.debounceTimer = setTimeout(() => {
             if(this.searchInput.value) this.execSearch(this.searchInput.value);
@@ -59,14 +56,48 @@ export default class extends Controller {
             },
             body: JSON.stringify({ title: title })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.status === 200) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        })
         .then(data => {
-            console.log('Search result:', data);
+            if (data.results && data.results.length > 0) {
+                this.buildList(data.results);
+            } else {
+                this.clearList();
+            }
         })
         .catch(error => console.error('Error:', error));
     }
 
-    buildList() {
+    buildList(results) {
+        this.searchResults.innerHTML = '';
+
+        const ul = document.createElement('ul');
+
+        results.forEach(result => {
+            const li = document.createElement('li');
+            li.classList = "result__item";
+
+            const a = document.createElement('a');
+            a.href = result.path;
+            a.textContent = result.title;
+
+            const i = document.createElement('i');
+            if(result.type === "ingredient") {
+                i.classList = "ingredient__item bx bxs-bowl-rice";
+            } else if(result.type === "recipe") {
+                i.classList = "recipe__item bx bxs-bowl-hot";
+            }
+
+            li.appendChild(a);
+            a.appendChild(i);
+            ul.appendChild(li);
+        });
+
+        this.searchResults.appendChild(ul);
         this.searchResults.classList.add('show');
     }
 

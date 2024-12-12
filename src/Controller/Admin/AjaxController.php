@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Form\GroceryListType;
 use App\Form\IngredientType;
 use App\Repository\GroceryListRepository;
+use App\Repository\SearchRepository;
 use App\Service\GroceryListIngredientService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -60,7 +61,7 @@ class AjaxController extends AbstractController
     }
 
     #[Route('/search-by-title/', name: 'searchTitle', methods: ['POST'])]
-    public function searchByTitle(Request $request, Security $security, EntityManagerInterface $entityManager): JsonResponse
+    public function searchByTitle(Request $request, Security $security, SearchRepository $searchRepository): JsonResponse
     {
         /** @var User $user */
         $user = $security->getUser();
@@ -72,17 +73,8 @@ class AjaxController extends AbstractController
             return new JsonResponse(['error' => 'Title to search not provided'], Response::HTTP_BAD_REQUEST);
         }
 
-        // WIP : complete request search with $title
-        // ==> SearchRepository SQL query : return array ?
+        $results = $searchRepository->search($title,$user->getId());
 
-        /*$groceryListIngredients = $entityManager->getRepository(GroceryListIngredient::class)->findBy(['ingredient' => $ingredientId,'groceryList' => $listId]);
-        foreach ($groceryListIngredients as $groceryListIngredient) {
-            $status = $groceryListIngredient->isActive();
-            $groceryListIngredient->setActivation(!$status);
-            $entityManager->persist($groceryListIngredient);
-        }
-        $entityManager->flush();
-        
-        return new JsonResponse(['success' => true, 'ingredientId' => $ingredientId, 'listId' => $listId]);*/
+        return new JsonResponse(['success' => true, 'results' => $results], Response::HTTP_OK);
     }
 }
