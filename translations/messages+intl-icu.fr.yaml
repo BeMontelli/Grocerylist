@@ -4,6 +4,7 @@ app:
     backoffice: Administration
     dashboard: Tableau de bord
     logout: Déconnexion
+    search: Rechercher
   ftr:
     sign: "Créé par {name}, tous droits réservés."
   err:

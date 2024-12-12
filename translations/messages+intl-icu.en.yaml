@@ -4,6 +4,7 @@ app:
     backoffice: Back Office
     dashboard: Dashboard
     logout: Logout
+    search: Search
   ftr:
     sign: "Created by {name}, all rights reserved."
   err:
