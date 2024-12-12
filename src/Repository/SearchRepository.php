@@ -30,15 +30,21 @@ class SearchRepository extends ServiceEntityRepository
         $conn = $this->em->getConnection();
 
         $sql = "
-            SELECT 'recipe' AS type, r.id, r.title, r.slug, r.user_id
-            FROM recipe r
-            WHERE r.title LIKE :title AND r.user_id = :userId
+            SELECT * FROM (
+                SELECT 'recipe' AS type, r.id, r.title, r.slug, r.user_id
+                FROM recipe r
+                WHERE r.title LIKE :title AND r.user_id = :userId
+                LIMIT 30
+            ) AS recipes
             
             UNION ALL
             
-            SELECT 'ingredient' AS type, i.id, i.title, i.slug, i.user_id
-            FROM ingredient i
-            WHERE i.title LIKE :title AND i.user_id = :userId
+            SELECT * FROM (
+                SELECT 'ingredient' AS type, i.id, i.title, i.slug, i.user_id
+                FROM ingredient i
+                WHERE i.title LIKE :title AND i.user_id = :userId
+                LIMIT 30
+            ) AS ingredients
         ";
 
         $resultSet = $conn->executeQuery($sql, [
