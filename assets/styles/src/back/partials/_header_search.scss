@@ -14,7 +14,7 @@
   right: -35px;
   bottom: 10px;
   transition: all ease-in 0.2s;
-  z-index: 999;
+  z-index: 998;
   @include responsive.responsiveTo(md) {
     right: -40px;
   }
