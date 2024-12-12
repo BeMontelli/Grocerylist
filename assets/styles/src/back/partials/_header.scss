@@ -22,6 +22,7 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.1s;
+    font-size: 0;
   }
   #nav-toggle:checked ~ #nav-header label[for=nav-toggle] {
     left: 50%;
@@ -95,7 +96,7 @@
     left: 0;
     width: var(--navbar-width);
     max-width: calc(100vw + 30px);
-    min-height: 80px;
+    min-height: 60px;
     background: var(--background);
     border-radius: 16px 0 0 16px;
     z-index: 2;
