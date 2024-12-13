@@ -130,3 +130,23 @@ input[type=text], input[type=password], input[type=email], input[type=number], s
     font-size: 0 !important;
     color: var(--main-dark);
 }
+
+.form-select{
+    padding: 2px 1px 2px 1px;
+    .ts-control{
+        border: none;
+    }
+}
+
+.dropzone-container{
+    border-radius: 6px;
+}
+
+.form-check-input:checked{
+    background-color: var(--main-green) !important;
+    border-color: var(--main-green) !important;
+}
+.form-check-input{
+    background-color: transparent !important;
+    border-color: var(--main-dark-green) !important;
+}
