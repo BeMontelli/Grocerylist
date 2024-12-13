@@ -37,13 +37,19 @@ export default class extends Controller {
         const closeBtn = this.modalSearch.querySelector('.modal__cancel');
         if(event.target === this.modalSearch || event.target === closeBtn) {
             this.modalSearch.classList.remove('show');
+            this.clearList();
         }
     }
 
     inputTyping(event) {
         clearTimeout(this.debounceTimer);
         this.debounceTimer = setTimeout(() => {
+            this.searchInput.blur();
+            const parent = this.searchInput.parentNode;
+            parent.classList.add('loading');
+            console.log(parent);
             if(this.searchInput.value) this.execSearch(this.searchInput.value);
+            else this.clearList();
         }, 1500);
     }
 
@@ -57,17 +63,16 @@ export default class extends Controller {
             body: JSON.stringify({ title: title })
         })
         .then(response => {
+            const parent = this.searchInput.parentNode;
+            parent.classList.remove('loading');
             if (!response.status === 200) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             return response.json();
         })
         .then(data => {
-            if (data.results && data.results.length > 0) {
-                this.buildList(data.results);
-            } else {
-                this.clearList();
-            }
+            if (data.results && data.results.length > 0) this.buildList(data.results);
+            else this.clearList();
         })
         .catch(error => console.error('Error:', error));
     }
