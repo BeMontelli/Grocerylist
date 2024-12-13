@@ -30,7 +30,7 @@ class UserEditType extends AbstractType
             ->add('selectfile', FileAutocompleteField::class, [
                 'mapped' => false,
                 'required' => false,
-                'label' => 'Select thumbnail',
+                'label' => 'Select picture',
                 'attr' => [
                     'data-controller' => 'fileselector',
                     'class' => 'fileselector',
@@ -43,7 +43,7 @@ class UserEditType extends AbstractType
                 'constraints' => [
                     new Image()
                 ],
-                'label' => 'Upload thumbnail'
+                'label' => 'Upload picture'
             ])
             ->add('username',TextType::class, [
                 'empty_data' => '',
