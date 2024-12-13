@@ -4,6 +4,12 @@
     position: relative;
     margin-bottom: 40px;
 
+    .page__title_content{
+        h1{
+            margin-left: 36px;
+        }
+    }
+
     .mobile__btns {
         ul.pagination{
             margin: 10px 0 10px;
@@ -23,7 +29,7 @@
         }
 
         .page-link{
-            padding: 12px 10px 10px;
+            padding: 8px 10px 7px;
             display: table-cell;
             vertical-align: middle;
         }
@@ -77,14 +83,14 @@
     }
 
     .current__list__notice{
-        border: solid 1px var(--main-orange);
         background-color: var(--main-orange);
         border-radius: 5px;
-        font-size: 14px !important;
-        padding: 3px 10px;
+        font-size: 18px !important;
+        padding: 5px 7px;
         font-weight: bold;
-        position: relative;
-        top: -6px;
+        position: absolute;
+        top: 56px;
+        z-index: 10;
     }
 
     .list__title{
