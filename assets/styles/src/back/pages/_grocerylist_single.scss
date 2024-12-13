@@ -122,7 +122,6 @@
     ul.section__elements__list{
         padding: 0 0 15px;
         margin-bottom: 0rem;
-        padding-left: 10px;
     }
 
     .section__element__item{
@@ -146,25 +145,18 @@
         
         .section__element__content label{
             position: relative;
-            margin: 0 10px 10px 0;
+            margin: 0 10px 8px 0;
+            font-size: 15px;
         }
         input:checked + .check__label {
             text-decoration: line-through;
             opacity: 0.5;
         }
-        
-        ul.element__recipes__list{
-            position: relative;
-            display: flex;
-            flex-wrap: wrap;
-            margin-right: 20px;
-            margin-bottom: 0;
-            pointer-events: none;
-        }
-         .element__recipes__list .recipe{
+        .element__recipes__item{
             position: relative;
             display: flex;
             flex-wrap: wrap; 
+            pointer-events: none;
             margin-right: 8px;
             margin-bottom: 8px;
             padding: 0 8px;
