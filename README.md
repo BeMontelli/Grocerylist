@@ -19,9 +19,6 @@ TO DO LIST
   * select async bg from white to dark ?
   * recipe form "ingredients in" border input to remove
 
-  * form 'recipe & ingredients' in recipe single && create ingredient form
-    * select padding to fix ?
-
   * Fix random load scripts wysiwyg && thumbnail
 
   * ingredient index create form, section selection -> autocomplete to setup
