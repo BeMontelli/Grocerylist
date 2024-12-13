@@ -15,20 +15,12 @@ TO DO LIST
   
   * Entities Edit titles translate + structure rework
 
-  * grocerylist single 'current list' notice move to btns header separation
-  * grocerylist single '+' button try width full mobile ? desktop test other ?
-  * grocerylist single ingredient's recipes display 'block' to inline
-
-  * drag & drop dashed border add radius
   * select file background from white to dark ?
   * select async bg from white to dark ?
   * recipe form "ingredients in" border input to remove
 
   * form 'recipe & ingredients' in recipe single && create ingredient form
-    * Fix checkboxes colors
     * select padding to fix ?
-
-  * Fix profile labels thumbnail -> picture
 
   * Fix random load scripts wysiwyg && thumbnail
 
@@ -38,10 +30,6 @@ TO DO LIST
   * add gallery pagination (12)
   * Filters exec remove pagination
   * pagination reduce numbers displayed
-
-  * menu hover move reduce (mobile at least)
-
-  * search exec animation
 
 WORK IN PROGESS
 ------------
