@@ -26,7 +26,6 @@ TO DO LIST
   * remove index pagination ingredients sections
   * add gallery pagination (12)
   * Filters exec remove pagination
-  * pagination reduce numbers displayed
 
 WORK IN PROGESS
 ------------
