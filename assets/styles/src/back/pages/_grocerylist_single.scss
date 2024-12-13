@@ -96,6 +96,7 @@
             margin-left: 15px;
             @include responsive.responsiveTo(lg) {
                 margin: 0;
+                width: 100%;
             }
         }
     }    
