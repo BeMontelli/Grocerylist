@@ -39,6 +39,9 @@ class FileController extends AbstractController
         /** @var User $user */
         $user = $this->security->getUser();
 
+        $currentPage = $request->query->getInt('page', 1);
+        $files = $fileRepository->paginateUserFiles($currentPage,$user);
+
         $file = new File();
         $form = $this->createForm(FilesType::class, $file);
         $form->handleRequest($request);
@@ -64,7 +67,7 @@ class FileController extends AbstractController
         }
 
         return $this->render('admin/file/index.html.twig', [
-            'files' => $fileRepository->findAllByUser(user: $user),
+            'files' => $files,
             'form' => $form,
         ]);
     }

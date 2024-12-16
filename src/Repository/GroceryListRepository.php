@@ -20,10 +20,12 @@ class GroceryListRepository extends ServiceEntityRepository
 
     /** @var EntityManagerInterface $entityManager */
     private $entityManager;
+    private $paginator;
 
-    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, private PaginatorInterface $paginator)
+    public function __construct(ManagerRegistry $registry, EntityManagerInterface $entityManager, PaginatorInterface $paginator)
     {
         $this->entityManager = $entityManager;
+        $this->paginator = $paginator;
         parent::__construct($registry, GroceryList::class);
     }
 

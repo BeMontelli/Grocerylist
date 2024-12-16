@@ -12,6 +12,11 @@
 
     {{ include('admin/file/_form.html.twig') }}
 
+    {# total items count #}
+    <div class="table__count">
+        {{ 'app.admin.lists.count'|trans({'%entity%': 1}) }} : {{ files.getTotalItemCount }}
+    </div>
+        
     <div class="row files__row">
     {% for file in files %}
 
@@ -40,6 +45,11 @@
         </div>
 
     {% endfor %}
+    </div>
+
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(files) }}
     </div>
 
 </div>

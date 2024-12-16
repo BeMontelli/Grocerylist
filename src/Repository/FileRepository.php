@@ -6,14 +6,20 @@ use App\Entity\File;
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\Pagination\PaginationInterface;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @extends ServiceEntityRepository<File>
  */
 class FileRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    use ConfigRepositoryTrait;
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
+        $this->paginator = $paginator;
         parent::__construct($registry, File::class);
     }
 
@@ -25,6 +31,23 @@ class FileRepository extends ServiceEntityRepository
             ->orderBy('s.id', 'ASC');
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    public function paginateUserFiles(int $page, User $user) : PaginationInterface {
+
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->andWhere('l.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('l.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+
+        return $this->paginator->paginate($queryBuilder,$page,self::getPerPageGrid(),[
+            'distinct' => true,
+            'sortFieldAllowList' => [
+                'l.id','l.title'
+            ],
+        ]);
     }
 
     public function findForUser(User $user)
