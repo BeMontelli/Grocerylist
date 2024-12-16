@@ -10,6 +10,7 @@ use App\Form\GroceryListType;
 use App\Form\IngredientType;
 use App\Repository\GroceryListRepository;
 use App\Repository\SearchRepository;
+use App\Repository\SectionRepository;
 use App\Service\GroceryListIngredientService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -76,5 +77,24 @@ class AjaxController extends AbstractController
         $results = $searchRepository->search($title,$user->getId());
 
         return new JsonResponse(['success' => true, 'results' => $results], Response::HTTP_OK);
+    }
+
+    // WIP : Ajax sections update sections order
+    #[Route('/sections-order/', name: 'sectionsOrder', methods: ['POST'])]
+    public function updateSectionsOrder(Request $request, Security $security, SectionRepository $sectionRepository): JsonResponse
+    {
+        /** @var User $user */
+        $user = $security->getUser();
+
+        $data = json_decode($request->getContent(), true);
+        $ids = $data['ids'] ?? null;
+
+        if ($ids === null || empty($ids)) {
+            return new JsonResponse(['error' => 'Ids to update not provided'], Response::HTTP_BAD_REQUEST);
+        }
+
+        /*$results = $searchRepository->search($title,$user->getId());*/
+
+        //return new JsonResponse(['success' => true, 'results' => $results], Response::HTTP_OK);
     }
 }

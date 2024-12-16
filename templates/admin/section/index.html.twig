@@ -36,26 +36,32 @@
         <table class="table table__thead__tbody">
             <thead>
             <tr>
+                <th></th>
                 <th>Title</th>
                 <th class="mobile__hide">Slug</th>
                 <th class="actions">Actions</th>
             </tr>
             </thead>
-            <tbody>
-            {% for section in sections %}
-                <tr>
-                    <td><a href="{{ path('admin.section.show', {'slug': section.slug,'id': section.id}) }}">{{ section.title }}</a></td>
-                    <td class="mobile__hide">{{ section.slug }}</td>
-                    <td class="actions">
-                        {{ include('admin/section/_delete_form.html.twig') }}
-                    </td>
-                </tr>
+            {% if sections is not empty %}
+            <tbody id="listhandler" data-controller="sortablesections">
+                {% for section in sections %}
+                    <tr data-id="{{ section.id }}">
+                        <td class="td__handle"><div class="handle"><i class='bx bx-move-vertical' ></i></div></td>
+                        <td><a href="{{ path('admin.section.show', {'slug': section.slug,'id': section.id}) }}">{{ section.title }}</a></td>
+                        <td class="mobile__hide">{{ section.slug }}</td>
+                        <td class="actions">
+                            {{ include('admin/section/_delete_form.html.twig') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
             {% else %}
+            <tbody>
                 <tr>
                     <td colspan="6">{{ 'app.err.norecordfound'|trans }}</td>
                 </tr>
-            {% endfor %}
             </tbody>
+            {% endif %}
         </table>
         </div>
 

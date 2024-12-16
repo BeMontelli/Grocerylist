@@ -37,6 +37,25 @@ table.table{
         background-repeat: no-repeat;
         padding-bottom: 50px;
     }
+
+    .td__handle{
+        position: relative;
+        width: 25px;
+    }
+    .handle{
+        position: relative;
+        cursor: grab;
+        width: 25px;
+        height: 25px;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        i{
+            position: relative;
+            top: 2px;
+            font-size: 20px;
+        }
+    }
 }
 
 table.table__thead__tbody{
