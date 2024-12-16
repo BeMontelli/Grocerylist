@@ -29,20 +29,16 @@
 
         {# total items count #}
         <div class="table__count">
-            {{ 'app.admin.lists.count'|trans({'%entity%': 1}) }} : {{ sections.getTotalItemCount }}
+            {{ 'app.admin.lists.count'|trans({'%entity%': 1}) }} : {{ sections|length }}
         </div>
 
         <div class="table__container">
         <table class="table table__thead__tbody">
             <thead>
             <tr>
-                <th{% if sections.isSorted('s.title') %} class="sorted"{% endif %}>
-                    {{ knp_pagination_sortable(sections, 'Title', 's.title') }}
-                </th>
-                <th class="mobile__hide {% if sections.isSorted('s.slug') %}sorted{% endif %}">
-                    {{ knp_pagination_sortable(sections, 'Slug', 's.slug') }}
-                </th>
-                <th class="actions">actions</th>
+                <th>Title</th>
+                <th class="mobile__hide">Slug</th>
+                <th class="actions">Actions</th>
             </tr>
             </thead>
             <tbody>
@@ -63,9 +59,5 @@
         </table>
         </div>
 
-        {# display navigation #}
-        <div class="navigation">
-            {{ knp_pagination_render(sections) }}
-        </div>
     </div>
 {% endblock %}

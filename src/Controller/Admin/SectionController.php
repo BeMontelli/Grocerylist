@@ -36,8 +36,7 @@ class SectionController extends AbstractController
         /** @var User $user */
         $user = $this->security->getUser();
 
-        $currentPage = $request->query->getInt('page', 1);
-        $sections = $sectionRepository->paginateUserSections($currentPage,$user);
+        $sections = $sectionRepository->findAllByUser($user);
 
         // form new
         $section = new Section();
