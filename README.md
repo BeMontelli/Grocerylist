@@ -26,7 +26,6 @@ TO DO LIST
   * Sections add 'order' and drag & drop reorder feature
   * remove index pagination ingredients sections
 
-  * add gallery pagination (12)
   * Filters exec remove pagination
 
   * ingredient's sections count ingredients/products
