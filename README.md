@@ -23,9 +23,13 @@ TO DO LIST
 
   * ingredient index create form, section selection -> autocomplete to setup
 
+  * Sections add 'order' and drag & drop reorder feature
   * remove index pagination ingredients sections
+
   * add gallery pagination (12)
   * Filters exec remove pagination
+
+  * ingredient's sections count ingredients/products
 
 WORK IN PROGESS
 ------------
