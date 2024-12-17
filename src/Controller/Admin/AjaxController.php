@@ -13,6 +13,7 @@ use App\Repository\SearchRepository;
 use App\Repository\SectionRepository;
 use App\Service\GroceryListIngredientService;
 use Doctrine\ORM\EntityManagerInterface;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,9 +80,9 @@ class AjaxController extends AbstractController
         return new JsonResponse(['success' => true, 'results' => $results], Response::HTTP_OK);
     }
 
-    // WIP : Ajax sections update sections order
-    #[Route('/sections-order/', name: 'sectionsOrder', methods: ['POST'])]
-    public function updateSectionsOrder(Request $request, Security $security, SectionRepository $sectionRepository): JsonResponse
+    // WIP : Ajax sections update sections position
+    #[Route('/sections-position/', name: 'sectionsPosition', methods: ['POST'])]
+    public function updateSectionsPosition(Request $request, Security $security, SectionRepository $sectionRepository): JsonResponse
     {
         /** @var User $user */
         $user = $security->getUser();
@@ -93,8 +94,8 @@ class AjaxController extends AbstractController
             return new JsonResponse(['error' => 'Ids to update not provided'], Response::HTTP_BAD_REQUEST);
         }
 
-        /*$results = $searchRepository->search($title,$user->getId());*/
+        $sectionRepository->updatePositions($ids,$user);
 
-        //return new JsonResponse(['success' => true, 'results' => $results], Response::HTTP_OK);
+        return new JsonResponse(['success' => true], Response::HTTP_OK);
     }
 }

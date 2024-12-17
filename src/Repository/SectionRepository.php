@@ -31,7 +31,7 @@ class SectionRepository extends ServiceEntityRepository
         $queryBuilder = $this->createQueryBuilder('s')
             ->andWhere('s.user = :val')
             ->setParameter('val', $user->getId())
-            ->orderBy('s.id', 'ASC')
+            ->orderBy('s.position', 'ASC')
             ->getQuery()
             ->getResult();
 
@@ -44,13 +44,10 @@ class SectionRepository extends ServiceEntityRepository
     }
 
     public function findAllByUser(User $user) {
-
-        $queryBuilder = $this->createQueryBuilder('s')
+        return $this->createQueryBuilder('s')
             ->andWhere('s.user = :val')
             ->setParameter('val', $user->getId())
-            ->orderBy('s.id', 'ASC');
-
-        return $queryBuilder->getQuery()->getResult();
+            ->orderBy('s.position', 'ASC');
     }
 
     public function findForUser(User $user)
@@ -58,6 +55,22 @@ class SectionRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('s')
                     ->where('s.user = :val')
                     ->setParameter('val', $user->getId());
+    }
+
+    public function updatePositions(array $ids,User $user)
+    {
+        foreach ($ids as $position => $id) {
+            $this->createQueryBuilder('s')
+                ->update()
+                ->set('s.position', ':position')
+                ->where('s.id = :id')
+                ->andWhere('s.user = :user')
+                ->setParameter('position', $position)
+                ->setParameter('id', $id)
+                ->setParameter('user', $user)
+                ->getQuery()
+                ->execute();
+        }
     }
 
     //    /**

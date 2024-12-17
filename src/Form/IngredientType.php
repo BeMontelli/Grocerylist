@@ -21,6 +21,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Doctrine\ORM\EntityRepository;
 use App\Repository\GroceryListRepository;
+use App\Repository\RecipeRepository;
+use App\Repository\SectionRepository;
 use App\Service\GroceryListIngredientService;
 
 class IngredientType extends AbstractType
@@ -60,6 +62,9 @@ class IngredientType extends AbstractType
                 'label' => 'Ingredient section',
                 'choice_label' => 'title',
                 'placeholder' => 'Select a section',
+                'query_builder' => function (SectionRepository $er) use ($options) {
+                    return $er->findAllByUser($options['user']);
+                },
             ])
             ->add('availableRecipe', CheckboxType::class, [
                 'label' => 'Can be choosed in a Recipe ?',
@@ -74,6 +79,9 @@ class IngredientType extends AbstractType
                 'expanded' => true,
                 'by_reference' => false,
                 'attr' => ['class' => 'recipe__fields'],
+                'query_builder' => function (RecipeRepository $er) use ($options) {
+                    return $er->findAllByUser($options['user']);
+                },
             ])
             ->add('groceryLists', EntityType::class, [
                 'label' => 'In grocery list(s) ?',

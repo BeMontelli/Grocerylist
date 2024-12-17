@@ -22,24 +22,21 @@ export default class extends Controller {
             let sortable = new Sortable(listhandler, {
                 handle: '.handle',
                 animation: 150,
-                onEnd: function (/**Event*/evt) {
-                    let idsOrder = [];
+                onEnd: function (evt) {
+                    let idsPosition = [];
                     [...trList].map(tr => {
                         const id = tr.getAttribute('data-id');
-                        idsOrder.push(id);
+                        idsPosition.push(id);
                         return tr;
                     });
-                    // WIP : Ajax save sections order
-                    console.log(idsOrder);
-                    self.execUpdate(idsOrder);
+                    self.execUpdate(idsPosition);
                 },
             });
         }
     }
 
-    // WIP : Complete execUpdate
     execUpdate(ids) {
-        fetch('/admin/ajax/sections-order/', {
+        fetch('/admin/ajax/sections-position/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
