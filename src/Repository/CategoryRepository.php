@@ -26,9 +26,8 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
-    public function paginateUserCategoriesWithRecipesTotal(int $page, User $user) : PaginationInterface {
-
-        $queryBuilder = $this->createQueryBuilder('c')
+    public function findAllWithRecipesTotal( User $user)  {
+        return  $this->createQueryBuilder('c')
             ->select('c as category', 'COUNT(r.id) as total')
             ->leftJoin('c.recipes', 'r')
             ->andWhere('c.user = :val')
@@ -37,13 +36,6 @@ class CategoryRepository extends ServiceEntityRepository
             ->groupBy('c.id')
             ->getQuery()
             ->getResult();
-
-        return $this->paginator->paginate($queryBuilder,$page,self::getPerPage(),[
-            'distinct' => true,
-            'sortFieldAllowList' => [
-                'c.id','c.title','c.slug'
-            ],
-        ]);
     }
 
     public function findAllByUser(User $user,$exec = false) {

@@ -37,8 +37,7 @@ class CategoryController extends AbstractController
         /** @var User $user  */
         $user = $this->security->getUser();
 
-        $currentPage = $request->query->getInt('page', 1);
-        $categories = $categoryRepository->paginateUserCategoriesWithRecipesTotal($currentPage,$user);
+        $categories = $categoryRepository->findAllWithRecipesTotal($user);
 
         // form new
         $category = new Category();
