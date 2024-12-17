@@ -56,6 +56,18 @@ class SectionRepository extends ServiceEntityRepository
         } else return $query;
     }
 
+    public function findAllWithIngredientsTotal( User $user)  {
+        return  $this->createQueryBuilder('s')
+            ->select('s as section', 'COUNT(i.id) as total')
+            ->leftJoin('s.ingredients', 'i')
+            ->andWhere('s.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('s.position', 'ASC')
+            ->groupBy('s.id')
+            ->getQuery()
+            ->getResult();
+    }
+
     public function findForUser(User $user)
     {
         return $this->createQueryBuilder('s')

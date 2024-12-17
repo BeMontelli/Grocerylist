@@ -39,16 +39,18 @@
                 <th></th>
                 <th>Title</th>
                 <th class="mobile__hide">Slug</th>
+                <th>Count</th>
                 <th class="actions">Actions</th>
             </tr>
             </thead>
             {% if sections is not empty %}
             <tbody id="listhandler" data-controller="sortablesections">
                 {% for section in sections %}
-                    <tr data-id="{{ section.id }}">
+                    <tr data-id="{{ section.section.id }}">
                         <td class="td__handle"><div class="handle"><i class='bx bx-move-vertical' ></i></div></td>
-                        <td><a href="{{ path('admin.section.show', {'slug': section.slug,'id': section.id}) }}">{{ section.title }}</a></td>
-                        <td class="mobile__hide">{{ section.slug }}</td>
+                        <td><a href="{{ path('admin.section.show', {'slug': section.section.slug,'id': section.section.id}) }}">{{ section.section.title }}</a></td>
+                        <td class="mobile__hide">{{ section.section.slug }}</td>
+                        <td>{{ section.total }}</td>
                         <td class="actions">
                             {{ include('admin/section/_delete_form.html.twig') }}
                         </td>
