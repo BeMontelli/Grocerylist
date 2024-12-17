@@ -33,7 +33,7 @@ class CategoryRepository extends ServiceEntityRepository
             ->leftJoin('c.recipes', 'r')
             ->andWhere('c.user = :val')
             ->setParameter('val', $user->getId())
-            ->orderBy('c.id', 'ASC')
+            ->orderBy('c.position', 'ASC')
             ->groupBy('c.id')
             ->getQuery()
             ->getResult();
@@ -46,11 +46,41 @@ class CategoryRepository extends ServiceEntityRepository
         ]);
     }
 
+    public function findAllByUser(User $user,$exec = false) {
+        $query = $this->createQueryBuilder('c')
+            ->andWhere('c.user = :val')
+            ->setParameter('val', $user->getId())
+            ->orderBy('c.position', 'ASC');
+
+        if($exec) {
+            return $query
+            ->getQuery()
+            ->getResult();
+        } else return $query;
+    }
+
     public function findForUser(User $user)
     {
         return $this->createQueryBuilder('i')
                     ->where('i.user = :val')
+                    ->orderBy('i.position', 'ASC')
                     ->setParameter('val', $user->getId());
+    }
+
+    public function updatePositions(array $ids,User $user)
+    {
+        foreach ($ids as $position => $id) {
+            $this->createQueryBuilder('s')
+                ->update()
+                ->set('s.position', ':position')
+                ->where('s.id = :id')
+                ->andWhere('s.user = :user')
+                ->setParameter('position', $position)
+                ->setParameter('id', $id)
+                ->setParameter('user', $user)
+                ->getQuery()
+                ->execute();
+        }
     }
 
     //    /**

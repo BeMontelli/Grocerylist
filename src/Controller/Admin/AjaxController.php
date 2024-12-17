@@ -8,6 +8,7 @@ use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\GroceryListType;
 use App\Form\IngredientType;
+use App\Repository\CategoryRepository;
 use App\Repository\GroceryListRepository;
 use App\Repository\SearchRepository;
 use App\Repository\SectionRepository;
@@ -80,7 +81,6 @@ class AjaxController extends AbstractController
         return new JsonResponse(['success' => true, 'results' => $results], Response::HTTP_OK);
     }
 
-    // WIP : Ajax sections update sections position
     #[Route('/sections-position/', name: 'sectionsPosition', methods: ['POST'])]
     public function updateSectionsPosition(Request $request, Security $security, SectionRepository $sectionRepository): JsonResponse
     {
@@ -95,6 +95,24 @@ class AjaxController extends AbstractController
         }
 
         $sectionRepository->updatePositions($ids,$user);
+
+        return new JsonResponse(['success' => true], Response::HTTP_OK);
+    }
+
+    #[Route('/categories-position/', name: 'categoriesPosition', methods: ['POST'])]
+    public function updateCategoriesPosition(Request $request, Security $security, CategoryRepository $categoryRepository): JsonResponse
+    {
+        /** @var User $user */
+        $user = $security->getUser();
+
+        $data = json_decode($request->getContent(), true);
+        $ids = $data['ids'] ?? null;
+
+        if ($ids === null || empty($ids)) {
+            return new JsonResponse(['error' => 'Ids to update not provided'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $categoryRepository->updatePositions($ids,$user);
 
         return new JsonResponse(['success' => true], Response::HTTP_OK);
     }

@@ -34,7 +34,7 @@
     <table class="table table__thead__tbody">
         <thead>
         <tr>
-            {# sorting of properties based on query components #}
+            <th></th>
             <th{% if categories.isSorted('a.title') %} class="sorted"{% endif %}>
                 {{ knp_pagination_sortable(categories, 'Title', 'c.title') }}
             </th>
@@ -46,25 +46,28 @@
         </tr>
 
         </thead>
-        <tbody>
 
-        {# table body #}
-        {% for category in categories %}
-            <tr {% if loop.index is odd %}class="color"{% endif %}>
-                <td><a href="{{ url('admin.category.show', {slug: category.category.slug, id: category.category.id}) }}">{{ category.category.title }}</a></td>
-                <td class="mobile__hide">{{ category.category.slug }}</td>
-                <td>{{ category.total }}</td>
-                <td class="actions">
-                    {{ include('admin/category/_delete_form.html.twig') }}
-                </td>
-            </tr>
-            {% else %}
-                <tr>
-                    <td colspan="6">{{ 'app.err.norecordfound'|trans }}</td>
+        {% if categories is not empty %}
+        <tbody id="listhandler" data-controller="sortablecategories">
+            {% for category in categories %}
+                <tr data-id="{{ category.category.id }}">
+                    <td class="td__handle"><div class="handle"><i class='bx bx-move-vertical' ></i></div></td>
+                    <td><a href="{{ url('admin.category.show', {slug: category.category.slug, id: category.category.id}) }}">{{ category.category.title }}</a></td>
+                    <td class="mobile__hide">{{ category.category.slug }}</td>
+                    <td>{{ category.total }}</td>
+                    <td class="actions">
+                        {{ include('admin/category/_delete_form.html.twig') }}
+                    </td>
                 </tr>
             {% endfor %}
-
         </tbody>
+        {% else %}
+        <tbody>
+            <tr>
+                <td colspan="6">{{ 'app.err.norecordfound'|trans }}</td>
+            </tr>
+        </tbody>
+        {% endif %}
     </table>
     </div>
 
