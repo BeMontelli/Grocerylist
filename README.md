@@ -21,8 +21,6 @@ TO DO LIST
 
   * Fix random load scripts wysiwyg && thumbnail
 
-  * ingredient index create form, section selection -> autocomplete to setup
-
   * Filters exec remove pagination
 
   * ingredient's sections count ingredients/products
