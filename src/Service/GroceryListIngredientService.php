@@ -29,41 +29,44 @@ class GroceryListIngredientService
             /** @var Section $section */
             $section = $ingredient->getSection();
             if(!empty($section)) {
-                $sectionTitle = $section->getTitle();
+                $sectionPosition = $section->getPosition();
                 $this->entityManager->initializeObject($section);
                 if(
-                    !array_key_exists($sectionTitle,$structure) || 
-                    !array_key_exists("ingredients",$structure[$sectionTitle])
+                    !array_key_exists($sectionPosition,$structure) || 
+                    !array_key_exists("ingredients",$structure[$sectionPosition])
                 ) {
-                    $structure[$sectionTitle] = [
+                    $structure[$sectionPosition] = [
                         "section" => $section,
                         "hasElement" => false,
                         "ingredients" => []
                     ];
-                    $structure = $this->fillStructureElement($structure, $sectionTitle, $ingredient, $groceryListIngredient, $recipe);
+                    $structure = $this->fillStructureElement($structure, $sectionPosition, $ingredient, $groceryListIngredient, $recipe);
                 } else {
                     if(
-                        !array_key_exists($ingredient->getTitle(),$structure[$sectionTitle]["ingredients"]) || 
-                        !array_key_exists("collection",$structure[$sectionTitle]["ingredients"][$ingredient->getTitle()])
+                        !array_key_exists($ingredient->getTitle(),$structure[$sectionPosition]["ingredients"]) || 
+                        !array_key_exists("collection",$structure[$sectionPosition]["ingredients"][$ingredient->getTitle()])
                     ) {
-                        $structure = $this->fillStructureElement($structure, $sectionTitle, $ingredient, $groceryListIngredient, $recipe);
+                        $structure = $this->fillStructureElement($structure, $sectionPosition, $ingredient, $groceryListIngredient, $recipe);
                     } else {
                         if($groceryListIngredient->isInList()){
-                            $structure[$sectionTitle]["hasElement"] = true;
-                            $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]['inList'] = true;
-                            if($recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
+                            $structure[$sectionPosition]["hasElement"] = true;
+                            $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]['inList'] = true;
+                            if($recipe) $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
                         }
-                        $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["collection"][] = $ingredient;
+                        $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]["collection"][] = $ingredient;
                     }
                 }
             }
         }
 
+        // order sections by positions
+        ksort($structure);
+
         return $structure;
     }
 
-    private function fillStructureElement($structure, $sectionTitle, $ingredient, $groceryListIngredient, $recipe) {
-        $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()] = [
+    private function fillStructureElement($structure, $sectionPosition, $ingredient, $groceryListIngredient, $recipe) {
+        $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()] = [
             "id" => $ingredient->getId(),
             "title" => $ingredient->getTitle(),
             "inList" => $groceryListIngredient->isInList(),
@@ -71,9 +74,9 @@ class GroceryListIngredientService
             "collection" => [$ingredient],
             "recipes" => []
         ];
-        if($groceryListIngredient->isInList() && $recipe) $structure[$sectionTitle]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
+        if($groceryListIngredient->isInList() && $recipe) $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
 
-        if($groceryListIngredient->isInList()) $structure[$sectionTitle]["hasElement"] = true;
+        if($groceryListIngredient->isInList()) $structure[$sectionPosition]["hasElement"] = true;
 
         return $structure;
     }
