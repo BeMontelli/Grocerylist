@@ -23,8 +23,6 @@ TO DO LIST
 
   * Filters exec remove pagination
 
-  * ingredient's sections count ingredients/products
-
 WORK IN PROGESS
 ------------
 
