@@ -36,7 +36,7 @@ class SectionController extends AbstractController
         /** @var User $user */
         $user = $this->security->getUser();
 
-        $sections = $sectionRepository->findAllByUser($user);
+        $sections = $sectionRepository->findAllByUser($user,true);
 
         // form new
         $section = new Section();

@@ -43,11 +43,17 @@ class SectionRepository extends ServiceEntityRepository
         ]);
     }
 
-    public function findAllByUser(User $user) {
-        return $this->createQueryBuilder('s')
+    public function findAllByUser(User $user,$exec = false) {
+        $query = $this->createQueryBuilder('s')
             ->andWhere('s.user = :val')
             ->setParameter('val', $user->getId())
             ->orderBy('s.position', 'ASC');
+
+        if($exec) {
+            return $query
+            ->getQuery()
+            ->getResult();
+        } else return $query;
     }
 
     public function findForUser(User $user)
