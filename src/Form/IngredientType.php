@@ -57,15 +57,7 @@ class IngredientType extends AbstractType
                 'required' => false,
                 'label' => 'Slug'
             ])
-            ->add('section', EntityType::class, [
-                'class' => Section::class,
-                'label' => 'Ingredient section',
-                'choice_label' => 'title',
-                'placeholder' => 'Select a section',
-                'query_builder' => function (SectionRepository $er) use ($options) {
-                    return $er->findAllByUser($options['user']);
-                },
-            ])
+            ->add('section', SectionAutocompleteField::class)
             ->add('availableRecipe', CheckboxType::class, [
                 'label' => 'Can be choosed in a Recipe ?',
                 'required' => false,
