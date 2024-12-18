@@ -59,15 +59,24 @@
     flex-wrap: wrap;
 }
 .imagefiled {
-    width: 120px;
+    width: calc(100% / 4);
+    @include responsive.responsiveTo(lg) {
+        width: calc(100% / 3);
+    }
+    @media (max-width: 480px) {
+        width: calc(100% / 2);
+    }
     .img__disp{
-        width: 120px;
+        width: 100%;
         height: 120px;
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         overflow: hidden;
         border-radius: 4px;
+        @media (max-width: 320px) {
+            height: 80px;
+        }
     }
 }
 
@@ -142,6 +151,20 @@ input[type=text], input[type=password], input[type=email], input[type=number], s
     .ts-control{
         border: none;
     }
+}
+
+#main-content .ts-dropdown-content {
+    max-height: 300px;
+}
+
+.ts-wrapper.multi .ts-control [data-value]{
+    position: relative;
+    background-color: var(--main-dark);
+    border-color: var(--main-dark);
+    background-image: none !important;
+}
+.ts-wrapper.plugin-remove_button:not(.rtl) .item .remove{
+    border-left: 1px solid var(--main-darker) !important;
 }
 
 .dropzone-container{
