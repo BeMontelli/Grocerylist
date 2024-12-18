@@ -96,7 +96,7 @@ class RecipeController extends AbstractController
         if($formSearch->isSubmitted() && $formSearch->isValid()) {
             $title = $formSearch->get('title')->getData();
             $categories = $formSearch->get('categories')->getData();
-            $recipes = $recipeRepository->paginateUserSearchedRecipes($currentPage,$user,$title,$categories);
+            $recipes = $recipeRepository->paginateUserSearchedRecipes(1,$user,$title,$categories);
         } else {
             $recipes = $recipeRepository->paginateUserRecipes($currentPage,$user);
         }

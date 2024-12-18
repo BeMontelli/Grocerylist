@@ -73,7 +73,7 @@ class IngredientController extends AbstractController
         if($formSearch->isSubmitted() && $formSearch->isValid()) {
             $title = $formSearch->get('title')->getData();
             $sections = $formSearch->get('sections')->getData();
-            $ingredients = $ingredientRepository->paginateUserSearchedIngredients($currentPage,$user,$title,$sections);
+            $ingredients = $ingredientRepository->paginateUserSearchedIngredients(1,$user,$title,$sections);
         } else {
             $ingredients = $ingredientRepository->paginateUserIngredients($currentPage,$user);
         }
