@@ -13,44 +13,50 @@ import TomSelect from 'tom-select';
 
 export default class extends Controller {
     connect() {
-        
         document.addEventListener('DOMContentLoaded', () => {
-            const selectElements = document.querySelectorAll('.ts-wrapper.fileselector');
-
-            if(!selectElements || selectElements.length === 0 ) return;
-
-            selectElements.forEach(selectElement => {
-                if (selectElement) {
-                    // selector area
-                    let dropdownContent = selectElement.querySelector('.ts-dropdown-content:not(.image__display)');
-                    if(dropdownContent) dropdownContent.classList.add('image__display');
-                    
-                    setInterval(function() {
-                        // selection options
-                        let options = selectElement.querySelectorAll('.option:not(.imagefiled)');
-                        if(options.length > 0) {
-                            options.forEach(option => {
-                                if(!(option.classList.contains('no-more-results') || option.classList.contains('imagefiled'))) {
-                                    let imageUrl = option.textContent.trim();
-                                    option.innerHTML = `<div class="img__disp" style="background-image:url(${imageUrl})" alt="Thumbnail ${imageUrl}" aria-label="${imageUrl}">`;
-                                    option.classList.add('imagefiled');
-                                }
-                            });
-                        }
-
-                        // selected area
-                        let ControlItem = selectElement.querySelector('.ts-control .item');
-                        if(ControlItem) {
-                            if (!ControlItem.classList.contains('imagefiled')) {
-                                let imageUrl = ControlItem.textContent.trim();
-                                ControlItem.innerHTML = `<div class="img__disp" style="background-image:url(${imageUrl})" alt="Thumbnail ${imageUrl}" aria-label="${imageUrl}">`;
-                                ControlItem.classList.add('imagefiled');
-                            }
-                        }
-                    }, 10);
-                }
-            });
+            this.exec();
         });
-        
+
+        setTimeout(() => {
+            this.exec();
+        }, 500);
+    }
+
+    exec() {
+        const selectElements = document.querySelectorAll('.ts-wrapper.fileselector');
+
+        if(!selectElements || selectElements.length === 0 ) return;
+
+        selectElements.forEach(selectElement => {
+            if (selectElement) {
+                // selector area
+                let dropdownContent = selectElement.querySelector('.ts-dropdown-content:not(.image__display)');
+                if(dropdownContent) dropdownContent.classList.add('image__display');
+                    
+                setInterval(function() {
+                    // selection options
+                    let options = selectElement.querySelectorAll('.option:not(.imagefiled)');
+                    if(options.length > 0) {
+                        options.forEach(option => {
+                            if(!(option.classList.contains('no-more-results') || option.classList.contains('imagefiled'))) {
+                                let imageUrl = option.textContent.trim();
+                                option.innerHTML = `<div class="img__disp" style="background-image:url(${imageUrl})" alt="Thumbnail ${imageUrl}" aria-label="${imageUrl}">`;
+                                option.classList.add('imagefiled');
+                            }
+                        });
+                    }
+
+                    // selected area
+                    let ControlItem = selectElement.querySelector('.ts-control .item');
+                    if(ControlItem) {
+                        if (!ControlItem.classList.contains('imagefiled')) {
+                            let imageUrl = ControlItem.textContent.trim();
+                            ControlItem.innerHTML = `<div class="img__disp" style="background-image:url(${imageUrl})" alt="Thumbnail ${imageUrl}" aria-label="${imageUrl}">`;
+                            ControlItem.classList.add('imagefiled');
+                        }
+                    }
+                }, 10);
+            }
+        });
     }
 }
