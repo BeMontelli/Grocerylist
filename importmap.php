@@ -38,10 +38,6 @@ return [
     '@orchidjs/unicode-variants' => [
         'version' => '1.1.2',
     ],
-    'ckeditor-init' => [
-        'path' => './assets/ckeditor_init.js',
-        'entrypoint' => true,
-    ],
     'tom-select/dist/css/tom-select.default.min.css' => [
         'version' => '2.4.1',
         'type' => 'css',

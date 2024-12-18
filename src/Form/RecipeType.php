@@ -73,7 +73,10 @@ class RecipeType extends AbstractType
             ->add('content', TextareaType::class, [
                 'empty_data' => '',
                 'required' => false,
-                'label' => 'Content'
+                'label' => 'Content',
+                'attr' => [
+                    'data-controller' => 'wysiwyg'
+                ]
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save Recipe'
