@@ -19,8 +19,6 @@ TO DO LIST
   * select async bg from white to dark ?
   * recipe form "ingredients in" border input to remove
 
-  * Fix random load scripts wysiwyg && thumbnail
-
 WORK IN PROGESS
 ------------
 
