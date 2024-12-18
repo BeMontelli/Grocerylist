@@ -8,7 +8,7 @@ Encore
     .setPublicPath('/build')
     .cleanupOutputBeforeBuild()
     //.enableBuildNotifications()
-    .enableVersioning(Encore.isProduction())
+    //.enableVersioning(Encore.isProduction())
 
     .addStyleEntry('appback', './assets/styles/appback.scss')
     .addStyleEntry('app', './assets/styles/app.scss')
