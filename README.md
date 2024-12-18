@@ -21,8 +21,6 @@ TO DO LIST
 
   * Fix random load scripts wysiwyg && thumbnail
 
-  * Filters exec remove pagination
-
 WORK IN PROGESS
 ------------
 
