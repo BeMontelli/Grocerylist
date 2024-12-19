@@ -2,7 +2,95 @@
     position: relative;
     text-align: center;
 
-    .bg__deco{
+    .deco__area{
+        width: 100%;
+        position: relative;
+        .filter{
+            position: absolute;
+            z-index: 1;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: var(--main-pure-white);
+            opacity: 0.25;
+        }
+    }
+
+    .deco__area_top{
+        position: relative;
+        height: 300px;
+        background-image: url('../../../../images/_grocerylist-pattern.jpg');
+        background-repeat: repeat;
+        background-position: center;
+        background-size: 250px;
+        --mask:
+        radial-gradient(44.72px at 50% calc(100% - 60px),#000 99%,#0000 101%) calc(50% - 40px) 0/80px 100%,
+        radial-gradient(44.72px at 50% calc(100% + 40px),#0000 99%,#000 101%) 50% calc(100% - 20px)/80px 100% repeat-x;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+    }
+
+    .deco__area_bot{
+        position: relative;
+        height: 300px;
+        width: 100%;
+        background-image: url('../../../../images/_grocerylist-pattern.jpg');
+        background-repeat: repeat;
+        background-position: center;
+        background-size: 250px;
+        --mask:
+        radial-gradient(44.72px at 50% 60px,#000 99%,#0000 101%) calc(50% - 40px) 0/80px 100%,
+        radial-gradient(44.72px at 50% -40px,#0000 99%,#000 101%) 50% 20px/80px 100% repeat-x;
+        -webkit-mask: var(--mask);
+        mask: var(--mask);
+    }
+    
+    .deco__area_container{
+        position: relative;
+        &::before,&::after{
+            content: "";
+            display: block;
+            position: absolute;
+            z-index: 2;
+            background-repeat: no-repeat;
+            background-size: contain;
+            background-position: center;
+            pointer-events: none;
+        }
+        &.top::before{
+            top: -180px;
+            left: -270px;
+            height: 550px;
+            width: 550px;
+            background-image: url('../../../../images/_deco_tarte_citron.png');
+        }
+        &.top::after{
+            top: 90px;
+            right: -220px;
+            height: 250px;
+            width: 500px;
+            background-image: url('../../../../images/_deco_cerise.png');
+        }
+
+        
+        &.bot::before{
+            bottom: -420px;
+            left: -160px;
+            height: 400px;
+            width: 400px;
+            background-image: url('../../../../images/_deco_roses_sable_chocolat.png');
+        }
+        &.bot::after{
+            bottom: -300px;
+            right: -220px;
+            height: 400px;
+            width: 400px;
+            background-image: url('../../../../images/_deco_croque_monsieur.png');
+        }
+    }
+
+    /*.bg__deco{
         position: fixed;
         top: 20px;
         left: 50%;
@@ -14,6 +102,10 @@
         font-weight: bolder;
         color: var(--main-main-green);
         pointer-events: none;
+    }*/
+
+    .home__area{
+        padding: 40px 0 60px;
     }
 
     h1{
@@ -26,8 +118,7 @@
     .site__logo{
         position: relative;
         z-index: 2;
-        margin: 40px 0 50px;
-        max-width: 200px;
+        max-width: 130px;
         width: 90%;
     }
 

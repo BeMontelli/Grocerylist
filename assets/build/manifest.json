@@ -1,10 +1,18 @@
 {
   "build/appback.css": "/build/appback.css",
   "build/app.css": "/build/app.css",
+  "build/../../public/build/images/_deco_croque_monsieur.2ec4f3fd.png": "/build/../../public/build/images/_deco_croque_monsieur.2ec4f3fd.png",
+  "build/images/_deco_croque_monsieur.png": "/build/images/_deco_croque_monsieur.2ec4f3fd.png",
+  "build/../../public/build/images/_deco_tarte_citron.4b6c3177.png": "/build/../../public/build/images/_deco_tarte_citron.4b6c3177.png",
+  "build/images/_deco_tarte_citron.png": "/build/images/_deco_tarte_citron.4b6c3177.png",
+  "build/../../public/build/images/_deco_roses_sable_chocolat.f11c084a.png": "/build/../../public/build/images/_deco_roses_sable_chocolat.f11c084a.png",
+  "build/images/_deco_roses_sable_chocolat.png": "/build/images/_deco_roses_sable_chocolat.f11c084a.png",
   "build/../../public/build/images/_grocerylist-pattern.753ccec6.jpg": "/build/../../public/build/images/_grocerylist-pattern.753ccec6.jpg",
   "build/images/_grocerylist-pattern.jpg": "/build/images/_grocerylist-pattern.753ccec6.jpg",
   "build/../../public/build/images/_grocerylist-placeholder-big.f4a125d4.jpg": "/build/../../public/build/images/_grocerylist-placeholder-big.f4a125d4.jpg",
   "build/images/_grocerylist-placeholder-big.jpg": "/build/images/_grocerylist-placeholder-big.f4a125d4.jpg",
   "build/../../public/build/images/_grocerylist-placeholder.d293c5e2.jpg": "/build/../../public/build/images/_grocerylist-placeholder.d293c5e2.jpg",
-  "build/images/_grocerylist-placeholder.jpg": "/build/images/_grocerylist-placeholder.d293c5e2.jpg"
+  "build/images/_grocerylist-placeholder.jpg": "/build/images/_grocerylist-placeholder.d293c5e2.jpg",
+  "build/../../public/build/images/_deco_cerise.5daa6cb7.png": "/build/../../public/build/images/_deco_cerise.5daa6cb7.png",
+  "build/images/_deco_cerise.png": "/build/images/_deco_cerise.5daa6cb7.png"
 }

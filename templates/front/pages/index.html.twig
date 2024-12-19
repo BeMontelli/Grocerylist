@@ -4,20 +4,41 @@
 
 {% block body %}
 
-<div id="site__home" class="container">
-    <span class="bg__deco" aria-hidden="true">Vos listes de course</span>
-    <h1 class="mt-3">Vos listes de course</h1>
+<div id="site__home">
 
-    <img class="site__logo" src="{{ asset('images/grocerylist-logo.png') }}" alt="GroceryList">
+    <div class="deco__area_container top container"></div>
+    <div class="deco__area deco__area_top">
+        <div class="filter"></div>
+    </div>
 
-    {% if app.user.id is not defined %}
-        <nav class="right">
-            <ul>
-                <li><a class="btn btn-primary btn-lg mb-3 {{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">{{ 'app.front.login.action'|trans }}</a></li>
-                <li><a class="btn btn-primary btn-lg {{ app.current_route starts with 'app_register' ? 'active' : '' }}" href="{{ url('app_register') }}">{{ 'app.front.register.action'|trans }}</a></li>
-            </ul>
-        </nav>
-    {% endif %}
+    <div class="home__area">
+    <div class="container">
+        <img class="site__logo" src="{{ asset('images/grocerylist-logo.png') }}" alt="GroceryList">
+        
+        {#<span class="bg__deco" aria-hidden="true">Vos listes de course</span>#}
+        <h1 class="mt-3 mb-3">Vos listes de course</h1>
+
+        {% if app.user.id is not defined %}
+            <nav class="right">
+                <ul>
+                    <li><a class="btn btn-primary btn-lg mb-3 {{ app.current_route starts with 'app_login' ? 'active' : '' }}" href="{{ url('app_login') }}">{{ 'app.front.login.action'|trans }}</a></li>
+                    <li><a class="btn btn-primary btn-lg {{ app.current_route starts with 'app_register' ? 'active' : '' }}" href="{{ url('app_register') }}">{{ 'app.front.register.action'|trans }}</a></li>
+                </ul>
+            </nav>
+        {% else %}
+            <nav class="right">
+                <ul>
+                    <li><a class="btn btn-primary btn-lg mb-3" href="{{ url('admin.dashboard') }}">{{ 'app.hdr.dashboard'|trans }}</a></li>
+                </ul>
+            </nav>
+        {% endif %}
+    </div>
+    </div>
+
+    <div class="deco__area_container bot container"></div>
+    <div class="deco__area deco__area_bot">
+        <div class="filter"></div>
+    </div>
 
 </div>
 {% endblock %}
