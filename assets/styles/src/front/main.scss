@@ -1,9 +1,9 @@
-body {
+html,body {
     font-family: Arial, sans-serif;
     color: var(--main-text-color);
     background-color: var(--main-bg-color);
     padding-top: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 ul,li,a,p{

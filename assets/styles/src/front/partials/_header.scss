@@ -1,4 +1,7 @@
+@use '../../mixins/responsive' as responsive;
+
 #main-header{
+
     .deco__area{
         width: 100%;
         position: relative;
@@ -46,6 +49,12 @@
             height: 550px;
             width: 550px;
             background-image: url('../../../../images/_deco_tarte_citron.png');
+            @include responsive.responsiveTo(md) {
+                top: -20px;
+                left: -170px;
+                height: 350px;
+                width: 350px;
+            }
         }
         &.top::after{
             top: 90px;
@@ -53,6 +62,12 @@
             height: 250px;
             width: 500px;
             background-image: url('../../../../images/_deco_cerise.png');
+            @include responsive.responsiveTo(md) {
+                top: 100px;
+                right: -140px;
+                height: 220px;
+                width: 380px;
+            }
         }
     }
 }

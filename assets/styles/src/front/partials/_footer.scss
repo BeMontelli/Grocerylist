@@ -1,4 +1,7 @@
+@use '../../mixins/responsive' as responsive;
+
 #main-footer{
+    overflow: hidden;
 
     .footer__content{
         background-color: var(--main-darker);
@@ -67,6 +70,12 @@
             height: 400px;
             width: 400px;
             background-image: url('../../../../images/_deco_croque_monsieur.png');
+            @include responsive.responsiveTo(md) {
+                bottom: -300px;
+                right: -220px;
+                height: 330px;
+                width: 340px;
+            }
         }
     }
 }
