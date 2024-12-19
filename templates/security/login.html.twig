@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="login__page container">
+    <div class="login__page container mt-5 mb-5">
         {% if app.user %}
             <div class="mb-3">
                 <p>{{ 'app.front.login.status'|trans }} {{ app.user.userIdentifier }}</p>
