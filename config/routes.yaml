@@ -1,5 +1,23 @@
-controllers:
+controllers_front:
     resource:
-        path: ../src/Controller/
-        namespace: App\Controller
+        path: ../src/Controller/Front/
+        namespace: App\Controller\Front
+    type: attribute
+
+controllers_admin:
+    resource:
+        path: ../src/Controller/Admin/
+        namespace: App\Controller\Admin
+    type: attribute
+
+controllers_api:
+    resource:
+        path: ../src/Controller/API/
+        namespace: App\Controller\API
+    type: attribute
+
+controllers_normalizer:
+    resource:
+        path: ../src/Controller/Normalizer/
+        namespace: App\Controller\Normalizer
     type: attribute
