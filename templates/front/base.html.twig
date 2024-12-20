@@ -19,7 +19,7 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
+    <body class="{{ body_class|default('classic__page') }}">
         {% include 'front/layouts/header.html.twig' %}
         <div id="main-content">
             {% block body %}{% endblock %}

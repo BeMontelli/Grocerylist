@@ -29,7 +29,9 @@ class HomeController extends AbstractController
         if($user) {
             return $this->redirectToRoute('admin.dashboard');
         } else {
-            return $this->render('front/pages/index.html.twig');
+            return $this->render('front/pages/index.html.twig', [
+                'body_class' => 'home__page', // Classe spécifique pour cette page
+            ]);
         }
 
     }
