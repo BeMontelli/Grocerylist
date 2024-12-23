@@ -75,18 +75,8 @@ class IngredientType extends AbstractType
                     return $er->findAllByUser($options['user']);
                 },
             ])
-            ->add('groceryLists', EntityType::class, [
-                'label' => 'In grocery list(s) ?',
-                'class' => GroceryList::class,
-                'choice_label' => 'title',
-                'mapped' => false, // Not mapping to entity
-                'query_builder' => function (GroceryListRepository $er) use ($options) {
-                    return $er->findGroceryListForUser($options['user']);
-                },
-                'multiple' => true,
-                'expanded' => true,
-                'by_reference' => false,
-                'data' => $groceryListsAssociated 
+            ->add('groceryLists', GroceryListsAutocompleteField::class, [
+                'data' => $groceryListsAssociated,
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Save Ingredient'
