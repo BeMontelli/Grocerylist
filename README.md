@@ -14,15 +14,6 @@ TO DO LIST
   
   * Entities Edit titles translate + structure rework
 
-  * entities updated_at auto ?
-  * groceryList updatedAt
-    *  when toggle item
-    *  when remove item
-    *  when add product
-    *  when remove product
-    *  when add recipe
-    *  when remove recipe
-
   * Features
     * Data samples import
     * Public lists access
