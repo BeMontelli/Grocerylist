@@ -108,6 +108,17 @@ class IngredientController extends AbstractController
                 $formData = $form->getData();
                 $entityManager->persist($formData);
                 $entityManager->flush();
+
+                $groceryListsAssociated = [];
+                if($ingredient->getId()) {
+                    $groceryListsAssociated = $entityManager->getRepository(GroceryList::class)->getIngredientGroceryLists($ingredient);
+                }
+                foreach($groceryListsAssociated as $groceryList) {
+                    $groceryList->setUpdatedAt(new \DateTimeImmutable());
+                    $entityManager->persist($groceryList);
+                }
+                $entityManager->flush();
+
                 $this->addFlash('success', 'Ingredient updated !');
                 return $this->redirectToRoute('admin.ingredient.edit', ["id" => $ingredient->getId()]);
             } else $this->addFlash('danger', 'Form validation error !');

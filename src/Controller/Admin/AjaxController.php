@@ -52,6 +52,10 @@ class AjaxController extends AbstractController
             return new JsonResponse(['error' => 'GroceryList ID not provided'], Response::HTTP_BAD_REQUEST);
         }
 
+        $groceryList = $entityManager->getRepository(GroceryList::class)->find($listId);
+        $groceryList->setUpdatedAt(updatedAt: new \DateTimeImmutable());
+        $entityManager->persist($groceryList);
+
         $groceryListIngredients = $entityManager->getRepository(GroceryListIngredient::class)->findBy(['ingredient' => $ingredientId,'groceryList' => $listId]);
         foreach ($groceryListIngredients as $groceryListIngredient) {
             $status = $groceryListIngredient->isActive();

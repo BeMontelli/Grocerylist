@@ -150,6 +150,7 @@ class GroceryListController extends AbstractController
 
         if($groceryList->getUser()->getId() === $user->getId()) {
             $groceryList->removeRecipe($recipe);
+            $groceryList->setUpdatedAt(new \DateTimeImmutable());
             $em->persist($groceryList);
             $em->flush();
             $this->groceryListIngredientService->removeRecipeIngredientsInGroceryList($recipe,$groceryList);
@@ -185,10 +186,17 @@ class GroceryListController extends AbstractController
             ]);
 
             foreach ($groceryListIngredients as $groceryListIngredient) {
-                $groceryListIngredient->setInList($inListTarget);
-                $groceryListIngredient->setActivation(false);
-                $em->persist($groceryListIngredient);
+                if($groceryListIngredient->getRecipe() === null) {
+                    $em->remove($groceryListIngredient);
+                } else {
+                    $groceryListIngredient->setInList($inListTarget);
+                    $groceryListIngredient->setActivation(false);
+                    $em->persist($groceryListIngredient);
+                }
             }
+
+            $groceryList->setUpdatedAt(updatedAt: new \DateTimeImmutable());
+            $em->persist($groceryList);
 
             $em->flush();
 

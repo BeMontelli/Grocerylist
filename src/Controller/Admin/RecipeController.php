@@ -161,6 +161,7 @@ class RecipeController extends AbstractController
             }
 
             $groceryList->addRecipe($recipe);
+            $groceryList->setUpdatedAt(updatedAt: new \DateTimeImmutable());
             $em->persist($groceryList);
             
             $this->groceryListIngredientService->removeRecipeIngredientsInGroceryList($recipe,$groceryList);
