@@ -16,7 +16,7 @@ export default class extends Controller {
         this.recipeFields = document.querySelector('.recipe__fields');
         if(!this.recipeChecker || !this.recipeFields) return;
 
-        this.recipeFields = this.recipeFields.parentElement.parentElement.parentElement;
+        this.recipeFields = this.recipeFields.parentElement.parentElement;
         if(!this.recipeFields) return;
         
         this.recipeChecker.addEventListener('change', this.toggleRecipesField.bind(this));
@@ -24,7 +24,7 @@ export default class extends Controller {
     }
     
     toggleRecipesField() {
-        if (this.recipeChecker.checked) this.recipeFields.style.display = 'block';
+        if (this.recipeChecker.checked) this.recipeFields.style.display = 'flex';
         else this.recipeFields.style.display = 'none';   
     }
 }

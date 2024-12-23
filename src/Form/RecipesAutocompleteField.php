@@ -2,8 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\GroceryList;
-use App\Repository\GroceryListRepository;
+use App\Entity\Recipe;
+use App\Repository\RecipeRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\OptionsResolver\Options;
@@ -13,7 +13,7 @@ use Symfony\Bundle\SecurityBundle\Security;
 use App\Entity\User;
 
 #[AsEntityAutocompleteField]
-class GroceryListsAutocompleteField extends AbstractType
+class RecipesAutocompleteField extends AbstractType
 {
     private $security;
 
@@ -27,18 +27,19 @@ class GroceryListsAutocompleteField extends AbstractType
         $user = $this->security->getUser();
 
         $resolver->setDefaults([
-            'label' => 'In grocery list(s) ?',
-            'class' => GroceryList::class,
+            'label' => 'Recipes related',
+            'class' => Recipe::class,
             'choice_label' => 'title',
             'multiple' => true,
             'expanded' => false,
             'required' => false,
-            'mapped' => false, // Not mapping to entity*/
-            'query_builder' => function (GroceryListRepository $er) use ($user) {
-                return $er->findAllForUser($user);
+            'mapped' => true, // Not mapping to entity*/
+            'query_builder' => function (RecipeRepository $er) use ($user) {
+                return $er->findAllByUser($user);
             },
             'by_reference' => false,
-            'data' => []
+            'data' => [],
+            'attr' => ['class' => 'recipe__fields']
         ]);
 
     }

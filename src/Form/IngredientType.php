@@ -43,9 +43,13 @@ class IngredientType extends AbstractType
         $ingredient = $options['data'];
         // Get GroceryLists linked to ingredient
         $groceryListsAssociated = [];
+        $recipesAssociated = [];
         if($ingredient->getId()) {
             $groceryListsAssociated = $this->groceryListRepository->getIngredientGroceryLists($ingredient);
+            $recipesAssociated = $ingredient->getRecipes();
         }
+        /*dump($ingredient->getId());
+        dd($recipesAssociated);*/
 
         $builder
             ->add('title',TextType::class, [
@@ -63,17 +67,8 @@ class IngredientType extends AbstractType
                 'required' => false,
                 'attr' => ['class' => 'recipes__check'],
             ])
-            ->add('recipes', EntityType::class, [
-                'label' => 'Recipes related',
-                'class' => Recipe::class,
-                'choice_label' => 'title',
-                'multiple' => true,
-                'expanded' => true,
-                'by_reference' => false,
-                'attr' => ['class' => 'recipe__fields'],
-                'query_builder' => function (RecipeRepository $er) use ($options) {
-                    return $er->findAllByUser($options['user']);
-                },
+            ->add('recipes', RecipesAutocompleteField::class, [
+                'data' => $recipesAssociated,
             ])
             ->add('groceryLists', GroceryListsAutocompleteField::class, [
                 'data' => $groceryListsAssociated,

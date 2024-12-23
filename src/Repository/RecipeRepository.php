@@ -97,7 +97,7 @@ class RecipeRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('c')
             ->andWhere('c.user = :val')
             ->setParameter('val', $user->getId())
-            ->orderBy('c.id', 'ASC');
+            ->orderBy('c.title', 'ASC');
     }
 
     public function findRecipeWithCategory($recipeId)
