@@ -18,6 +18,23 @@ TO DO LIST
   * select async bg from white to dark ?
   * recipe form "ingredients in" border input to remove
 
+  * entities updated_at auto ?
+  * groceryList updatedAt
+    *  when toggle item
+    *  when remove item
+    *  when add product
+    *  when remove product
+    *  when add recipe
+    *  when remove recipe
+
+  * Features
+    * Data samples import
+    * Public lists access
+
+  * src\Form\IngredientType.php
+    * 'Recipes related' field : autocomplete + Data
+    * 'In grocery list(s) ?' field: autocomplete + Data
+
 WORK IN PROGESS
 ------------
 
