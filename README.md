@@ -14,10 +14,6 @@ TO DO LIST
   
   * Entities Edit titles translate + structure rework
 
-  * select file background from white to dark ?
-  * select async bg from white to dark ?
-  * recipe form "ingredients in" border input to remove
-
   * entities updated_at auto ?
   * groceryList updatedAt
     *  when toggle item
