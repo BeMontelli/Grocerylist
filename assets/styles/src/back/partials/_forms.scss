@@ -115,8 +115,8 @@ input,input::placeholder,textarea,textarea::placeholder,button{
 fieldset{
     border: solid 1px var(--main-green-alt);
     border-radius: 5px;
-    padding: 5px;
-    margin: 10px 0 20px;
+    padding: 0 5px 5px;
+    margin: 0 0 20px;
 }
 
 input[type=text], input[type=password], input[type=email], input[type=number], select, textarea {
