@@ -31,10 +31,6 @@ TO DO LIST
     * Data samples import
     * Public lists access
 
-  * src\Form\IngredientType.php
-    * 'Recipes related' field : autocomplete + Data
-    * 'In grocery list(s) ?' field: autocomplete + Data
-
 WORK IN PROGESS
 ------------
 
