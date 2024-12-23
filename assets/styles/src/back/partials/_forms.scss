@@ -58,6 +58,9 @@
     display: flex;
     flex-wrap: wrap;
 }
+.ts-control .imagefiled {
+    padding: 0 !important;
+}
 .imagefiled {
     width: calc(100% / 4);
     @include responsive.responsiveTo(lg) {
@@ -147,6 +150,18 @@ input[type=text], input[type=password], input[type=email], input[type=number], s
     background-color: var(--main-bg-input);
     &.ts-wrapper{
         padding: 2px 1px 2px 1px;
+        background-color: var(--main-bg-input);
+        .ts-control{
+            background-color: var(--main-bg-input);
+            background-image: none !important;
+            box-shadow: none !important;
+        }
+        input{
+            color: var(--main-text-color);
+            font-weight: 600;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
     }
     .ts-control{
         border: none;
@@ -157,11 +172,27 @@ input[type=text], input[type=password], input[type=email], input[type=number], s
     max-height: 300px;
 }
 
+
+.ts-wrapper.single .ts-control [data-value]{
+    position: relative;
+    background-color: var(--main-dark);
+    border-color: var(--main-dark);
+    background-image: none !important;
+    border: none !important;
+    margin: 0;
+    padding: 2px 6px;
+    color: var(--main-text-color);
+    border-radius: 3px;
+    box-shadow: none !important;
+}
 .ts-wrapper.multi .ts-control [data-value]{
     position: relative;
     background-color: var(--main-dark);
     border-color: var(--main-dark);
     background-image: none !important;
+    border: none !important;
+    color: var(--main-text-color);
+    box-shadow: none !important;
 }
 .ts-wrapper.plugin-remove_button:not(.rtl) .item .remove{
     border-left: 1px solid var(--main-darker) !important;
