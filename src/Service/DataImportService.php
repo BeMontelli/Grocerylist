@@ -855,16 +855,19 @@ class DataImportService
         $this->em->flush();
     }
 
-    public function createIngredients($user) : void {
+    public function createIngredients($user, $sections = null) : void {
         foreach ($this->ingredients as $ingredient) {
             $existing = $this->em->getRepository(Section::class)
                 ->findOneBy(['title' => $ingredient['title'],'user' => $user]);
     
-            if (!$existing) $this->createIngredient($ingredient,$user);
+            if (!$existing) $this->createIngredient($ingredient,$user,$sections);
         }
     }
 
-    public function createIngredient(array $ingredient,$user): void {
+    public function createIngredient(array $ingredient, $user, $sections = null): void {
+
+        if(!$sections) $sections = $this->builtSections;
+
         $slugger = new AsciiSlugger();
 
         $newIngredient = new Ingredient();
@@ -876,7 +879,7 @@ class DataImportService
         $newIngredient->setAvailableRecipe(availableRecipe: $ingredient['recipeOK']);
 
         $titleToFind = $ingredient['section'];
-        $matchingSections = array_filter($this->builtSections, function($section) use ($titleToFind) {
+        $matchingSections = array_filter($sections, function($section) use ($titleToFind) {
             return $section->getTitle() === $titleToFind;
         });
         $matchingSections = array_values($matchingSections);

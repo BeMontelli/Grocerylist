@@ -7,14 +7,17 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Category;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use App\Service\DataImportService;
 
 class CategoryFixtures extends Fixture
 {
     private EntityManagerInterface $entityManager;
+    private DataImportService $dataImportService;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, DataImportService $dataImportService)
     {
         $this->entityManager = $entityManager;
+        $this->dataImportService = $dataImportService;
     }
 
     public function load(ObjectManager $manager): void
@@ -24,41 +27,9 @@ class CategoryFixtures extends Fixture
             $this->getReference(UserFixtures::NORMAL_USER_REFERENCE),
         ];
 
-        $categories = [
-            "Entrée",
-            "Plat principal",
-            "Dessert",
-            "Apéritif",
-            "Boisson",
-            "Autre"
-        ];
-
         foreach ($users as $user) {
-            foreach ($categories as $category) {
-                $existing = $this->entityManager->getRepository(Category::class)
-                    ->findOneBy(['title' => $category,'user' => $user]);
-        
-                if (!$existing) $this->createCategory($manager,$category,$user);
-            }
+            $this->dataImportService->createCategories($user);
         }
-    }
-
-    public function createCategory(ObjectManager $manager,string $category,$user): void {
-        $slugger = new AsciiSlugger();
-
-        $newCategory = new Category();
-        $newCategory->setTitle($category);
-
-        $slug = strtolower($slugger->slug($category));
-        $newCategory->setSlug($slug);
-
-        $newCategory->setUser($user);
-
-        $newCategory->setCreatedAt(new \DateTimeImmutable());
-        $newCategory->setUpdatedAt(new \DateTimeImmutable());
-
-        $manager->persist($newCategory);
-        $manager->flush();
     }
 
     public static function getGroups(): array

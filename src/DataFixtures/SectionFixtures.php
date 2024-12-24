@@ -7,14 +7,17 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Section;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use App\Service\DataImportService;
 
 class SectionFixtures extends Fixture
 {
     private EntityManagerInterface $entityManager;
+    private DataImportService $dataImportService;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager, DataImportService $dataImportService)	
     {
         $this->entityManager = $entityManager;
+        $this->dataImportService = $dataImportService;
     }
 
     public function load(ObjectManager $manager): void
@@ -24,57 +27,9 @@ class SectionFixtures extends Fixture
             $this->getReference(UserFixtures::NORMAL_USER_REFERENCE),
         ];
 
-        // sections names used in IngredientFixtures
-        $sections = [
-            "Conserves",
-            "Hygiene",
-            "Ménage/Vaisselle",
-            "Cuisine",
-            "Matin/Biscuits",
-            "Boissons",
-            "Desserts",
-            "Apéritifs",
-            "Surgelés",
-            "Condiments/Sauces",
-            "Pâtes/Riz",
-            "Plats cuisinés",
-            "Boulangerie",
-            "Épicerie",
-            "Fruits",
-            "Légumes",
-            "Laitages",
-            "Fromages",
-            "Boucherie/Viandes",
-            "Poissonnerie/Poissons",
-            "Autres"
-        ];
-
         foreach ($users as $user) {
-            foreach ($sections as $section) {
-                $existing = $this->entityManager->getRepository(Section::class)
-                    ->findOneBy(['title' => $section,'user' => $user]);
-        
-                if (!$existing) $this->createSection($manager,$section,$user);
-            }
+            $this->dataImportService->createSections($user);
         }
-    }
-
-    public function createSection(ObjectManager $manager,string $section,$user): void {
-        $slugger = new AsciiSlugger();
-
-        $newSection = new Section();
-        $newSection->setTitle($section);
-
-        $slug = strtolower($slugger->slug($section));
-        $newSection->setSlug($slug);
-
-        $newSection->setUser($user);
-
-        $newSection->setCreatedAt(new \DateTimeImmutable());
-        $newSection->setUpdatedAt(new \DateTimeImmutable());
-
-        $manager->persist($newSection);
-        $manager->flush();
     }
 
     public static function getGroups(): array
