@@ -1,4 +1,7 @@
-html,body {
+@use '../mixins/responsive' as responsive;
+
+body {
+    accent-color: var(--main-green);
     font-family: Arial, sans-serif;
     color: var(--main-text-color);
     background-color: var(--main-bg-color);
@@ -8,5 +11,44 @@ html,body {
 
 ul,li,a,p{
     color: var(--main-text-color);
+}
+
+a{
+    color: var(--main-green);
+    text-decoration: none;
     transition: all 0.5s ease;
+    &:hover,&:focus{
+        color: var(--main-green-alt);
+        text-decoration: none;
+        transition: all 0.5s ease;
+    }
+    &.hspec{
+        height: 38px;
+        display: block;
+    }
+    &.dashboard{
+        padding: 10px 20px 10px 10px;
+    }
+}
+
+hr {
+    background-color: var(--main-green);
+    border-radius: 2px;
+    height: 4px;
+    width: 100%;
+    border: none;
+}
+
+.mobile__hide{
+    @include responsive.responsiveTo(md) {
+        display: none;
+    }
+}
+
+.container_relative{
+    position: relative;
+}
+
+.narrow__container{
+    max-width: 550px;
 }
