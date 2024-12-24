@@ -15,7 +15,6 @@ TO DO LIST
   * Entities Edit titles translate + structure rework
 
   * Features
-    * Data samples import
     * Public lists access
 
 WORK IN PROGESS
