@@ -16,11 +16,15 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use App\Service\DataImportService;
 
 class RegistrationController extends AbstractController
 {
-    public function __construct(private EmailVerifier $emailVerifier)
+    private DataImportService $dataImportService;
+
+    public function __construct(private EmailVerifier $emailVerifier,DataImportService $dataImportService)
     {
+        $this->dataImportService = $dataImportService;
     }
 
     #[Route(path: '/{_locale}/register', name: 'app_register', requirements: ['_locale' => 'fr|en'])]
@@ -41,6 +45,9 @@ class RegistrationController extends AbstractController
 
             $entityManager->persist($user);
             $entityManager->flush();
+
+            // WIP
+            $this->dataImportService->importData($user);
 
             // generate a signed url and email it to the user
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
