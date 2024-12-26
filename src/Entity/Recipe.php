@@ -58,8 +58,6 @@ class Recipe
         new Assert\Positive(),
         new Assert\GreaterThan(value: '0'),
     ])]
-    #[Groups(['recipes.*','categories.*','ingredients.*'])]
-    private ?string $price = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
     #[Groups(['recipes.index','recipes.show'])]
@@ -160,18 +158,6 @@ class Recipe
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getPrice(): ?string
-    {
-        return $this->price;
-    }
-
-    public function setPrice(string $price): static
-    {
-        $this->price = $price;
 
         return $this;
     }

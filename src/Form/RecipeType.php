@@ -61,15 +61,6 @@ class RecipeType extends AbstractType
             ])
             ->add('category', CategoryAutocompleteField::class)
             ->add('ingredients', IngredientsAutocompleteField::class)
-            ->add('price',NumberType::class, [
-                'empty_data' => 0,
-                'label' => 'Price (€)',
-                'attr' => [
-                    'min' => 0,
-                    'max' => 100,
-                    'type' => 'number',
-                ]
-            ])
             ->add('content', TextareaType::class, [
                 'empty_data' => '',
                 'required' => false,
