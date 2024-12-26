@@ -16,6 +16,17 @@ TO DO LIST
 
   * Features
     * Public lists access
+    * add db:
+      * public slug
+    * front:
+      * route
+      * template display list like backoffice
+      * template display owner
+      * items check allow from not logged
+      * do not show remove ingredients
+      * do not show recipe ingredients toggle
+      * do not show recipe remove
+      * add comment item ?
 
 WORK IN PROGESS
 ------------
