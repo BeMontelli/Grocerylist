@@ -52,13 +52,6 @@ class Recipe
     #[Groups(['recipes.*','categories.*','ingredients.*'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    #[Assert\Sequentially([
-        new Assert\NotBlank(),
-        new Assert\Positive(),
-        new Assert\GreaterThan(value: '0'),
-    ])]
-
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
     #[Groups(['recipes.index','recipes.show'])]
     private ?Category $category = null;
