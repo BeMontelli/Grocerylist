@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Front;
 
 use App\Entity\GroceryList;
 use App\Entity\GroceryListIngredient;
@@ -25,8 +25,7 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Doctrine\Persistence\Proxy;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-#[Route("/admin/ajax", name: "admin.ajax.")]
-#[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
+#[Route("/front/ajax", name: "front.ajax.")]
 class AjaxController extends AbstractController
 {
     public function __construct()
@@ -35,11 +34,8 @@ class AjaxController extends AbstractController
     }
 
     #[Route('/ingredient-toggle/', name: 'ingredientToggle', methods: ['POST'])]
-    public function ingredientToggle(Request $request, Security $security, EntityManagerInterface $entityManager): JsonResponse
+    public function ingredientToggle(Request $request, EntityManagerInterface $entityManager): JsonResponse
     {
-        /** @var User $user */
-        $user = $security->getUser();
-
         $data = json_decode($request->getContent(), true);
         $ingredientId = $data['ingredientId'] ?? null;
         $listId = $data['listId'] ?? null;
@@ -54,7 +50,7 @@ class AjaxController extends AbstractController
 
         $groceryList = $entityManager->getRepository(GroceryList::class)->find($listId);
         
-        if($groceryList === null) {
+        if($groceryList === null || $groceryList->getPublicSlug() === null) {
             return new JsonResponse(['error' => 'GroceryList not found'], Response::HTTP_NOT_FOUND);
         }
 
@@ -70,59 +66,5 @@ class AjaxController extends AbstractController
         $entityManager->flush();
         
         return new JsonResponse(['success' => true, 'ingredientId' => $ingredientId, 'listId' => $listId]);
-    }
-
-    #[Route('/search-by-title/', name: 'searchTitle', methods: ['POST'])]
-    public function searchByTitle(Request $request, Security $security, SearchRepository $searchRepository): JsonResponse
-    {
-        /** @var User $user */
-        $user = $security->getUser();
-
-        $data = json_decode($request->getContent(), true);
-        $title = $data['title'] ?? null;
-
-        if ($title === null) {
-            return new JsonResponse(['error' => 'Title to search not provided'], Response::HTTP_BAD_REQUEST);
-        }
-
-        $results = $searchRepository->search($title,$user->getId());
-
-        return new JsonResponse(['success' => true, 'results' => $results], Response::HTTP_OK);
-    }
-
-    #[Route('/sections-position/', name: 'sectionsPosition', methods: ['POST'])]
-    public function updateSectionsPosition(Request $request, Security $security, SectionRepository $sectionRepository): JsonResponse
-    {
-        /** @var User $user */
-        $user = $security->getUser();
-
-        $data = json_decode($request->getContent(), true);
-        $ids = $data['ids'] ?? null;
-
-        if ($ids === null || empty($ids)) {
-            return new JsonResponse(['error' => 'Ids to update not provided'], Response::HTTP_BAD_REQUEST);
-        }
-
-        $sectionRepository->updatePositions($ids,$user);
-
-        return new JsonResponse(['success' => true], Response::HTTP_OK);
-    }
-
-    #[Route('/categories-position/', name: 'categoriesPosition', methods: ['POST'])]
-    public function updateCategoriesPosition(Request $request, Security $security, CategoryRepository $categoryRepository): JsonResponse
-    {
-        /** @var User $user */
-        $user = $security->getUser();
-
-        $data = json_decode($request->getContent(), true);
-        $ids = $data['ids'] ?? null;
-
-        if ($ids === null || empty($ids)) {
-            return new JsonResponse(['error' => 'Ids to update not provided'], Response::HTTP_BAD_REQUEST);
-        }
-
-        $categoryRepository->updatePositions($ids,$user);
-
-        return new JsonResponse(['success' => true], Response::HTTP_OK);
     }
 }

@@ -12,6 +12,9 @@ import { Controller } from '@hotwired/stimulus';
 
 export default class extends Controller {
     connect() {
+        this.body = document.querySelector('body');
+        this.callSide = (this.body.classList.contains('admin')) ? '/admin' : '/front';
+        
         this.items = document.querySelectorAll('.section__element__item');
         if(!this.items) return;
 
@@ -26,7 +29,7 @@ export default class extends Controller {
         const listId = checkbox.dataset.listid;
         if(!ingredientId || !listId) return;
 
-        fetch('/admin/ajax/ingredient-toggle/', {
+        fetch(this.callSide+'/ajax/ingredient-toggle/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -37,6 +40,7 @@ export default class extends Controller {
         .then(response => response.json())
         .then(data => {
             console.log('Ingredient toggled:', data);
+            window.location.reload();
         })
         .catch(error => console.error('Error:', error));
     }
