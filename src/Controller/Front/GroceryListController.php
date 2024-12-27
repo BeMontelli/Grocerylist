@@ -96,6 +96,9 @@ class GroceryListController extends AbstractController
         $groceryListIngredient->setActivation(false);
         $em->persist($groceryListIngredient);
 
+        $groceryList->setUpdatedAt(new \DateTimeImmutable());
+        $em->persist($groceryList);
+
         $em->flush();
 
         $url = $this->generateUrl('page.list.show', [
