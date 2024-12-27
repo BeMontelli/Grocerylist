@@ -19,7 +19,7 @@
             {% block importmap %}{{ importmap(['appback']) }}{% endblock %}
         {% endblock %}
     </head>
-    <body class="admin">
+    <body class="admin {{ body_class|default('admin__page') }}">
         {% include 'admin/layouts/header.html.twig' %}
         {% include 'admin/partials/flashes.html.twig' %}
         <div id="main-content">

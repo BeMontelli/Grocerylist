@@ -1,0 +1,57 @@
+@use '../../mixins/responsive' as responsive;
+
+body.profile__page{
+    position: relative;
+    .cols{
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        margin-bottom: 15px;
+        @include responsive.responsiveTo(sm) {
+            flex-direction: column;
+        }
+    }
+    .col__left{
+        width: 150px;
+        height: 200px;
+        @include responsive.responsiveTo(sm) {
+            width: 100%;
+            max-width: 200px;
+            margin-bottom: 10px;
+            height: auto;
+            padding-bottom: 0;
+        }
+    }
+    .col__right{
+        width: calc(100% - 200px);
+        padding-left: 15px;
+        @include responsive.responsiveTo(sm) {
+            padding-left: 0;
+            width: 100%;
+        }
+    }
+
+    #profile-avatar {
+      position: relative;
+      margin: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      border-radius: 10px;
+      overflow: hidden;
+      transform: translate(0);
+      transition: 0.2s;
+      background-image: url('../../../../images/_grocerylist-placeholder.jpg');
+      background-repeat: repeat;
+      background-position: center;
+      background-size: cover;
+      @include responsive.responsiveTo(sm) {
+            max-width: 200px;
+            width: 100%;
+            height: auto;
+            padding-bottom: 100%;
+      }
+    }
+    
+}

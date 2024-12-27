@@ -17,33 +17,46 @@
    
    <div class="container">
 
-        <div class="table__container">
-        <table class="table table__thead__tbody">
-            <tbody>
-                <tr>
-                    <th>Id</th>
-                    <td>{{ user.id }}</td>
-                </tr>
-                <tr>
-                    <th>Username</th>
-                    <td>{{ user.username }}</td>
-                </tr>
-                <tr>
-                    <th>Roles</th>
-                    <td>
-                    {% for role in user.roles %}<span class="role__elem">{{ role }}</span>{% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{ user.email }}</td>
-                </tr>
-                <tr>
-                    <th>IsVerified</th>
-                    <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="cols">
+            <div class="col__left">
+                <div id="profile-avatar" 
+                    {% if user is not empty and user.picture is not empty and user.picture.url is not empty %}
+                        style="background-image:url({{ user.picture.url }})"
+                    {% endif %}>
+                </div>
+            </div>
+            <div class="col__right">
+                <div class="table__container">
+                <table class="table table__thead__tbody">
+                    <tbody>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <tr>
+                                <th>Id</th>
+                                <td>{{ user.id }}</td>
+                            </tr>
+                            <tr>
+                                <th>Roles</th>
+                                <td>
+                                {% for role in user.roles %}<span class="role__elem">{{ role }}</span>{% endfor %}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Username</th>
+                            <td>{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{ user.email }}</td>
+                        </tr>
+                        <tr>
+                            <th>IsVerified</th>
+                            <td>{{ user.isVerified ? 'Yes' : 'No' }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
         </div>
 
         <a class="btn btn-primary" href="{{ path('admin.user.edit', {'id': user.id}) }}"><i class='bx bx-edit-alt' ></i></a>

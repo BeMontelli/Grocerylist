@@ -236,6 +236,7 @@ class UserController extends AbstractController
 
         return $this->render('admin/user/profile.html.twig', [
             'user' => $user,
+            'body_class' => 'profile__page', // Classe spécifique pour cette page
         ]);
     }
 }
