@@ -13,6 +13,17 @@
         }
     }
 
+    &.public__access{
+        .page__title_content{
+            h1{
+                margin-left: 0;
+                @include responsive.responsiveTo(sm) {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+
     .mobile__btns {
         ul.pagination{
             margin: 10px 0 10px;

@@ -1,0 +1,36 @@
+<div class="grocery__list_recipe_card">
+    <div class="cols">
+        <div class="col__left">
+            <div class="single__image" 
+                {% if recipe.thumbnail is not empty and recipe.thumbnail.url is not empty %}
+                    style="background-image:url({{ recipe.thumbnail.url }})"
+                {% else %}
+                    style="background-image:url({{ asset('images/_grocerylist-placeholder.jpg') }})"
+                {% endif %}
+            >
+            {% if recipe.category is defined and recipe.category.title is defined and recipe.category.title is not empty %}
+                <span class="category__thumbnail">{{ recipe.category.title }}</span>
+            {% endif %}
+
+            </div>
+        </div>
+        <div class="col__right">
+            <div class="single__pres">
+                <div class="single__title">
+                    <h3 class="section__title">{{ recipe.title }}</h1>
+                </div>
+                <div class="card ingredients">
+                    {% if recipe.groceryListIngredients is not empty %}
+                    <ul class="ingredients__list">
+                        {% for groceryListIngredient in recipe.groceryListIngredients %}
+                            <li>
+                            {{ include('front/partials/grocerylist_recipe_ingredient_card.html.twig') }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

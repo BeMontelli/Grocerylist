@@ -1,0 +1,20 @@
+<div class="section__content">
+    <h3 class="section__title">
+        {#({{ element['section'].id }})#} {{element['section'].title}}
+    </h3>
+    {% if elements is not empty %}
+    <div class="section__elements">
+    <ul class="section__elements__list">
+        {% for ingredient in element['ingredients'] %}
+            {% if ingredient.inList %}
+            <li class="section__element__item">
+                {{ include('front/partials/grocerylist_section_ingredient_card.html.twig') }}
+            </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    </div>
+    {% else %}
+        <span class="section__elements__none">NO ITEM</span>
+    {% endif %}
+</div>

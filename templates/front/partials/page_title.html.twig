@@ -1,0 +1,20 @@
+<div class="page__title">
+    <div class="page__title_bg_area">
+        <div class="page__title_bg"></div>
+        <div class="page__title_filter"></div>
+    </div>
+    <div class="page__title_content">
+    <div class="container">
+        
+        <h1>{{ icon|raw }} {{ title }}</h1>
+    </div>
+    </div>
+
+    {% if links is defined and links|length > 0 %}
+        <div class="container container_relative">
+            {% for link in links %}
+                <a href="{{ link.url }}" class="{{ link.class }}">{{ link.label|raw }}</a>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
