@@ -75,4 +75,33 @@ class GroceryListController extends AbstractController
             'recipes' => $recipes,
         ]);
     }
+
+    #[Route('/toggle-grocerylistingredient-list/{grocerylistId}/{grocerylistingredientId}/{inlist}', name: 'toggleGroceryListIngredientList', requirements: ['grocerylistId' => Requirement::DIGITS,'grocerylistingredientId' => Requirement::DIGITS,'inlist' => 'remove|put'], methods: ['GET'])]
+    public function toggleGroceryListIngredientFromList(int $grocerylistId,int $grocerylistingredientId,string $inlist,Request $request,EntityManagerInterface $em): Response
+    {
+
+        /** @var GroceryList $groceryList  */
+        $groceryList = $em->find(GroceryList::class,$grocerylistId);
+        /** @var GroceryListIngredient $grocerylistingredientId  */
+        $groceryListIngredient = $em->find(GroceryListIngredient::class,$grocerylistingredientId);
+
+        if(!$groceryList || !$groceryListIngredient) {
+            $preferredLanguage = $request->getPreferredLanguage(['en', 'fr']);
+            return $this->redirectToRoute('page.home', ["_locale" => $preferredLanguage]);
+        }
+
+        $inListTarget = !($inlist === 'remove');
+
+        $groceryListIngredient->setInList($inListTarget);
+        $groceryListIngredient->setActivation(false);
+        $em->persist($groceryListIngredient);
+
+        $em->flush();
+
+        $url = $this->generateUrl('page.list.show', [
+            'publicSlug' => $groceryList->getPublicSlug()
+        ]) . '?group=grocerylist&gid=recipes';
+
+        return $this->redirect($url, Response::HTTP_SEE_OTHER);
+    }
 }
