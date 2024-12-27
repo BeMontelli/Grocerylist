@@ -28,9 +28,6 @@ TO DO LIST
       * do not show recipe remove
       * add comment item ?
 
-  * Profile picture remove
-  * Profile id do not show id if not admin
-
 WORK IN PROGESS
 ------------
 
