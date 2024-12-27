@@ -6,8 +6,11 @@ use App\Repository\GroceryListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GroceryListRepository::class)]
+#[UniqueEntity(fields: ['publicSlug'], message: 'app.admin.lists.publicslug.form.uniquealert')]
 class GroceryList
 {
     #[ORM\Id]
@@ -48,6 +51,17 @@ class GroceryList
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'groceryList', orphanRemoval: true)]
     private Collection $groceryListIngredients;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Expression(
+        expression: "this.getPublicSlug() === null || this.getPublicSlug() === '' || (this.getPublicSlug() != null && this.getPublicSlugLength() >= 10)",
+        message: 'app.admin.lists.publicslug.form.lengthalert'
+    )]
+    #[Assert\Regex(
+        pattern: '/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
+        message: 'app.admin.lists.publicslug.form.urlalert'
+    )]
+    private ?string $publicSlug = null;
 
     public function __construct()
     {
@@ -203,5 +217,22 @@ class GroceryList
         }
 
         return $this;
+    }
+
+    public function getPublicSlug(): ?string
+    {
+        return $this->publicSlug;
+    }
+
+    public function setPublicSlug(?string $publicSlug): static
+    {
+        $this->publicSlug = $publicSlug;
+
+        return $this;
+    }
+    
+    public function getPublicSlugLength(): int
+    {
+        return strlen($this->publicSlug);
     }
 }

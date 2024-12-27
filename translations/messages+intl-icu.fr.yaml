@@ -49,9 +49,13 @@ app:
         =1 {Liste}
         other {Listes}
       }
-    lists.recipes.remove: 'Retirer de la liste'
     lists.deletetitle: "Supprimer la liste ?"
     lists.deleteconfirm: "Êtes vous sur de vouloir supprimer la liste ?"
+    lists.publicslug.form.lengthalert: "Le slug doit être vide ou contenir au moins 10 caractères."
+    lists.publicslug.form.urlalert: "Le slug ne doit contenir que des caractères alphanumériques, séparés éventuellement par des tirets (pas d’accents, espaces, ou caractères spéciaux)."
+    lists.publicslug.form.help: "Si rempli alors la liste sera accessible publiquement via ce slug."
+    lists.publicslug.form.uniquealert: "Ce slug n'est pas disponible, merci d'en changer."
+    lists.recipes.remove: 'Retirer de la liste'
     recipes.title: Recettes
     recipes.none: 'Pas de recette'
     recipes.sendtolistnotice: Votre recette sera envoyée à la liste sélectionnée avec les ingrédients cible.

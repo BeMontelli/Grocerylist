@@ -3,6 +3,7 @@
         {{ form_row(form.title) }}
         {{ form_row(form.slug) }}
     </div>
+    {{ form_row(form.publicSlug) }}
     {{ form_row(form.save, {'label_html': true, 'label': button_label|default('app.admin.action.create'|trans)}) }}
     {{ form_widget(form) }}
 {{ form_end(form) }}
