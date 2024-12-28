@@ -366,8 +366,8 @@ class DataImportService
                 'recipeOK' => true
             ],
             [
-                "title" => "Saucisson à l'ail",
-                'section' => 'Chorizo',
+                "title" => "Chorizo",
+                'section' => 'Boucherie/Viandes',
                 'recipeOK' => true
             ],
             [
@@ -415,17 +415,7 @@ class DataImportService
 
             //Condiments/Sauces
             [
-                "title" => 'Sauce provençale',
-                'section' => 'Condiments/Sauces',
-                'recipeOK' => true
-            ],
-            [
-                "title" => 'Sauce tomate/aubergine',
-                'section' => 'Condiments/Sauces',
-                'recipeOK' => true
-            ],
-            [
-                "title" => 'Viandox',
+                "title" => 'Sauce tomate',
                 'section' => 'Condiments/Sauces',
                 'recipeOK' => true
             ],
@@ -441,11 +431,6 @@ class DataImportService
             ],
             [
                 "title" => 'Sauce frites',
-                'section' => 'Condiments/Sauces',
-                'recipeOK' => true
-            ],
-            [
-                "title" => 'Sauce blanbche Samia',
                 'section' => 'Condiments/Sauces',
                 'recipeOK' => true
             ],
@@ -563,19 +548,19 @@ class DataImportService
                 'recipeOK' => true
             ],
             [
-                "title" => 'Biscuits (fingers)',
-                'section' => 'Matin/Biscuits',
-                'recipeOK' => false
-            ],
-            [
-                "title" => 'Belvita',
-                'section' => 'Matin/Biscuits',
-                'recipeOK' => false
-            ],
-            [
                 "title" => 'Brioche',
                 'section' => 'Matin/Biscuits',
                 'recipeOK' => true
+            ],
+            [
+                "title" => 'Cookies',
+                'section' => 'Matin/Biscuits',
+                'recipeOK' => false
+            ],
+            [
+                "title" => 'Petits Lu',
+                'section' => 'Matin/Biscuits',
+                'recipeOK' => false
             ],
 
             //Desserts
@@ -606,6 +591,11 @@ class DataImportService
             ],
 
             //Apéritifs
+            [
+                "title" => 'Chips',
+                'section' => 'Apéritifs',
+                'recipeOK' => false
+            ],
             [
                 "title" => 'Chips crevettes',
                 'section' => 'Apéritifs',
@@ -639,7 +629,7 @@ class DataImportService
 
             //Hygiene
             [
-                "title" => 'Déodorant stick',
+                "title" => 'Déodorant',
                 'section' => 'Hygiene',
                 'recipeOK' => false
             ],
@@ -679,7 +669,7 @@ class DataImportService
                 'recipeOK' => false
             ],
             [
-                "title" => 'Dentifrice Oral B pro Expert',
+                "title" => 'Dentifrice',
                 'section' => 'Hygiene',
                 'recipeOK' => false
             ],
@@ -711,7 +701,7 @@ class DataImportService
 
             //Ménage/Vaisselle
             [
-                "title" => 'Sac poubelle 50L',
+                "title" => 'Sac poubelle',
                 'section' => 'Ménage/Vaisselle',
                 'recipeOK' => false
             ],
