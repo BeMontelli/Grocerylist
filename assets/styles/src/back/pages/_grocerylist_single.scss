@@ -118,10 +118,12 @@
         align-items: center;
         margin: 10px 0;
         a{
-            margin-left: 15px;
+            margin-left: 5px;
             @include responsive.responsiveTo(lg) {
-                margin: 0;
-                width: 100%;
+                width: 50%;
+                &:first-of-type{
+                    margin-left: 0;
+                }
             }
         }
     }    

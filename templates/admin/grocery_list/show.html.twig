@@ -44,7 +44,8 @@
             class="{% if group == 'grocerylist' and id == 'recipes' %}mobile__hide{% else %}mobile__show{% endif %} area-toggler grocerylist__col__left ingredients__products">
                 <div class="list__title">
                     <h2 class="mobile__hide">{{ 'app.admin.ingredients.title'|trans }}</h2>
-                    <a class="btn-primary btn mb-2" href="{{ path('admin.ingredient.index') }}"><i class='bx bx-plus'></i></a>
+                    <a class="btn-primary btn mb-2" href="{{ path('admin.ingredient.index') }}"><i class='bx bx-search'></i></a>
+                    <a class="btn-primary btn mb-2" href="{{ path('admin.ingredient.index', { create: 'ingredient' }) }}"><i class='bx bx-plus'></i></a>
                 </div>
                 <ul class="listelementchecker" data-controller="listelementchecker">
                     {% if elements is not empty %}
@@ -64,7 +65,8 @@
             class="{% if group == 'grocerylist' and id == 'recipes' %}mobile__show{% else %}mobile__hide{% endif %} area-toggler grocerylist__col__right recipes">
                 <div class="list__title">
                     <h2 class="mobile__hide">{{ 'app.admin.recipes.title'|trans }}</h2>
-                    <a class="btn-primary btn mb-2" href="{{ path('admin.recipe.index') }}"><i class='bx bx-plus'></i></a>
+                    <a class="btn-primary btn mb-2" href="{{ path('admin.recipe.index') }}"><i class='bx bx-search'></i></a>
+                    <a class="btn-primary btn mb-2" href="{{ path('admin.recipe.index', { create: 'recipe' }) }}"><i class='bx bx-plus'></i></a>
                 </div>
                 <ul>
                     {% if recipes is not empty %}
