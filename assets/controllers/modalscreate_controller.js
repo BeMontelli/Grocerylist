@@ -17,11 +17,18 @@ export default class extends Controller {
 
         if(!this.modals || !this.btns) return;
 
+        const urlParams = new URLSearchParams(window.location.search);
+        const createParam = urlParams.get('create');
+
         this.modals.forEach((modal) => {
             modal.addEventListener('click', (event) => this.closeModal(modal, event));
             const form = modal.querySelector('form');
             const confirmArea = modal.querySelector('button.modal__confirm');
             if(form && confirmArea) confirmArea.addEventListener('click', (event) => this.submitForm(form));
+        
+            if (createParam && modal.getAttribute('data-entity') === createParam) {
+                this.showModal(modal);
+            }
         });
 
         this.btns.forEach((btn) => {
