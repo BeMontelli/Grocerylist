@@ -295,6 +295,6 @@ $RECYCLE.BIN/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,phpstorm,visualstudiocode,symfony
 
-/public/images/recipes/
+/public/images/u/
 node_modules
 /node_modules/
