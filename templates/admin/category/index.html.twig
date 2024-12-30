@@ -16,14 +16,9 @@
     }) }}
 
 <div class="container">
-    <button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <button class="btn btn-primary mb-2 btn_modal_entity" data-entity="category" type="button" >
         {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.categories.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
     </button>
-    <div class="collapse" id="collapseExample">
-        <div class="card card-body">
-            {{ include('admin/category/_form.html.twig') }}
-        </div>
-    </div>
 
     {# total items count #}
     <div class="table__count">
@@ -66,5 +61,24 @@
         {% endif %}
     </table>
     </div>
+</div>
+{% endblock %}
+
+{% block outside_body %}
+<div class="modal modal_entity fade" role="dialog" aria-hidden="true" data-entity="category" data-controller="modalscreate">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title modal__title">{{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.categories.entity'|trans({'%entity%': 1}) }}</h5>
+      </div>
+      <div class="modal-body modal__txts">
+        {{ include('admin/category/_form.html.twig') }}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal__cancel" data-dismiss="modal"><i class='bx bx-arrow-back'></i></button>
+        <button type="button" class="btn btn-primary modal__confirm">{{ 'app.admin.action.save'|trans }}</button>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

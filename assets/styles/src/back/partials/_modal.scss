@@ -1,3 +1,5 @@
+@use '../../mixins/responsive' as responsive;
+
 .modal{
     position: relative;
     position: fixed;
@@ -10,6 +12,11 @@
     .modal-dialog {
         display: flex;
         flex-direction: column-reverse;
+        max-width: 750px;
+        padding: 0 0.5rem;
+        @include responsive.responsiveTo(sm) {
+            padding: 0;
+        }
     }
     
     .modal__title{
@@ -38,5 +45,11 @@
         &>* {
             pointer-events: none !important;
         }
+    }
+}
+
+.modal_entity {
+    form button[type="submit"] {
+        display: none !important;
     }
 }
