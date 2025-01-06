@@ -55,7 +55,7 @@
                 <div class="single__pres">
                     {% if recipe.content is not empty %}
                     <div class="single__content">
-                        <div class="collapse show" id="collapseExample">
+                        <div class="collapse show reducable_item" id="collapseExample" data-controller="reducable">
                             <div class="card card-body">
                                 {{ recipe.content | raw | nl2br }}
                             </div>
