@@ -98,7 +98,8 @@ class RecipeController extends AbstractController
             $categories = $formSearch->get('categories')->getData();
             $recipes = $recipeRepository->paginateUserSearchedRecipes(1,$user,$title,$categories);
         } else {
-            $recipes = $recipeRepository->paginateUserRecipes($currentPage,$user);
+            $order = ($request->query->get('order')) ? $request->query->get('order') : 'id';
+            $recipes = $recipeRepository->paginateUserRecipes($currentPage,$user,$order);
         }
         
         // PROXY collection objects fully initialize if not
@@ -112,7 +113,8 @@ class RecipeController extends AbstractController
         return $this->render('admin/recipe/index.html.twig', [
             'recipes' => $recipes,
             'form' => $form,
-            'formSearch' => $formSearch
+            'formSearch' => $formSearch,
+            'isRandom' => (!empty($request->query->get('order')) && $request->query->get('order') === 'random'),
         ]);
 
     }

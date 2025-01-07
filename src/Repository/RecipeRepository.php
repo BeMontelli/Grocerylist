@@ -27,16 +27,29 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-    public function paginateUserRecipes(int $page, User $user) : PaginationInterface {
+    public function paginateUserRecipes(int $page, User $user, string $order = 'id') : PaginationInterface {
 
-        $queryBuilder = $this->createQueryBuilder('r')
-            ->andWhere('r.user = :val')
-            ->setParameter('val', $user->getId())
-            ->orderBy('r.id', 'ASC')
-            ->getQuery()
+        $qb = $this->createQueryBuilder('r');
+            $qb->andWhere('r.user = :val')
+            ->setParameter('val', $user->getId());
+
+            switch ($order) {
+                case 'title':
+                    $qb->orderBy('r.title', 'ASC');
+                    break;
+                case 'random':
+                    $qb->addSelect('RAND() as HIDDEN rand')
+                       ->orderBy('rand');
+                    break;
+                default:
+                    $qb->orderBy('r.id', 'ASC');
+                    break;
+            }
+
+            $qb->getQuery()
             ->getResult();
 
-        return $this->paginator->paginate($queryBuilder,$page,self::getPerPageGrid(),[
+        return $this->paginator->paginate($qb,$page,self::getPerPageGrid(),[
             'distinct' => true,
             'sortFieldAllowList' => [
                 'r.id','r.title','r.slug'
