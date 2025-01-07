@@ -21,7 +21,6 @@ TO DO LIST
     * List entity : add comment textarea
     * recipes favorite option for user
       * filter index list
-    * random list button
 
 WORK IN PROGESS
 ------------
