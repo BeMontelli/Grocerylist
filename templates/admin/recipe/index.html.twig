@@ -21,13 +21,12 @@
     <button class="btn btn-primary mb-2 btn_modal_entity" data-entity="recipe" type="button" >
         {{ 'app.admin.action.new'|trans({'%gender%': 'female'}) }} {{ 'app.admin.recipes.entity'|trans({'%entity%': 1}) }} <i class='bx bx-plus-circle' ></i>
     </button>
+    <a href="{{ path('admin.recipe.index',{order:'random'}) }}" class="btn btn-primary mb-2 btn_rndm" type="button">
+        <i class='bx bx-dice-5'></i>
+    </a>
     {% if isRandom %}
     <a href="{{ path('admin.recipe.index') }}" class="btn btn-primary mb-2 btn_rndm" type="button">
         <i class='bx bx-reset'></i>
-    </a>
-    {% else %}
-    <a href="{{ path('admin.recipe.index',{order:'random'}) }}" class="btn btn-primary mb-2 btn_rndm" type="button">
-        <i class='bx bx-dice-5'></i>
     </a>
     {% endif %}
     {#<button class="btn btn-primary mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
