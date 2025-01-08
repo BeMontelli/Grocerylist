@@ -23,9 +23,6 @@ class SearchIngredientsType extends AbstractType
                 'required' => false,
             ])
             ->add('sections', SectionsAutocompleteField::class)
-            ->add('search', SubmitType::class, [
-                'label' => t('app.admin.action.search')
-            ])
         ;
     }
 

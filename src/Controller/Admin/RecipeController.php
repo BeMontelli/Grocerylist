@@ -90,7 +90,8 @@ class RecipeController extends AbstractController
 
         $search = new SearchRecipesDTO();
         $formSearch = $this->createForm(SearchRecipesType::class,$search, [
-            'attr' => ['data-turbo' => 'false']
+            'attr' => ['data-turbo' => 'false'],
+            'method' => 'GET',
         ]);
         $formSearch->handleRequest($request);
         if($formSearch->isSubmitted() && $formSearch->isValid()) {

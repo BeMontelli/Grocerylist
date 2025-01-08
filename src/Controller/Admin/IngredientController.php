@@ -67,7 +67,8 @@ class IngredientController extends AbstractController
 
         $search = new SearchIngredientsDTO();
         $formSearch = $this->createForm(SearchIngredientsType::class,$search, [
-            'attr' => ['data-turbo' => 'false']
+            'attr' => ['data-turbo' => 'false'],
+            'method' => 'GET',
         ]);
         $formSearch->handleRequest($request);
         if($formSearch->isSubmitted() && $formSearch->isValid()) {
