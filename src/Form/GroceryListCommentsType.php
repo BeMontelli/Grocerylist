@@ -15,26 +15,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use function Symfony\Component\Translation\t;
 
-class GroceryListType extends AbstractType
+class GroceryListCommentsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title',TextType::class, [
-                'empty_data' => '',
-                'label' => 'List title'
-            ])
-            ->add('slug',TextType::class, [
-                'empty_data' => '',
-                'required' => false,
-                'label' => 'Slug'
-            ])
-            ->add('publicSlug',TextType::class, [
-                'empty_data' => '',
-                'required' => false,
-                'label' => 'Public slug',
-                'help' => t('app.admin.lists.publicslug.form.help'),
-            ])
             ->add('comments',TextareaType::class, [
                 'empty_data' => '',
                 'required' => false,
@@ -43,19 +28,8 @@ class GroceryListType extends AbstractType
             ->add('save', SubmitType::class, [
                 'label' => 'Save List'
             ])
-            ->addEventListener(FormEvents::PRE_SUBMIT,$this->autoSlug(...))
             ->addEventListener(FormEvents::POST_SUBMIT,$this->autoTimestamps(...))
         ;
-    }
-
-    public function autoSlug(PreSubmitEvent $event) : void {
-        $slugger = new AsciiSlugger();
-        $data = $event->getData();
-
-        $data['slug'] = $slugger->slug(strtolower($slugger->slug((!empty($data['slug'])) ? $data['slug'] : $data['title'])));
-        $data['publicSlug'] = $slugger->slug((!empty($data['publicSlug'])) ? $slugger->slug(strtolower($data['publicSlug'])) : '');
-
-        $event->setData($data);
     }
 
     public function autoTimestamps(PostSubmitEvent $event) : void {

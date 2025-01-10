@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\GroceryListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -62,6 +63,9 @@ class GroceryList
         message: 'app.admin.lists.publicslug.form.urlalert'
     )]
     private ?string $publicSlug = null;
+
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $comments = null;
 
     public function __construct()
     {
@@ -234,5 +238,17 @@ class GroceryList
     public function getPublicSlugLength(): int
     {
         return strlen($this->publicSlug);
+    }
+
+    public function getComments(): ?string
+    {
+        return $this->comments;
+    }
+
+    public function setComments(?string $comments): static
+    {
+        $this->comments = $comments;
+
+        return $this;
     }
 }

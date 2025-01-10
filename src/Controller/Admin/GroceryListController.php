@@ -8,6 +8,7 @@ use App\Entity\GroceryListIngredient;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\GroceryListType;
+use App\Form\GroceryListCommentsType;
 use App\Form\IngredientType;
 use App\Form\RecipeType;
 use App\Repository\GroceryListRepository;
@@ -71,7 +72,7 @@ class GroceryListController extends AbstractController
     }
 
     #[Route('/{slug}-{id}', name: 'show', requirements: ['id' => Requirement::DIGITS, 'slug' => Requirement::ASCII_SLUG])]
-    public function show(string $slug, int $id,GroceryListRepository $groceryListRepository, EntityManagerInterface $entityManager): Response
+    public function show(string $slug, int $id, Request $request, GroceryListRepository $groceryListRepository, EntityManagerInterface $entityManager): Response
     {
         /** @var GroceryList $groceryList  */
         $groceryList = $groceryListRepository->find($id);
@@ -82,6 +83,17 @@ class GroceryListController extends AbstractController
         $user = $this->security->getUser();
         $user->setCurrentGroceryList($groceryList);
         $entityManager->flush();
+
+        $form = $this->createForm(GroceryListCommentsType::class, $groceryList);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $entityManager->flush();
+                $this->addFlash('success', $this->translator->trans('app.notif.edited', ['%gender%' => 'female']));
+                return $this->redirectToRoute('admin.list.show', ['slug'=> $groceryList->getSlug(),'id'=> $groceryList->getId()], Response::HTTP_SEE_OTHER);
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
+        }
 
         $groceryListIngredients = $groceryList->getGroceryListIngredients();
         // PROXY collection objects fully initialize if not
@@ -107,6 +119,7 @@ class GroceryListController extends AbstractController
             'grocery_list' => $groceryList,
             'elements' => $this->groceryListIngredientService->getIngredientsStructured($groceryListIngredients->toArray()),
             'recipes' => $recipes,
+            'form' => $form,
         ]);
     }
 

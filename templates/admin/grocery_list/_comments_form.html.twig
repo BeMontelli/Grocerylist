@@ -1,0 +1,5 @@
+{{ form_start(form) }}
+    {{ form_row(form.comments) }}
+    {{ form_row(form.save, {'label_html': true, 'label': button_label|default("<i class='bx bx-check'></i>")}) }}
+    {{ form_widget(form) }}
+{{ form_end(form) }}

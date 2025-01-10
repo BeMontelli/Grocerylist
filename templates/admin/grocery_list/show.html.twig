@@ -84,6 +84,8 @@
 
         <hr>
 
+        {{ include('admin/grocery_list/_comments_form.html.twig') }}
+
         {% if grocery_list.publicSlug is not empty %}
             
         <input type="text" value="{{ url('page.list.show', {'publicSlug': grocery_list.publicSlug}) }}">
