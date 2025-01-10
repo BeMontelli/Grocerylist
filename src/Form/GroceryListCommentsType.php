@@ -23,6 +23,7 @@ class GroceryListCommentsType extends AbstractType
             ->add('comments',TextareaType::class, [
                 'empty_data' => '',
                 'required' => false,
+                'attr' => array('class' => 'txtarea__autoh'),
                 'label' => 'Comments'
             ])
             ->add('save', SubmitType::class, [

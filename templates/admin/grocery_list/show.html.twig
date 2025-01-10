@@ -84,7 +84,9 @@
 
         <hr>
 
-        {{ include('admin/grocery_list/_comments_form.html.twig') }}
+        <div data-controller="textareaautosize">
+            {{ include('admin/grocery_list/_comments_form.html.twig') }}
+        </div>
 
         {% if grocery_list.publicSlug is not empty %}
             
