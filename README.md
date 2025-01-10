@@ -18,9 +18,6 @@ TO DO LIST
     * front:
       * template display owner
       * add comment item ?
-    * List entity : add comment textarea
-    * recipes favorite option for user
-      * filter index list
 
 WORK IN PROGESS
 ------------
