@@ -8,6 +8,7 @@ use App\Entity\GroceryListIngredient;
 use App\Entity\Recipe;
 use App\Entity\User;
 use App\Form\GroceryListType;
+use App\Form\GroceryListCommentsType;
 use App\Form\IngredientType;
 use App\Form\RecipeType;
 use App\Repository\GroceryListRepository;
@@ -48,6 +49,16 @@ class GroceryListController extends AbstractController
         
         // fully load object
         $entityManager->refresh($groceryList);
+
+        $form = $this->createForm(GroceryListCommentsType::class, $groceryList);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $entityManager->flush();
+                return $this->redirectToRoute('page.list.show', ['publicSlug'=> $groceryList->getPublicSlug()], Response::HTTP_SEE_OTHER);
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
+        }
         
         $groceryListIngredients = $groceryList->getGroceryListIngredients();
         // PROXY collection objects fully initialize if not
@@ -73,6 +84,7 @@ class GroceryListController extends AbstractController
             'grocery_list' => $groceryList,
             'elements' => $this->groceryListIngredientService->getIngredientsStructured($groceryListIngredients->toArray()),
             'recipes' => $recipes,
+            'form' => $form,
         ]);
     }
 
