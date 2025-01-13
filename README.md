@@ -27,6 +27,7 @@ WORK IN PROGESS
 Production deploy
 ------------
 
+  * > delete public/assets
   * > npm run build
   * > php bin/console asset-map:compile
 
