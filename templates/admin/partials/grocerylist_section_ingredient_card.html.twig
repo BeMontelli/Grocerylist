@@ -5,7 +5,7 @@
         data-listid="{{ grocery_list.id }}">
     <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
     {% for recipe in ingredient['recipes'] %}
-        <span class="element__recipes__item">{{recipe.title}}</span>
+        <span class="element__recipes__item">{{ recipe.title|truncate() }}</span>
     {% endfor %}
     <a class="btn-small btn-remove btn" href="{{ path('admin.list.toggleIngredientList', {'grocerylistId':grocery_list.id,'ingredientId': ingredient.id,inlist:ingredient.inList?'remove':'put'}) }}"><i class='bx bx-x'></i></a>
 </div>

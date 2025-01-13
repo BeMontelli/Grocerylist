@@ -5,6 +5,6 @@
         data-listid="{{ grocery_list.id }}">
     <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
     {% for recipe in ingredient['recipes'] %}
-        <span class="element__recipes__item">{{recipe.title}}</span>
+        <span class="element__recipes__item">{{ recipe.title|truncate() }}</span>
     {% endfor %}
 </div>
