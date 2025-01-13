@@ -130,6 +130,8 @@ app:
       password.confirm: 'Confirmer password'
       btn: "Create"
   front:
+    list:
+      owner.username: 'List of'
     form:
       name: 'Your name'
       name.placeholder: 'John Doe'

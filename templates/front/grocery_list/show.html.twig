@@ -85,6 +85,17 @@
 
         <hr>
 
+        <div id="list__owner">
+            <div class="list__owner-avatar" 
+                {% if grocery_list.user is not empty and grocery_list.user.picture is not empty and grocery_list.user.picture.url is not empty %}
+                    style="background-image:url({{ grocery_list.user.picture.url }})"
+                {% endif %}>
+            </div>
+            <div class="list__owner-username">
+                <span id="nav-footer-username">{{ 'app.front.list.owner.username'|trans}} <strong>{{ grocery_list.user.username }}</strong></span>
+            </div>
+        </div>
+
     </div>
 </div>
 {% endblock %}

@@ -244,4 +244,24 @@
             display: none;
         }
     }
+
+    #list__owner{
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        .list__owner-avatar{
+            position: relative;
+            height: 40px;
+            width: 40px;
+            border-radius: 100%;
+            margin-right: 10px;
+            background-image: url('../../../../images/_grocerylist-placeholder.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .list__owner-username{
+            position: relative;
+        }
+    }
 }

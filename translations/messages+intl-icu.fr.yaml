@@ -150,6 +150,8 @@ app:
       password.confirm: 'Confirmer le mot de passe'
       btn: "Créer"
   front:
+    list:
+      owner.username: 'Liste de'
     form:
       name: 'Votre nom'
       name.placeholder: 'John Doe'
