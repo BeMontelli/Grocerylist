@@ -17,7 +17,7 @@ TO DO LIST
   * Features
     * front:
       * template display owner
-      * add comment item ?
+      * add comment item display ?
 
 WORK IN PROGESS
 ------------
