@@ -13,6 +13,7 @@ use App\Form\UserCreateType;
 use App\Form\UserEditType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,6 +28,13 @@ use App\Service\FileUploader;
 #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
 class UserController extends AbstractController
 {
+    private $translator;
+
+    public function __construct(Security $security, TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function index(Request $request, EntityManagerInterface $em,UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher, FileUploader $fileUploader): Response
@@ -73,13 +81,13 @@ class UserController extends AbstractController
 
                     $em->persist($user);
                     $em->flush();
-                    $this->addFlash('success', 'Changes saved !');
+                    $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
                 } else {
                     $this->addFlash('danger', 'Email or Password confirmation does not match!');
                 }
 
                 return $this->redirectToRoute('admin.user.index', [], Response::HTTP_SEE_OTHER);
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/user/index.html.twig', [
@@ -156,9 +164,9 @@ class UserController extends AbstractController
                 $em->persist($user);
                 $em->flush();
 
-                $this->addFlash('success', 'Changes saved !');
+                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
                 return $this->redirectToRoute($redirectRoute, [], Response::HTTP_SEE_OTHER);
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/user/edit.html.twig', [
@@ -220,9 +228,9 @@ class UserController extends AbstractController
 
             $em->remove($user);
             $em->flush();
-            $this->addFlash('warning', 'User '.$user->getUsername().' deleted !');
+            $this->addFlash('warning', $user->getUsername().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
-            $this->addFlash('danger', 'Error occured !');
+            $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
 
         return $this->redirectToRoute('admin.user.index', [], Response::HTTP_SEE_OTHER);

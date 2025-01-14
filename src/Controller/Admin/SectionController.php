@@ -48,9 +48,9 @@ class SectionController extends AbstractController
                 $section->setUser($user);
                 $entityManager->persist($section);
                 $entityManager->flush();
-                $this->addFlash('success', 'Section saved !');
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
                 return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/section/index.html.twig', [
@@ -74,9 +74,9 @@ class SectionController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $entityManager->flush();
-                $this->addFlash('success', 'Section updated !');
+                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
                 return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/section/edit.html.twig', [
@@ -91,9 +91,9 @@ class SectionController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($section);
             $entityManager->flush();
-            $this->addFlash('warning', 'Ingredient category '.$section->getTitle().' deleted !');
+            $this->addFlash('warning', $section->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
-            $this->addFlash('danger', 'Error occured !');
+            $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
 
         return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);

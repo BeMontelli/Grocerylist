@@ -83,9 +83,9 @@ class RecipeController extends AbstractController
                 $recipe->setUser($user);
                 $em->persist($recipe);
                 $em->flush();
-                $this->addFlash('success', 'Recipe saved !');
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
                 return $this->redirectToRoute('admin.recipe.index');
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         $search = new SearchRecipesDTO();
@@ -224,9 +224,9 @@ class RecipeController extends AbstractController
 
                 $em->persist($recipe);
                 $em->flush();
-                $this->addFlash('success', 'Recipe updated !');
+                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
                 return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
         
         // PROXY object fully initialize if not
@@ -255,9 +255,9 @@ class RecipeController extends AbstractController
             
             $em->remove($recipe);
             $em->flush();
-            $this->addFlash('warning', 'Recipe '.$recipe->getTitle().' deleted !');
+            $this->addFlash('warning', $recipe->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
-            $this->addFlash('danger', 'Error occured !');
+            $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
 
         return $this->redirectToRoute('admin.recipe.index');
