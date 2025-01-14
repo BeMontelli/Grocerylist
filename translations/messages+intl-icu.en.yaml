@@ -24,6 +24,8 @@ app:
     deleted: Entity deleted !
     usererr.emailmatch: 'Email confirmation does not match !'
     usererr.pwdmatch: 'Password confirmation does not match !'
+    list.none: 'GroceryList do not exists.'
+    list.addsuccess: 'Recipe added to list !'
   admin:
     default_title: 'Welcome in Administration'
     welcome_title: Welcome

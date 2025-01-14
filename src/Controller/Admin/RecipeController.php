@@ -159,7 +159,7 @@ class RecipeController extends AbstractController
 
             $groceryList = $em->getRepository(GroceryList::class)->find($groceryListId);
             if (!$groceryList) {
-                $this->addFlash('danger', 'GroceryList do not exists.');
+                $this->addFlash('danger', $this->translator->trans('app.notif.list.none'));
                 return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
             }
 
@@ -188,7 +188,7 @@ class RecipeController extends AbstractController
             }
 
             $em->flush();
-            $this->addFlash('success', 'Recipe added to list !');
+            $this->addFlash('success', $this->translator->trans('app.notif.list.addsuccess'));
 
             return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
         }

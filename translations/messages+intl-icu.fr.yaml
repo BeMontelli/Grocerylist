@@ -39,6 +39,8 @@ app:
         }
     usererr.emailmatch: "La confirmation d'email de correspond pas !"
     usererr.pwdmatch: "La confirmation de mot de passe de correspond pas !"
+    list.none: "La liste n'existe pas."
+    list.addsuccess: "Recette ajoutée à la liste !"
   admin:
     default_title: "Bienvenue dans l'administration"
     welcome_title: Bienvenue
