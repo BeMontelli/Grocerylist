@@ -57,7 +57,7 @@ class FileController extends AbstractController
                             $entityManager->persist($file);
                             $entityManager->flush();
         
-                            $this->addFlash('success', 'File saved !');
+                            $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
                         } else $this->addFlash('danger', $this->translator->trans('app.notif.fileinvalid'));
                     }
                     return $this->redirectToRoute('admin.file.index');
@@ -105,9 +105,9 @@ class FileController extends AbstractController
     
             $entityManager->remove($file);
             $entityManager->flush();
-            $this->addFlash('warning', 'File deleted !');
+            $this->addFlash('warning', $this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
-            $this->addFlash('danger', 'Error occured !');
+            $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
 
         return $this->redirectToRoute('admin.file.index', [], Response::HTTP_SEE_OTHER);

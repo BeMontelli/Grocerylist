@@ -60,9 +60,9 @@ class IngredientController extends AbstractController
                     $ingredient->getTemporaryGroceryLists()
                 );
     
-                $this->addFlash('success', 'Ingredient saved !');
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
                 return $this->redirectToRoute('admin.ingredient.index');
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         $search = new SearchIngredientsDTO();
@@ -119,10 +119,9 @@ class IngredientController extends AbstractController
                     $entityManager->persist($groceryList);
                 }
                 $entityManager->flush();
-
-                $this->addFlash('success', 'Ingredient updated !');
+                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
                 return $this->redirectToRoute('admin.ingredient.edit', ["id" => $ingredient->getId()]);
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/ingredient/edit.html.twig', [
@@ -137,9 +136,9 @@ class IngredientController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$ingredient->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($ingredient);
             $entityManager->flush();
-            $this->addFlash('warning', 'Ingredient '.$ingredient->getTitle().' deleted !');
+            $this->addFlash('warning', $this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
-            $this->addFlash('danger', 'Error occured !');
+            $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
 
         return $this->redirectToRoute('admin.ingredient.index');

@@ -90,7 +90,7 @@ class GroceryListController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.edited', ['%gender%' => 'female']));
+                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
                 return $this->redirectToRoute('admin.list.show', ['slug'=> $groceryList->getSlug(),'id'=> $groceryList->getId()], Response::HTTP_SEE_OTHER);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -135,7 +135,7 @@ class GroceryListController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.edited', ['%gender%' => 'female']));
+                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
                 return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
