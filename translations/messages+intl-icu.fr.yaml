@@ -25,12 +25,7 @@ app:
           male     {Entité sauvegardé !}
           other    {Entité sauvegardée !}
         }
-    edited: >-
-        {gender, select,
-          female   {Entité mise à jour !}
-          male     {Entité mis à jour !}
-          other    {Entité mis à jour !}
-        }
+    edited: Entité mise à jour !
     deleted: >-
         {gender, select,
           female   {Entité supprimée !}
