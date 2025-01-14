@@ -49,9 +49,9 @@ class CategoryController extends AbstractController
                 $category->setUser($user);
                 $entityManager->persist($category);
                 $entityManager->flush();
-                $this->addFlash('success', 'Category saved !');
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
                 return $this->redirectToRoute('admin.category.index');
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/category/index.html.twig', [
@@ -85,9 +85,9 @@ class CategoryController extends AbstractController
                 $category->setUser($user);
                 $entityManager->persist($category);
                 $entityManager->flush();
-                $this->addFlash('success', 'Category saved !');
+                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
                 return $this->redirectToRoute('admin.category.index');
-            } else $this->addFlash('danger', 'Form validation error !');
+            } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
 
         return $this->render('admin/category/edit.html.twig', [
@@ -102,9 +102,9 @@ class CategoryController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($category);
             $entityManager->flush();
-            $this->addFlash('warning', 'Category '.$category->getTitle().' deleted !');
+            $this->addFlash('warning', $this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
-            $this->addFlash('danger', 'Error occured !');
+            $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
 
         return $this->redirectToRoute('admin.category.index');
