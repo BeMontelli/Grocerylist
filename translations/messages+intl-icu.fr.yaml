@@ -25,13 +25,20 @@ app:
           male     {Entité sauvegardé !}
           other    {Entité sauvegardée !}
         }
-    edited: Entité mise à jour !
+    edited: >-
+        {gender, select,
+          female   {Entité mise à jour !}
+          male     {Entité mis à jour !}
+          other    {Entité mise à jour !}
+        }
     deleted: >-
         {gender, select,
           female   {Entité supprimée !}
           male     {Entité supprimé !}
           other    {Entité supprimé !}
         }
+    usererr.emailmatch: "La confirmation d'email de correspond pas !"
+    usererr.pwdmatch: "La confirmation de mot de passe de correspond pas !"
   admin:
     default_title: "Bienvenue dans l'administration"
     welcome_title: Bienvenue

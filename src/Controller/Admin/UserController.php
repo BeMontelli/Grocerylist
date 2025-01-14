@@ -125,7 +125,7 @@ class UserController extends AbstractController
                     if ($newEmail === $emailConfirm) {
                         $user->setEmail($newEmail);
                     } else {
-                        $this->addFlash('danger', 'Email confirmation does not match!');
+                        $this->addFlash('danger', $this->translator->trans('app.notif.usererr.emailmatch'));
                         return $this->redirectToRoute('edit', ['id' => $user->getId()]);
                     }
                 }
@@ -136,7 +136,7 @@ class UserController extends AbstractController
                         $hashedPassword = $userPasswordHasher->hashPassword($user, $newPassword);
                         $user->setPassword($hashedPassword);
                     } else {
-                        $this->addFlash('danger', 'Password confirmation does not match!');
+                        $this->addFlash('danger', $this->translator->trans('app.notif.usererr.pwdmatch'));
                         return $this->redirectToRoute('edit', ['id' => $user->getId()]);
                     }
                 }
