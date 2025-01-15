@@ -1,4 +1,10 @@
 app:
+  test: >-
+        {gender, select,
+          female   {{test} teste fr!}
+          male     {{test} test fr!}
+          other    {{test} teste fr!}
+        }
   hdr:
     front: Site
     backoffice: Administration
@@ -21,21 +27,21 @@ app:
     nofile: Pas de fichier detecté !
     saved: >-
         {gender, select,
-          female   {Entité sauvegardée !}
-          male     {Entité sauvegardé !}
-          other    {Entité sauvegardée !}
+          female   {{entity} sauvegardée !}
+          male     {{entity} sauvegardé !}
+          other    {{entity} sauvegardée !}
         }
     edited: >-
         {gender, select,
-          female   {Entité mise à jour !}
-          male     {Entité mis à jour !}
-          other    {Entité mise à jour !}
+          female   {{entity} mise à jour !}
+          male     {{entity} mis à jour !}
+          other    {{entity} mise à jour !}
         }
     deleted: >-
         {gender, select,
-          female   {Entité supprimée !}
-          male     {Entité supprimé !}
-          other    {Entité supprimé !}
+          female   {{entity} supprimée !}
+          male     {{entity} supprimé !}
+          other    {{entity} supprimée !}
         }
     usererr.emailmatch: "La confirmation d'email de correspond pas !"
     usererr.pwdmatch: "La confirmation de mot de passe de correspond pas !"

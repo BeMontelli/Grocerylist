@@ -60,7 +60,10 @@ class IngredientController extends AbstractController
                     $ingredient->getTemporaryGroceryLists()
                 );
     
-                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', [
+                    '%entity%' => $this->translator->trans('app.admin.ingredients.entity',['%entity%' => '1']),
+                    '%gender%' => 'male'
+                ]));
                 return $this->redirectToRoute('admin.ingredient.index');
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -119,7 +122,10 @@ class IngredientController extends AbstractController
                     $entityManager->persist($groceryList);
                 }
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
+                $this->addFlash('success', $this->translator->trans('app.notif.edited',[
+                    '%gender%' => 'male',
+                    '%entity%' => $this->translator->trans('app.admin.ingredients.entity',['%entity%' => '1'])
+                ]));
                 return $this->redirectToRoute('admin.ingredient.edit', ["id" => $ingredient->getId()]);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -136,7 +142,10 @@ class IngredientController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$ingredient->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($ingredient);
             $entityManager->flush();
-            $this->addFlash('warning', $ingredient->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
+            $this->addFlash('warning', $ingredient->getTitle().': '.$this->translator->trans('app.notif.deleted', [
+                '%entity%' => $this->translator->trans('app.admin.ingredients.entity',['%entity%' => '1']),
+                '%gender%' => 'male'
+            ]));
         } else {
             $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }

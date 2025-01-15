@@ -60,7 +60,10 @@ class GroceryListController extends AbstractController
                 $groceryList->setUser($user);
                 $entityManager->persist($groceryList);
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', [
+                    '%entity%' => $this->translator->trans('app.admin.lists.entity',['%entity%' => '1']),
+                    '%gender%' => 'female'
+                ]));
                 return $this->redirectToRoute('admin.list.index');
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -90,7 +93,10 @@ class GroceryListController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
+                $this->addFlash('success', $this->translator->trans('app.notif.edited',[
+                    '%entity%' => $this->translator->trans('app.admin.lists.entity',['%entity%' => '1']),
+                    '%gender%' => 'female'
+                ]));
                 return $this->redirectToRoute('admin.list.show', ['slug'=> $groceryList->getSlug(),'id'=> $groceryList->getId()], Response::HTTP_SEE_OTHER);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -135,7 +141,10 @@ class GroceryListController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
+                $this->addFlash('success', $this->translator->trans('app.notif.edited',[
+                    '%entity%' => $this->translator->trans('app.admin.lists.entity',['%entity%' => '1']),
+                    '%gender%' => 'female'
+                ]));
                 return $this->redirectToRoute('admin.list.index', [], Response::HTTP_SEE_OTHER);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -276,7 +285,10 @@ class GroceryListController extends AbstractController
 
             $entityManager->remove($groceryList);
             $entityManager->flush();
-            $this->addFlash('warning', $groceryList->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
+            $this->addFlash('warning', $groceryList->getTitle().': '.$this->translator->trans('app.notif.deleted', [
+                '%entity%' => $this->translator->trans('app.admin.lists.entity',['%entity%' => '1']),
+                '%gender%' => 'female'
+            ]));
         } else {
             $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }

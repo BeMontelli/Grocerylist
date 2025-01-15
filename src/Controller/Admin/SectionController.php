@@ -48,7 +48,10 @@ class SectionController extends AbstractController
                 $section->setUser($user);
                 $entityManager->persist($section);
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', [
+                    '%entity%' => $this->translator->trans('app.admin.sections.entity',['%entity%' => '1']),
+                    '%gender%' => 'female'
+                ]));
                 return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -74,7 +77,10 @@ class SectionController extends AbstractController
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
+                $this->addFlash('success', $this->translator->trans('app.notif.edited',[
+                    '%entity%' => $this->translator->trans('app.admin.sections.entity',['%entity%' => '1']),
+                    '%gender%' => 'female'
+                ]));
                 return $this->redirectToRoute('admin.section.index', [], Response::HTTP_SEE_OTHER);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -91,7 +97,10 @@ class SectionController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$section->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($section);
             $entityManager->flush();
-            $this->addFlash('warning', $section->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
+            $this->addFlash('warning', $section->getTitle().': '.$this->translator->trans('app.notif.deleted', [
+                '%entity%' => $this->translator->trans('app.admin.sections.entity',['%entity%' => '1']),
+                '%gender%' => 'female'
+            ]));
         } else {
             $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }

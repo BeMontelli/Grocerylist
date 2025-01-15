@@ -83,7 +83,10 @@ class RecipeController extends AbstractController
                 $recipe->setUser($user);
                 $em->persist($recipe);
                 $em->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', [
+                    '%entity%' => $this->translator->trans('app.admin.recipes.entity',['%entity%' => '1']),
+                    '%gender%' => 'female'
+                ]));
                 return $this->redirectToRoute('admin.recipe.index');
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -224,7 +227,10 @@ class RecipeController extends AbstractController
 
                 $em->persist($recipe);
                 $em->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
+                $this->addFlash('success', $this->translator->trans('app.notif.edited',[
+                    '%entity%' => $this->translator->trans('app.admin.recipes.entity',['%entity%' => '1']),
+                    '%gender%' => 'female'
+                ]));
                 return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -255,7 +261,10 @@ class RecipeController extends AbstractController
             
             $em->remove($recipe);
             $em->flush();
-            $this->addFlash('warning', $recipe->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
+            $this->addFlash('warning', $recipe->getTitle().': '.$this->translator->trans('app.notif.deleted', [
+                '%entity%' => $this->translator->trans('app.admin.recipes.entity',['%entity%' => '1']),
+                '%gender%' => 'female'
+            ]));
         } else {
             $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }

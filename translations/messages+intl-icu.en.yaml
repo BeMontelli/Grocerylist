@@ -1,4 +1,5 @@
 app:
+  test: '%test% {test} {%test%} test en!'
   hdr:
     front: Front
     backoffice: Back Office
@@ -19,9 +20,9 @@ app:
     validerr: Form validation error !
     fileinvalid: A file is invalid !
     nofile: No file detected !
-    saved: Entity saved !
-    edited: Entity updated !
-    deleted: Entity deleted !
+    saved: "{entity} saved !"
+    edited: "{entity} updated !"
+    deleted: "{entity} deleted !"
     usererr.emailmatch: 'Email confirmation does not match !'
     usererr.pwdmatch: 'Password confirmation does not match !'
     list.none: 'GroceryList do not exists.'
