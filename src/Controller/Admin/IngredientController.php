@@ -136,7 +136,7 @@ class IngredientController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$ingredient->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($ingredient);
             $entityManager->flush();
-            $this->addFlash('warning', $this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
+            $this->addFlash('warning', $ingredient->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
             $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }

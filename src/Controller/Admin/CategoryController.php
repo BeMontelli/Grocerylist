@@ -102,7 +102,7 @@ class CategoryController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($category);
             $entityManager->flush();
-            $this->addFlash('warning', $this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
+            $this->addFlash('warning', $category->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
             $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }

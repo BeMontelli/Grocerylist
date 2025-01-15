@@ -276,7 +276,7 @@ class GroceryListController extends AbstractController
 
             $entityManager->remove($groceryList);
             $entityManager->flush();
-            $this->addFlash('warning', $this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
+            $this->addFlash('warning', $groceryList->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
         } else {
             $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
