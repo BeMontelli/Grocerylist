@@ -81,7 +81,10 @@ class UserController extends AbstractController
 
                     $em->persist($user);
                     $em->flush();
-                    $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
+                    $this->addFlash('success', $this->translator->trans('app.notif.saved', [
+                        '%entity%' => $this->translator->trans('app.admin.users.entity',['%entity%' => '1']),
+                        '%gender%' => 'male'
+                    ]));
                 } else {
                     $this->addFlash('danger', 'Email or Password confirmation does not match!');
                 }
@@ -164,7 +167,10 @@ class UserController extends AbstractController
                 $em->persist($user);
                 $em->flush();
 
-                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
+                $this->addFlash('success', $this->translator->trans('app.notif.edited',[
+                    '%entity%' => $this->translator->trans('app.admin.users.entity',['%entity%' => '1']),
+                    '%gender%' => 'male'
+                ]));
                 return $this->redirectToRoute($redirectRoute, [], Response::HTTP_SEE_OTHER);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -228,7 +234,10 @@ class UserController extends AbstractController
 
             $em->remove($user);
             $em->flush();
-            $this->addFlash('warning', $user->getUsername().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
+            $this->addFlash('warning', $user->getUsername().': '.$this->translator->trans('app.notif.deleted', [
+                '%entity%' => $this->translator->trans('app.admin.users.entity',['%entity%' => '1']),
+                '%gender%' => 'male'
+            ]));
         } else {
             $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
