@@ -49,7 +49,10 @@ class CategoryController extends AbstractController
                 $category->setUser($user);
                 $entityManager->persist($category);
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.saved', ['%gender%' => 'female']));
+                $this->addFlash('success', $this->translator->trans('app.notif.saved', [
+                    '%entity%' => $this->translator->trans('app.admin.categories.entity',['%entity%' => '1']),
+                    '%gender%' => 'female'
+                ]));
                 return $this->redirectToRoute('admin.category.index');
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -85,7 +88,10 @@ class CategoryController extends AbstractController
                 $category->setUser($user);
                 $entityManager->persist($category);
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.edited'));
+                $this->addFlash('success', $this->translator->trans('app.notif.edited',[
+                    '%entity%' => $this->translator->trans('app.admin.categories.entity',['%entity%' => '1']),
+                    '%gender%' => 'female'
+                ]));
                 return $this->redirectToRoute('admin.category.index');
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -102,7 +108,10 @@ class CategoryController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->getPayload()->get('_token'))) {
             $entityManager->remove($category);
             $entityManager->flush();
-            $this->addFlash('warning', $category->getTitle().': '.$this->translator->trans('app.notif.deleted', ['%gender%' => 'female']));
+            $this->addFlash('warning', $category->getTitle().': '.$this->translator->trans('app.notif.deleted', [
+                '%entity%' => $this->translator->trans('app.admin.categories.entity',['%entity%' => '1']),
+                '%gender%' => 'female'
+            ]));
         } else {
             $this->addFlash('danger', $this->translator->trans('app.notif.erroccur'));
         }
