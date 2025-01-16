@@ -20,6 +20,9 @@ app:
     txtback: "Vous pouvez retourner à l'accueil"
     home: Accueil
     norecordfound: Pas de résultats trouvé
+  modal:
+    comments.title: 'Commentaires'
+    comments.notice: 'Vous pouvez joindre les différents commentaires en un seul si vous le souhaitez.'
   notif:
     erroccur: Une erreur est survenue !
     validerr: Le formulaire comporte une erreur !

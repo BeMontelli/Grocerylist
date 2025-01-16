@@ -15,6 +15,9 @@ app:
     txtback: You can go back to the Home
     home: Home
     norecordfound: No records found
+  modal:
+    comments.title: 'Comments'
+    comments.notice: 'You can join all comments as one if you want.'
   notif:
     erroccur: Error occured !
     validerr: Form validation error !
