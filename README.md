@@ -14,7 +14,7 @@ TO DO LIST
   * Entities Edit titles translate + structure rework
 
   * Features
-    * front:
+    * front (done back):
       * add comment item display ?
 
 WORK IN PROGESS
