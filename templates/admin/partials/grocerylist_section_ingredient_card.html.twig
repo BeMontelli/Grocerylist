@@ -10,7 +10,7 @@
             </button>
         {% elseif ingredient.comments|length == 1 %}
             <button class="comment__item" data-ing-id="{{ ingredient.id }}" data-list-id="{{ grocery_list.id }}">
-                {{ ingredient.comments[0] }}
+                {{ ingredient.comments[0]|truncate(15) }}
             </button>
         {% else %}
             <button class="comment__item" data-ing-id="{{ ingredient.id }}" data-list-id="{{ grocery_list.id }}">?</button>
