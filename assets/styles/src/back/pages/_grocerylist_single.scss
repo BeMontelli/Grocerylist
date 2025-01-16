@@ -157,7 +157,7 @@
             top: -2px;
             border: none;
             color: var(--main-text-color);
-            background-color: var(--main-dark-lighter);
+            background-color: var(--main-dark-light);
             border-radius: 6px;
             margin-right: 5px;
             line-height: 20px;
@@ -193,13 +193,11 @@
             margin: 0 10px 8px 0;
             font-size: 15px;
         }
-        input:checked + .check__label {
-            text-decoration: line-through;
-            opacity: 0.5;
-        }
-        input:checked + .comment__item {
-            text-decoration: line-through;
-            opacity: 0.5;
+        input:checked + .infos {
+            .comment__item, .check__label{
+                text-decoration: line-through;
+                opacity: 0.5;
+            }
         }
 
         .element__recipes__item{

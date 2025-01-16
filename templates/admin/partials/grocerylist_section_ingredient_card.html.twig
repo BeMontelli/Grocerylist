@@ -4,6 +4,7 @@
         data-ingredientid="{{ ingredient.id }}" 
         data-listid="{{ grocery_list.id }}">
 
+    <div class="infos">
         {% if ingredient.comments|length > 1 %}
             <button class="comment__item" data-ing-id="{{ ingredient.id }}" data-list-id="{{ grocery_list.id }}">
                 <i class='bx bx-dots-horizontal-rounded'></i>
@@ -16,7 +17,9 @@
             <button class="comment__item" data-ing-id="{{ ingredient.id }}" data-list-id="{{ grocery_list.id }}">?</button>
         {% endif %}
 
-    <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
+        <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
+    </div>
+
     {% for recipe in ingredient['recipes'] %}
         <span class="element__recipes__item">{{ recipe.title|truncate() }}</span>
     {% endfor %}
