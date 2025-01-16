@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\GroceryList;
+use App\Entity\Ingredient;
 use App\Entity\GroceryListIngredient;
 use App\Entity\Recipe;
 use App\Entity\User;
@@ -124,5 +125,41 @@ class AjaxController extends AbstractController
         $categoryRepository->updatePositions($ids,$user);
 
         return new JsonResponse(['success' => true], Response::HTTP_OK);
+    }
+
+    #[Route('/ingredient-comments/{ingredientId}/{listId}', name: 'ingredientComments', requirements: ['ingredientId' => Requirement::DIGITS,'listId' => Requirement::DIGITS], methods: ['GET'])]
+    public function getIngredientComments(int $ingredientId, int $listId, Request $request, Security $security, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager): JsonResponse
+    {
+        /** @var User $user */
+        $user = $security->getUser();
+
+        $ingredient = $entityManager->getRepository(Ingredient::class)->find($ingredientId);
+        if($ingredient === null) {
+            return new JsonResponse(['error' => 'Ingredient not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $groceryList = $entityManager->getRepository(GroceryList::class)->find($listId);
+        if($groceryList === null) {
+            return new JsonResponse(['error' => 'GroceryList not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $groceryList->setUpdatedAt(updatedAt: new \DateTimeImmutable());
+        $entityManager->persist($groceryList);
+
+        $hasComments = false;
+        $comments = [];
+        $groceryListIngredients = $entityManager->getRepository(GroceryListIngredient::class)->findBy(['ingredient' => $ingredientId,'groceryList' => $listId]);
+        foreach ($groceryListIngredients as $groceryListIngredient) {
+            
+        }
+
+        return new JsonResponse([
+            'success' => true,
+            'ingredientId' => $ingredientId,
+            'ingredientTitle' => $ingredient->getTitle(),
+            'hasComments' => $hasComments,
+            'comments' => $comments,
+            'listId' => $listId
+        ], Response::HTTP_OK);
     }
 }
