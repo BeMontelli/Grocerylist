@@ -54,6 +54,12 @@ class GroceryListIngredientService
                             if($recipe) $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
                         }
                         $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]["collection"][] = $ingredient;
+
+                        $comment = (!empty($groceryListIngredient->getComment())) ? $groceryListIngredient->getComment() : false;
+                        $arrComment = $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]["comments"];
+                        if($comment !== false && array_key_exists("comments",$structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]) && !in_array($comment,$arrComment)) {
+                            $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]["comments"][] = $comment;
+                        }
                     }
                 }
             }
@@ -66,12 +72,14 @@ class GroceryListIngredientService
     }
 
     private function fillStructureElement($structure, $sectionPosition, $ingredient, $groceryListIngredient, $recipe) {
+        $comment = (!empty($groceryListIngredient->getComment())) ? [$groceryListIngredient->getComment()] : [];
         $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()] = [
             "id" => $ingredient->getId(),
             "title" => $ingredient->getTitle(),
             "inList" => $groceryListIngredient->isInList(),
             "activation" => $groceryListIngredient->isActive(),
             "collection" => [$ingredient],
+            "comments" => $comment,
             "recipes" => []
         ];
         if($groceryListIngredient->isInList() && $recipe) $structure[$sectionPosition]["ingredients"][$ingredient->getTitle()]["recipes"][] = $recipe;
