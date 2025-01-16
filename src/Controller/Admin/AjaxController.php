@@ -127,7 +127,7 @@ class AjaxController extends AbstractController
         return new JsonResponse(['success' => true], Response::HTTP_OK);
     }
 
-    #[Route('/ingredient-comments/{ingredientId}/{listId}', name: 'ingredientComments', requirements: ['ingredientId' => Requirement::DIGITS,'listId' => Requirement::DIGITS], methods: ['GET'])]
+    #[Route('/ingredient-comments/{ingredientId}/{listId}', name: 'getIngredientComments', requirements: ['ingredientId' => Requirement::DIGITS,'listId' => Requirement::DIGITS], methods: ['GET'])]
     public function getIngredientComments(int $ingredientId, int $listId, Request $request, Security $security, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager): JsonResponse
     {
         /** @var User $user */
@@ -150,7 +150,11 @@ class AjaxController extends AbstractController
         $comments = [];
         $groceryListIngredients = $entityManager->getRepository(GroceryListIngredient::class)->findBy(['ingredient' => $ingredientId,'groceryList' => $listId]);
         foreach ($groceryListIngredients as $groceryListIngredient) {
-            
+            $comment = $groceryListIngredient->getComment();
+            if ($comment !== null && !in_array($comment, $comments, true)) {
+                $hasComments = true;
+                $comments[] = $comment;
+            }
         }
 
         return new JsonResponse([
@@ -161,5 +165,47 @@ class AjaxController extends AbstractController
             'comments' => $comments,
             'listId' => $listId
         ], Response::HTTP_OK);
+    }
+
+    #[Route('/ingredient-comments/', name: 'setIingredientComments', methods: ['POST'])]
+    public function setIngredientComments(Request $request, Security $security, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager): JsonResponse
+    {
+        /** @var User $user */
+        $user = $security->getUser();
+
+        $data = json_decode($request->getContent(), true);
+        $ingredientId = $data['ingredientId'] ?? null;
+        $listId = $data['listId'] ?? null;
+        $comment = $data['comment'] ?? '';
+
+        if ($ingredientId === null) {
+            return new JsonResponse(['error' => 'Ingredient ID not provided'], Response::HTTP_BAD_REQUEST);
+        }
+
+        if ($listId === null) {
+            return new JsonResponse(['error' => 'GroceryList ID not provided'], Response::HTTP_BAD_REQUEST);
+        }
+
+        $ingredient = $entityManager->getRepository(Ingredient::class)->find($ingredientId);
+        if($ingredient === null) {
+            return new JsonResponse(['error' => 'Ingredient not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $groceryList = $entityManager->getRepository(GroceryList::class)->find($listId);
+        if($groceryList === null) {
+            return new JsonResponse(['error' => 'GroceryList not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $groceryList->setUpdatedAt(updatedAt: new \DateTimeImmutable());
+        $entityManager->persist($groceryList);
+
+        $groceryListIngredients = $entityManager->getRepository(GroceryListIngredient::class)->findBy(['ingredient' => $ingredientId,'groceryList' => $listId]);
+        foreach ($groceryListIngredients as $groceryListIngredient) {
+            $groceryListIngredient->setComment($comment);
+            $entityManager->persist($groceryListIngredient);
+        }
+        $entityManager->flush();
+
+        return new JsonResponse(['success' => true], Response::HTTP_OK);
     }
 }

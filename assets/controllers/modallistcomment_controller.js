@@ -21,9 +21,9 @@ export default class extends Controller {
         if(!this.modal || !this.btns) return;
 
         this.modal.addEventListener('click', (event) => this.closeModal(event));
-        const form = this.modal.querySelector('form');
+
         const confirmArea = this.modal.querySelector('button.modal__confirm');
-        if(form && confirmArea) confirmArea.addEventListener('click', (event) => this.submitForm(form));
+        if(confirmArea) confirmArea.addEventListener('click', (event) => this.submitForm());
         
         this.btns.forEach((btn) => {
             btn.addEventListener('click', (event) => this.actionBtn(btn));
@@ -31,11 +31,11 @@ export default class extends Controller {
     }
     
     actionBtn(btn) {
-        const ingredientId = encodeURIComponent(btn.getAttribute('data-ing-id'));
-        const listId = encodeURIComponent(btn.getAttribute('data-list-id'));
-        if(!ingredientId || !listId) return;
+        this.ingredientId = encodeURIComponent(btn.getAttribute('data-ing-id'));
+        this.listId = encodeURIComponent(btn.getAttribute('data-list-id'));
+        if(!this.ingredientId || !this.listId) return;
 
-        fetch(this.callSide+'/ajax/ingredient-comments/'+ingredientId+'/'+listId, {
+        fetch(this.callSide+'/ajax/ingredient-comments/'+this.ingredientId+'/'+this.listId, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -44,18 +44,39 @@ export default class extends Controller {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data);
-            //window.location.reload();
             if (data.success) {
-                this.showModal(btn,data);
+                this.showModal(data);
             }
             else this.modal.classList.remove('show');
         })
         .catch(error => console.error('Error:', error));
     }
 
-    showModal(btn,data) {
+    showModal(data) {
         const title = this.modal.querySelector('.modal__title .ingredient');
+        const inputsRange = this.modal.querySelector('.modal__txts .inputs');
+
+        if(inputsRange) {
+            inputsRange.innerHTML = '';
+            if(data.comments.length > 0) {
+                for(let i = 0; i < data.comments.length; i++) {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = '';
+
+                    if(i+1 === data.comments.length) input.className = 'main__input mb-0';
+                    else input.className = 'lost__input mt-0 mb-0';
+
+                    input.value = data.comments[i];
+                    inputsRange.appendChild(input);
+                }
+            } else {
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.className = 'main__input mb-0';
+                inputsRange.appendChild(input);
+            }
+        }
 
         if(title) title.innerHTML = data.ingredientTitle;
         this.modal.classList.add('show');
@@ -68,7 +89,25 @@ export default class extends Controller {
         }
     }
 
-    submitForm(form) {
-        form.submit();
+    submitForm() {
+        const inputKept = this.modal.querySelector('.modal__txts .main__input');
+        if(!inputKept) return;
+
+        fetch(this.callSide+'/ajax/ingredient-comments/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            body: JSON.stringify({ ingredientId: this.ingredientId, listId: this.listId, comment: inputKept.value })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+            if (data.success) {
+                window.location.reload();
+            }
+        })
+        .catch(error => console.error('Error:', error));
     }
 }
