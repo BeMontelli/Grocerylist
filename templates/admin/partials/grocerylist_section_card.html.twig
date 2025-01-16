@@ -2,7 +2,7 @@
     <h3 class="section__title">
         {#({{ element['section'].id }})#} {{element['section'].title}}
     </h3>
-    {% if elements is not empty %}
+    {% if element['ingredients'] is not empty %}
     <div class="section__elements">
     <ul class="section__elements__list">
         {% for ingredient in element['ingredients'] %}
