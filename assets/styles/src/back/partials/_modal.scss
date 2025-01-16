@@ -53,3 +53,20 @@
         display: none !important;
     }
 }
+
+.modal_comments{
+    .modal__title{
+        .ingredient{
+            position: relative;
+            margin-right: 10px;
+        }
+        .comment__title{
+            position: relative;
+            font-size: 15px;
+            background-color: #2d2a2a;
+            padding: 3px 10px;
+            border-radius: 10px;
+            top: -2px;
+        }
+    }
+}

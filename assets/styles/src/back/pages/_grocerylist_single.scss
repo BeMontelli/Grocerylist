@@ -152,6 +152,19 @@
     }
 
     .section__element__item{
+        .comment__item{
+            position: relative;
+            top: -2px;
+            border: none;
+            color: var(--main-text-color);
+            background-color: var(--main-dark-lighter);
+            border-radius: 6px;
+            margin-right: 5px;
+            line-height: 20px;
+            font-size: 12px;
+            padding: 0px 5px;
+        }
+
         .section__element__content{
             position: relative;
             display: flex;
@@ -179,6 +192,11 @@
             text-decoration: line-through;
             opacity: 0.5;
         }
+        input:checked + .comment__item {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
         .element__recipes__item{
             position: relative;
             display: flex;
