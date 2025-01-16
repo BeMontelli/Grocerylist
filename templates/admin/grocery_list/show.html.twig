@@ -103,3 +103,25 @@
     </div>
 </div>
 {% endblock %}
+
+{% block outside_body %}
+<div class="modal modal_comments fade" role="dialog" aria-hidden="true" data-controller="modallistcomment">
+  <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title modal__title"><span class="ingredient"></span><span class="comment__title">{{ 'app.modal.comments.title'|trans }}</span></h5>
+      </div>
+      <div class="modal-body modal__txts">
+        <p>{{ 'app.modal.comments.notice'|trans }}</p>
+        <div class="inputs">
+            <input type="text">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary modal__cancel" data-dismiss="modal"><i class='bx bx-arrow-back'></i></button>
+        <button type="button" class="btn btn-primary modal__confirm"><i class="bx bx-check"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -3,6 +3,7 @@
         {% if ingredient.activation %}checked="checked"{% endif %}
         data-ingredientid="{{ ingredient.id }}" 
         data-listid="{{ grocery_list.id }}">
+    <button class="comment__item" data-ing-id="{{ ingredient.id }}" data-list-id="{{ grocery_list.id }}">?</button>  
     <label for="{{ ingredient.id }}-{{ grocery_list.id }}" class="check__label">{{ ingredient.title }}</label>
     {% for recipe in ingredient['recipes'] %}
         <span class="element__recipes__item">{{ recipe.title|truncate() }}</span>
