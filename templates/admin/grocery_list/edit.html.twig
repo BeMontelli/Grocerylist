@@ -1,11 +1,11 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Edit - {{ grocery_list.title }}{% endblock %}
+{% block title %}{{ 'app.admin.action.edit'|trans }} - {{ grocery_list.title }}{% endblock %}
 
 {% block body %}
     {{ include('admin/partials/page_title.html.twig', {
         'icon': "<i class='icon__page_title bx bx-list-ul' ></i>",
-        'title': 'Edit - ' ~ grocery_list.title,
+        'title': 'app.admin.action.edit'|trans ~ ' - ' ~ grocery_list.title,
         'links': [
             {
                 'url': path('admin.list.show', {'slug': grocery_list.slug,'id': grocery_list.id}),

@@ -1,11 +1,11 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Edit - {{ category.title }}{% endblock %}
+{% block title %}{{ 'app.admin.action.edit'|trans }} - {{ category.title }}{% endblock %}
 
 {% block body %}
     {{ include('admin/partials/page_title.html.twig', {
         'icon': "<i class='icon__page_title bx bxs-category-alt' ></i>",
-        'title': 'Edit - ' ~ category.title,
+        'title': 'app.admin.action.edit'|trans ~ ' - ' ~ category.title,
         'links': [
             {
                 'url': path('admin.category.index'),

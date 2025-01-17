@@ -1,13 +1,13 @@
 {% extends 'admin/base.html.twig' %}
 
-{% block title %}Edit - {{user.username}}{% endblock %}
+{% block title %}{{ 'app.admin.action.edit'|trans }} - {{user.username}}{% endblock %}
 
 {% block body %}
 
     {% if is_granted('ROLE_ADMIN') %}
         {{ include('admin/partials/page_title.html.twig', {
             'icon': "<i class='icon__page_title bx bx bxs-user' ></i>",
-            'title': 'Edit -' ~ user.username,
+            'title': 'app.admin.action.edit'|trans ~ ' - ' ~ user.username,
             'links': [
                 {
                     'url': path('admin.user.index'),
@@ -19,7 +19,7 @@
     {% else %}
         {{ include('admin/partials/page_title.html.twig', {
             'icon': "<i class='icon__page_title bx bx bxs-user' ></i>",
-            'title': 'Edit -' ~ user.username,
+            'title': 'app.admin.action.edit'|trans ~ ' - ' ~ user.username,
             'links': [
                 {
                     'url': path('admin.user.profile'),
