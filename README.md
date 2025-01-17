@@ -10,8 +10,6 @@ TO DO LIST
 
   * translations
     * forms
-  
-  * Entities Edit titles translate + structure rework
 
   * Features
     * front (done back):
