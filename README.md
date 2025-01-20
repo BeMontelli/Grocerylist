@@ -15,8 +15,6 @@ TO DO LIST
     * front (done back):
       * add comment item display ?
 
-  * Fix public slug cant be empty if already empty exists
-
 WORK IN PROGESS
 ------------
 
