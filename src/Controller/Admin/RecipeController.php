@@ -147,6 +147,7 @@ class RecipeController extends AbstractController
             'choices' => $choices,
             'currentGrocerylistId' => $currentGrocerylistId,
         ],['attr' => ['class' => 'narrow__form']]);
+        
         $formlist->handleRequest($request);
         if ($formlist->isSubmitted() && $formlist->isValid()) {
             $groceryListId = $formlist->get('groceryList')->getData();
