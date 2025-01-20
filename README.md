@@ -11,10 +11,6 @@ TO DO LIST
   * translations
     * forms
 
-  * Features
-    * front (done back):
-      * add comment item display ?
-
 WORK IN PROGESS
 ------------
 
