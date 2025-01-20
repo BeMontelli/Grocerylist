@@ -11,7 +11,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GroceryListRepository::class)]
-#[UniqueEntity(fields: ['publicSlug'], message: 'app.admin.lists.publicslug.form.uniquealert')]
+#[UniqueEntity(fields: ['publicSlug'], message: 'app.admin.lists.publicslug.form.uniquealert', ignoreNull: true)]
 class GroceryList
 {
     #[ORM\Id]

@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use function Symfony\Component\Translation\t;
+use Symfony\Component\Form\CallbackTransformer;
 
 class GroceryListType extends AbstractType
 {
@@ -30,7 +31,7 @@ class GroceryListType extends AbstractType
                 'label' => 'Slug'
             ])
             ->add('publicSlug',TextType::class, [
-                'empty_data' => '',
+                'empty_data' => null,
                 'required' => false,
                 'label' => 'Public slug',
                 'help' => t('app.admin.lists.publicslug.form.help'),
@@ -54,7 +55,8 @@ class GroceryListType extends AbstractType
         $data = $event->getData();
 
         $data['slug'] = $slugger->slug(strtolower($slugger->slug((!empty($data['slug'])) ? $data['slug'] : $data['title'])));
-        $data['publicSlug'] = $slugger->slug((!empty($data['publicSlug'])) ? $slugger->slug(strtolower($data['publicSlug'])) : '');
+        
+        $data['publicSlug'] = (!empty($data['publicSlug'])) ? $slugger->slug($slugger->slug(strtolower($data['publicSlug']))): null;
 
         $event->setData($data);
     }
