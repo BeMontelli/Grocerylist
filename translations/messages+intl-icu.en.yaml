@@ -46,6 +46,7 @@ app:
     lists.deleteconfirm: "Are you to sure to delete the list ?"
     lists.publicslug.form.lengthalert: "The slug must be empty or contain at least 10 characters."
     lists.publicslug.form.urlalert: "The slug must contain only alphanumeric characters, possibly separated by hyphens (no accents, spaces, or special characters)."
+    lists.publicslug.notice: "The pubic list is accessible with this link"
     lists.publicslug.form.help: "If filled then the list will be publicly accessible via this slug."
     lists.publicslug.form.uniquealert: "This slug is not available, please change."
     lists.recipes.remove: 'Remove from list'
