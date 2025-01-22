@@ -4,7 +4,8 @@
     bottom: 10px;
     left: 10px;
     min-width: 50%;
-    max-width: calc(100% - 40px);
+    max-width: calc(100% - 40px);;
+    width: 400px;
     max-height: 80vh;
     overflow-y: scroll;
     -ms-overflow-style: none;
@@ -19,6 +20,13 @@
         --bs-alert-link-color: var(--bs-info-text-emphasis);
         &:last-child{
             margin-bottom: 0;
+        }
+
+        &.with-btn{
+            position: relative;
+            .alert__msg{
+                padding-right: 100px;
+            }
         }
     }
 
@@ -53,4 +61,20 @@
     .alert__btn{
         position: absolute;
     }
+
+    .btn-flash{
+        position: absolute;
+        right: 0px;
+        top: -4px;
+        max-width: 90px;
+        width: 0;
+        padding: 3px 20px;
+        i{
+            position: relative;
+            left: -9px;
+            top: 3px;
+            font-size: 20px;
+        }
+    }
+    right: 20px;
 }

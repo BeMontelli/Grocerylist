@@ -27,6 +27,7 @@ use App\Repository\GroceryListRepository;
 use App\Service\GroceryListIngredientService;
 use App\Form\SearchRecipesType;
 use Doctrine\Persistence\Proxy;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 #[Route("/{_locale}/admin/recipes", name: "admin.recipe.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
@@ -36,13 +37,15 @@ class RecipeController extends AbstractController
     private $translator;
     private $fileUploader;
     private $groceryListIngredientService;
+    private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(Security $security, TranslatorInterface $translator, FileUploader $fileUploader,GroceryListIngredientService $groceryListIngredientService)
+    public function __construct(Security $security, TranslatorInterface $translator, FileUploader $fileUploader,GroceryListIngredientService $groceryListIngredientService, UrlGeneratorInterface $urlGenerator)
     {
         $this->security = $security;
         $this->translator = $translator;
         $this->fileUploader = $fileUploader;
         $this->groceryListIngredientService = $groceryListIngredientService;
+        $this->urlGenerator = $urlGenerator;
     }
 
     #[Route('/', name: 'index')]
@@ -192,7 +195,17 @@ class RecipeController extends AbstractController
             }
 
             $em->flush();
-            $this->addFlash('success', $this->translator->trans('app.notif.list.addsuccess'));
+
+            $listLink = $this->urlGenerator->generate(
+                'admin.list.show', 
+                ['id' => $groceryList->getId(),'slug' => $groceryList->getSlug()],
+                UrlGeneratorInterface::ABSOLUTE_URL
+            );
+            
+            $this->addFlash(
+                'success with-btn', 
+                $this->translator->trans('app.notif.list.addsuccess').
+                        '<a class="btn-flash" href="'.$listLink.'"><i class="bx bx-right-arrow-alt"></i></a>');
 
             return $this->redirectToRoute('admin.recipe.show', ['id' => $recipe->getId(),'slug' => $recipe->getSlug()]);
         }

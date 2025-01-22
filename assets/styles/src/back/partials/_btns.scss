@@ -82,3 +82,29 @@
         font-size: 16px !important;
     }
 }
+
+.btn-flash{
+    width: auto;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: var(--main-pure-white);
+    border-radius: 5px;
+    border: 0px;
+    font-weight: normal;
+    background-image: linear-gradient(45deg, var(--main-orange) 0%, var(--main-orange-alt)  51%, var(--main-orange)  100%);
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    padding: 5px 20px;
+    margin-left: 10px;
+    &:hover {
+        background-position: right center;
+        color: var(--main-pure-white);
+        text-decoration: none;
+    }
+    &:active {
+        transform: scale(0.95);
+    }
+}

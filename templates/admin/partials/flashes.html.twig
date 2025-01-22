@@ -4,7 +4,7 @@
         {% for label, messages in flashMessages %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }} alert-dismissible" role="alert">
-                    <div class="alert__msg">{{ message }}</div>
+                    <div class="alert__msg">{{ message|raw }}</div>
                     <button type="button" class="alert__btn btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             {% endfor %}
