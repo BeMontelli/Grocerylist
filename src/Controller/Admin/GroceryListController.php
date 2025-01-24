@@ -24,6 +24,9 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Requirement\Requirement;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Doctrine\Persistence\Proxy;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\Common\Collections\Order;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[Route("/{_locale}/admin/lists", name: "admin.list.", requirements: ['_locale' => 'fr|en'])]
 #[IsGranted('IS_AUTHENTICATED_REMEMBERED')]
@@ -110,7 +113,9 @@ class GroceryListController extends AbstractController
             }
         }
 
-        $recipes = $groceryList->getRecipes();
+        $criteria = Criteria::create()->orderBy(['title' => Order::Ascending]);
+        $recipesOrigin = new ArrayCollection($groceryList->getRecipes()->toArray());
+        $recipes = $recipesOrigin->matching($criteria);
         // PROXY collection objects fully initialize if not
         foreach ($recipes as $recipe) {
             $recipeGroceryListIngredients = $recipe->getGroceryListIngredients();
