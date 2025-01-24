@@ -200,7 +200,7 @@ class RecipeController extends AbstractController
                 'admin.list.show', 
                 ['id' => $groceryList->getId(),'slug' => $groceryList->getSlug()],
                 UrlGeneratorInterface::ABSOLUTE_URL
-            );
+            ) . '?group=grocerylist&gid=recipes';
             
             $this->addFlash(
                 'success with-btn', 
