@@ -47,7 +47,7 @@ class SecurityController extends AbstractController
         ], Response::HTTP_OK);
     }
 
-    #[Route(path: '/logout', name: 'logout', methods: ['POST'])]
+    /*#[Route(path: '/logout', name: 'logout', methods: ['POST'])]
     public function logout(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher, TokenGeneratorInterface $tokenGenerator): Response
     {
         $token = $request->request->get('token');
@@ -69,5 +69,5 @@ class SecurityController extends AbstractController
             'email' => $user->getEmail(),
             'message' => 'Logout successful',
         ], Response::HTTP_OK);
-    }
+    }*/
 }
