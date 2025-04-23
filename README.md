@@ -11,9 +11,6 @@ TO DO LIST
   * translations
     * forms
 
-  * If recipe added to x lists, listing in view list all ingredients x time
-    * src\Service\GroceryListIngredientService.php ? : getIngredientsStructured() ?
-
 WORK IN PROGESS
 ------------
 
