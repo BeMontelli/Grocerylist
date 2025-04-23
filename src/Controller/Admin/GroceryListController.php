@@ -119,10 +119,12 @@ class GroceryListController extends AbstractController
         // PROXY collection objects fully initialize if not
         foreach ($recipes as $recipe) {
             $recipeGroceryListIngredients = $recipe->getGroceryListIngredients();
-            foreach ($recipeGroceryListIngredients as $groceryListIngredient) {
-                if ($recipeGroceryListIngredients instanceof Proxy) {
-                    $entityManager->initializeObject($recipeGroceryListIngredients);
-                }
+            foreach ($recipeGroceryListIngredients as $k => $groceryListIngredient) {
+                if ($groceryListIngredient->getGroceryList() === $groceryList) {
+                    if ($recipeGroceryListIngredients instanceof Proxy) {
+                        $entityManager->initializeObject($recipeGroceryListIngredients);
+                    }
+                } else unset($recipeGroceryListIngredients[$k]);
             }
         }
 
