@@ -7,19 +7,24 @@ namespace App\OpenApi;
 
 use ApiPlatform\OpenApi\Factory\OpenApiFactoryInterface;
 use ApiPlatform\OpenApi\OpenApi;
+use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\PathItem;
 use ApiPlatform\OpenApi\Model;
 
 final class JwtDecorator implements OpenApiFactoryInterface
 {
     public function __construct(
         private OpenApiFactoryInterface $decorated
-    ) {}
+    ) {
+        $this->decorated = $decorated;
+    }
 
     public function __invoke(array $context = []): OpenApi
     {
         $openApi = ($this->decorated)($context);
         $schemas = $openApi->getComponents()->getSchemas();
 
+        // Schemas Definition for JWT Token
         $schemas['Token'] = new \ArrayObject([
             'type' => 'object',
             'properties' => [
@@ -43,6 +48,7 @@ final class JwtDecorator implements OpenApiFactoryInterface
             ],
         ]);
  
+        // Path Definition for JWT
         $pathItem = new Model\PathItem(
             ref: 'JWT Token',
             post: new Model\Operation(
