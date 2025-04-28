@@ -10,12 +10,6 @@ controllers_admin:
         namespace: App\Controller\Admin
     type: attribute
 
-controllers_api:
-    resource:
-        path: ../src/Controller/API/
-        namespace: App\Controller\API
-    type: attribute
-
 controllers_normalizer:
     resource:
         path: ../src/Controller/Normalizer/
