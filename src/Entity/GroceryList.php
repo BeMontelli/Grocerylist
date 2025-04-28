@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use App\Repository\GroceryListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -12,6 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: GroceryListRepository::class)]
 #[UniqueEntity(fields: ['publicSlug'], message: 'app.admin.lists.publicslug.form.uniquealert', ignoreNull: true)]
+#[ApiResource()]
 class GroceryList
 {
     #[ORM\Id]
