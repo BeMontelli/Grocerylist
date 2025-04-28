@@ -85,9 +85,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne]
     private ?File $picture = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $apitoken = null;
-
     public function __construct()
     {
         $this->groceryLists = new ArrayCollection();
@@ -401,18 +398,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPicture(?File $picture): static
     {
         $this->picture = $picture;
-
-        return $this;
-    }
-
-    public function getApiToken(): ?string
-    {
-        return $this->apitoken;
-    }
-
-    public function setApiToken(?string $apitoken): static
-    {
-        $this->apitoken = $apitoken;
 
         return $this;
     }
