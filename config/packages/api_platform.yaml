@@ -12,6 +12,6 @@ api_platform:
     swagger:
         versions: [3]
         api_keys:
-            apiKey:
+            JWT: # default authorization header (Bearer string autocompleted)
                 name: Authorization
                 type: header
