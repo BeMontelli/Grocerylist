@@ -11,6 +11,14 @@ TO DO LIST
   * translations
     * forms
 
+  * API : API Plateform
+    * test all collections
+    * test GET, PUT, PATCH, DELETE
+    * add multipart form data for File entity
+    * check links src
+    * pagination & filters ?
+    * filter entities by user access and properties ?
+
 WORK IN PROGESS
 ------------
 
