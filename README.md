@@ -12,8 +12,7 @@ TO DO LIST
     * forms
 
   * API : API Plateform
-    * test all collections
-    * test GET, PUT, PATCH, DELETE
+    * test PUT, PATCH, DELETE
     * add multipart form data for File entity
     * check links src
     * pagination & filters ?
