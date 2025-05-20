@@ -18,6 +18,9 @@ TO DO LIST
     * pagination & filters ?
     * filter entities by user access and properties ?
 
+  * Front link back root
+  * register fr title page display desktop to fixK
+
 WORK IN PROGESS
 ------------
 
