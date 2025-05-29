@@ -17,9 +17,6 @@ TO DO LIST
     * check links src
     * pagination & filters ?
     * filter entities by user access and properties ?
-
-  * Front link back root
-  * register fr title page display desktop to fix
   
 WORK IN PROGESS
 ------------
