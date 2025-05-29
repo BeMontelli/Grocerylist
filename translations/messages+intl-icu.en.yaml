@@ -139,6 +139,8 @@ app:
       password.confirm: 'Confirmer password'
       btn: "Create"
   front:
+    back:
+      home: Return to home
     list:
       owner.username: 'List of'
     form:

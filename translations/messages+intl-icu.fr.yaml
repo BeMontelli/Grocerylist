@@ -164,6 +164,8 @@ app:
       password.confirm: 'Confirmer le mot de passe'
       btn: "Créer"
   front:
+    back:
+      home: Retourner à l'accueil
     list:
       owner.username: 'Liste de'
     form:
