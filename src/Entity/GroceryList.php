@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\GroceryListRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,49 +11,63 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: GroceryListRepository::class)]
 #[UniqueEntity(fields: ['publicSlug'], message: 'app.admin.lists.publicslug.form.uniquealert', ignoreNull: true)]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ['groups' => ['grocery_list:read','*:read']],
+    denormalizationContext: ['groups' => ['grocery_list:write','*:write']]
+)]
 class GroceryList
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['grocery_list:read','grocery_list:write','*:read','*:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
     private ?string $title = null;
 
     #[ORM\Column]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
+    #[ApiProperty(example: 'slug-example')]
     private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'groceryLists')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
     private ?User $user = null;
 
     /**
      * @var Collection<int, Recipe>
      */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'groceryLists')]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
     private Collection $recipes;
 
     /**
      * @var Collection<int, User>
      */
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'current_grocery_list')]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
     private Collection $users;
 
     /**
      * @var Collection<int, GroceryListIngredient>
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'groceryList', orphanRemoval: true)]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
     private Collection $groceryListIngredients;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -64,9 +79,11 @@ class GroceryList
         pattern: '/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
         message: 'app.admin.lists.publicslug.form.urlalert'
     )]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
     private ?string $publicSlug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups(['grocery_list:read','grocery_list:write'])]
     private ?string $comments = null;
 
     public function __construct()

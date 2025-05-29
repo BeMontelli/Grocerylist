@@ -10,62 +10,76 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 #[UniqueEntity(fields: ['username'], message: 'There is already an account with this username')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ['groups' => ['user:read','*:read']],
+    denormalizationContext: ['groups' => ['user:write','*:write']]
+)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['user:read','user:write','*:read','*:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180)]
+    #[Groups(['user:read','user:write'])]
     private ?string $username = null;
 
     /**
      * @var list<string> The user roles
      */
     #[ORM\Column]
+    #[Groups(['user:read','user:write'])]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(['user:read','user:write'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['user:read','user:write'])]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups(['user:read','user:write'])]
     private bool $isVerified = false;
 
     /**
      * @var Collection<int, GroceryList>
      */
     #[ORM\OneToMany(targetEntity: GroceryList::class, mappedBy: 'user', orphanRemoval: true)]
+    #[Groups(['user:read','user:write'])]
     private Collection $groceryLists;
 
     /**
      * @var Collection<int, Recipe>
      */
     #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'user')]
+    #[Groups(['user:read','user:write'])]
     private Collection $recipes;
 
     /**
      * @var Collection<int, Ingredient>
      */
     #[ORM\OneToMany(targetEntity: Ingredient::class, mappedBy: 'user')]
+    #[Groups(['user:read','user:write'])]
     private Collection $ingredients;
 
     /**
      * @var Collection<int, Category>
      */
     #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'user')]
+    #[Groups(['user:read','user:write'])]
     private Collection $categories;
 
     /**
@@ -73,18 +87,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Section::class, mappedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['user:read','user:write'])]
     private Collection $sections;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
+    #[Groups(['user:read','user:write'])]
     private ?GroceryList $current_grocery_list = null;
 
     /**
      * @var Collection<int, File>
      */
     #[ORM\OneToMany(targetEntity: File::class, mappedBy: 'user', orphanRemoval: true)]
+    #[Groups(['user:read','user:write'])]
     private Collection $files;
 
     #[ORM\ManyToOne]
+    #[Groups(['user:read','user:write'])]
     private ?File $picture = null;
 
     public function __construct()

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,13 +15,16 @@ use Symfony\Component\Validator\Constraints as Assert;
 use App\Entity\File;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ['groups' => ['recipe:read','*:read']],
+    denormalizationContext: ['groups' => ['recipe:write','*:write']]
+)]
 class Recipe
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['recipes.*','categories.*','ingredients.*'])]
+    #[Groups(['recipe:read','recipe:write','*:read','*:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -28,7 +32,7 @@ class Recipe
         new Assert\NotBlank(),
         new Assert\Length(min: 4),
     ])]
-    #[Groups(['recipes.*','categories.*','ingredients.*'])]
+    #[Groups(['recipe:read','recipe:write'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -39,50 +43,55 @@ class Recipe
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
-    #[Groups(['recipes.*','categories.*','ingredients.*'])]
+    #[Groups(['recipe:read','recipe:write'])]
+    #[ApiProperty(example: 'slug-example')]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['recipes.show','categories.*','ingredients.*'])]
+    #[Groups(['recipe:read','recipe:write'])]
     private ?string $content = null;
 
     #[ORM\Column]
-    #[Groups(['recipes.*','categories.*','ingredients.*'])]
+    #[Groups(['recipe:read','recipe:write'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Groups(['recipes.*','categories.*','ingredients.*'])]
+    #[Groups(['recipe:read','recipe:write'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipe:read','recipe:write'])]
     private ?Category $category = null;
 
     /**
      * @var Collection<int, Ingredient>
      */
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'recipes')]
-    #[Groups(['recipes.index','recipes.show'])]
+    #[Groups(['recipe:read','recipe:write'])]
     private Collection $ingredients;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['recipe:read','recipe:write'])]
     private ?User $user = null;
 
     /**
      * @var Collection<int, GroceryList>
      */
     #[ORM\ManyToMany(targetEntity: GroceryList::class, mappedBy: 'recipes')]
+    #[Groups(['recipe:read','recipe:write'])]
     private Collection $groceryLists;
 
     /**
      * @var Collection<int, GroceryListIngredient>
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'recipe')]
+    #[Groups(['recipe:read','recipe:write'])]
     private Collection $groceryListIngredients;
 
     #[ORM\ManyToOne(targetEntity: File::class, inversedBy: 'recipes')]
     #[ORM\JoinColumn(name: 'thumbnail_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
+    #[Groups(['recipe:read','recipe:write'])]
     private ?File $thumbnail = null;
 
     public function __construct()

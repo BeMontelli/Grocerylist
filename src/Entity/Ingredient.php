@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\IngredientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,13 +12,16 @@ use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ['groups' => ['ingredient:read','*:read']],
+    denormalizationContext: ['groups' => ['ingredient:write','*:write']]
+)]
 class Ingredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['ingredients.*','recipes.*'])]
+    #[Groups(['ingredient:read','ingredient:write','*:read','*:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -25,7 +29,7 @@ class Ingredient
         new Assert\NotBlank(),
         new Assert\Length(min: 3),
     ])]
-    #[Groups(['ingredients.*','recipes.*'])]
+    #[Groups(['ingredient:read','ingredient:write'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -36,35 +40,39 @@ class Ingredient
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
-    #[Groups(['ingredients.*','recipes.*'])]
+    #[Groups(['ingredient:read','ingredient:write'])]
+    #[ApiProperty(example: 'slug-example')]
     private ?string $slug = null;
 
     #[ORM\Column]
-    #[Groups(['ingredients.*','recipes.*'])]
+    #[Groups(['ingredient:read','ingredient:write'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Groups(['ingredients.*','recipes.*'])]
+    #[Groups(['ingredient:read','ingredient:write'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * @var Collection<int, Recipe>
      */
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'ingredients')]
-    #[Groups(['ingredients.index','ingredients.show'])]
+    #[Groups(['ingredient:read','ingredient:write'])]
     private Collection $recipes;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients', cascade: ['persist'])]
+    #[Groups(['ingredient:read','ingredient:write'])]
     private ?Section $section = null;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['ingredient:read','ingredient:write'])]
     private ?User $user = null;
 
     /**
      * @var Collection<int, GroceryListIngredient>
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'ingredient', orphanRemoval: true)]
+    #[Groups(['ingredient:read','ingredient:write'])]
     private Collection $groceryListIngredients;
 
     /**

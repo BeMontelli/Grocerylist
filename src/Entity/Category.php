@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -13,13 +14,16 @@ use Symfony\Component\Serializer\Attribute\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-#[ApiResource()]
+#[ApiResource(
+    normalizationContext: ['groups' => ['category:read','*:read']],
+    denormalizationContext: ['groups' => ['category:write','*:write']]
+)]
 class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['categories.*','recipes.*',])]
+    #[Groups(['category:read','category:write','*:read','*:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -27,7 +31,7 @@ class Category
         new Assert\NotBlank(),
         new Assert\Length(min: 4),
     ])]
-    #[Groups(['categories.*','recipes.*'])]
+    #[Groups(['category:read','category:write'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -38,26 +42,29 @@ class Category
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
-    #[Groups(['categories.*','recipes.*'])]
+    #[Groups(['category:read','category:write'])]
+    #[ApiProperty(example: 'slug-example')]
     private ?string $slug = null;
 
     #[ORM\Column]
-    #[Groups(['categories.*','recipes.*'])]
+    #[Groups(['category:read','category:write'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Groups(['categories.*','recipes.*'])]
+    #[Groups(['category:read','category:write'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'category', cascade: ['remove'], orphanRemoval: true)]
-    #[Groups(['categories.index','categories.show'])]
+    #[Groups(['category:read','category:write'])]
     private Collection $recipes;
 
     #[ORM\ManyToOne(inversedBy: 'categories')]
+    #[Groups(['category:read','category:write'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['category:read','category:write'])]
     private ?int $position = null;
 
     public function __construct()
