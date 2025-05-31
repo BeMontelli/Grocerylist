@@ -3,6 +3,11 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\RecipeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,15 +21,22 @@ use App\Entity\File;
 
 #[ORM\Entity(repositoryClass: RecipeRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['recipe:read','*:read']],
-    denormalizationContext: ['groups' => ['recipe:write','*:write']]
+    normalizationContext: ['groups' => ['read:Recipe:collection']],
+    denormalizationContext: ['groups' => ['write:Recipe']],
+    operations: [
+        new GetCollection(normalizationContext: ['groups' => ['read:Recipe:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:Recipe:collection']]),
+        new Post(normalizationContext: ['groups' => ['read:Recipe:collection']]),
+        new Put(),
+        new Delete(),
+    ]
 )]
 class Recipe
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['recipe:read','recipe:write','*:read','*:write'])]
+    #[Groups(['read:Recipe:collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -32,7 +44,7 @@ class Recipe
         new Assert\NotBlank(),
         new Assert\Length(min: 4),
     ])]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection', 'write:Recipe'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -43,55 +55,55 @@ class Recipe
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection', 'write:Recipe'])]
     #[ApiProperty(example: 'slug-example')]
     private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection', 'write:Recipe'])]
     private ?string $content = null;
 
     #[ORM\Column]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection', 'write:Recipe'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection', 'write:Recipe'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'recipes', cascade: ['persist'])]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection'])]
     private ?Category $category = null;
 
     /**
      * @var Collection<int, Ingredient>
      */
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'recipes')]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection'])]
     private Collection $ingredients;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection'])]
     private ?User $user = null;
 
     /**
      * @var Collection<int, GroceryList>
      */
     #[ORM\ManyToMany(targetEntity: GroceryList::class, mappedBy: 'recipes')]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection'])]
     private Collection $groceryLists;
 
     /**
      * @var Collection<int, GroceryListIngredient>
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'recipe')]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection'])]
     private Collection $groceryListIngredients;
 
     #[ORM\ManyToOne(targetEntity: File::class, inversedBy: 'recipes')]
     #[ORM\JoinColumn(name: 'thumbnail_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
-    #[Groups(['recipe:read','recipe:write'])]
+    #[Groups(['read:Recipe:collection'])]
     private ?File $thumbnail = null;
 
     public function __construct()

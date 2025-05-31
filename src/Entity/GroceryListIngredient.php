@@ -9,41 +9,32 @@ use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: GroceryListIngredientRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['grocery_list_ingredient:read','*:read']],
-    denormalizationContext: ['groups' => ['grocery_list_ingredient:write','*:write']]
 )]
 class GroceryListIngredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['grocery_list_ingredient:read','grocery_list_ingredient:write','*:read','*:write'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'groceryListIngredients')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['grocery_list_ingredient:read','grocery_list_ingredient:write'])]
     private ?GroceryList $groceryList = null;
 
     #[ORM\ManyToOne(inversedBy: 'groceryListIngredients')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['grocery_list_ingredient:read','grocery_list_ingredient:write'])]
     private ?Ingredient $ingredient = null;
 
     #[ORM\Column]
-    #[Groups(['grocery_list_ingredient:read','grocery_list_ingredient:write'])]
     private ?bool $activation = null;
 
     #[ORM\Column]
-    #[Groups(['grocery_list_ingredient:read','grocery_list_ingredient:write'])]
     private ?bool $inList = null;
 
     #[ORM\ManyToOne(inversedBy: 'groceryListIngredients')]
-    #[Groups(['grocery_list_ingredient:read','grocery_list_ingredient:write'])]
     private ?Recipe $recipe = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['grocery_list_ingredient:read','grocery_list_ingredient:write'])]
     private ?string $comment = null;
 
     public function getId(): ?int

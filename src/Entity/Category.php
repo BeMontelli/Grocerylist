@@ -3,6 +3,11 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,15 +20,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['category:read','*:read']],
-    denormalizationContext: ['groups' => ['category:write','*:write']]
+    normalizationContext: ['groups' => ['read:Category:collection']],
+    denormalizationContext: ['groups' => ['write:Category']],
+    operations: [
+        new GetCollection(normalizationContext: ['groups' => ['read:Category:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:Category:collection']]),
+        new Post(normalizationContext: ['groups' => ['read:Category:collection']]),
+        new Put(),
+        new Delete(),
+    ]
 )]
 class Category
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['category:read','category:write','*:read','*:write'])]
+    #[Groups(['read:Category:collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -31,7 +43,7 @@ class Category
         new Assert\NotBlank(),
         new Assert\Length(min: 4),
     ])]
-    #[Groups(['category:read','category:write'])]
+    #[Groups(['read:Category:collection', 'write:Category'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -42,29 +54,29 @@ class Category
             message: "The slug should only contain lowercase letters, numbers, and dashes, and should start and end with a letter or number."
         ),
     ])]
-    #[Groups(['category:read','category:write'])]
+    #[Groups(['read:Category:collection', 'write:Category'])]
     #[ApiProperty(example: 'slug-example')]
     private ?string $slug = null;
 
     #[ORM\Column]
-    #[Groups(['category:read','category:write'])]
+    #[Groups(['read:Category:collection', 'write:Category'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
-    #[Groups(['category:read','category:write'])]
+    #[Groups(['read:Category:collection', 'write:Category'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'category', cascade: ['remove'], orphanRemoval: true)]
-    #[Groups(['category:read','category:write'])]
+    #[Groups(['read:Category:collection', 'write:Category'])]
     private Collection $recipes;
 
     #[ORM\ManyToOne(inversedBy: 'categories')]
-    #[Groups(['category:read','category:write'])]
+    #[Groups(['read:Category:collection', 'write:Category'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['category:read','category:write'])]
+    #[Groups(['read:Category:collection', 'write:Category'])]
     private ?int $position = null;
 
     public function __construct()

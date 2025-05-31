@@ -11,39 +11,31 @@ use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: FileRepository::class)]
 #[ApiResource(
-    normalizationContext: ['groups' => ['file:read','*:read']],
-    denormalizationContext: ['groups' => ['file:write','*:write']]
 )]
 class File
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['file:read','file:write','*:read','*:write'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['file:read','file:write'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['file:read','file:write'])]
     private ?string $extension = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['file:read','file:write'])]
     private ?string $url = null;
 
     #[ORM\ManyToOne(inversedBy: 'files')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['file:read','file:write'])]
     private ?User $user = null;
 
     /**
      * @var Collection<int, Recipe>
      */
     #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'thumbnail')]
-    #[Groups(['file:read','file:write'])]
     private Collection $recipes;
 
     public function __construct()
