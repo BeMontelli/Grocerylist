@@ -20,7 +20,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
     denormalizationContext: ['groups' => ['write:File']],
     operations: [
         new GetCollection(normalizationContext: ['groups' => ['read:File:collection']]),
-        new Get(normalizationContext: ['groups' => ['read:File:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:File:collection', 'read:File:item']]),
         new Post(normalizationContext: ['groups' => ['read:File:collection']]),
         new Put(),
         new Delete(),
@@ -55,7 +55,7 @@ class File
      * @var Collection<int, Recipe>
      */
     #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'thumbnail')]
-    #[Groups(['read:File:collection', 'write:File'])]
+    #[Groups(['read:File:item', 'write:File'])]
     private Collection $recipes;
 
     public function __construct()

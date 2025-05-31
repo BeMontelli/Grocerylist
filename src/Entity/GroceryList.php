@@ -25,7 +25,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
     denormalizationContext: ['groups' => ['write:GroceryList']],
     operations: [
         new GetCollection(normalizationContext: ['groups' => ['read:GroceryList:collection']]),
-        new Get(normalizationContext: ['groups' => ['read:GroceryList:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:GroceryList:collection', 'read:GroceryList:item']]),
         new Post(normalizationContext: ['groups' => ['read:GroceryList:collection']]),
         new Put(),
         new Delete(),
@@ -65,21 +65,21 @@ class GroceryList
      * @var Collection<int, Recipe>
      */
     #[ORM\ManyToMany(targetEntity: Recipe::class, inversedBy: 'groceryLists')]
-    #[Groups(['read:GroceryList:collection', 'write:GroceryList'])]
+    #[Groups(['read:GroceryList:item', 'write:GroceryList'])]
     private Collection $recipes;
 
     /**
      * @var Collection<int, User>
      */
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'current_grocery_list')]
-    #[Groups(['read:GroceryList:collection', 'write:GroceryList'])]
+    #[Groups(['read:GroceryList:item', 'write:GroceryList'])]
     private Collection $users;
 
     /**
      * @var Collection<int, GroceryListIngredient>
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'groceryList', orphanRemoval: true)]
-    #[Groups(['read:GroceryList:collection', 'write:GroceryList'])]
+    #[Groups(['read:GroceryList:item', 'write:GroceryList'])]
     private Collection $groceryListIngredients;
 
     #[ORM\Column(length: 255, nullable: true)]

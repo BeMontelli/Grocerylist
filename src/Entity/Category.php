@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     denormalizationContext: ['groups' => ['write:Category']],
     operations: [
         new GetCollection(normalizationContext: ['groups' => ['read:Category:collection']]),
-        new Get(normalizationContext: ['groups' => ['read:Category:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:Category:collection', 'read:Category:item']]),
         new Post(normalizationContext: ['groups' => ['read:Category:collection']]),
         new Put(),
         new Delete(),
@@ -67,7 +67,7 @@ class Category
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'category', cascade: ['remove'], orphanRemoval: true)]
-    #[Groups(['read:Category:collection', 'write:Category'])]
+    #[Groups(['read:Category:item', 'write:Category'])]
     private Collection $recipes;
 
     #[ORM\ManyToOne(inversedBy: 'categories')]

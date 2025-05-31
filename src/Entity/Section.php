@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
     denormalizationContext: ['groups' => ['write:Section']],
     operations: [
         new GetCollection(normalizationContext: ['groups' => ['read:Section:collection']]),
-        new Get(normalizationContext: ['groups' => ['read:Section:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:Section:collection', 'read:Section:item']]),
         new Post(normalizationContext: ['groups' => ['read:Section:collection']]),
         new Put(),
         new Delete(),
@@ -56,7 +56,7 @@ class Section
      * @var Collection<int, Ingredient>
      */
     #[ORM\OneToMany(targetEntity: Ingredient::class, mappedBy: 'section', cascade: ['remove'], orphanRemoval: true)]
-    #[Groups(['read:Section:collection', 'write:Section'])]
+    #[Groups(['read:Section:item', 'write:Section'])]
     private Collection $ingredients;
 
     #[ORM\ManyToOne(inversedBy: 'sections')]

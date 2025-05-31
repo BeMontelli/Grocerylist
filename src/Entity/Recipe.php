@@ -25,7 +25,7 @@ use App\Entity\File;
     denormalizationContext: ['groups' => ['write:Recipe']],
     operations: [
         new GetCollection(normalizationContext: ['groups' => ['read:Recipe:collection']]),
-        new Get(normalizationContext: ['groups' => ['read:Recipe:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:Recipe:collection', 'read:Recipe:item']]),
         new Post(normalizationContext: ['groups' => ['read:Recipe:collection']]),
         new Put(),
         new Delete(),
@@ -79,7 +79,7 @@ class Recipe
      * @var Collection<int, Ingredient>
      */
     #[ORM\ManyToMany(targetEntity: Ingredient::class, inversedBy: 'recipes')]
-    #[Groups(['read:Recipe:collection'])]
+    #[Groups(['read:Recipe:item'])]
     private Collection $ingredients;
 
     #[ORM\ManyToOne(inversedBy: 'recipes')]
@@ -91,14 +91,14 @@ class Recipe
      * @var Collection<int, GroceryList>
      */
     #[ORM\ManyToMany(targetEntity: GroceryList::class, mappedBy: 'recipes')]
-    #[Groups(['read:Recipe:collection'])]
+    #[Groups(['read:Recipe:item'])]
     private Collection $groceryLists;
 
     /**
      * @var Collection<int, GroceryListIngredient>
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'recipe')]
-    #[Groups(['read:Recipe:collection'])]
+    #[Groups(['read:Recipe:item'])]
     private Collection $groceryListIngredients;
 
     #[ORM\ManyToOne(targetEntity: File::class, inversedBy: 'recipes')]

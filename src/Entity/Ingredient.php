@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
     denormalizationContext: ['groups' => ['write:Ingredient']],
     operations: [
         new GetCollection(normalizationContext: ['groups' => ['read:Ingredient:collection']]),
-        new Get(normalizationContext: ['groups' => ['read:Ingredient:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:Ingredient:collection', 'read:Ingredient:item']]),
         new Post(normalizationContext: ['groups' => ['read:Ingredient:collection']]),
         new Put(),
         new Delete(),
@@ -68,7 +68,7 @@ class Ingredient
      * @var Collection<int, Recipe>
      */
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'ingredients')]
-    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
+    #[Groups(['read:Ingredient:item', 'write:Ingredient'])]
     private Collection $recipes;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients', cascade: ['persist'])]
@@ -84,7 +84,7 @@ class Ingredient
      * @var Collection<int, GroceryListIngredient>
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'ingredient', orphanRemoval: true)]
-    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
+    #[Groups(['read:Ingredient:item', 'write:Ingredient'])]
     private Collection $groceryListIngredients;
 
     /**

@@ -18,7 +18,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
     denormalizationContext: ['groups' => ['write:GroceryListIngredient']],
     operations: [
         new GetCollection(normalizationContext: ['groups' => ['read:GroceryListIngredient:collection']]),
-        new Get(normalizationContext: ['groups' => ['read:GroceryListIngredient:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:GroceryListIngredient:collection', 'read:GroceryListIngredient:item']]),
         new Post(normalizationContext: ['groups' => ['read:GroceryListIngredient:collection']]),
         new Put(),
         new Delete(),
