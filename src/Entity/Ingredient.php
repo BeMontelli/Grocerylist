@@ -3,6 +3,11 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\IngredientRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,12 +18,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: IngredientRepository::class)]
 #[ApiResource(
+    normalizationContext: ['groups' => ['read:Ingredient:collection']],
+    denormalizationContext: ['groups' => ['write:Ingredient']],
+    operations: [
+        new GetCollection(normalizationContext: ['groups' => ['read:Ingredient:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:Ingredient:collection']]),
+        new Post(normalizationContext: ['groups' => ['read:Ingredient:collection']]),
+        new Put(),
+        new Delete(),
+    ]
 )]
 class Ingredient
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read:Ingredient:collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
@@ -26,6 +41,7 @@ class Ingredient
         new Assert\NotBlank(),
         new Assert\Length(min: 3),
     ])]
+    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
@@ -37,31 +53,38 @@ class Ingredient
         ),
     ])]
     #[ApiProperty(example: 'slug-example')]
+    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
     private ?string $slug = null;
 
     #[ORM\Column]
+    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * @var Collection<int, Recipe>
      */
     #[ORM\ManyToMany(targetEntity: Recipe::class, mappedBy: 'ingredients')]
+    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
     private Collection $recipes;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients', cascade: ['persist'])]
+    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
     private ?Section $section = null;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
     private ?User $user = null;
 
     /**
      * @var Collection<int, GroceryListIngredient>
      */
     #[ORM\OneToMany(targetEntity: GroceryListIngredient::class, mappedBy: 'ingredient', orphanRemoval: true)]
+    #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
     private Collection $groceryListIngredients;
 
     /**

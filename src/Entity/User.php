@@ -26,7 +26,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
     denormalizationContext: ['groups' => ['write:User']],
     operations: [
         new GetCollection(normalizationContext: ['groups' => ['read:User:collection']]),
-        new Get(normalizationContext: ['groups' => ['read:User:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:User:collection', 'read:User:item']]),
         new Post(normalizationContext: ['groups' => ['read:User:collection']]),
         new Put(),
         new Delete(),
@@ -55,7 +55,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Groups(['read:User:collection', 'write:User'])]
+    #[Groups(['read:User:item', 'write:User'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
@@ -63,35 +63,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    #[Groups(['read:User:collection', 'write:User'])]
+    #[Groups(['read:User:item', 'write:User'])]
     private bool $isVerified = false;
 
     /**
      * @var Collection<int, GroceryList>
      */
     #[ORM\OneToMany(targetEntity: GroceryList::class, mappedBy: 'user', orphanRemoval: true)]
-    #[Groups(['read:User:collection'])]
+    #[Groups(['read:User:item'])]
     private Collection $groceryLists;
 
     /**
      * @var Collection<int, Recipe>
      */
     #[ORM\OneToMany(targetEntity: Recipe::class, mappedBy: 'user')]
-    #[Groups(['read:User:collection'])]
+    #[Groups(['read:User:item'])]
     private Collection $recipes;
 
     /**
      * @var Collection<int, Ingredient>
      */
     #[ORM\OneToMany(targetEntity: Ingredient::class, mappedBy: 'user')]
-    #[Groups(['read:User:collection'])]
+    #[Groups(['read:User:item'])]
     private Collection $ingredients;
 
     /**
      * @var Collection<int, Category>
      */
     #[ORM\OneToMany(targetEntity: Category::class, mappedBy: 'user')]
-    #[Groups(['read:User:collection'])]
+    #[Groups(['read:User:item'])]
     private Collection $categories;
 
     /**
@@ -99,18 +99,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Section::class, mappedBy: 'user')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['read:User:collection'])]
+    #[Groups(['read:User:item'])]
     private Collection $sections;
 
     #[ORM\ManyToOne(inversedBy: 'users')]
-    #[Groups(['read:User:collection'])]
+    #[Groups(['read:User:item'])]
     private ?GroceryList $current_grocery_list = null;
 
     /**
      * @var Collection<int, File>
      */
     #[ORM\OneToMany(targetEntity: File::class, mappedBy: 'user', orphanRemoval: true)]
-    #[Groups(['read:User:collection'])]
+    #[Groups(['read:User:item'])]
     private Collection $files;
 
     #[ORM\ManyToOne]

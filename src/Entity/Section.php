@@ -3,6 +3,11 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\ApiProperty;
 use App\Repository\SectionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,38 +17,55 @@ use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: SectionRepository::class)]
 #[ApiResource(
+    normalizationContext: ['groups' => ['read:Section:collection']],
+    denormalizationContext: ['groups' => ['write:Section']],
+    operations: [
+        new GetCollection(normalizationContext: ['groups' => ['read:Section:collection']]),
+        new Get(normalizationContext: ['groups' => ['read:Section:collection']]),
+        new Post(normalizationContext: ['groups' => ['read:Section:collection']]),
+        new Put(),
+        new Delete(),
+    ]
 )]
 class Section
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read:Section:collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read:Section:collection', 'write:Section'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255)]
     #[ApiProperty(example: 'slug-example')]
+    #[Groups(['read:Section:collection', 'write:Section'])]
     private ?string $slug = null;
 
     #[ORM\Column]
+    #[Groups(['read:Section:collection', 'write:Section'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
+    #[Groups(['read:Section:collection', 'write:Section'])]
     private ?\DateTimeImmutable $updatedAt = null;
 
     /**
      * @var Collection<int, Ingredient>
      */
     #[ORM\OneToMany(targetEntity: Ingredient::class, mappedBy: 'section', cascade: ['remove'], orphanRemoval: true)]
+    #[Groups(['read:Section:collection', 'write:Section'])]
     private Collection $ingredients;
 
     #[ORM\ManyToOne(inversedBy: 'sections')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['read:Section:collection', 'write:Section'])]
     private ?User $user = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['read:Section:collection', 'write:Section'])]
     private ?int $position = null;
 
     public function __construct()
