@@ -12,10 +12,9 @@ TO DO LIST
     * forms
 
   * API : API Plateform
-    * test POST, PUT, PATCH, DELETE
     * add multipart form data for File entity
     * check links src
-    * pagination & filters ?
+    * filters ?
     * filter entities by user access and properties ?
   
 WORK IN PROGESS
