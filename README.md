@@ -29,6 +29,23 @@ Production deploy
   * > npm run build
   * > php bin/console asset-map:compile
 
+Local access
+------------
+
+```docker-compose build```
+
+```docker-compose up -d```
+
+```docker-compose stop```
+
+```docker-compose down```
+
+| Service       | URL                    |
+|---------------|------------------------|
+| Symfony       | http://127.0.0.1:8080  |
+| PhpMyAdmin    | http://127.0.0.1:8081  |
+| Mailpit       | http://127.0.0.1:8025  |
+
 Requirements
 ------------
 
