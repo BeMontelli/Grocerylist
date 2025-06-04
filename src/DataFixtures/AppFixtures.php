@@ -36,6 +36,9 @@ class AppFixtures extends Fixture implements DependentFixtureInterface
             IngredientFixtures::class,
 
             CategoryFixtures::class,
+
+            GroceryListFixtures::class,
+            
             // Recipes
         ];
     }
