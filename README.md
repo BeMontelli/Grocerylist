@@ -12,7 +12,7 @@ TO DO LIST
     * forms
 
   * API : API Plateform
-    * add multipart form data for File entity
+    * add multipart form data for File entity : WIP configure POST API
     * check links src
     * filters ?
     * filter entities by user access and properties ?
