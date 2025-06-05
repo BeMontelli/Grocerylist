@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType as SymfonyFileType;
 use Symfony\UX\Dropzone\Form\DropzoneType;
+//use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class FilesType extends AbstractType
 {
@@ -19,6 +20,9 @@ class FilesType extends AbstractType
                 'multiple' => true,
                 'required' => true
             ])
+            /*->add('save', SubmitType::class, [
+                'label' => 'Save File'
+            ])*/
         ;
     }
 
