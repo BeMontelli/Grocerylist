@@ -3,28 +3,55 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiProperty;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Delete;
 use App\Repository\FileRepository;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Groups;
+use ApiPlatform\OpenApi\Model;
 
+#[Vich\Uploadable]
 #[ORM\Entity(repositoryClass: FileRepository::class)]
 #[ApiResource(
     normalizationContext: ['groups' => ['read:File:collection']],
     denormalizationContext: ['groups' => ['write:File']],
+    types: ['https://schema.org/MediaObject'],
+    outputFormats: ['jsonld' => ['application/ld+json']],
     operations: [
         new GetCollection(normalizationContext: ['groups' => ['read:File:collection']]),
         new Get(normalizationContext: ['groups' => ['read:File:collection', 'read:File:item']]),
-        new Post(normalizationContext: ['groups' => ['read:File:collection']]),
-        new Put(),
+        new Post(
+            normalizationContext: ['groups' => ['read:File:collection']],
+            inputFormats: ['multipart' => ['multipart/form-data']],
+            openapi: new Model\Operation(
+                requestBody: new Model\RequestBody(
+                    content: new \ArrayObject([
+                        'multipart/form-data' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'file' => [
+                                        'type' => 'string',
+                                        'format' => 'binary'
+                                    ]
+                                ]
+                            ]
+                        ]
+                    ])
+                )
+            )
+        ),
         new Delete(),
-    ]
+    ],
+    validationContext: ['groups' => ['Default', 'api']],
 )]
 class File
 {
@@ -44,12 +71,17 @@ class File
 
     #[ORM\Column(length: 255)]
     #[Groups(['read:File:collection', 'write:File'])]
+    #[ApiProperty(writable: false)]
     private ?string $url = null;
 
     #[ORM\ManyToOne(inversedBy: 'files')]
     #[ORM\JoinColumn(nullable: false)]
     #[Groups(['read:File:collection', 'write:File'])]
     private ?User $user = null;
+    
+    #[Vich\UploadableField(mapping: 'media_object', fileNameProperty: 'filePath')]
+    #[Assert\NotNull(groups: ['api'])]
+    public ?File $file = null;
 
     /**
      * @var Collection<int, Recipe>
