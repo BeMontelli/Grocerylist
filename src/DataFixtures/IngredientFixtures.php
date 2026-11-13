@@ -7,6 +7,7 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Section;
 use App\Entity\Ingredient;
+use App\Entity\User;
 use App\Repository\SectionRepository;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use App\Service\DataImportService;
@@ -27,8 +28,8 @@ class IngredientFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $users = [
-            $this->getReference(UserFixtures::ADMIN_USER_REFERENCE),
-            $this->getReference(UserFixtures::NORMAL_USER_REFERENCE),
+            $this->getReference(UserFixtures::ADMIN_USER_REFERENCE, User::class),
+            $this->getReference(UserFixtures::NORMAL_USER_REFERENCE, User::class),
         ];
         
         foreach ($users as $user) {

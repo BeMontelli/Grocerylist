@@ -6,6 +6,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Category;
+use App\Entity\User;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use App\Service\DataImportService;
 
@@ -23,8 +24,8 @@ class CategoryFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $users = [
-            $this->getReference(UserFixtures::ADMIN_USER_REFERENCE),
-            $this->getReference(UserFixtures::NORMAL_USER_REFERENCE),
+            $this->getReference(UserFixtures::ADMIN_USER_REFERENCE, User::class),
+            $this->getReference(UserFixtures::NORMAL_USER_REFERENCE, User::class),
         ];
 
         foreach ($users as $user) {

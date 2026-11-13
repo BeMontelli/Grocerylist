@@ -22,8 +22,8 @@ class GroceryListFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $users = [
-            $this->getReference(UserFixtures::ADMIN_USER_REFERENCE),
-            $this->getReference(UserFixtures::NORMAL_USER_REFERENCE),
+            $this->getReference(UserFixtures::ADMIN_USER_REFERENCE, User::class),
+            $this->getReference(UserFixtures::NORMAL_USER_REFERENCE, User::class),
         ];
 
         foreach ($users as $user) {

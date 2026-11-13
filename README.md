@@ -32,6 +32,10 @@ Production deploy
 Local access
 ------------
 
+Windows sans Docker (PHP + MySQL natifs) : voir [LOCAL_SETUP.md](LOCAL_SETUP.md).
+
+Docker :
+
 ```docker-compose build```
 
 ```docker-compose up -d```
