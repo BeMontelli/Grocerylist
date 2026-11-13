@@ -11,6 +11,14 @@ import { Controller } from '@hotwired/stimulus';
  */
 
 export default class extends Controller {
+    static values = {
+        ingredientUrl: String,
+        recipeUrl: String,
+        noresultLabel: String,
+        ingredientLabel: String,
+        recipeLabel: String,
+    };
+
     connect() {
 
         this.modalSearch = document.querySelector('#modalsearch');
@@ -72,7 +80,7 @@ export default class extends Controller {
         })
         .then(data => {
             if (data.results && data.results.length > 0) this.buildList(data.results);
-            else this.clearList();
+            else this.buildNoResult(title);
         })
         .catch(error => console.error('Error:', error));
     }
@@ -104,6 +112,41 @@ export default class extends Controller {
 
         this.searchResults.appendChild(ul);
         this.searchResults.classList.add('show');
+    }
+
+    buildNoResult(title) {
+        this.searchResults.innerHTML = '';
+
+        const message = document.createElement('p');
+        message.className = 'search__noresult';
+        message.textContent = this.noresultLabelValue.replace('__TITLE__', title);
+
+        const actions = document.createElement('div');
+        actions.className = 'search__create';
+        actions.appendChild(this.buildCreateLink(this.ingredientUrlValue, title, this.ingredientLabelValue, 'ingredient__item bx bxs-bowl-rice'));
+        actions.appendChild(this.buildCreateLink(this.recipeUrlValue, title, this.recipeLabelValue, 'recipe__item bx bxs-bowl-hot'));
+
+        this.searchResults.appendChild(message);
+        this.searchResults.appendChild(actions);
+        this.searchResults.classList.add('show');
+    }
+
+    buildCreateLink(baseUrl, title, label, iconClass) {
+        const url = new URL(baseUrl, window.location.origin);
+        url.searchParams.set('title', title);
+
+        const a = document.createElement('a');
+        a.href = url.pathname + url.search;
+
+        const i = document.createElement('i');
+        i.className = iconClass;
+
+        const span = document.createElement('span');
+        span.textContent = label;
+
+        a.appendChild(i);
+        a.appendChild(span);
+        return a;
     }
 
     clearList() {

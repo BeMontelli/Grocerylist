@@ -43,6 +43,10 @@ class IngredientController extends AbstractController
         $currentPage = $request->query->getInt('page', 1);
 
         $ingredient = new Ingredient();
+        $prefillTitle = trim($request->query->getString('title'));
+        if ($request->query->get('create') === 'ingredient' && $prefillTitle !== '') {
+            $ingredient->setTitle(mb_substr($prefillTitle, 0, 255));
+        }
         $form = $this->createForm(IngredientType::class,$ingredient,[
             'user'=> $user,
         ]);

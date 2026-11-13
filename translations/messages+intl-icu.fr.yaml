@@ -11,6 +11,9 @@ app:
     dashboard: Tableau de bord
     logout: Déconnexion
     search: Rechercher
+    search_noresult: "Aucun résultat pour « {title} »"
+    search_add_ingredient: Ajouter un ingrédient
+    search_add_recipe: Ajouter une recette
   ftr:
     sign: "Créé par {name}, tous droits réservés."
   err:

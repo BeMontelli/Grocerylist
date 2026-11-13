@@ -168,8 +168,12 @@ Pour tester sans toucher à la base principale, préfixer avec une autre base :
 ```powershell
 $env:DATABASE_URL="mysql://root:@127.0.0.1:3306/grocerylist_scratch?serverVersion=8.4.13&charset=utf8mb4"
 # … mêmes commandes …
+# serveur web branché sur cette base (port 8001, en parallèle du 8000) :
+php -d variables_order=EGPCS -S 127.0.0.1:8001 -t public
 Remove-Item Env:DATABASE_URL
 ```
+
+> `-d variables_order=EGPCS` est indispensable pour `php -S` : avec le `php.ini` de dev (`GPCS`), la variable d'environnement serait ignorée et le serveur utiliserait la base du `.env`. Les commandes `bin/console` la prennent en compte sans option.
 
 ### Base de test (PHPUnit)
 

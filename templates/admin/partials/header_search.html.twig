@@ -2,7 +2,12 @@
     <button id="btnsearch" aria-label="Search"><i class='bx bx-search'></i></button>
 </div>
 
-<div id="modalsearch" class="modal fade " role="dialog" aria-hidden="true" data-controller="modalsearch">
+<div id="modalsearch" class="modal fade " role="dialog" aria-hidden="true" data-controller="modalsearch"
+  data-modalsearch-ingredient-url-value="{{ path('admin.ingredient.index', {create: 'ingredient'}) }}"
+  data-modalsearch-recipe-url-value="{{ path('admin.recipe.index', {create: 'recipe'}) }}"
+  data-modalsearch-noresult-label-value="{{ 'app.hdr.search_noresult'|trans({title: '__TITLE__'}) }}"
+  data-modalsearch-ingredient-label-value="{{ 'app.hdr.search_add_ingredient'|trans }}"
+  data-modalsearch-recipe-label-value="{{ 'app.hdr.search_add_recipe'|trans }}">
   <div class="modal-dialog modal-dialog-scrollable" role="document">
     <div class="modal-content">
       <div class="modal-header">

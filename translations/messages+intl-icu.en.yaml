@@ -6,6 +6,9 @@ app:
     dashboard: Dashboard
     logout: Logout
     search: Search
+    search_noresult: "No results for “{title}”"
+    search_add_ingredient: Add an ingredient
+    search_add_recipe: Add a recipe
   ftr:
     sign: "Created by {name}, all rights reserved."
   err:

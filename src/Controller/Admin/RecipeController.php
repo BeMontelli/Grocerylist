@@ -57,9 +57,13 @@ class RecipeController extends AbstractController
         $currentPage = $request->query->getInt('page', 1);
 
         $recipe = new Recipe();
+        $prefillTitle = trim($request->query->getString('title'));
+        if ($request->query->get('create') === 'recipe' && $prefillTitle !== '') {
+            $recipe->setTitle(mb_substr($prefillTitle, 0, 255));
+        }
         $form = $this->createForm(RecipeType::class,$recipe);
         $form->handleRequest($request);
-        
+
         if($form->isSubmitted()) {
             if($form->isValid()) {
                 $uploadfile = $form->get('uploadfile')->getData();
