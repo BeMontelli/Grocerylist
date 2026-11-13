@@ -63,11 +63,9 @@ class IngredientController extends AbstractController
                     null,
                     $ingredient->getTemporaryGroceryLists()
                 );
-    
-                $this->addFlash('success', $this->translator->trans('app.notif.saved', [
-                    '%entity%' => $this->translator->trans('app.admin.ingredients.entity',['%entity%' => '1']),
-                    '%gender%' => 'male'
-                ]));
+
+                $linkedGroceryLists = $entityManager->getRepository(GroceryList::class)->getIngredientGroceryLists($ingredient);
+                $this->addIngredientSavedFlash($linkedGroceryLists, 'app.notif.saved');
                 return $this->redirectToRoute('admin.ingredient.index');
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -106,10 +104,17 @@ class IngredientController extends AbstractController
         /** @var User $user */
         $user = $this->security->getUser();
 
+        $groceryListRepository = $entityManager->getRepository(GroceryList::class);
+        // Lists linked before submit: the form's PRE_SUBMIT listener rewrites the relations
+        $groceryListIdsBefore = array_map(
+            fn (GroceryList $groceryList) => $groceryList->getId(),
+            $groceryListRepository->getIngredientGroceryLists($ingredient)
+        );
+
         $form = $this->createForm(IngredientType::class,$ingredient,[
             'user'=> $user,
         ]);
-        
+
         $form->handleRequest($request);
         if($form->isSubmitted()) {
             if($form->isValid()) {
@@ -119,17 +124,19 @@ class IngredientController extends AbstractController
 
                 $groceryListsAssociated = [];
                 if($ingredient->getId()) {
-                    $groceryListsAssociated = $entityManager->getRepository(GroceryList::class)->getIngredientGroceryLists($ingredient);
+                    $groceryListsAssociated = $groceryListRepository->getIngredientGroceryLists($ingredient);
                 }
+                $addedGroceryLists = [];
                 foreach($groceryListsAssociated as $groceryList) {
                     $groceryList->setUpdatedAt(new \DateTimeImmutable());
                     $entityManager->persist($groceryList);
+                    if (!in_array($groceryList->getId(), $groceryListIdsBefore, true)) {
+                        $addedGroceryLists[$groceryList->getId()] = $groceryList;
+                    }
                 }
                 $entityManager->flush();
-                $this->addFlash('success', $this->translator->trans('app.notif.edited',[
-                    '%gender%' => 'male',
-                    '%entity%' => $this->translator->trans('app.admin.ingredients.entity',['%entity%' => '1'])
-                ]));
+
+                $this->addIngredientSavedFlash(array_values($addedGroceryLists), 'app.notif.edited');
                 return $this->redirectToRoute('admin.ingredient.edit', ["id" => $ingredient->getId()]);
             } else $this->addFlash('danger', $this->translator->trans('app.notif.validerr'));
         }
@@ -138,6 +145,42 @@ class IngredientController extends AbstractController
             'ingredient' => $ingredient,
             'form' => $form
         ]);
+    }
+
+    /**
+     * Exactly one grocery list newly added: "added" notification with a link to that list.
+     * Otherwise: the default notification ($defaultKey).
+     *
+     * @param GroceryList[] $addedGroceryLists
+     */
+    private function addIngredientSavedFlash(array $addedGroceryLists, string $defaultKey): void
+    {
+        $params = [
+            '%gender%' => 'male',
+            '%entity%' => $this->translator->trans('app.admin.ingredients.entity', ['%entity%' => '1']),
+        ];
+
+        $uniqueGroceryLists = [];
+        foreach ($addedGroceryLists as $groceryList) {
+            $uniqueGroceryLists[$groceryList->getId()] = $groceryList;
+        }
+
+        if (count($uniqueGroceryLists) !== 1) {
+            $this->addFlash('success', $this->translator->trans($defaultKey, $params));
+            return;
+        }
+
+        $groceryList = reset($uniqueGroceryLists);
+        $listLink = $this->generateUrl(
+            'admin.list.show',
+            ['id' => $groceryList->getId(), 'slug' => $groceryList->getSlug()]
+        ) . '?group=grocerylist&gid=ingredients';
+
+        $this->addFlash(
+            'success with-btn',
+            $this->translator->trans('app.notif.added', $params).
+            '<a class="btn-flash" href="'.htmlspecialchars($listLink, ENT_QUOTES).'"><i class="bx bx-right-arrow-alt"></i></a>'
+        );
     }
 
     #[Route('/{id}', name: 'delete', requirements: ['id' => Requirement::DIGITS], methods: ['DELETE'])]

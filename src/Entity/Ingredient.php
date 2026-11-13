@@ -72,6 +72,7 @@ class Ingredient
     private Collection $recipes;
 
     #[ORM\ManyToOne(inversedBy: 'ingredients', cascade: ['persist'])]
+    #[Assert\NotNull(message: 'app.validation.ingredient.section_required')]
     #[Groups(['read:Ingredient:collection', 'write:Ingredient'])]
     private ?Section $section = null;
 

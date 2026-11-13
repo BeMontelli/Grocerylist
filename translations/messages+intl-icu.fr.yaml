@@ -43,6 +43,12 @@ app:
           male     {{entity} mis à jour !}
           other    {{entity} mise à jour !}
         }
+    added: >-
+        {gender, select,
+          female   {{entity} ajoutée !}
+          male     {{entity} ajouté !}
+          other    {{entity} ajoutée !}
+        }
     deleted: >-
         {gender, select,
           female   {{entity} supprimée !}
@@ -53,6 +59,8 @@ app:
     usererr.pwdmatch: "La confirmation de mot de passe de correspond pas !"
     list.none: "La liste n'existe pas."
     list.addsuccess: "Recette ajoutée à la liste !"
+  validation:
+    ingredient.section_required: "Veuillez choisir un rayon."
   admin:
     default_title: "Bienvenue dans l'administration"
     welcome_title: Bienvenue

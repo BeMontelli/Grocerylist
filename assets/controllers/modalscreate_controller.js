@@ -57,6 +57,8 @@ export default class extends Controller {
     }
 
     submitForm(form) {
+        // form.submit() skips HTML validation (required fields): check it first
+        if (!form.reportValidity()) return;
         form.submit();
     }
 }

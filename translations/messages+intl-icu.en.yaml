@@ -28,11 +28,14 @@ app:
     nofile: No file detected !
     saved: "{entity} saved !"
     edited: "{entity} updated !"
+    added: "{entity} added !"
     deleted: "{entity} deleted !"
     usererr.emailmatch: 'Email confirmation does not match !'
     usererr.pwdmatch: 'Password confirmation does not match !'
     list.none: 'GroceryList do not exists.'
     list.addsuccess: 'Recipe added to list !'
+  validation:
+    ingredient.section_required: 'Please select a section.'
   admin:
     default_title: 'Welcome in Administration'
     welcome_title: Welcome
